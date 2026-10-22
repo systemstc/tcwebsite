@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+    RewriteBase /tcwebsite/
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteRule ^$ public/ [L,R=301]
+    RewriteCond %{REQUEST_URI} !^/tcwebsite/public/
+    RewriteRule ^(.*)$ public/$1 [L,R=301]
+</IfModule>

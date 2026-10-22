@@ -1,0 +1,112 @@
+[
+  {
+    "ID": 3094,
+    "title": "Archives",
+    "url": "/archives?page=tenders",
+    "menu_item_parent": "0",
+    "slug": "archives",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 3095,
+    "title": "Website Policies",
+    "url": "/policies",
+    "menu_item_parent": "0",
+    "slug": "website-policies",
+    "description": "",
+    "title_attribute": "",
+    "children": [
+      {
+        "ID": 3620,
+        "title": "Terms of Use",
+        "url": "/WebPolicy",
+        "menu_item_parent": "3095",
+        "slug": "terms-of-use",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 3621,
+        "title": "Privacy policy",
+        "url": "/Privacypolicy",
+        "menu_item_parent": "3095",
+        "slug": "privacy-policy",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 3622,
+        "title": "Hyperlink policy",
+        "url": "/HyperLinkingpolicy",
+        "menu_item_parent": "3095",
+        "slug": "hyperlinkng-policy",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 3623,
+        "title": "Copyright policy",
+        "url": "/Copyrightpolicy",
+        "menu_item_parent": "3095",
+        "slug": "copyright-policy",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14403,
+        "title": "Disclaimer",
+        "url": "/disclaimer",
+        "menu_item_parent": "3095",
+        "slug": "disclaimer",
+        "description": "",
+        "title_attribute": ""
+      }
+    ]
+  },
+  {
+    "ID": 3096,
+    "title": "Related Links",
+    "url": "/RelatedLinks",
+    "menu_item_parent": "0",
+    "slug": "related-links",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 6410,
+    "title": "Sitemap",
+    "url": "/sitemap",
+    "menu_item_parent": "0",
+    "slug": "sitemap",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 6411,
+    "title": "Help",
+    "url": "/help",
+    "menu_item_parent": "0",
+    "slug": "help",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 13864,
+    "title": "Contact Us",
+    "url": "/connect",
+    "menu_item_parent": "0",
+    "slug": "contact-us-3",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 15061,
+    "title": "Feedback",
+    "url": "/feedback",
+    "menu_item_parent": "0",
+    "slug": "feedback",
+    "description": "",
+    "title_attribute": ""
+  }
+]

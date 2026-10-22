@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 568" width="400" height="568">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a0823"/>
+      <stop offset="45%" stop-color="#6c1340"/>
+      <stop offset="100%" stop-color="#240210"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d061"/>
+      <stop offset="50%" stop-color="#e5b338"/>
+      <stop offset="100%" stop-color="#aa7c11"/>
+    </linearGradient>
+    <pattern id="weavePattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 0,10 L 20,10 M 10,0 L 10,20" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <circle cx="10" cy="10" r="1.5" fill="rgba(255,215,0,0.08)"/>
+    </pattern>
+  </defs>
+
+  <!-- Cover Background -->
+  <rect width="400" height="568" fill="url(#bgGrad)"/>
+  <rect width="400" height="568" fill="url(#weavePattern)"/>
+
+  <!-- Left Spine Shadow Crease -->
+  <rect x="0" y="0" width="18" height="568" fill="black" opacity="0.25"/>
+  <line x1="18" y1="0" x2="18" y2="568" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+
+  <!-- Golden Geometric Border -->
+  <rect x="28" y="24" width="344" height="520" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.65"/>
+  <rect x="34" y="30" width="332" height="508" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+
+  <!-- Top Emblem & Ministry Header -->
+  <circle cx="200" cy="74" r="22" fill="#ffffff" opacity="0.95"/>
+  <path d="M 200,58 L 208,68 L 200,78 L 192,68 Z" fill="#6c1340"/>
+  <circle cx="200" cy="74" r="6" fill="#aa7c11"/>
+
+  <text x="200" y="112" fill="#f5d061" font-family="'Noto Sans', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="2" text-anchor="middle">GOVERNMENT OF INDIA</text>
+  <text x="200" y="126" fill="#ffffff" font-family="'Noto Sans', Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" text-anchor="middle">MINISTRY OF TEXTILES</text>
+  <text x="200" y="142" fill="#e5b338" font-family="'Noto Sans', Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1" text-anchor="middle">TEXTILES COMMITTEE</text>
+
+  <line x1="100" y1="154" x2="300" y2="154" stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- Center Title Card -->
+  <rect x="48" y="190" width="304" height="190" rx="8" fill="rgba(15, 2, 8, 0.45)" stroke="url(#goldGrad)" stroke-width="1"/>
+  
+  <rect x="135" y="178" width="130" height="24" rx="12" fill="#aa7c11"/>
+  <text x="200" y="194" fill="#ffffff" font-family="'Noto Sans', Arial, sans-serif" font-size="9" font-weight="800" letter-spacing="1.5" text-anchor="middle">SURVEY REPORT</text>
+
+  <text x="200" y="240" fill="#ffffff" font-family="'Merriweather', Georgia, serif" font-size="21" font-weight="700" text-anchor="middle">NATIONAL</text>
+  <text x="200" y="268" fill="#ffffff" font-family="'Merriweather', Georgia, serif" font-size="21" font-weight="700" text-anchor="middle">HOUSEHOLD</text>
+  <text x="200" y="296" fill="#f5d061" font-family="'Merriweather', Georgia, serif" font-size="18" font-weight="700" text-anchor="middle">TEXTILE CONSUMPTION</text>
+  <text x="200" y="322" fill="#ffffff" font-family="'Noto Sans', Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="2" text-anchor="middle">REPORT 2023 - 2024</text>
+
+  <text x="200" y="354" fill="rgba(255,255,255,0.7)" font-family="'Noto Sans', Arial, sans-serif" font-size="9" text-anchor="middle">AN EMPIRICAL ANALYSIS ACROSS RURAL &amp; URBAN INDIA</text>
+
+  <!-- Bottom Details & ISSN -->
+  <text x="200" y="440" fill="#e5b338" font-family="'Noto Sans', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" text-anchor="middle">MARKET RESEARCH DIVISION</text>
+  <text x="200" y="456" fill="rgba(255,255,255,0.85)" font-family="'Noto Sans', Arial, sans-serif" font-size="9.5" text-anchor="middle">P. Balu Road, Prabhadevi, Mumbai - 400025</text>
+
+  <!-- Barcode / ISSN strip -->
+  <rect x="70" y="485" width="260" height="34" fill="#ffffff" rx="4"/>
+  <text x="130" y="506" fill="#111111" font-family="monospace" font-size="11" font-weight="bold">ISSN 2348-7615</text>
+  <path d="M 230,490 L 230,514 M 234,490 L 234,514 M 238,490 L 238,514 M 244,490 L 244,514 M 248,490 L 248,514 M 254,490 L 254,514 M 258,490 L 258,514 M 264,490 L 264,514 M 270,490 L 270,514 M 276,490 L 276,514 M 282,490 L 282,514 M 288,490 L 288,514 M 294,490 L 294,514 M 300,490 L 300,514" stroke="#111111" stroke-width="2"/>
+</svg>

@@ -1,0 +1,493 @@
+[
+  {
+    "ID": 7443,
+    "title": "Ministry",
+    "url": "/ministry",
+    "menu_item_parent": "0",
+    "slug": "ministry",
+    "description": "",
+    "title_attribute": "",
+    "children": [
+      {
+        "ID": 7442,
+        "title": "About Us",
+        "url": "/ministry",
+        "menu_item_parent": "7443",
+        "slug": "about-us-2",
+        "description": "aboutus",
+        "title_attribute": ""
+      },
+      {
+        "ID": 2828,
+        "title": "Our Team",
+        "url": "/ministry/our-team",
+        "menu_item_parent": "7443",
+        "slug": "our-team",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 7364,
+        "title": "Our Organisation",
+        "url": "/ministry/our-organisation",
+        "menu_item_parent": "7443",
+        "slug": "our-organisation",
+        "description": "our_organisation",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8023,
+        "title": "Our Dashboard",
+        "url": "/ministry/our-performance",
+        "menu_item_parent": "7443",
+        "slug": "our-performance-2",
+        "description": "our_performance",
+        "title_attribute": ""
+      },
+      {
+        "ID": 22208,
+        "title": "Our Division",
+        "url": "/ministry/our-division",
+        "menu_item_parent": "7443",
+        "slug": "our-division-3",
+        "description": "",
+        "title_attribute": ""
+      }
+    ]
+  },
+  {
+    "ID": 2830,
+    "title": "Offerings",
+    "url": "/offerings",
+    "menu_item_parent": "0",
+    "slug": "offerings",
+    "description": "",
+    "title_attribute": "",
+    "children": [
+      {
+        "ID": 2831,
+        "title": "Schemes and Services",
+        "url": "/offerings",
+        "menu_item_parent": "2830",
+        "slug": "schemes-and-services",
+        "description": "schemes-and-services",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14601,
+        "title": "Vacancies",
+        "url": "/offerings/vacancies",
+        "menu_item_parent": "2830",
+        "slug": "vacancies",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14602,
+        "title": "Tenders",
+        "url": "/offerings/tenders",
+        "menu_item_parent": "2830",
+        "slug": "tenders",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 2876,
+        "title": "Competition and Awards",
+        "url": "/offerings/competition-and-awards",
+        "menu_item_parent": "2830",
+        "slug": "competition-and-awards",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14863,
+        "title": "Sector and Industry",
+        "url": "/offerings/sector-and-industry",
+        "menu_item_parent": "2830",
+        "slug": "sector-and-industry",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8090,
+        "title": "Initiative",
+        "url": "/offerings/initiative",
+        "menu_item_parent": "2830",
+        "slug": "initiative",
+        "description": "initiative",
+        "title_attribute": ""
+      }
+    ]
+  },
+  {
+    "ID": 3624,
+    "title": "Documents",
+    "url": "/documents",
+    "menu_item_parent": "0",
+    "slug": "documents",
+    "description": "",
+    "title_attribute": "",
+    "children": [
+      {
+        "ID": 14872,
+        "title": "Reports and Budget",
+        "url": "/documents",
+        "menu_item_parent": "3624",
+        "slug": "reports",
+        "description": "reports",
+        "title_attribute": ""
+      },
+      {
+        "ID": 10151,
+        "title": "Acts and Policies",
+        "url": "/documents/acts-and-policies",
+        "menu_item_parent": "3624",
+        "slug": "acts-and-policies",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14871,
+        "title": "Committee and Nodal Officers",
+        "url": "/documents/committee-and-nodal-officers",
+        "menu_item_parent": "3624",
+        "slug": "committee-and-nodal-officers",
+        "description": "orders-and-notices",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8234,
+        "title": "Gazettes Notifications",
+        "url": "/documents/gazettes-notifications",
+        "menu_item_parent": "3624",
+        "slug": "gazettes-notifications",
+        "description": "gazettes-notifications",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14459,
+        "title": "Textile data",
+        "url": "/documents/textile-data",
+        "menu_item_parent": "3624",
+        "slug": "textile-data",
+        "description": "guidelines",
+        "title_attribute": ""
+      },
+      {
+        "ID": 20773,
+        "title": "Press Release",
+        "url": "/documents/press-release",
+        "menu_item_parent": "3624",
+        "slug": "press-release",
+        "description": "press-release",
+        "title_attribute": ""
+      }
+    ]
+  },
+  {
+    "ID": 5760,
+    "title": "Media",
+    "url": "/media",
+    "menu_item_parent": "0",
+    "slug": "media-2",
+    "description": "",
+    "title_attribute": "",
+    "children": [
+      {
+        "ID": 3630,
+        "title": "Photos",
+        "url": "/media",
+        "menu_item_parent": "5760",
+        "slug": "photos",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 7371,
+        "title": "Videos",
+        "url": "/media/videos",
+        "menu_item_parent": "5760",
+        "slug": "videos",
+        "description": "videos-post",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14514,
+        "title": "Conferences/Presentation/Events",
+        "url": "/media/events",
+        "menu_item_parent": "5760",
+        "slug": "events",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8819,
+        "title": "Presentations/Events/Conferences",
+        "url": "/media/presentations",
+        "menu_item_parent": "5760",
+        "slug": "presentations-2",
+        "description": "",
+        "title_attribute": ""
+      }
+    ]
+  },
+  {
+    "ID": 8112,
+    "title": "Connect",
+    "url": "/connect",
+    "menu_item_parent": "0",
+    "slug": "connect",
+    "description": "",
+    "title_attribute": "",
+    "children": [
+      {
+        "ID": 8113,
+        "title": "Contact Us",
+        "url": "/connect",
+        "menu_item_parent": "8112",
+        "slug": "contact-us",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8114,
+        "title": "Directory",
+        "url": "/connect/directory",
+        "menu_item_parent": "8112",
+        "slug": "directory-2",
+        "description": "directory_post",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8115,
+        "title": "RTI",
+        "url": "/connect/rti",
+        "menu_item_parent": "8112",
+        "slug": "rti",
+        "description": "rti",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8118,
+        "title": "Grievance Redressal",
+        "url": "/connect/grievance-redressal",
+        "menu_item_parent": "8112",
+        "slug": "grievance-redressal",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14516,
+        "title": "Vigilance",
+        "url": "/connect/vigilance",
+        "menu_item_parent": "8112",
+        "slug": "vigilance",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8120,
+        "title": "Parliament Questions",
+        "url": "/connect/parliament-questions",
+        "menu_item_parent": "8112",
+        "slug": "parliament-questions",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8117,
+        "title": "Visitor's Pass",
+        "url": "/connect/visitors-pass",
+        "menu_item_parent": "8112",
+        "slug": "visitors-pass",
+        "description": "",
+        "title_attribute": ""
+      }
+    ]
+  },
+  {
+    "ID": 7445,
+    "title": "Website Policies",
+    "url": "/policies",
+    "menu_item_parent": "0",
+    "slug": "website-policies-3",
+    "description": "",
+    "title_attribute": "",
+    "children": [
+      {
+        "ID": 7446,
+        "title": "Terms of Use",
+        "url": "/policies",
+        "menu_item_parent": "7445",
+        "slug": "terms-of-use-3",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 7447,
+        "title": "Privacy Policy",
+        "url": "/policies/privacy-policy",
+        "menu_item_parent": "7445",
+        "slug": "privacy-policy-3",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 7448,
+        "title": "Hyperlink Policy",
+        "url": "/policies/hyperlinking-policy",
+        "menu_item_parent": "7445",
+        "slug": "hyperlink-policy",
+        "description": "",
+        "title_attribute": ""
+      }
+    ]
+  },
+  {
+    "ID": 7034,
+    "title": "Archives",
+    "url": "/archives",
+    "menu_item_parent": "0",
+    "slug": "archives-2",
+    "description": "",
+    "title_attribute": "",
+    "children": [
+      {
+        "ID": 14630,
+        "title": "Tenders",
+        "url": "/archives/tenders",
+        "menu_item_parent": "7034",
+        "slug": "tenders-4",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14643,
+        "title": "Vacancies",
+        "url": "/archives/vacancies",
+        "menu_item_parent": "7034",
+        "slug": "vacancies-4",
+        "description": "",
+        "title_attribute": ""
+      },
+      {
+        "ID": 8230,
+        "title": "Schemes and Services",
+        "url": "/archives/schemes-and-services",
+        "menu_item_parent": "7034",
+        "slug": "schemes-and-services-3",
+        "description": "schemes_and_services",
+        "title_attribute": ""
+      },
+      {
+        "ID": 9190,
+        "title": "Presentation",
+        "url": "/archives/presentation",
+        "menu_item_parent": "7034",
+        "slug": "presentation",
+        "description": "presentation",
+        "title_attribute": ""
+      },
+      {
+        "ID": 14873,
+        "title": "Reports and Budget",
+        "url": "/archives/reports",
+        "menu_item_parent": "7034",
+        "slug": "reports-4",
+        "description": "reports",
+        "title_attribute": "Report"
+      },
+      {
+        "ID": 14874,
+        "title": "Committee and Nodal Officers",
+        "url": "/archives/committee-and-nodal-officers",
+        "menu_item_parent": "7034",
+        "slug": "committee-and-nodal-officers-3",
+        "description": "orders",
+        "title_attribute": "Orders%20and%20Notices"
+      },
+      {
+        "ID": 9193,
+        "title": "Gazettes Notifications",
+        "url": "/archives/gazettes-notifications",
+        "menu_item_parent": "7034",
+        "slug": "gazettes-notifications-3",
+        "description": "gazettes-notifications",
+        "title_attribute": "Gazettes%20Notifications"
+      },
+      {
+        "ID": 9195,
+        "title": "Acts and Policies",
+        "url": "/documents/acts-and-policies",
+        "menu_item_parent": "7034",
+        "slug": "acts-and-policies-3",
+        "description": "acts-and-policies",
+        "title_attribute": "Act%20and%20policies"
+      },
+      {
+        "ID": 9196,
+        "title": "Publications",
+        "url": "/archives/publications",
+        "menu_item_parent": "7034",
+        "slug": "publications-3",
+        "description": "publications",
+        "title_attribute": "Publications"
+      },
+      {
+        "ID": 16580,
+        "title": "Textile Data",
+        "url": "/archives/textile-data",
+        "menu_item_parent": "7034",
+        "slug": "textile-data-4",
+        "description": "",
+        "title_attribute": ""
+      }
+    ]
+  },
+  {
+    "ID": 20658,
+    "title": "Media Layout",
+    "url": "https://cms-texmin.digifootprint.gov.in/resources/",
+    "menu_item_parent": "0",
+    "slug": "20658",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 20657,
+    "title": "Media",
+    "url": "/media",
+    "menu_item_parent": "0",
+    "slug": "media-3",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 8116,
+    "title": "RTI Documents",
+    "url": "/connect/Rti/details",
+    "menu_item_parent": "0",
+    "slug": "rti-documents",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 14527,
+    "title": "PIDPI/Whistle Blower Policy Guidelines",
+    "url": "/connect/vigilance/pidpi-whistleblower-policy-guidelines",
+    "menu_item_parent": "0",
+    "slug": "pidpi-whistle-blower-policy-guidelines-2",
+    "description": "",
+    "title_attribute": ""
+  },
+  {
+    "ID": 14526,
+    "title": "Complaint Handling Policy",
+    "url": "/connect/vigilance/complaint-handling-policy",
+    "menu_item_parent": "0",
+    "slug": "complaint-handling-policy-2",
+    "description": "",
+    "title_attribute": ""
+  }
+]

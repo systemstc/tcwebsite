@@ -1,0 +1,1451 @@
+<div class="tc-office-network-wrap" id="tcOfficeNetwork">
+    <!-- Leaflet CDN Resources -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- SECTION 1: OFFICIAL TEXMIN INTERACTIVE MAP -->
+    <div class="texmin-map-panel mb-5 p-3 p-md-4 rounded-3 shadow-sm" style="background: #ffffff; border: 1.5px solid #ebd0de;">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-2 border-bottom">
+            <div>
+                <h2 class="fw-bold mb-1" style="color: #500a2f; font-size: 2.2rem; font-family: 'Noto Sans', sans-serif;">
+                    <i class="fa-solid fa-map-location-dot me-2 text-theme-icon"></i> Pan-India Regional Offices & Laboratories Network
+                </h2>
+                <p class="text-muted mb-0" style="font-size: 1.35rem;">
+                    Textiles Committee has 24 regional offices and state-of-the-art testing laboratories across all major textile manufacturing and export hubs.
+                </p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2" onclick="resetOfficeMap()" style="font-size: 1.25rem; font-weight: 600; border-radius: 8px;">
+                    <i class="fa-solid fa-arrows-to-circle me-1" style="color: #500a2f;"></i> Reset All India View
+                </button>
+            </div>
+        </div>
+
+        <!-- Interactive Map Container -->
+        <div id="tcOfficeMap" style="height: 480px; width: 100%; border-radius: 12px; border: 1.5px solid #d4aabf; position: relative; z-index: 1;"></div>
+
+        <!-- Search and Zone Filter Pill Bar -->
+        <div class="row align-items-center g-3 mt-2 pt-2">
+            <div class="col-md-7 col-lg-6 col-12">
+                <div class="input-group">
+                    <span class="input-group-text bg-white" style="border: 1.5px solid #d4aabf; border-right: none; color: #500a2f;">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="roSearchInput" class="form-control" placeholder="Search office by city, address, or officer..." oninput="filterRoList()" style="font-size: 1.35rem; border: 1.5px solid #d4aabf; border-left: none;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="mt-2 text-muted small d-flex justify-content-between align-items-center" style="font-size: 1.15rem;">
+            <span id="roResultCount" style="color: #500a2f; font-weight: 600;">Showing all 24 offices & laboratories</span>
+            <span><i class="fa-solid fa-info-circle me-1" style="color: #500a2f;"></i> Click any card below or pin on the map to navigate</span>
+        </div>
+    </div>
+
+    <!-- SECTION 2: 2-COLUMN REGIONAL OFFICE CARDS -->
+    <div class="row g-4" id="roCardsContainer">
+            <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-mumbai" data-ro-id="mumbai" data-city="Mumbai" data-name="Textiles Committee Headquarters (Mumbai)" data-address="P. Balu Road, Off. Veer Savarkar Marg, Prabhadevi Chowk, Prabhadevi, Mumbai - 400 025 (Maharashtra)" onclick="selectRo('mumbai')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Headquarters (Mumbai)
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Shri Kartikay Dhanda, Secretary, Textiles Committee
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>P. Balu Road, Off. Veer Savarkar Marg, Prabhadevi Chowk, Prabhadevi, Mumbai - 400 025 (Maharashtra)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:02266527507" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">022-66527507, 022-66527506</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:secy.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">secy.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="badge texmin-hq-badge"><i class="fa-solid fa-star me-1"></i>HQ</span>
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Mumbai on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-delhi" data-ro-id="delhi" data-city="Delhi (NCR) - Gurugram" data-name="Textiles Committee Delhi (NCR) - Gurugram" data-address="Apparel House, 5th Floor, Institutional Area, Sector 44, Gurugram - 122 003 (Haryana)" onclick="selectRo('delhi')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Delhi (NCR) - Gurugram
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Regional Office & Central Testing Laboratory
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Apparel House, 5th Floor, Institutional Area, Sector 44, Gurugram - 122 003 (Haryana)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:01242544201" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0124-2544201</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:ndl1.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">ndl1.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Delhi (NCR) - Gurugram on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-ahmedabad" data-ro-id="ahmedabad" data-city="Ahmedabad" data-name="Textiles Committee Ahmedabad" data-address="Opp. Dinbai Tower, Mirzapur Road, Lal Darwaza, Ahmedabad – 380 001 (Gujarat)" onclick="selectRo('ahmedabad')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Ahmedabad
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Western Zone Regional Office & Eco-Laboratory
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Opp. Dinbai Tower, Mirzapur Road, Lal Darwaza, Ahmedabad – 380 001 (Gujarat)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:07925507612" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">079–2550 7612</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:abd.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">abd.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Ahmedabad on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-bangalore" data-ro-id="bangalore" data-city="Bangalore" data-name="Textiles Committee Bangalore (Bengaluru)" data-address="FKCCI, WTC Building, 1st Floor, Kempe Gowda Road, Bangalore – 560 009 (Karnataka)" onclick="selectRo('bangalore')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Bangalore (Bengaluru)
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Southern Zone Regional Office & Silk Testing Wing
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>FKCCI, WTC Building, 1st Floor, Kempe Gowda Road, Bangalore – 560 009 (Karnataka)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:08022261401" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">080-22261401, 080-22208010</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:blr.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">blr.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Bangalore on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-bhubaneshwar" data-ro-id="bhubaneshwar" data-city="Bhubaneshwar" data-name="Textiles Committee Bhubaneshwar" data-address="C/o Weavers Service Centre Campus, Plot No. A/407, Shahid Nagar, Bhubaneshwar - 751 007 (Odisha)" onclick="selectRo('bhubaneshwar')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Bhubaneshwar
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Eastern Zone Office & Handloom Testing Centre
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>C/o Weavers Service Centre Campus, Plot No. A/407, Shahid Nagar, Bhubaneshwar - 751 007 (Odisha)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:06742548303" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0674-2548303</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:bbs.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">bbs.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Bhubaneshwar on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-chennai" data-ro-id="chennai" data-city="Chennai" data-name="Textiles Committee Chennai" data-address="TNUHDB Complex, 2nd Floor, 130, R.K Mutt Road, Mylapore, Chennai - 600 004 (Tamil Nadu)" onclick="selectRo('chennai')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Chennai
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Tamil Nadu Regional Office & Quality Assurance Lab
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>TNUHDB Complex, 2nd Floor, 130, R.K Mutt Road, Mylapore, Chennai - 600 004 (Tamil Nadu)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:04424610887" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">044-24610887, 044-24640740</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:chennai.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">chennai.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Chennai on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-coimbatore" data-ro-id="coimbatore" data-city="Coimbatore" data-name="Textiles Committee Coimbatore" data-address="Raj Chambers, 978-A, Thadagam Road, Coimbatore – 641 002 (Tamil Nadu)" onclick="selectRo('coimbatore')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Coimbatore
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Major Textile Cluster Laboratory & EPQA Cell
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Raj Chambers, 978-A, Thadagam Road, Coimbatore – 641 002 (Tamil Nadu)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:04222473094" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0422-2473094, 0422-2472689</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:cbe.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">cbe.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Coimbatore on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-guntur" data-ro-id="guntur" data-city="Guntur" data-name="Textiles Committee Guntur" data-address="Sai Ram Complex, Door No. 25-1-9, Near Mastan Darga, G.T. Road, Guntur – 522 004 (Andhra Pradesh)" onclick="selectRo('guntur')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Guntur
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Andhra Pradesh Cotton & Quality Cell
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Sai Ram Complex, Door No. 25-1-9, Near Mastan Darga, G.T. Road, Guntur – 522 004 (Andhra Pradesh)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:08632218951" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0863-2218951</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:gnt.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">gnt.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Guntur on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-hyderabad" data-ro-id="hyderabad" data-city="Hyderabad" data-name="Textiles Committee Hyderabad" data-address="1st Floor, UNI Bldg, D. No 10-1-1200, A C Guards, Masab Tank Road, Hyderabad – 500 004 (Telangana)" onclick="selectRo('hyderabad')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Hyderabad
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Telangana Regional Centre & Lab Facility
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>1st Floor, UNI Bldg, D. No 10-1-1200, A C Guards, Masab Tank Road, Hyderabad – 500 004 (Telangana)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:04023327153" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">040-23327153</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:oic-hyd.tc@gov.in, rotchyd@gmail.com" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">oic-hyd.tc@gov.in, rotchyd@gmail.com</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Hyderabad on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-ichalkaranji" data-ro-id="ichalkaranji" data-city="Ichalkaranji" data-name="Textiles Committee Ichalkaranji" data-address="Hall No. 1, Ward No. 10, Rajaram Stadium, Near Shivaji Putala, Ichalkaranji – 416 115 (Maharashtra)" onclick="selectRo('ichalkaranji')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Ichalkaranji
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Powerloom & Weaving Cluster Regional Office
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Hall No. 1, Ward No. 10, Rajaram Stadium, Near Shivaji Putala, Ichalkaranji – 416 115 (Maharashtra)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:02302420838" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0230-2420838</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:ichl.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">ichl.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Ichalkaranji on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-indore" data-ro-id="indore" data-city="Indore" data-name="Textiles Committee Indore" data-address="C-1, F Vikas Tower Indira Complex, A.B Road, Navlakha, Indore - 452 001 (Madhya Pradesh)" onclick="selectRo('indore')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Indore
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Central India Regional Centre & Lab
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>C-1, F Vikas Tower Indira Complex, A.B Road, Navlakha, Indore - 452 001 (Madhya Pradesh)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:07312401243" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0731-2401243</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:Indore.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">Indore.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Indore on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-jaipur" data-ro-id="jaipur" data-city="Jaipur" data-name="Textiles Committee Jaipur" data-address="N/S/O/2, NGR-1, Nehru Place, Tonk Road, Jaipur – 302 015 (Rajasthan)" onclick="selectRo('jaipur')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Jaipur
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Rajasthan Apparel & Textile Quality Assurance Office
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>N/S/O/2, NGR-1, Nehru Place, Tonk Road, Jaipur – 302 015 (Rajasthan)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:01414052664" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0141-4052664</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:jpr.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">jpr.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Jaipur on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-kannur" data-ro-id="kannur" data-city="Kannur" data-name="Textiles Committee Kannur" data-address="Platinum Centre, 2nd Floor, Bank Road, Kannur – 670 001 (Kerala)" onclick="selectRo('kannur')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Kannur
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Kerala Handloom & Export Quality Centre
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Platinum Centre, 2nd Floor, Bank Road, Kannur – 670 001 (Kerala)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:04972706390" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0497-2706390</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:kannur.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">kannur.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Kannur on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-kanpur" data-ro-id="kanpur" data-city="Kanpur" data-name="Textiles Committee Kanpur" data-address="117/48, Sarvodaya Nagar (Basement and First Floor), Near Bank of Baroda, Kanpur – 208 005 (Uttar Pradesh)" onclick="selectRo('kanpur')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Kanpur
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Uttar Pradesh Regional Office & Eco-Testing Lab
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>117/48, Sarvodaya Nagar (Basement and First Floor), Near Bank of Baroda, Kanpur – 208 005 (Uttar Pradesh)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:05122240066" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0512-2240066, 0512-2212548</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:kanpur.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">kanpur.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Kanpur on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-karur" data-ro-id="karur" data-city="Karur" data-name="Textiles Committee Karur" data-address="K V R Complex, 2nd Floor, 21 – J, 80 Feet Road, Karur – 639 002 (Tamil Nadu)" onclick="selectRo('karur')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Karur
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Home Textiles Export & Testing Centre
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>K V R Complex, 2nd Floor, 21 – J, 80 Feet Road, Karur – 639 002 (Tamil Nadu)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:04324274871" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">04324-274871</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:krr.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">krr.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Karur on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-kolkata" data-ro-id="kolkata" data-city="Kolkata" data-name="Textiles Committee Kolkata" data-address="Block G.N, Plot-38/3, Sector-V, Salt Lake City, Kolkata – 700 091 (West Bengal)" onclick="selectRo('kolkata')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Kolkata
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Eastern & North-Eastern Regional Hub & Jute Lab
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Block G.N, Plot-38/3, Sector-V, Salt Lake City, Kolkata – 700 091 (West Bengal)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:03346021338" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">033-46021338</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:kol.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">kol.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Kolkata on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-ludhiana" data-ro-id="ludhiana" data-city="Ludhiana" data-name="Textiles Committee Ludhiana" data-address="Sona Complex, 3rd Floor, G.T Road, Miller Ganj, Ludhiana – 141 003 (Punjab)" onclick="selectRo('ludhiana')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Ludhiana
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Knitwear & Woollen Testing Laboratory
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Sona Complex, 3rd Floor, G.T Road, Miller Ganj, Ludhiana – 141 003 (Punjab)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:01612530165" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0161-2530165, 0161-2530135</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:ldh.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">ldh.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Ludhiana on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-nagpur" data-ro-id="nagpur" data-city="Nagpur" data-name="Textiles Committee Nagpur" data-address="Brindavan, 1st Floor, 744, WHC Road, Dharmapeth, Nagpur – 440 010 (Maharashtra)" onclick="selectRo('nagpur')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Nagpur
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Vidarbha Regional Centre & Lab Facility
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Brindavan, 1st Floor, 744, WHC Road, Dharmapeth, Nagpur – 440 010 (Maharashtra)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:07122561564" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0712-2561564</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:ngr.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">ngr.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Nagpur on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-surat" data-ro-id="surat" data-city="Surat" data-name="Textiles Committee Surat" data-address="Block No. 2(A), 2nd Floor, Resham Bhawan, Lal Darwaza, Surat - 395 003 (Gujarat)" onclick="selectRo('surat')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Surat
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Man-Made Fibre & Synthetic Cluster Office
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Block No. 2(A), 2nd Floor, Resham Bhawan, Lal Darwaza, Surat - 395 003 (Gujarat)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:02612423167" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0261-2423167</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:surat.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">surat.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Surat on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-tirupur" data-ro-id="tirupur" data-city="Tirupur" data-name="Textiles Committee Tirupur" data-address="Plot No 8 & 9, Thiruvika Nagar, 1st Floor, College Road, Tirupur – 641 602 (Tamil Nadu)" onclick="selectRo('tirupur')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Tirupur
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Knitwear Export Hub & NABL Testing Laboratory
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>Plot No 8 & 9, Thiruvika Nagar, 1st Floor, College Road, Tirupur – 641 602 (Tamil Nadu)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:04212201402" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0421-2201402, 0421-2202500</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:tpr.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">tpr.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Tirupur on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-tuticorin" data-ro-id="tuticorin" data-city="Tuticorin (Thoothukudi)" data-name="Textiles Committee Tuticorin" data-address="57/14, Muniasamypuram II, New Colony, Tuticorin - 628 003 (Tamil Nadu)" onclick="selectRo('tuticorin')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Tuticorin
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Port Quality Control & Testing Cell
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>57/14, Muniasamypuram II, New Colony, Tuticorin - 628 003 (Tamil Nadu)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:04612323384" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0461-2323384</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:tctutcorin@gmail.com" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">tctutcorin@gmail.com</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Tuticorin (Thoothukudi) on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-varanasi" data-ro-id="varanasi" data-city="Varanasi" data-name="Textiles Committee Varanasi" data-address="52, Patel Nagar, 1st Floor, Mint House, Nadesar, Varanasi - 221 002 (Uttar Pradesh)" onclick="selectRo('varanasi')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Varanasi
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Varanasi Handloom Silk & Zari Quality Centre
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>52, Patel Nagar, 1st Floor, Mint House, Nadesar, Varanasi - 221 002 (Uttar Pradesh)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:05422500616" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0542-2500616</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:var.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">var.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Varanasi on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-srinagar" data-ro-id="srinagar" data-city="Srinagar" data-name="Textiles Committee Srinagar" data-address="C/o Weavers Service Centre, UNDP Project Complex, Baghe Ali Mardan Khan, Nowshera, Srinagar – 190 011 (J&K)" onclick="selectRo('srinagar')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee Srinagar
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Kashmir Wool, Silk & Pashmina Quality Centre
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>C/o Weavers Service Centre, UNDP Project Complex, Baghe Ali Mardan Khan, Nowshera, Srinagar – 190 011 (J&K)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:01942411043" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">0194-2411043</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:sgr.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">sgr.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View Srinagar on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>    <div class="col-lg-6 col-md-6 col-12 d-flex">
+        <div class="texmin-ro-card w-100" id="ro-card-jnpa" data-ro-id="jnpa" data-city="JNPA (Nhava Sheva)" data-name="Textiles Committee JNPA (Nhava Sheva)" data-address="PB/G/D-5, Port Users Building, Jawaharlal Nehru Port Authority, Nhava Sheva, Navi Mumbai - 400 707 (Maharashtra)" onclick="selectRo('jnpa')">
+            <!-- Top Section: Title & Subtitle (Logo removed as requested) -->
+            <div class="mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-1">
+                    <h3 class="texmin-card-title mb-0">
+                        Textiles Committee JNPA (Nhava Sheva)
+                    </h3>
+                </div>
+                <div class="texmin-card-subtitle">
+                    Port Quality Cell & Export Inspection Lab
+                </div>
+            </div>
+
+            <!-- Middle Section: Address, Phone, Email with Theme Colors -->
+            <div class="texmin-card-body flex-grow-1 my-2">
+                <p class="texmin-card-address mb-2">
+                    <i class="fa-solid fa-location-dot me-2 text-theme-icon"></i>PB/G/D-5, Port Users Building, Jawaharlal Nehru Port Authority, Nhava Sheva, Navi Mumbai - 400 707 (Maharashtra)
+                </p>
+                <div class="texmin-card-meta d-flex flex-wrap gap-3 pt-1">
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-phone me-1 text-theme-icon"></i>
+                        <a href="tel:02227240020" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">022-27240020</a>
+                    </span>
+                    <span class="texmin-meta-item">
+                        <i class="fa-solid fa-envelope me-1 text-theme-icon"></i>
+                        <a href="mailto:labjnpt2.tc@nic.in" class="text-decoration-none text-theme-link" onclick="event.stopPropagation();">labjnpt2.tc@nic.in</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Zone Pill on Left, Theme Maroon Arrow Button on Right -->
+            <div class="texmin-card-footer d-flex align-items-center justify-content-between pt-2 border-top">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-theme-muted ms-2 d-none d-sm-inline">Click to locate</span>
+                </div>
+                <!-- Theme Maroon Button with White Arrow (Matching theme as requested) -->
+                <button type="button" class="texmin-arrow-btn" aria-label="View JNPA (Nhava Sheva) on Map" title="Locate on Map">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<style>
+/* ============================================================
+   TEXMIN THEME RO CARDS - DEEP MAROON & #ebd0de PALETTE
+   ============================================================ */
+.tc-office-network-wrap {
+    font-family: 'Noto Sans', sans-serif;
+    color: #1e293b;
+}
+
+/* RO CARD DESIGN:
+   Background: #ebd0de (User Specified)
+   Border: 1.5px solid #d4aabf
+   Radius: 14px */
+.texmin-ro-card {
+    background: #ebd0de !important;
+    border: 1.5px solid #d4aabf !important;
+    border-radius: 14px !important;
+    padding: 24px 26px !important;
+    box-shadow: 0 4px 14px rgba(80, 10, 47, 0.06) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    transition: all 0.25s ease-in-out !important;
+}
+.texmin-ro-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: #721835 !important;
+    box-shadow: 0 10px 25px rgba(80, 10, 47, 0.16) !important;
+    background: #f1dae6 !important;
+}
+.texmin-ro-card.active-ro-card {
+    border: 2.5px solid #500a2f !important;
+    box-shadow: 0 0 0 4px rgba(80, 10, 47, 0.22), 0 12px 28px rgba(80, 10, 47, 0.2) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* Card Header Typography: Theme Maroon #500a2f */
+.texmin-card-title {
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    color: #500a2f !important; /* Theme Deep Maroon */
+    line-height: 1.3 !important;
+    letter-spacing: -0.2px;
+}
+.texmin-card-subtitle {
+    font-size: 1.3rem !important;
+    color: #4a132e !important; /* Theme Subtitle */
+    font-weight: 600 !important;
+    line-height: 1.45 !important;
+}
+
+/* Card Body Typography */
+.texmin-card-address {
+    font-size: 1.35rem !important;
+    color: #2b081a !important; /* High-contrast text */
+    line-height: 1.65 !important;
+    margin: 0;
+}
+.texmin-card-meta {
+    font-size: 1.3rem !important;
+}
+.text-theme-icon {
+    color: #721835 !important; /* Rich Theme Maroon Icon */
+}
+.text-theme-link {
+    color: #500a2f !important;
+    font-weight: 600 !important;
+}
+.text-theme-link:hover {
+    color: #8c1d43 !important;
+    text-decoration: underline !important;
+}
+.text-theme-muted {
+    color: #500a2f !important;
+    font-weight: 500;
+}
+
+/* HQ Badge */
+.texmin-hq-tag {
+    background: #500a2f !important;
+    color: #ffffff !important;
+    font-size: 1.05rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+.texmin-hq-badge {
+    background: #b8144b !important;
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+    padding: 5px 10px !important;
+    border-radius: 6px !important;
+}
+
+/* ACTION BUTTON IN THEME MAROON (Changed from teal to theme maroon) */
+.texmin-arrow-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #500a2f !important; /* Theme Deep Maroon */
+    color: #ffffff !important;      /* White Arrow */
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.5rem !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 6px rgba(80, 10, 47, 0.25) !important;
+}
+.texmin-ro-card:hover .texmin-arrow-btn {
+    background: #721835 !important;
+    color: #ffffff !important;
+    transform: scale(1.08) !important;
+    box-shadow: 0 4px 12px rgba(80, 10, 47, 0.4) !important;
+}
+.texmin-ro-card.active-ro-card .texmin-arrow-btn {
+    background: #38051e !important;
+    color: #ffffff !important;
+}
+
+/* Custom Leaflet Map Pin Styles */
+.tc-map-marker {
+    background: none;
+    border: none;
+}
+.tc-pin-wrap {
+    position: relative;
+    width: 32px;
+    height: 44px;
+    cursor: pointer;
+}
+.tc-pin-svg {
+    width: 32px;
+    height: 44px;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
+    transition: transform 0.2s;
+}
+.tc-pin-wrap:hover .tc-pin-svg {
+    transform: scale(1.15) translateY(-4px);
+}
+.tc-pin-wrap.active .tc-pin-svg {
+    transform: scale(1.28) translateY(-6px);
+    filter: drop-shadow(0 0 10px rgba(80, 10, 47, 0.85));
+}
+.tc-pin-halo {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(114, 24, 53, 0.45);
+    bottom: -6px;
+    left: 4px;
+    animation: tcPulse 1.8s infinite;
+    pointer-events: none;
+    display: none;
+}
+.tc-pin-wrap.active .tc-pin-halo {
+    display: block;
+}
+@keyframes tcPulse {
+    0% { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Leaflet Popup Box */
+.leaflet-popup-content-wrapper {
+    border-radius: 10px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+    border: 1.5px solid #ebd0de !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+.leaflet-popup-content {
+    margin: 0 !important;
+    line-height: 1.5 !important;
+    font-family: 'Noto Sans', sans-serif !important;
+    min-width: 270px;
+}
+.ro-popup-head {
+    background: #500a2f;
+    color: #ffffff;
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 1.35rem;
+}
+.ro-popup-body {
+    padding: 12px 14px;
+    background: #ffffff;
+    font-size: 1.25rem;
+    color: #1e293b;
+}
+</style>
+
+<script>
+(function() {
+    var roLocations = [{"id":"mumbai","city":"Mumbai","name":"Textiles Committee Headquarters (Mumbai)","officer":"Shri Kartikay Dhanda, Secretary, Textiles Committee","address":"P. Balu Road, Off. Veer Savarkar Marg, Prabhadevi Chowk, Prabhadevi, Mumbai - 400 025 (Maharashtra)","phone":"022-66527507, 022-66527506","email":"secy.tc@nic.in","lat":19.0144,"lng":72.8277,"is_hq":true},{"id":"delhi","city":"Delhi (NCR) - Gurugram","name":"Textiles Committee Delhi (NCR) - Gurugram","officer":"Regional Office \u0026 Central Testing Laboratory","address":"Apparel House, 5th Floor, Institutional Area, Sector 44, Gurugram - 122 003 (Haryana)","phone":"0124-2544201","email":"ndl1.tc@nic.in","lat":28.4526,"lng":77.0673,"is_hq":false},{"id":"ahmedabad","city":"Ahmedabad","name":"Textiles Committee Ahmedabad","officer":"Western Zone Regional Office \u0026 Eco-Laboratory","address":"Opp. Dinbai Tower, Mirzapur Road, Lal Darwaza, Ahmedabad \u2013 380 001 (Gujarat)","phone":"079\u20132550 7612","email":"abd.tc@nic.in","lat":23.0276,"lng":72.5873,"is_hq":false},{"id":"bangalore","city":"Bangalore","name":"Textiles Committee Bangalore (Bengaluru)","officer":"Southern Zone Regional Office \u0026 Silk Testing Wing","address":"FKCCI, WTC Building, 1st Floor, Kempe Gowda Road, Bangalore \u2013 560 009 (Karnataka)","phone":"080-22261401, 080-22208010","email":"blr.tc@nic.in","lat":12.9767,"lng":77.5713,"is_hq":false},{"id":"bhubaneshwar","city":"Bhubaneshwar","name":"Textiles Committee Bhubaneshwar","officer":"Eastern Zone Office \u0026 Handloom Testing Centre","address":"C\/o Weavers Service Centre Campus, Plot No. A\/407, Shahid Nagar, Bhubaneshwar - 751 007 (Odisha)","phone":"0674-2548303","email":"bbs.tc@nic.in","lat":20.2961,"lng":85.8245,"is_hq":false},{"id":"chennai","city":"Chennai","name":"Textiles Committee Chennai","officer":"Tamil Nadu Regional Office \u0026 Quality Assurance Lab","address":"TNUHDB Complex, 2nd Floor, 130, R.K Mutt Road, Mylapore, Chennai - 600 004 (Tamil Nadu)","phone":"044-24610887, 044-24640740","email":"chennai.tc@nic.in","lat":13.0339,"lng":80.2677,"is_hq":false},{"id":"coimbatore","city":"Coimbatore","name":"Textiles Committee Coimbatore","officer":"Major Textile Cluster Laboratory \u0026 EPQA Cell","address":"Raj Chambers, 978-A, Thadagam Road, Coimbatore \u2013 641 002 (Tamil Nadu)","phone":"0422-2473094, 0422-2472689","email":"cbe.tc@nic.in","lat":11.0168,"lng":76.9558,"is_hq":false},{"id":"guntur","city":"Guntur","name":"Textiles Committee Guntur","officer":"Andhra Pradesh Cotton \u0026 Quality Cell","address":"Sai Ram Complex, Door No. 25-1-9, Near Mastan Darga, G.T. Road, Guntur \u2013 522 004 (Andhra Pradesh)","phone":"0863-2218951","email":"gnt.tc@nic.in","lat":16.3067,"lng":80.4365,"is_hq":false},{"id":"hyderabad","city":"Hyderabad","name":"Textiles Committee Hyderabad","officer":"Telangana Regional Centre \u0026 Lab Facility","address":"1st Floor, UNI Bldg, D. No 10-1-1200, A C Guards, Masab Tank Road, Hyderabad \u2013 500 004 (Telangana)","phone":"040-23327153","email":"oic-hyd.tc@gov.in, rotchyd@gmail.com","lat":17.4065,"lng":78.4772,"is_hq":false},{"id":"ichalkaranji","city":"Ichalkaranji","name":"Textiles Committee Ichalkaranji","officer":"Powerloom \u0026 Weaving Cluster Regional Office","address":"Hall No. 1, Ward No. 10, Rajaram Stadium, Near Shivaji Putala, Ichalkaranji \u2013 416 115 (Maharashtra)","phone":"0230-2420838","email":"ichl.tc@nic.in","lat":16.6974,"lng":74.4646,"is_hq":false},{"id":"indore","city":"Indore","name":"Textiles Committee Indore","officer":"Central India Regional Centre \u0026 Lab","address":"C-1, F Vikas Tower Indira Complex, A.B Road, Navlakha, Indore - 452 001 (Madhya Pradesh)","phone":"0731-2401243","email":"Indore.tc@nic.in","lat":22.7244,"lng":75.8839,"is_hq":false},{"id":"jaipur","city":"Jaipur","name":"Textiles Committee Jaipur","officer":"Rajasthan Apparel \u0026 Textile Quality Assurance Office","address":"N\/S\/O\/2, NGR-1, Nehru Place, Tonk Road, Jaipur \u2013 302 015 (Rajasthan)","phone":"0141-4052664","email":"jpr.tc@nic.in","lat":26.8834,"lng":75.7958,"is_hq":false},{"id":"kannur","city":"Kannur","name":"Textiles Committee Kannur","officer":"Kerala Handloom \u0026 Export Quality Centre","address":"Platinum Centre, 2nd Floor, Bank Road, Kannur \u2013 670 001 (Kerala)","phone":"0497-2706390","email":"kannur.tc@nic.in","lat":11.8745,"lng":75.3704,"is_hq":false},{"id":"kanpur","city":"Kanpur","name":"Textiles Committee Kanpur","officer":"Uttar Pradesh Regional Office \u0026 Eco-Testing Lab","address":"117\/48, Sarvodaya Nagar (Basement and First Floor), Near Bank of Baroda, Kanpur \u2013 208 005 (Uttar Pradesh)","phone":"0512-2240066, 0512-2212548","email":"kanpur.tc@nic.in","lat":26.4735,"lng":80.3475,"is_hq":false},{"id":"karur","city":"Karur","name":"Textiles Committee Karur","officer":"Home Textiles Export \u0026 Testing Centre","address":"K V R Complex, 2nd Floor, 21 \u2013 J, 80 Feet Road, Karur \u2013 639 002 (Tamil Nadu)","phone":"04324-274871","email":"krr.tc@nic.in","lat":10.9601,"lng":78.0766,"is_hq":false},{"id":"kolkata","city":"Kolkata","name":"Textiles Committee Kolkata","officer":"Eastern \u0026 North-Eastern Regional Hub \u0026 Jute Lab","address":"Block G.N, Plot-38\/3, Sector-V, Salt Lake City, Kolkata \u2013 700 091 (West Bengal)","phone":"033-46021338","email":"kol.tc@nic.in","lat":22.5735,"lng":88.4331,"is_hq":false},{"id":"ludhiana","city":"Ludhiana","name":"Textiles Committee Ludhiana","officer":"Knitwear \u0026 Woollen Testing Laboratory","address":"Sona Complex, 3rd Floor, G.T Road, Miller Ganj, Ludhiana \u2013 141 003 (Punjab)","phone":"0161-2530165, 0161-2530135","email":"ldh.tc@nic.in","lat":30.8872,"lng":75.8624,"is_hq":false},{"id":"nagpur","city":"Nagpur","name":"Textiles Committee Nagpur","officer":"Vidarbha Regional Centre \u0026 Lab Facility","address":"Brindavan, 1st Floor, 744, WHC Road, Dharmapeth, Nagpur \u2013 440 010 (Maharashtra)","phone":"0712-2561564","email":"ngr.tc@nic.in","lat":21.1458,"lng":79.0882,"is_hq":false},{"id":"surat","city":"Surat","name":"Textiles Committee Surat","officer":"Man-Made Fibre \u0026 Synthetic Cluster Office","address":"Block No. 2(A), 2nd Floor, Resham Bhawan, Lal Darwaza, Surat - 395 003 (Gujarat)","phone":"0261-2423167","email":"surat.tc@nic.in","lat":21.1959,"lng":72.8302,"is_hq":false},{"id":"tirupur","city":"Tirupur","name":"Textiles Committee Tirupur","officer":"Knitwear Export Hub \u0026 NABL Testing Laboratory","address":"Plot No 8 \u0026 9, Thiruvika Nagar, 1st Floor, College Road, Tirupur \u2013 641 602 (Tamil Nadu)","phone":"0421-2201402, 0421-2202500","email":"tpr.tc@nic.in","lat":11.1085,"lng":77.3411,"is_hq":false},{"id":"tuticorin","city":"Tuticorin (Thoothukudi)","name":"Textiles Committee Tuticorin","officer":"Port Quality Control \u0026 Testing Cell","address":"57\/14, Muniasamypuram II, New Colony, Tuticorin - 628 003 (Tamil Nadu)","phone":"0461-2323384","email":"tctutcorin@gmail.com","lat":8.7642,"lng":78.1348,"is_hq":false},{"id":"varanasi","city":"Varanasi","name":"Textiles Committee Varanasi","officer":"Varanasi Handloom Silk \u0026 Zari Quality Centre","address":"52, Patel Nagar, 1st Floor, Mint House, Nadesar, Varanasi - 221 002 (Uttar Pradesh)","phone":"0542-2500616","email":"var.tc@nic.in","lat":25.3356,"lng":82.9839,"is_hq":false},{"id":"srinagar","city":"Srinagar","name":"Textiles Committee Srinagar","officer":"Kashmir Wool, Silk \u0026 Pashmina Quality Centre","address":"C\/o Weavers Service Centre, UNDP Project Complex, Baghe Ali Mardan Khan, Nowshera, Srinagar \u2013 190 011 (J\u0026K)","phone":"0194-2411043","email":"sgr.tc@nic.in","lat":34.1205,"lng":74.8219,"is_hq":false},{"id":"jnpa","city":"JNPA (Nhava Sheva)","name":"Textiles Committee JNPA (Nhava Sheva)","officer":"Port Quality Cell \u0026 Export Inspection Lab","address":"PB\/G\/D-5, Port Users Building, Jawaharlal Nehru Port Authority, Nhava Sheva, Navi Mumbai - 400 707 (Maharashtra)","phone":"022-27240020","email":"labjnpt2.tc@nic.in","lat":18.9496,"lng":72.9515,"is_hq":false}];
+    var mapInstance = null;
+    var markersMap = {};
+    var activeMarkerId = null;
+
+    function initMap() {
+        if (typeof L === 'undefined') {
+            setTimeout(initMap, 150);
+            return;
+        }
+
+        var mapEl = document.getElementById('tcOfficeMap');
+        if (!mapEl) return;
+
+        // Initialize Map centered on India
+        mapInstance = L.map('tcOfficeMap', {
+            center: [22.5, 79.5],
+            zoom: 5,
+            scrollWheelZoom: false
+        });
+
+        // Add CartoDB Positron / OpenStreetMap high-clarity tiles
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(mapInstance);
+
+        // SVG Pin Generator
+        function createPinIcon(isHq, id) {
+            var fillColor = isHq ? '#b8144b' : '#500a2f';
+            var starBadge = isHq ? '<circle cx="16" cy="15" r="4.5" fill="#facc15" stroke="#ffffff" stroke-width="1.2"/>' : '<circle cx="16" cy="15" r="4" fill="#ffffff"/>';
+
+            var svgHtml = '<div class="tc-pin-wrap" id="pin-wrap-' + id + '">' +
+                '<div class="tc-pin-halo"></div>' +
+                '<svg class="tc-pin-svg" viewBox="0 0 32 44" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                    '<path d="M16 0C7.163 0 0 7.163 0 16C0 27.5 14.5 42.5 15.3 43.3C15.7 43.7 16.3 43.7 16.7 43.3C17.5 42.5 32 27.5 32 16C32 7.163 24.837 0 16 0Z" fill="' + fillColor + '"/>' +
+                    '<path d="M16 2C8.268 2 2 8.268 2 16C2 26 14.8 39.5 16 40.8C17.2 39.5 30 26 30 16C30 8.268 23.732 2 16 2Z" fill="url(#pinGlow)"/>' +
+                    starBadge +
+                '</svg>' +
+            '</div>';
+
+            return L.divIcon({
+                className: 'tc-map-marker',
+                html: svgHtml,
+                iconSize: [32, 44],
+                iconAnchor: [16, 44],
+                popupAnchor: [0, -42]
+            });
+        }
+
+        // Add markers for all 24 locations
+        roLocations.forEach(function(ro) {
+            var icon = createPinIcon(ro.is_hq, ro.id);
+            var marker = L.marker([ro.lat, ro.lng], { icon: icon, title: ro.name }).addTo(mapInstance);
+
+            var popupContent = '<div class="ro-popup-head">' +
+                '<div style="font-size: 1.4rem;">' + ro.name + '</div>' +
+                '<small style="color: #f1dbe6; font-weight: 500;">' + ro.city + '</small>' +
+            '</div>' +
+            '<div class="ro-popup-body">' +
+                '<div style="margin-bottom: 6px;"><strong>Details:</strong> ' + ro.officer + '</div>' +
+                '<div style="margin-bottom: 6px;"><strong>Address:</strong> ' + ro.address + '</div>' +
+                '<div style="margin-bottom: 6px;"><strong>Phone:</strong> <a href="tel:' + ro.phone.split(',')[0].trim() + '" style="color:#500a2f; font-weight:600;">' + ro.phone + '</a></div>' +
+                '<div style="margin-bottom: 8px;"><strong>Email:</strong> <a href="mailto:' + ro.email + '" style="color:#500a2f; font-weight:600;">' + ro.email + '</a></div>' +
+                '<div style="text-align: right; border-top: 1px solid #eee; padding-top: 6px;">' +
+                    '<a href="https://maps.google.com/?q=' + encodeURIComponent(ro.name + ' ' + ro.address) + '" target="_blank" style="color: #721835; font-size: 1.2rem; font-weight: 700; text-decoration: none;">' +
+                        'Open in Google Maps &rarr;' +
+                    '</a>' +
+                '</div>' +
+            '</div>';
+
+            marker.bindPopup(popupContent);
+
+            marker.on('click', function() {
+                highlightCard(ro.id);
+            });
+
+            markersMap[ro.id] = marker;
+        });
+
+        // Global functions
+        window.selectRo = function(id) {
+            var ro = roLocations.find(function(item) { return item.id === id; });
+            if (!ro || !mapInstance) return;
+
+            // Smoothly fly map to location
+            mapInstance.flyTo([ro.lat, ro.lng], 13, {
+                duration: 1.2,
+                easeLinearity: 0.25
+            });
+
+            // Open popup
+            if (markersMap[id]) {
+                markersMap[id].openPopup();
+            }
+
+            // Highlight card
+            highlightCard(id);
+
+            // Smoothly scroll up to the map so user sees the location
+            var mapPanel = document.querySelector('.texmin-map-panel');
+            if (mapPanel) {
+                mapPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        };
+
+        window.highlightCard = function(id) {
+            // Remove previous active classes
+            document.querySelectorAll('.texmin-ro-card').forEach(function(c) {
+                c.classList.remove('active-ro-card');
+            });
+            document.querySelectorAll('.tc-pin-wrap').forEach(function(p) {
+                p.classList.remove('active');
+            });
+
+            // Add active to current card
+            var card = document.getElementById('ro-card-' + id);
+            if (card) {
+                card.classList.add('active-ro-card');
+            }
+
+            // Add active to map pin
+            var pin = document.getElementById('pin-wrap-' + id);
+            if (pin) {
+                pin.classList.add('active');
+            }
+            activeMarkerId = id;
+        };
+
+        window.resetOfficeMap = function() {
+            if (!mapInstance) return;
+            mapInstance.setView([22.5, 79.5], 5);
+            if (activeMarkerId && markersMap[activeMarkerId]) {
+                mapInstance.closePopup();
+            }
+            document.querySelectorAll('.texmin-ro-card').forEach(function(c) {
+                c.classList.remove('active-ro-card');
+            });
+            document.querySelectorAll('.tc-pin-wrap').forEach(function(p) {
+                p.classList.remove('active');
+            });
+            document.getElementById('roSearchInput').value = '';
+            filterRoList();
+            
+        };
+
+        window.filterRoList = function() {
+            var q = (document.getElementById('roSearchInput').value || '').toLowerCase().trim();
+            var visibleCount = 0;
+            var visibleBounds = [];
+
+            document.querySelectorAll('.texmin-ro-card').forEach(function(card) {
+                var name = (card.getAttribute('data-name') || '').toLowerCase();
+                var city = (card.getAttribute('data-city') || '').toLowerCase();
+                var address = (card.getAttribute('data-address') || '').toLowerCase();
+                
+                var id = card.getAttribute('data-ro-id');
+                var parentCol = card.closest('.col-lg-6');
+
+                var matches = !q || name.includes(q) || city.includes(q) || address.includes(q) ;
+
+                if (matches) {
+                    if (parentCol) parentCol.style.display = 'flex';
+                    visibleCount++;
+                    if (markersMap[id]) {
+                        markersMap[id].addTo(mapInstance);
+                        visibleBounds.push(markersMap[id].getLatLng());
+                    }
+                } else {
+                    if (parentCol) parentCol.style.display = 'none';
+                    if (markersMap[id]) {
+                        mapInstance.removeLayer(markersMap[id]);
+                    }
+                }
+            });
+
+            document.getElementById('roResultCount').textContent = 'Showing ' + visibleCount + ' of ' + roLocations.length + ' locations';
+
+            if (visibleBounds.length > 0 && mapInstance && q) {
+                var bounds = L.latLngBounds(visibleBounds);
+                mapInstance.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
+            }
+        };
+
+            }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMap);
+    } else {
+        initMap();
+    }
+})();
+</script>
