@@ -396,36 +396,20 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'आपकी प्रतिक्रिया/पूछताछ सफलतापूर्वक प्राप्त हो गई है। धन्यवाद! / Your inquiry has been submitted successfully.');
     }
 
-    public function search(Request $request)
+    public function search(Request $request, \App\Services\GlobalSearchService $searchService)
     {
         $q = trim($request->input('q'));
         if (!$q) {
             return redirect()->route('home');
         }
 
-        $schemes = Scheme::where('is_active', true)
-            ->where(function($query) use ($q) {
-                $query->where('title_hi', 'like', "%{$q}%")
-                      ->orWhere('title_en', 'like', "%{$q}%")
-                      ->orWhere('description_hi', 'like', "%{$q}%")
-                      ->orWhere('description_en', 'like', "%{$q}%");
-            })->get();
-
-        $documents = Document::where('is_active', true)
-            ->where(function($query) use ($q) {
-                $query->where('title_hi', 'like', "%{$q}%")
-                      ->orWhere('title_en', 'like', "%{$q}%");
-            })->get();
-
-        $tenders = Tender::where('is_active', true)
-            ->where(function($query) use ($q) {
-                $query->where('title_hi', 'like', "%{$q}%")
-                      ->orWhere('title_en', 'like', "%{$q}%");
-            })->get();
-
+        $results = $searchService->search($q);
         $settings = Setting::all()->pluck('value', 'key')->toArray();
 
-        return view('front.search', compact('q', 'schemes', 'documents', 'tenders', 'settings'));
+        return view('front.search', array_merge($results, [
+            'q' => $q,
+            'settings' => $settings,
+        ]));
     }
 
     public function toggleLocale($lang)

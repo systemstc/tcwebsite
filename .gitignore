@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/assets
 /storage/*.key
 /vendor
 .env
@@ -17,4 +18,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-public/uploads/media/rsa_1792405297_R6WHm.mp4
+public/uploads

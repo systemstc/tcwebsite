@@ -141,10 +141,20 @@
         cursor: default !important;
         outline: none !important;
     }
-    .editor-pro-table-ctrl, .editor-img-ctrl, .editor-table-ctrl,
+    .editor-pro-table-ctrl, .editor-img-ctrl, .editor-img-ctrl.d-flex, .editor-table-ctrl,
     .editor-table-btn, .editor-img-btn, .editor-doc-btn, .editor-avatar-btn, .editor-faq-btn,
     .section-action-overlay, .editor-floating-toolbar, .component-resize-handle, .drop-indicator-line {
         display: none !important;
+    }
+    .dbim-image-with-text-wrapper {
+        border-color: #ebd0de !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 14px rgba(114, 24, 53, 0.04) !important;
+        transition: all 0.25s ease;
+    }
+    .dbim-image-with-text-wrapper:hover {
+        border-color: #d19bb8 !important;
+        box-shadow: 0 6px 20px rgba(114, 24, 53, 0.08) !important;
     }
 
     /* ============================================================

@@ -377,7 +377,7 @@
             width: 90%;
             /*max-width: 1400px;*/
             margin: 0 auto;
-            padding: 18px 24px 16px;
+            padding: 30px 24px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -425,14 +425,23 @@
             padding: 0;
         }
 
-        /* Center: Search Box */
-        .exact-search-wrap {
+        /* Center: Search Box & Mobile Menu Bar */
+        .exact-search-menu-bar {
             display: flex;
             align-items: center;
             justify-content: center;
             flex: 1;
-            max-width: 360px;
+            max-width: 380px;
             margin: 0 20px;
+        }
+        .exact-search-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .exact-hamburger-btn {
+            display: none !important;
         }
         .exact-search-box {
             display: flex;
@@ -487,7 +496,7 @@
             margin: 0;
         }
         .exact-di-img {
-            height: 64px;
+            height: 75px;
             width: auto;
             display: block;
             object-fit: contain;
@@ -550,7 +559,7 @@
             width: 90%;
             /*max-width: 1400px;*/
             margin: 0 auto;
-            padding: 0 24px;
+            /*padding: 0 24px;*/
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -575,7 +584,7 @@
             gap: 6px;
             padding: 14px 6px 18px 6px;
             font-size: 2.15rem;
-            font-weight: 700;
+            font-weight: 600;
             font-family: 'Noto Sans', sans-serif;
             color: #1a1a1a;
             text-decoration: none !important;
@@ -590,8 +599,9 @@
             outline: none;
         }
         .gov-nav-a.active {
+            font-size: 2.35rem;
             color: #6c1340;
-            font-weight: 700;
+            font-weight: 800;
         }
         .gov-nav-a.active::after {
             content: '';
@@ -599,7 +609,7 @@
             bottom: 0px;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 7px;
             background: #6c1340;
             border-radius: 3px 3px 0 0;
         }
@@ -857,94 +867,135 @@
 
         @media (max-width: 991px) {
             .exact-header-top {
-                padding: 12px 16px;
-                flex-wrap: wrap;
-                row-gap: 12px;
-            }
-            .exact-brand {
-                order: 1;
-            }
-            .exact-di-wrap {
-                order: 2;
-                margin-left: auto;
-            }
-            .exact-di-img {
-                height: 44px;
-            }
-            .exact-utilities {
-                order: 3;
-                width: 100%;
-                justify-content: flex-end;
-                padding-top: 8px;
-                border-top: 1px dashed #eedde5;
-                flex-wrap: wrap;
+                padding: 10px 16px 14px;
+                display: flex;
+                flex-direction: column;
                 gap: 8px;
             }
-            .exact-search-wrap {
+            /* 1. On Top: class='exact-utilities' */
+            .exact-utilities {
+                order: 1;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 10px;
+                padding: 2px 0 8px;
+                border-bottom: 1px solid #f0e4ec;
+                margin: 0;
+            }
+            /* 2. Then our logo below: .exact-brand */
+            .exact-brand {
+                order: 2;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: left;
+                gap: 12px;
+                margin: 4px 0 2px;
+            }
+            .exact-emblem-img {
+                height: 70px;
+            }
+            .exact-brand-title {
+                font-size: 2.15rem;
+                line-height: 1.2;
+            }
+            .exact-brand-sub {
+                font-size: 1.55rem;
+                line-height: 1.2;
+            }
+            /* 3. Then class='exact-di-wrap' below logo */
+            .exact-di-wrap {
+                order: 3;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 2px 0 4px;
+            }
+            .exact-di-img {
+                height: 50px;
+            }
+            /* 4. Then search and on right side menu hamburger */
+            .exact-search-menu-bar {
                 order: 4;
                 width: 100%;
-                max-width: 100%;
+                display: flex;
+                align-items: stretch;
+                gap: 8px;
                 margin: 4px 0 0;
+                max-width: 100%;
+            }
+            .exact-search-wrap {
+                flex: 1 1 auto;
+                max-width: 100%;
+                margin: 0;
             }
             .exact-search-box {
                 max-width: 100%;
+                height: 46px;
+                border-radius: 8px 8px 0 0;
+            }
+            .exact-hamburger-btn {
+                order: 2;
+                display: inline-flex !important;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                height: 46px;
+                padding: 0 16px;
+                background: #6c1340;
+                color: #ffffff;
+                border: 1.5px solid #570e33;
+                border-radius: 8px;
+                cursor: pointer;
+                flex-shrink: 0;
+                font-family: 'Noto Sans', sans-serif;
+                font-size: 1.55rem;
+                font-weight: 700;
+                box-shadow: 0 2px 8px rgba(108, 19, 64, 0.25);
+                text-decoration: none;
+                transition: all 0.2s ease;
+            }
+            .exact-hamburger-btn:hover,
+            .exact-hamburger-btn:focus {
+                background: #520d30;
+                color: #ffffff;
+                outline: none;
+            }
+            .hamburger-icon {
+                font-size: 24px;
+                line-height: 1;
+            }
+            .hamburger-label {
+                line-height: 1;
             }
 
-            .gov-mobile-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 12px 0;
-                border-bottom: 2px solid #6c1340;
-            }
-            .gov-nav-ul {
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                width: 100%;
-                gap: 0;
-                padding: 8px 0 16px;
-            }
-            .gov-nav-ul.show {
-                display: flex;
-            }
-            .gov-nav-li {
-                width: 100%;
-                border-bottom: 1px solid #f2edf0;
-            }
-            .gov-nav-a {
-                width: 100%;
-                padding: 12px 8px;
-                font-size: 1.65rem;
-                justify-content: space-between;
-            }
-            .gov-nav-drop {
-                position: static;
-                box-shadow: none;
-                border: none;
-                border-left: 3px solid #6c1340;
-                background: #fbf5f8;
-                padding: 4px 0 8px 12px;
-                display: none;
-                width: 100%;
-            }
-            .gov-nav-li.active-mobile-sub .gov-nav-drop {
-                display: block;
+            /* Hide horizontal desktop nav bar on mobile because hamburger offcanvas drawer handles navigation */
+            .gov-nav-bar-exact {
+                display: none !important;
             }
         }
 
         @media (max-width: 575px) {
             .exact-header-top {
-                padding: 10px 12px;
+                padding: 8px 12px 12px;
+                gap: 6px;
+            }
+            .exact-utilities {
+                gap: 6px;
+                padding-bottom: 6px;
             }
             .exact-emblem-img {
-                height: 56px;
+                height: 52px;
             }
             .exact-brand-title {
-                font-size: 1.85rem;
+                font-size: 1.75rem;
             }
             .exact-brand-sub {
-                font-size: 1.45rem;
+                font-size: 1.35rem;
             }
             .exact-di-img {
                 height: 38px;
@@ -952,14 +1003,266 @@
             .exact-util-divider {
                 display: none;
             }
-            .exact-utilities {
-                justify-content: space-between;
-                gap: 6px;
-            }
             .font-resize-btn {
                 font-size: 1.4rem;
                 padding: 4px 6px;
             }
+            .exact-hamburger-btn {
+                padding: 0 12px;
+                font-size: 1.4rem;
+            }
+            .exact-search-box input {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Mobile Navigation Right-Side Offcanvas Drawer */
+        .mobile-nav-drawer {
+            width: 330px !important;
+            max-width: 86vw !important;
+            background: #ffffff;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
+            z-index: 10500;
+        }
+        .mobile-nav-header {
+            background: #6c1340;
+            color: #ffffff;
+            padding: 16px 18px;
+            border-bottom: 2px solid #570e33;
+        }
+        .mobile-nav-title {
+            color: #ffffff !important;
+            font-size: 1.85rem !important;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .mobile-nav-hdr-icon {
+            font-size: 24px;
+            color: #ffffff;
+        }
+        .mobile-nav-close {
+            background: transparent;
+            border: none;
+            color: #ffffff !important;
+            opacity: 0.9;
+            padding: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .mobile-nav-close:hover {
+            opacity: 1;
+            color: #ffffff;
+        }
+        .mobile-nav-brand-strip {
+            background: #fbf5f8;
+            padding: 12px 18px;
+            border-bottom: 1px solid #ebdbe4;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-nav-brand-name {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: #6c1340;
+        }
+        .mobile-nav-brand-sub {
+            font-size: 1.25rem;
+            color: #555555;
+        }
+        .mobile-nav-list {
+            padding: 4px 0;
+        }
+        .mobile-nav-ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .mobile-nav-item {
+            border-bottom: 1px solid #f2edf0;
+        }
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 18px;
+            color: #1a1a1a;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.15s, color 0.15s;
+        }
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            background: #f8edf3;
+            color: #6c1340;
+        }
+        .mobile-nav-icon {
+            font-size: 20px;
+            color: #6c1340;
+        }
+        .mobile-nav-accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px 0 18px;
+        }
+        .mobile-nav-link-text {
+            flex: 1;
+            padding: 13px 0;
+            color: #1a1a1a;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .mobile-nav-link-text:hover,
+        .mobile-nav-link-text.active {
+            color: #6c1340;
+        }
+        .mobile-nav-caret-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 12px;
+            cursor: pointer;
+            color: #6c1340;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.25s ease;
+        }
+        .mobile-nav-caret-btn:not(.collapsed) span {
+            transform: rotate(180deg);
+        }
+        .mobile-sub-collapse {
+            background: #fdfafd;
+            border-top: 1px solid #f0e4ec;
+        }
+        .mobile-sub-ul {
+            list-style: none;
+            padding: 4px 0;
+            margin: 0;
+        }
+        .mobile-sub-item {
+            border-bottom: 1px solid #f5edf2;
+        }
+        .mobile-sub-accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px 0 32px;
+        }
+        .mobile-sub-link {
+            display: block;
+            padding: 11px 18px 11px 32px;
+            color: #333333;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            flex: 1;
+        }
+        .mobile-sub-link:hover,
+        .mobile-sub-link.active {
+            color: #6c1340;
+            background: #faedf3;
+            font-weight: 600;
+        }
+        .mobile-sub-caret-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 10px;
+            color: #888888;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+        .mobile-sub-caret-btn:not(.collapsed) span {
+            transform: rotate(180deg);
+        }
+        .mobile-gc-collapse {
+            background: #f7eef3;
+            border-top: 1px dashed #e5d1dc;
+        }
+        .mobile-gc-ul {
+            list-style: none;
+            padding: 4px 0;
+            margin: 0;
+        }
+        .mobile-gc-item {
+            border-bottom: 1px solid #f0e3ea;
+        }
+        .mobile-gc-accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px 0 44px;
+        }
+        .mobile-gc-link {
+            display: block;
+            padding: 9px 18px 9px 44px;
+            color: #444444;
+            font-size: 1.42rem;
+            font-weight: 500;
+            text-decoration: none;
+            flex: 1;
+        }
+        .mobile-gc-link:hover,
+        .mobile-gc-link.active {
+            color: #6c1340;
+            background: #eedbe5;
+            font-weight: 600;
+        }
+        .mobile-gc-caret-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 8px;
+            color: #888888;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+        .mobile-gc-caret-btn:not(.collapsed) span {
+            transform: rotate(180deg);
+        }
+        .mobile-dc-collapse {
+            background: #f0e2ea;
+            border-top: 1px dashed #dcbccc;
+        }
+        .mobile-dc-ul {
+            list-style: none;
+            padding: 2px 0;
+            margin: 0;
+        }
+        .mobile-dc-link {
+            display: block;
+            padding: 8px 18px 8px 56px;
+            color: #444444;
+            font-size: 1.35rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .mobile-dc-link:hover,
+        .mobile-dc-link.active {
+            color: #6c1340;
+            background: #e5cbdb;
+            font-weight: 600;
+        }
+        .mobile-nav-footer {
+            padding: 14px 18px;
+            background: #fbf5f8;
+            border-top: 1px solid #ebdbe4;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .mobile-nav-footer-text {
+            font-size: 1.25rem;
+            color: #666666;
+            font-weight: 600;
         }
 
         /* 3. HERO BANNER SLIDER */
@@ -978,10 +1281,63 @@
             min-width: 100%;
             position: relative;
         }
+        .hero-banner-slide a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
         .hero-banner-slide img {
             width: 100%;
             height: auto;
-            max-height: 520px;
+            max-height: 635px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Hero Section Strictly Max-Height 635px in PC */
+        @media (min-width: 992px) {
+            .hero-banner-wrap {
+                height: 635px;
+                max-height: 635px !important;
+            }
+            .hero-banner-track {
+                height: 635px;
+            }
+            .hero-banner-slide {
+                height: 635px;
+                max-height: 635px !important;
+            }
+            .hero-banner-slide a {
+                height: 635px;
+                max-height: 635px !important;
+            }
+            .hero-banner-slide img {
+                height: 635px !important;
+                max-height: 635px !important;
+                object-fit: cover;
+            }
+        }
+        @media (max-width: 991px) {
+            .hero-banner-wrap {
+                max-height: 480px;
+            }
+            .hero-banner-slide img {
+                max-height: 480px;
+                object-fit: cover;
+            }
+        }
+        @media (max-width: 575px) {
+            .hero-banner-wrap {
+                max-height: 280px;
+            }
+            .hero-banner-slide img {
+                max-height: 280px;
+            }
+        }
+        .hero-banner-slide img {
+            width: 100%;
+            height: auto;
+            max-height: 635px;
             object-fit: cover;
             display: block;
         }
@@ -1241,11 +1597,6 @@
             gap: 36px;
             align-items: start;
         }
-        @media (max-width: 991px) {
-            .about-dignitaries-grid {
-                grid-template-columns: 1fr;
-            }
-        }
         .about-text {
             font-size: 2.0rem !important;
             line-height: 34px !important;
@@ -1271,14 +1622,12 @@
             transform: translateX(2px);
         }
         .about-action-btns-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
         }
         .about-pill-btn {
-            flex: 1;
-            min-width: 130px;
+            min-width: 0;
             min-height: 72px;
             display: inline-flex;
             flex-direction: column;
@@ -1288,20 +1637,20 @@
             border: 1.5px solid #6c1340;
             background: #ffffff;
             color: #6c1340;
-            padding: 14px 12px;
-            border-radius: 4px;
-            font-size: 1.65rem !important;
+            padding: 12px 8px;
+            border-radius: 6px;
+            font-size: 1.55rem !important;
             font-weight: 600;
             font-family: 'Noto Sans', sans-serif;
             text-decoration: none;
             transition: all 0.2s;
         }
         .about-pill-title {
-            font-size: 1.65rem !important;
+            font-size: 1.55rem !important;
             font-weight: 600;
             color: inherit;
             margin: 0;
-            line-height: 1.2;
+            line-height: 1.25;
             text-align: center;
         }
         .about-pill-btn:hover {
@@ -1309,7 +1658,7 @@
             color: #ffffff;
         }
 
-        /* Dignitaries 3-card Row matching .group1 .about-section .about-section-right */
+        /* Dignitaries 3-card Row (Responsive & Fluid) */
         .dignitaries-row {
             margin-top: 4%;
             display: grid;
@@ -1324,17 +1673,20 @@
             flex-direction: column;
             align-items: center;
             transition: transform 0.2s;
+            min-width: 0;
         }
         .dignitary-card-exact:hover {
             transform: translateY(-2px);
         }
         .dignitary-photo {
-            width: 172px !important;
-            height: 172px !important;
+            width: 100%;
+            max-width: 172px;
+            aspect-ratio: 1 / 1;
+            height: auto !important;
             object-fit: contain;
             border: 2px solid #ebeaea;
             border-bottom: 6px solid #6c1340;
-            border-radius: 4px;
+            border-radius: 6px;
             background: #fafafa;
             margin: 0 auto 10px;
             display: block;
@@ -1353,6 +1705,102 @@
             font-weight: 500;
             color: #444444;
             line-height: 1.35;
+        }
+
+        /* About Us Responsive Breakpoints */
+        @media (max-width: 991px) {
+            .about-section {
+                padding: 24px 0;
+            }
+            .about-dignitaries-grid {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+            .about-text {
+                font-size: 1.7rem !important;
+                line-height: 1.75 !important;
+                margin-bottom: 20px;
+            }
+            .dignitaries-row {
+                margin-top: 8px;
+                gap: 14px;
+            }
+            .dignitary-photo {
+                max-width: 145px;
+            }
+            .dignitary-name-exact {
+                font-size: 1.55rem !important;
+            }
+            .dignitary-desig-exact {
+                font-size: 1.3rem !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .about-text {
+                font-size: 1.55rem !important;
+                line-height: 1.65 !important;
+                text-align: left;
+            }
+            .about-action-btns-group {
+                gap: 8px;
+            }
+            .about-pill-btn {
+                min-height: 60px;
+                padding: 8px 4px;
+                gap: 6px;
+            }
+            .about-pill-btn img {
+                width: 32px !important;
+                height: 32px !important;
+            }
+            .about-pill-title {
+                font-size: 1.3rem !important;
+            }
+            .dignitaries-row {
+                gap: 10px;
+            }
+            .dignitary-photo {
+                max-width: 120px;
+                border-bottom-width: 4px;
+                margin-bottom: 6px;
+            }
+            .dignitary-name-exact {
+                font-size: 1.4rem !important;
+            }
+            .dignitary-desig-exact {
+                font-size: 1.18rem !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .about-action-btns-group {
+                gap: 6px;
+            }
+            .about-pill-btn {
+                min-height: 52px;
+                padding: 6px 2px;
+                gap: 4px;
+            }
+            .about-pill-btn img {
+                width: 26px !important;
+                height: 26px !important;
+            }
+            .about-pill-title {
+                font-size: 1.15rem !important;
+            }
+            .dignitaries-row {
+                gap: 6px;
+            }
+            .dignitary-photo {
+                max-width: 92px;
+                border-bottom-width: 3px;
+                margin-bottom: 4px;
+            }
+            .dignitary-name-exact {
+                font-size: 1.25rem !important;
+            }
+            .dignitary-desig-exact {
+                font-size: 1.08rem !important;
+            }
         }
 
         /* 8. KEY OFFERINGS & WHAT'S NEW */

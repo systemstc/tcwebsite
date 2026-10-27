@@ -13,8 +13,8 @@
             @endphp
 
             @if($siteEmblem && $siteLogo)
-                <img src="{{ asset($siteEmblem) }}" alt="State Emblem of India" class="exact-emblem-img" style="height: 85px; width: auto; object-fit: contain;">
-                <img src="{{ asset($siteLogo) }}" alt="Textiles Committee Logo" class="exact-emblem-img ms-1" style="height: 82px; width: auto; object-fit: contain;">
+                <img src="{{ asset($siteEmblem) }}" alt="State Emblem of India" class="exact-emblem-img" style="height: 95px; width: auto; object-fit: contain;">
+                <img src="{{ asset($siteLogo) }}" alt="Textiles Committee Logo" class="exact-emblem-img ms-1" style="height: 92px; width: auto; object-fit: contain;">
             @elseif($siteEmblem)
                 <img src="{{ asset($siteEmblem) }}" alt="State Emblem of India" class="exact-emblem-img" style="height: 62px; width: auto; object-fit: contain;">
             @elseif($siteLogo)
@@ -29,15 +29,23 @@
             </div>
         </a>
 
-        <!-- Center: Search Box with Maroon Bottom Accent -->
-        <div class="exact-search-wrap">
-            <form action="{{ route('site.search') }}" method="GET" class="exact-search-box" role="search" aria-label="Site Search">
-                <input type="search" name="q" placeholder="Search..." value="{{ request('q') }}" aria-label="Search keywords">
-                <div class="exact-search-divider"></div>
-                <button type="submit" class="exact-search-btn" title="Submit Search" aria-label="Submit Search">
-                    <span class="material-symbols-outlined" style="font-size: 24px; color: #6c1340; font-weight: 600;">search</span>
-                </button>
-            </form>
+        <!-- Center: Search Box with Maroon Bottom Accent & Mobile Hamburger -->
+        <div class="exact-search-menu-bar">
+            <div class="exact-search-wrap">
+                <form action="{{ route('site.search') }}" method="GET" class="exact-search-box" role="search" aria-label="Site Search">
+                    <input type="search" name="q" placeholder="Search..." value="{{ request('q') }}" aria-label="Search keywords">
+                    <div class="exact-search-divider"></div>
+                    <button type="submit" class="exact-search-btn" title="Submit Search" aria-label="Submit Search">
+                        <span class="material-symbols-outlined" style="font-size: 24px; color: #6c1340; font-weight: 600;">search</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Hamburger Button (Visible only on Responsive, on the right side of Search) -->
+            <button class="exact-hamburger-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavDrawer" aria-controls="mobileNavDrawer" aria-label="Open Navigation Menu">
+                <span class="material-symbols-outlined hamburger-icon">menu</span>
+                <span class="hamburger-label">Menu</span>
+            </button>
         </div>
 
         <!-- Center-Right: Digital India Logo -->
@@ -223,5 +231,199 @@
         </div>
     </nav>
 </header>
+
+<!-- Mobile Navigation Right-Side Offcanvas Drawer -->
+<div class="offcanvas offcanvas-end mobile-nav-drawer" tabindex="-1" id="mobileNavDrawer" aria-labelledby="mobileNavDrawerLabel">
+    <div class="offcanvas-header mobile-nav-header">
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined mobile-nav-hdr-icon">menu_open</span>
+            <h5 class="offcanvas-title mobile-nav-title" id="mobileNavDrawerLabel">
+                {{ session('locale') == 'hi' ? 'नेविगेशन मेनू' : 'Navigation Menu' }}
+            </h5>
+        </div>
+        <button type="button" class="btn-close mobile-nav-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close menu">
+            <span class="material-symbols-outlined" style="font-size: 24px;">close</span>
+        </button>
+    </div>
+
+    <div class="offcanvas-body mobile-nav-body p-0">
+        <!-- Brand banner inside drawer -->
+        <div class="mobile-nav-brand-strip">
+            <span class="mobile-nav-brand-name">{{ \App\Models\Setting::get('site_title_en', 'Textiles Committee') }}</span>
+            <span class="mobile-nav-brand-sub">{{ \App\Models\Setting::get('site_tagline_en', 'Ministry of Textiles, Govt. of India') }}</span>
+        </div>
+
+        <!-- Navigation items list with collapsible accordions -->
+        <nav class="mobile-nav-list" role="navigation" aria-label="Mobile Navigation">
+            <ul class="mobile-nav-ul">
+                <!-- Home Link -->
+                <li class="mobile-nav-item">
+                    <a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined mobile-nav-icon">home</span>
+                        <span>{{ session('locale') == 'hi' ? 'मुख्य पृष्ठ' : 'Home' }}</span>
+                    </a>
+                </li>
+
+                @if(isset($headerMenuItems) && $headerMenuItems->count())
+                    @foreach($headerMenuItems as $menu)
+                        @php
+                            $children = $menu->activeChildren;
+                            $hasKids = $children->count() > 0;
+                            $menuTitle = session('locale') == 'hi' ? ($menu->title_hi ?: $menu->title_en) : ($menu->title_en ?: $menu->title_hi);
+                            $collapseId = 'mobCollapse_' . $menu->id;
+                            
+                            $isActive = false;
+                            if ($menu->type === 'page' && $menu->page && request()->is('page/' . $menu->page->slug)) {
+                                $isActive = true;
+                            } elseif ($hasKids) {
+                                foreach ($children as $ck) {
+                                    if ($ck->type === 'page' && $ck->page && request()->is('page/' . $ck->page->slug)) {
+                                        $isActive = true;
+                                        break;
+                                    }
+                                    if (($ck->page && $ck->page->slug === 'industry-tech-issues') || str_contains($ck->url ?? '', 'industry-tech-issues')) {
+                                        if (request()->is('industry-tech-issues*')) {
+                                            $isActive = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        @endphp
+
+                        <li class="mobile-nav-item {{ $hasKids ? 'has-children' : '' }}">
+                            @if($hasKids)
+                                <div class="mobile-nav-accordion-header {{ $isActive ? 'active' : '' }}">
+                                    <a href="{{ $menu->resolved_url !== '#' && $menu->resolved_url !== '' ? $menu->resolved_url : 'javascript:void(0)' }}" 
+                                       class="mobile-nav-link-text {{ $isActive ? 'active' : '' }}">
+                                        {{ $menuTitle }}
+                                    </a>
+                                    <button class="mobile-nav-caret-btn {{ $isActive ? '' : 'collapsed' }}" 
+                                            type="button" 
+                                            data-bs-toggle="collapse" 
+                                            data-bs-target="#{{ $collapseId }}" 
+                                            aria-expanded="{{ $isActive ? 'true' : 'false' }}" 
+                                            aria-controls="{{ $collapseId }}"
+                                            aria-label="Toggle {{ $menuTitle }} submenu">
+                                        <span class="material-symbols-outlined">expand_more</span>
+                                    </button>
+                                </div>
+
+                                <div class="collapse mobile-sub-collapse {{ $isActive ? 'show' : '' }}" id="{{ $collapseId }}">
+                                    <ul class="mobile-sub-ul">
+                                        @foreach($children as $sub)
+                                            @php
+                                                $subKids = $sub->activeChildren;
+                                                $hasSubKids = $subKids->count() > 0;
+                                                $subTitle = session('locale') == 'hi' ? ($sub->title_hi ?: $sub->title_en) : ($sub->title_en ?: $sub->title_hi);
+                                                $subCollapseId = 'mobSubCollapse_' . $sub->id;
+                                                $isSubActive = false;
+                                                if ($sub->type === 'page' && $sub->page && request()->is('page/' . $sub->page->slug)) {
+                                                    $isSubActive = true;
+                                                } elseif (($sub->page && $sub->page->slug === 'industry-tech-issues') || str_contains($sub->url ?? '', 'industry-tech-issues')) {
+                                                    if (request()->is('industry-tech-issues*')) {
+                                                        $isSubActive = true;
+                                                    }
+                                                }
+                                            @endphp
+
+                                            <li class="mobile-sub-item">
+                                                @if($hasSubKids)
+                                                    <div class="mobile-sub-accordion-header {{ $isSubActive ? 'active' : '' }}">
+                                                        <a href="{{ $sub->resolved_url !== '#' && $sub->resolved_url !== '' ? $sub->resolved_url : 'javascript:void(0)' }}" 
+                                                           class="mobile-sub-link {{ $isSubActive ? 'active' : '' }}">
+                                                            {{ $subTitle }}
+                                                        </a>
+                                                        <button class="mobile-sub-caret-btn {{ $isSubActive ? '' : 'collapsed' }}" 
+                                                                type="button" 
+                                                                data-bs-toggle="collapse" 
+                                                                data-bs-target="#{{ $subCollapseId }}" 
+                                                                aria-expanded="{{ $isSubActive ? 'true' : 'false' }}" 
+                                                                aria-controls="{{ $subCollapseId }}"
+                                                                aria-label="Toggle {{ $subTitle }} submenu">
+                                                            <span class="material-symbols-outlined">expand_more</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="collapse mobile-gc-collapse {{ $isSubActive ? 'show' : '' }}" id="{{ $subCollapseId }}">
+                                                        <ul class="mobile-gc-ul">
+                                                            @foreach($subKids as $gc)
+                                                                @php
+                                                                    $gcKids = $gc->activeChildren;
+                                                                    $hasGcKids = $gcKids->count() > 0;
+                                                                    $gcTitle = session('locale') == 'hi' ? ($gc->title_hi ?: $gc->title_en) : ($gc->title_en ?: $gc->title_hi);
+                                                                    $gcCollapseId = 'mobGcCollapse_' . $gc->id;
+                                                                    $isGcActive = ($gc->type === 'page' && $gc->page && request()->is('page/' . $gc->page->slug));
+                                                                @endphp
+                                                                <li class="mobile-gc-item">
+                                                                    @if($hasGcKids)
+                                                                        <div class="mobile-gc-accordion-header {{ $isGcActive ? 'active' : '' }}">
+                                                                            <a href="{{ $gc->resolved_url }}" class="mobile-gc-link {{ $isGcActive ? 'active' : '' }}">
+                                                                                {{ $gcTitle }}
+                                                                            </a>
+                                                                            <button class="mobile-gc-caret-btn collapsed" 
+                                                                                    type="button" 
+                                                                                    data-bs-toggle="collapse" 
+                                                                                    data-bs-target="#{{ $gcCollapseId }}" 
+                                                                                    aria-expanded="false" 
+                                                                                    aria-controls="{{ $gcCollapseId }}">
+                                                                                <span class="material-symbols-outlined">expand_more</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="collapse mobile-dc-collapse" id="{{ $gcCollapseId }}">
+                                                                            <ul class="mobile-dc-ul">
+                                                                                @foreach($gcKids as $dc)
+                                                                                    @php
+                                                                                        $dcTitle = session('locale') == 'hi' ? ($dc->title_hi ?: $dc->title_en) : ($dc->title_en ?: $dc->title_hi);
+                                                                                        $isDcActive = ($dc->type === 'page' && $dc->page && request()->is('page/' . $dc->page->slug));
+                                                                                    @endphp
+                                                                                    <li class="mobile-dc-item">
+                                                                                        <a href="{{ $dc->resolved_url }}" class="mobile-dc-link {{ $isDcActive ? 'active' : '' }}">
+                                                                                            {{ $dcTitle }}
+                                                                                        </a>
+                                                                                    </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </div>
+                                                                    @else
+                                                                        <a href="{{ $gc->resolved_url }}" target="{{ $gc->target ?: '_self' }}" class="mobile-gc-link {{ $isGcActive ? 'active' : '' }}">
+                                                                            {{ $gcTitle }}
+                                                                        </a>
+                                                                    @endif
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @else
+                                                    <a href="{{ $sub->resolved_url }}" target="{{ $sub->target ?: '_self' }}" class="mobile-sub-link {{ $isSubActive ? 'active' : '' }}">
+                                                        {{ $subTitle }}
+                                                    </a>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @else
+                                <a href="{{ $menu->resolved_url }}" target="{{ $menu->target ?: '_self' }}" class="mobile-nav-link {{ $isActive ? 'active' : '' }}">
+                                    <span>{{ $menuTitle }}</span>
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
+                @endif
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="mobile-nav-footer">
+        <a href="https://digitalindia.gov.in/" target="_blank" rel="noopener noreferrer" class="mobile-nav-footer-di">
+            <img src="{{ asset('assets/images/digital india.png') }}" alt="Digital India" height="34">
+        </a>
+        <div class="mobile-nav-footer-text">
+            Textiles Committee &bull; Govt. of India
+        </div>
+    </div>
+</div>
 
 

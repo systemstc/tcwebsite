@@ -40,6 +40,8 @@ Route::get('/tefc', fn() => redirect()->route('page.show', 'tefcs'));
 Route::get('/tefcs', fn() => redirect()->route('page.show', 'tefcs'));
 Route::get('/page/tefc', fn() => redirect()->route('page.show', 'tefcs'));
 Route::get('/textile-export-facilitation-center', fn() => redirect()->route('page.show', 'tefcs'));
+Route::get('/rti', fn() => redirect()->route('page.show', 'rti'));
+Route::get('/right-to-information', fn() => redirect()->route('page.show', 'rti'));
 
 // Convenience Aliases for Standard Government Footer & Header Routes
 Route::get('/policies', fn() => redirect()->route('page.show', 'website-policies'))->name('footer.policies');

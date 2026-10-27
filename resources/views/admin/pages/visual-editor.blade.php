@@ -2066,6 +2066,11 @@
                     <i class="fa-solid fa-table-list text-danger"></i>
                     <span>Official Directory Table</span>
                 </div>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_whos_who_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_whos_who_table')" title="Drag into canvas or click to add: Official Who's Who Directory Table with Employee Photos, Name & Designation, Contact & Work Allocation">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #9c2759; color: #fff;">WHO'S WHO</span>
+                    <i class="fa-solid fa-address-book text-danger"></i>
+                    <span>Who's Who Table (with Photos)</span>
+                </div>
                 <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_data_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_data_table')" title="Drag into canvas or click to add: Universal Clean Data Table (No icons in cells, Add/Remove Rows & Columns, Cell Images, Pagination, Action Buttons)">
                     <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #0f766e; color: #fff;">DATA TABLE</span>
                     <i class="fa-solid fa-table text-success"></i>
@@ -2524,7 +2529,12 @@
                  onclick="handleCanvasClick(event)"
                  onmouseup="handleCanvasMouseUp(event)">
                 @if(!empty(trim($page->content_en)))
-                    {!! $page->content_en !!}
+                    @php
+                        $editorCanvasContent = $page->content_en;
+                        $editorCanvasContent = preg_replace('/src="\/assets\//i', 'src="' . asset('assets') . '/', $editorCanvasContent);
+                        $editorCanvasContent = preg_replace('/src="\/uploads\//i', 'src="' . asset('uploads') . '/', $editorCanvasContent);
+                    @endphp
+                    {!! $editorCanvasContent !!}
                 @else
                     <div class="alert alert-info py-4 my-3 text-center" id="emptyCanvasNotice">
                         <i class="fa-solid fa-hand-pointer me-2"></i> <strong>Start building your page:</strong> Click here to begin typing, or drag any widget from the left sidebar into this area!
@@ -3645,6 +3655,76 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+                case 'dbim_whos_who_table':
+                case 'whos_who_table':
+                    return `<div class="dbim-directory-section dbim-whos-who-section my-4" data-component="dbim_whos_who_table">
+                        <div class="dbim-dir-table-wrapper" style="border: 1px solid #ebd0de; border-radius: 8px; overflow: hidden; background: #ffffff; box-shadow: 0 4px 14px rgba(114, 24, 53, 0.05); margin-bottom: 24px;">
+                            <div class="dbim-dir-category-header" style="background: #9c2759; color: #ffffff; padding: 12px 20px; font-weight: 700; font-size: 1.45rem; text-transform: uppercase; letter-spacing: 0.6px; display: flex; align-items: center; justify-content: space-between;">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-users" style="font-size: 16px;"></i>
+                                    <span class="dbim-dir-category-title" contenteditable="true">WHO'S WHO (TEXTILES COMMITTEE)</span>
+                                </div>
+                                <div class="editor-row-ctrl d-inline-flex gap-1">
+                                    <button type="button" class="btn btn-sm btn-outline-light py-0 px-2" style="font-size: 11px;" onclick="addDirRowToTable(this)" title="Add another official row with photo">
+                                        <i class="fa-solid fa-plus me-1"></i> Add Row
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="table-responsive m-0">
+                                <table class="table mb-0 dbim-dir-table dbim-whos-who-table" style="width: 100%; border-collapse: collapse; font-family: 'Noto Sans', sans-serif;">
+                                    <thead>
+                                        <tr style="background: #faebf3; border-bottom: 2px solid #ecd5e1;">
+                                            <th style="width: 14%; padding: 12px 18px; color: #9c2759; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.5px; border: none; text-align: center;">IMAGES</th>
+                                            <th style="width: 30%; padding: 12px 18px; color: #9c2759; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.5px; border: none;">NAME AND DESIGNATION</th>
+                                            <th style="width: 28%; padding: 12px 18px; color: #9c2759; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.5px; border: none;">CONTACT</th>
+                                            <th style="width: 28%; padding: 12px 18px; color: #9c2759; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.5px; border: none;">WORK ALLOCATION</th>
+                                            <th class="editor-row-ctrl" style="width: 40px; padding: 12px 6px; border: none;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="dbim-dir-tbody">
+                                        <tr style="border-bottom: 1px solid #f1edf0; transition: background 0.15s;">
+                                            <td class="whos-who-photo-cell text-center" style="padding: 16px 14px; vertical-align: middle; border: none;">
+                                                <div class="whos-who-avatar-wrap position-relative d-inline-block" style="cursor: pointer;" onclick="openAvatarModal(this)" title="Click to upload or change employee photo">
+                                                    <img src="/assets/images/user-placeholder.png" alt="Employee Photo" class="team-avatar-img shadow-sm" style="width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid #ebd0de; background: #faf5f8; display: block; margin: 0 auto;">
+                                                    <span class="whos-who-cam-badge position-absolute bottom-0 end-0 bg-white shadow-sm border rounded-circle d-flex align-items-center justify-content-center" style="width: 20px; height: 20px; color: #6c1340; transform: translate(15%, 15%); font-size: 10px;">
+                                                        <i class="fa-solid fa-camera"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="mt-1">
+                                                    <button type="button" class="btn btn-link p-0 text-muted editor-row-ctrl" style="font-size: 10.5px; text-decoration: none;" onclick="openAvatarModal(this.parentElement.previousElementSibling)" title="Upload photo">
+                                                        <i class="fa-solid fa-cloud-arrow-up me-1"></i>Upload
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                                                <div class="officer-name fw-bold" contenteditable="true" style="color: #111827; font-size: 1.45rem; line-height: 1.35; margin-bottom: 3px;">Kartikay Dhanda</div>
+                                                <div class="officer-desig" contenteditable="true" style="color: #4b5563; font-size: 1.25rem; line-height: 1.4;">Director (Market Research)</div>
+                                            </td>
+                                            <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                                                <div class="d-flex align-items-center gap-2 mb-1" style="font-size: 1.25rem; color: #1f2937;">
+                                                    <i class="fa-solid fa-phone" style="font-size: 13px; color: #374151; width: 14px;"></i>
+                                                    <span class="officer-phone" contenteditable="true">91 22 66527515</span>
+                                                </div>
+                                                <div class="d-flex align-items-center gap-2" style="font-size: 1.25rem; color: #1f2937;">
+                                                    <i class="fa-regular fa-envelope" style="font-size: 13px; color: #374151; width: 14px;"></i>
+                                                    <span class="officer-email" contenteditable="true">dmr.tc@nic.in</span>
+                                                </div>
+                                            </td>
+                                            <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                                                <div class="officer-work" contenteditable="true" style="color: #374151; font-size: 1.25rem; line-height: 1.5;">Brand, Market Research</div>
+                                            </td>
+                                            <td class="editor-row-ctrl text-center" style="vertical-align: top; padding: 16px 6px; border: none;">
+                                                <button type="button" class="btn btn-sm btn-link text-danger p-0" onclick="removeDirRow(this)" title="Delete Row" style="font-size: 15px; text-decoration: none;">
+                                                    <i class="fa-regular fa-trash-can"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>`;
@@ -7190,39 +7270,83 @@
         // DBIM DIRECTORY TABLE ROW & SECTION OPERATIONS
         // ============================================================
         function addDirRowToTable(triggerBtn) {
-            const tableWrap = triggerBtn.closest('.dbim-dir-table-wrapper') || triggerBtn.closest('.dbim-directory-section');
+            const tableWrap = triggerBtn.closest('.dbim-dir-table-wrapper') || triggerBtn.closest('.dbim-directory-section') || triggerBtn.closest('.dbim-whos-who-section');
             if (!tableWrap) return;
             const tbody = tableWrap.querySelector('.dbim-dir-tbody') || tableWrap.querySelector('tbody');
             if (!tbody) return;
 
+            const thead = tableWrap.querySelector('thead');
+            const theadText = thead ? thead.innerText.toLowerCase() : '';
+            const isWhosWho = theadText.includes('image') || theadText.includes('photo') || tableWrap.classList.contains('dbim-whos-who-section') || tableWrap.querySelector('.whos-who-photo-cell');
+
             const tr = document.createElement('tr');
             tr.style.cssText = 'border-bottom: 1px solid #f1edf0; transition: background 0.15s;';
-            tr.innerHTML = `
-                <td style="padding: 16px 18px; vertical-align: top; border: none;">
-                    <div class="officer-name fw-bold" contenteditable="true" style="color: #111827; font-size: 1.45rem; line-height: 1.35; margin-bottom: 3px;">Official Full Name</div>
-                    <div class="officer-desig" contenteditable="true" style="color: #4b5563; font-size: 1.25rem; line-height: 1.4;">Official Designation</div>
-                </td>
-                <td style="padding: 16px 18px; vertical-align: top; border: none;">
-                    <div class="d-flex align-items-center gap-2 mb-1" style="font-size: 1.25rem; color: #1f2937;">
-                        <i class="fa-solid fa-phone" style="font-size: 13px; color: #374151; width: 14px;"></i>
-                        <span class="officer-phone" contenteditable="true">011-XXXXXXXX /Ext.- XXX</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2" style="font-size: 1.25rem; color: #1f2937;">
-                        <i class="fa-regular fa-envelope" style="font-size: 13px; color: #374151; width: 14px;"></i>
-                        <span class="officer-email" contenteditable="true">officer[dot]mot[at]gov[dot]in</span>
-                    </div>
-                </td>
-                <td style="padding: 16px 18px; vertical-align: top; border: none;">
-                    <div class="officer-address" contenteditable="true" style="color: #374151; font-size: 1.25rem; line-height: 1.5;">Room No. XXX, Xth Floor, GPOA-3, Netaji Nagar, New Delhi–110023</div>
-                </td>
-                <td class="editor-row-ctrl text-center" style="vertical-align: top; padding: 16px 6px; border: none;">
-                    <button type="button" class="btn btn-sm btn-link text-danger p-0" onclick="removeDirRow(this)" title="Delete Row" style="font-size: 15px; text-decoration: none;">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </button>
-                </td>
-            `;
+            if (isWhosWho) {
+                tr.innerHTML = `
+                    <td class="whos-who-photo-cell text-center" style="padding: 16px 14px; vertical-align: middle; border: none;">
+                        <div class="whos-who-avatar-wrap position-relative d-inline-block" style="cursor: pointer;" onclick="openAvatarModal(this)" title="Click to upload or change employee photo">
+                            <img src="/assets/images/user-placeholder.png" alt="Employee Photo" class="team-avatar-img shadow-sm" style="width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid #ebd0de; background: #faf5f8; display: block; margin: 0 auto;">
+                            <span class="whos-who-cam-badge position-absolute bottom-0 end-0 bg-white shadow-sm border rounded-circle d-flex align-items-center justify-content-center" style="width: 20px; height: 20px; color: #6c1340; transform: translate(15%, 15%); font-size: 10px;">
+                                <i class="fa-solid fa-camera"></i>
+                            </span>
+                        </div>
+                        <div class="mt-1">
+                            <button type="button" class="btn btn-link p-0 text-muted editor-row-ctrl" style="font-size: 10.5px; text-decoration: none;" onclick="openAvatarModal(this.parentElement.previousElementSibling)" title="Upload photo">
+                                <i class="fa-solid fa-cloud-arrow-up me-1"></i>Upload
+                            </button>
+                        </div>
+                    </td>
+                    <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                        <div class="officer-name fw-bold" contenteditable="true" style="color: #111827; font-size: 1.45rem; line-height: 1.35; margin-bottom: 3px;">Employee Full Name</div>
+                        <div class="officer-desig" contenteditable="true" style="color: #4b5563; font-size: 1.25rem; line-height: 1.4;">Official Designation</div>
+                    </td>
+                    <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                        <div class="d-flex align-items-center gap-2 mb-1" style="font-size: 1.25rem; color: #1f2937;">
+                            <i class="fa-solid fa-phone" style="font-size: 13px; color: #374151; width: 14px;"></i>
+                            <span class="officer-phone" contenteditable="true">91 22 XXXXXXXX</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2" style="font-size: 1.25rem; color: #1f2937;">
+                            <i class="fa-regular fa-envelope" style="font-size: 13px; color: #374151; width: 14px;"></i>
+                            <span class="officer-email" contenteditable="true">employee[at]nic[dot]in</span>
+                        </div>
+                    </td>
+                    <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                        <div class="officer-work" contenteditable="true" style="color: #374151; font-size: 1.25rem; line-height: 1.5;">Work Allocation / Portfolios</div>
+                    </td>
+                    <td class="editor-row-ctrl text-center" style="vertical-align: top; padding: 16px 6px; border: none;">
+                        <button type="button" class="btn btn-sm btn-link text-danger p-0" onclick="removeDirRow(this)" title="Delete Row" style="font-size: 15px; text-decoration: none;">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </td>
+                `;
+            } else {
+                tr.innerHTML = `
+                    <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                        <div class="officer-name fw-bold" contenteditable="true" style="color: #111827; font-size: 1.45rem; line-height: 1.35; margin-bottom: 3px;">Official Full Name</div>
+                        <div class="officer-desig" contenteditable="true" style="color: #4b5563; font-size: 1.25rem; line-height: 1.4;">Official Designation</div>
+                    </td>
+                    <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                        <div class="d-flex align-items-center gap-2 mb-1" style="font-size: 1.25rem; color: #1f2937;">
+                            <i class="fa-solid fa-phone" style="font-size: 13px; color: #374151; width: 14px;"></i>
+                            <span class="officer-phone" contenteditable="true">011-XXXXXXXX /Ext.- XXX</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2" style="font-size: 1.25rem; color: #1f2937;">
+                            <i class="fa-regular fa-envelope" style="font-size: 13px; color: #374151; width: 14px;"></i>
+                            <span class="officer-email" contenteditable="true">officer[dot]mot[at]gov[dot]in</span>
+                        </div>
+                    </td>
+                    <td style="padding: 16px 18px; vertical-align: top; border: none;">
+                        <div class="officer-address" contenteditable="true" style="color: #374151; font-size: 1.25rem; line-height: 1.5;">Room No. XXX, Xth Floor, GPOA-3, Netaji Nagar, New Delhi–110023</div>
+                    </td>
+                    <td class="editor-row-ctrl text-center" style="vertical-align: top; padding: 16px 6px; border: none;">
+                        <button type="button" class="btn btn-sm btn-link text-danger p-0" onclick="removeDirRow(this)" title="Delete Row" style="font-size: 15px; text-decoration: none;">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </td>
+                `;
+            }
             tbody.appendChild(tr);
-            showToast('New official contact row added to directory table!');
+            showToast('New row added to table!');
         }
 
         function removeDirRow(btn) {
@@ -8555,8 +8679,10 @@
             if (!triggerEl) return;
             if (triggerEl.tagName && triggerEl.tagName.toLowerCase() === 'img') {
                 activeAvatarImg = triggerEl;
+            } else if (triggerEl.querySelector && triggerEl.querySelector('img')) {
+                activeAvatarImg = triggerEl.querySelector('img');
             } else {
-                const parent = triggerEl.closest('.dbim-book-cover-inner, .dbim-book-card, .position-relative, .dbim-avatar-card-wrapper, .team-node-card, .dbim-avatar-inline-box, .acts-logo-wrap, .dbim-custom-image-wrapper, .dbim-image-with-text-wrapper, [data-component]') || triggerEl.parentElement;
+                const parent = triggerEl.closest('.whos-who-avatar-wrap, .whos-who-photo-cell, .dbim-book-cover-inner, .dbim-book-card, .position-relative, .dbim-avatar-card-wrapper, .team-node-card, .dbim-avatar-inline-box, .acts-logo-wrap, .dbim-custom-image-wrapper, .dbim-image-with-text-wrapper, [data-component]') || triggerEl.parentElement;
                 activeAvatarImg = parent ? parent.querySelector('img') : null;
             }
 
@@ -8600,7 +8726,7 @@
             .then(data => {
                 if (status) status.classList.add('d-none');
                 if (data.success) {
-                    const imgUrl = data.relative_url || data.url;
+                    const imgUrl = data.url || data.relative_url;
                     if (activeAvatarImg) {
                         activeAvatarImg.src = imgUrl;
                     }
@@ -8659,7 +8785,7 @@
             }
 
             grid.innerHTML = filtered.map(item => {
-                const fileUrl = item.disk_path ? '/' + item.disk_path : item.url;
+                const fileUrl = item.url ? item.url : (item.disk_path ? '/' + item.disk_path : '');
                 return `<div class="col-6 col-md-4 col-lg-3">
                     <div class="card p-1 border shadow-sm h-100 text-center" style="border-radius: 8px; cursor: pointer;" onclick="selectAvatarFromLibrary('${fileUrl}')">
                         <div style="height: 90px; overflow: hidden; border-radius: 6px; background: #f8fafc;" class="d-flex align-items-center justify-content-center mb-1">
