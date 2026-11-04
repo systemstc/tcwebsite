@@ -42,6 +42,30 @@ Route::get('/page/tefc', fn() => redirect()->route('page.show', 'tefcs'));
 Route::get('/textile-export-facilitation-center', fn() => redirect()->route('page.show', 'tefcs'));
 Route::get('/rti', fn() => redirect()->route('page.show', 'rti'));
 Route::get('/right-to-information', fn() => redirect()->route('page.show', 'rti'));
+Route::get('/inspection-product-capacity-assessment', fn() => redirect()->route('page.show', 'inspection-product-capacity-assessment'));
+Route::get('/trade-facilitation', fn() => redirect()->route('page.show', 'trade-facilitation'));
+Route::get('/handloom-mark', fn() => redirect()->route('page.show', 'handloom-mark'));
+Route::get('/handloom-mark-scheme', fn() => redirect()->route('page.show', 'handloom-mark'));
+Route::get('/jute-mark-india', fn() => redirect()->route('page.show', 'jute-mark-india-scheme'));
+Route::get('/jute-mark-india-scheme', fn() => redirect()->route('page.show', 'jute-mark-india-scheme'));
+Route::get('/page/jute-mark-india', fn() => redirect()->route('page.show', 'jute-mark-india-scheme'));
+Route::get('/intellectual-property-rights', fn() => redirect()->route('page.show', 'intellectual-property-rights'));
+
+// Dedicated Key Offerings Pages (Schemes, Vacancies, Tenders)
+Route::get('/govt-sponsored-scheme', [HomeController::class, 'govtSponsoredSchemes'])->name('schemes.index');
+Route::get('/schemes', fn() => redirect()->route('schemes.index'));
+Route::get('/page/govt-sponsored-scheme', [HomeController::class, 'govtSponsoredSchemes']);
+Route::get('/page/schemes', fn() => redirect()->route('schemes.index'));
+
+Route::get('/vacancies', [HomeController::class, 'vacancies'])->name('vacancies.index');
+Route::get('/page/vacancies', [HomeController::class, 'vacancies']);
+
+Route::get('/tenders', [HomeController::class, 'tenders'])->name('tenders.index');
+Route::get('/page/tenders', [HomeController::class, 'tenders']);
+
+Route::get('/related-links', [HomeController::class, 'relatedLinks'])->name('related-links.index');
+Route::get('/page/related-links', [HomeController::class, 'relatedLinks']);
+Route::get('/portals', fn() => redirect()->route('related-links.index'));
 
 // Convenience Aliases for Standard Government Footer & Header Routes
 Route::get('/policies', fn() => redirect()->route('page.show', 'website-policies'))->name('footer.policies');

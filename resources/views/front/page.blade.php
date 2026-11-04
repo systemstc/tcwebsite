@@ -111,6 +111,17 @@
             if (!empty($contentHtml)) {
                 $contentHtml = preg_replace('/src="\/assets\//i', 'src="' . asset('assets') . '/', $contentHtml);
                 $contentHtml = preg_replace('/src="\/uploads\//i', 'src="' . asset('uploads') . '/', $contentHtml);
+                $contentHtml = preg_replace('/href="\/uploads\//i', 'href="' . asset('uploads') . '/', $contentHtml);
+                $contentHtml = preg_replace('/href="\/assets\//i', 'href="' . asset('assets') . '/', $contentHtml);
+                $contentHtml = preg_replace('/href="(?:\/tcwebsite\/public)?\/page\//i', 'href="' . url('/page') . '/', $contentHtml);
+                $contentHtml = preg_replace('/href="(?:\/tcwebsite\/public)?\/industry-tech-issues"/i', 'href="' . url('/industry-tech-issues') . '"', $contentHtml);
+                
+                // Strip all editor-only controls and camera badges from server-side render
+                $contentHtml = preg_replace('/<span[^>]*class="[^"]*whos-who-cam-badge[^"]*"[^>]*>[\s\S]*?<\/span>/i', '', $contentHtml);
+                $contentHtml = preg_replace('/<button[^>]*class="[^"]*(?:editor-row-ctrl|editor-avatar-btn|editor-doc-btn|editor-table-btn|editor-img-btn|editor-pro-table-ctrl)[^"]*"[^>]*>[\s\S]*?<\/button>/i', '', $contentHtml);
+                $contentHtml = preg_replace('/<div[^>]*class="[^"]*whos-who-cam-badge[^"]*"[^>]*>[\s\S]*?<\/div>/i', '', $contentHtml);
+                $contentHtml = preg_replace('/\s*onclick="openAvatarModal\([^)]*\)"/i', '', $contentHtml);
+                $contentHtml = preg_replace('/\s*title="Click to upload[^"]*"/i', '', $contentHtml);
                 
                 // Auto-resolve form actions like action="/inquiry" to proper route and inject CSRF token
                 if (str_contains($contentHtml, '<form')) {
@@ -143,8 +154,23 @@
     }
     .editor-pro-table-ctrl, .editor-img-ctrl, .editor-img-ctrl.d-flex, .editor-table-ctrl,
     .editor-table-btn, .editor-img-btn, .editor-doc-btn, .editor-avatar-btn, .editor-faq-btn,
-    .section-action-overlay, .editor-floating-toolbar, .component-resize-handle, .drop-indicator-line {
+    .editor-row-ctrl, .whos-who-cam-badge, .section-action-overlay, .editor-floating-toolbar,
+    .component-resize-handle, .drop-indicator-line {
         display: none !important;
+    }
+    .whos-who-avatar-wrap {
+        cursor: default !important;
+    }
+    .whos-who-avatar-wrap .team-avatar-img {
+        width: 64px !important;
+        height: 64px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        border: 2px solid #ebd0de !important;
+        background: #faf5f8 !important;
+        display: block !important;
+        margin: 0 auto !important;
+        box-shadow: 0 2px 6px rgba(80, 10, 47, 0.12) !important;
     }
     .dbim-image-with-text-wrapper {
         border-color: #ebd0de !important;
@@ -155,6 +181,459 @@
     .dbim-image-with-text-wrapper:hover {
         border-color: #d19bb8 !important;
         box-shadow: 0 6px 20px rgba(114, 24, 53, 0.08) !important;
+    }
+
+    /* ============================================================
+       UNIFORM TYPOGRAPHY & DESIGN CONSISTENCY (Digital Brand Identity Manual)
+       Table 3: Desktop View (Heading 1: 36px, Heading 2: 24px, Heading 3: 20px,
+                Paragraph 1: 16px, Paragraph 2: 14px, Small Text: 12px)
+       ============================================================ */
+    .maincontent {
+        font-family: 'Noto Sans', sans-serif !important;
+        font-size: 16px !important;
+        line-height: 1.7 !important;
+        color: #212529 !important;
+    }
+    .maincontent h1, .maincontent h2, .maincontent h3, .maincontent h4, .maincontent h5, .maincontent h6, .maincontent .dbim-section-title {
+        color: #500a2f !important;
+        font-family: 'Noto Sans', sans-serif !important;
+        line-height: 1.35 !important;
+        margin-top: 2rem !important;
+        margin-bottom: 1rem !important;
+        letter-spacing: -0.2px;
+    }
+    /* Heading 1 (Desktop: 36px, Bold 700 / Semi Bold 600 / Medium 500) */
+    .maincontent h1, .inner-hero-title {
+        font-size: 36px !important;
+        font-weight: 700 !important;
+    }
+    /* Heading 2 (Desktop: 24px, Bold 700 / Semi Bold 600 / Medium 500) */
+    .maincontent h2, .maincontent .dbim-section-title {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+    }
+    /* Heading 3 / Subtitle (Desktop: 20px, Bold 700 / Semi Bold 600 / Medium 500) */
+    .maincontent h3, .maincontent .dbim-section-sub {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+    }
+    /* Heading 4 / Subtitle secondary (Desktop: 18px-20px) */
+    .maincontent h4 {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+    }
+    /* Paragraph 1 (Desktop: 16px, Bold 700 / Regular 400) */
+    .maincontent p, .maincontent li {
+        font-family: 'Noto Sans', sans-serif !important;
+        font-size: 16px !important;
+        line-height: 1.7 !important;
+        color: #212529 !important;
+        font-weight: 400;
+        margin-bottom: 1.2rem;
+    }
+    /* Paragraph 2 (Desktop: 14px, Bold 700 / Semi Bold 600 / Regular 400) */
+    .maincontent p.para-secondary, .maincontent .para-2, .maincontent .text-secondary-para,
+    .maincontent td, .maincontent th {
+        font-size: 14px !important;
+    }
+    /* Small Text 1 (Desktop: 12px, Semi Bold 600 / Regular 400) */
+    .maincontent small, .maincontent .small-text, .maincontent .text-muted,
+    .maincontent .doc-date-col, .maincontent .doc-size-text {
+        font-size: 13px !important;
+    }
+
+    /* Prevent rogue nested inline font sizes from breaking paragraphs & headings */
+    .maincontent p span:not(.badge):not(.doc-size-badge):not(.doc-type-badge):not(.material-symbols-outlined),
+    .maincontent li span:not(.badge):not(.doc-size-badge):not(.doc-type-badge):not(.material-symbols-outlined) {
+        font-size: inherit !important;
+        line-height: inherit !important;
+    }
+    .maincontent h1 span, .maincontent h2 span, .maincontent h3 span, .maincontent h4 span {
+        font-size: inherit !important;
+        line-height: inherit !important;
+        color: inherit !important;
+        font-weight: inherit !important;
+    }
+
+    /* ============================================================
+       MOBILE TYPOGRAPHY (Digital Brand Identity Manual - Table 4)
+       Table 4: Mobile View (max-width: 768px)
+                Heading 1: 24px (Bold / Semi Bold / Medium)
+                Heading 2: 20px (Bold / Semi Bold / Medium)
+                Heading 3 / Subtitle: 16px (Bold / Semi Bold / Medium)
+                Paragraph 1: 14px (Bold / Regular)
+                Paragraph 2: 12px (Bold / Semi Bold / Regular)
+                Small Text 1: 10px (Semi Bold / Regular)
+       ============================================================ */
+    @media (max-width: 768px) {
+        .maincontent {
+            font-size: 14px !important;
+            line-height: 1.65 !important;
+        }
+        .maincontent h1, .inner-hero-title {
+            font-size: 24px !important;
+            line-height: 1.3 !important;
+        }
+        .maincontent h2, .maincontent .dbim-section-title {
+            font-size: 20px !important;
+            line-height: 1.35 !important;
+        }
+        .maincontent h3, .maincontent h4, .maincontent .dbim-section-sub {
+            font-size: 16px !important;
+            line-height: 1.4 !important;
+        }
+        .maincontent p, .maincontent li {
+            font-size: 14px !important;
+            line-height: 1.65 !important;
+            margin-bottom: 1rem;
+        }
+        .maincontent p.para-secondary, .maincontent .para-2, .maincontent .text-secondary-para,
+        .maincontent td, .maincontent th {
+            font-size: 12px !important;
+            line-height: 1.5 !important;
+        }
+        .maincontent small, .maincontent .small-text, .maincontent .text-muted,
+        .maincontent .doc-date-col, .maincontent .doc-size-text {
+            font-size: 10px !important;
+        }
+        .doc-title-text {
+            font-size: 14px !important;
+        }
+        .doc-view-btn {
+            font-size: 11px !important;
+            padding: 4px 10px !important;
+        }
+    }
+
+    /* Who's Who & Officer Directory Typography & Image Styling */
+    .dbim-whos-who-table, .dbim-dir-table {
+        font-family: 'Noto Sans', sans-serif !important;
+    }
+    .dbim-whos-who-table thead th, .dbim-dir-table thead th {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.5px !important;
+        text-transform: uppercase !important;
+        color: #500a2f !important;
+        background: #faebf3 !important;
+        padding: 12px 18px !important;
+        border: none !important;
+    }
+    .officer-name {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        color: #111827 !important;
+        line-height: 1.35 !important;
+        margin-bottom: 3px !important;
+    }
+    .officer-desig {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        color: #4b5563 !important;
+        line-height: 1.4 !important;
+    }
+    .officer-contact-line {
+        font-size: 14px !important;
+        color: #374151 !important;
+        line-height: 1.5 !important;
+    }
+    .officer-allocation-text {
+        font-size: 14px !important;
+        color: #1f2937 !important;
+        line-height: 1.5 !important;
+    }
+    .whos-who-avatar-wrap img.team-avatar-img {
+        width: 98px !important;
+        height: 98px !important;
+        min-width: 62px !important;
+        min-height: 62px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        border: 2px solid #ebd0de !important;
+        background: #faf5f8 !important;
+        display: inline-block !important;
+        padding: 1px;
+        box-shadow: 0 2px 6px rgba(80, 10, 47, 0.12) !important;
+    }
+    @media (max-width: 768px) {
+        .officer-name {
+            font-size: 14px !important;
+        }
+        .officer-desig, .officer-contact-line, .officer-allocation-text {
+            font-size: 12px !important;
+        }
+        .whos-who-avatar-wrap img.team-avatar-img {
+            width: 48px !important;
+            height: 48px !important;
+            min-width: 48px !important;
+            min-height: 48px !important;
+        }
+    }
+
+    /* Standard links */
+    .maincontent a:not(.download-btn):not(.btn):not(.dbim-pill-link):not(.inner-pill-link) {
+        color: #500a2f !important;
+        text-decoration: underline !important;
+        font-weight: 500;
+        transition: color 0.15s;
+    }
+    .maincontent a:not(.download-btn):not(.btn):not(.dbim-pill-link):not(.inner-pill-link):hover {
+        color: #801244 !important;
+        text-decoration: underline !important;
+    }
+
+    /* ============================================================
+       PILL BUTTON COMPONENT (Matching Image 2 - Documents & Links)
+       ============================================================ */
+    .dbim-pill-link, .tc-download-pill, .tc-link-pill {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 7px 16px !important;
+        margin: 6px 0 !important;
+        border: 1.5px solid #d4aabf !important;
+        border-radius: 8px !important;
+        color: #500a2f !important;
+        background: #ffffff !important;
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
+        text-decoration: underline !important;
+        line-height: 1.4 !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 1px 3px rgba(80, 10, 47, 0.04) !important;
+        cursor: pointer !important;
+    }
+    .dbim-pill-link:hover, .tc-download-pill:hover, .tc-link-pill:hover {
+        background: #fdf2f7 !important;
+        border-color: #500a2f !important;
+        color: #500a2f !important;
+        text-decoration: underline !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 3px 8px rgba(80, 10, 47, 0.12) !important;
+    }
+    .dbim-pill-link .material-symbols-outlined,
+    .tc-download-pill .material-symbols-outlined,
+    .tc-link-pill .material-symbols-outlined {
+        font-size: 2rem !important;
+        color: #500a2f !important;
+        line-height: 1 !important;
+        display: inline-block !important;
+        text-decoration: none !important;
+        vertical-align: middle !important;
+    }
+    .dbim-pill-link small,
+    .tc-download-pill small,
+    .tc-link-pill small {
+        color: #666666 !important;
+        font-size: 1.25rem !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+    }
+
+    /* Contact Us & Standard Portal Action Buttons */
+    .tc-contact-btn-primary, .maincontent .btn.tc-contact-btn-primary {
+        background: #721835 !important;
+        color: #ffffff !important;
+        border: 1.5px solid #721835 !important;
+        border-radius: 6px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        padding: 10px 22px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        text-decoration: none !important;
+        box-shadow: 0 2px 6px rgba(114, 24, 53, 0.25) !important;
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+    .tc-contact-btn-primary i, .tc-contact-btn-primary span,
+    .maincontent .btn.tc-contact-btn-primary i, .maincontent .btn.tc-contact-btn-primary span {
+        color: #ffffff !important;
+    }
+    .tc-contact-btn-primary:hover, .tc-contact-btn-primary:focus,
+    .maincontent .btn.tc-contact-btn-primary:hover, .maincontent .btn.tc-contact-btn-primary:focus {
+        background: #500a2f !important;
+        border-color: #500a2f !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 14px rgba(80, 10, 47, 0.35) !important;
+        text-decoration: none !important;
+    }
+    .tc-contact-btn-outline, .maincontent .btn.tc-contact-btn-outline {
+        background: #ffffff !important;
+        color: #721835 !important;
+        border: 1.5px solid #721835 !important;
+        border-radius: 6px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        padding: 10px 22px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        text-decoration: none !important;
+        box-shadow: 0 2px 6px rgba(114, 24, 53, 0.08) !important;
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+    .tc-contact-btn-outline i, .tc-contact-btn-outline span,
+    .maincontent .btn.tc-contact-btn-outline i, .maincontent .btn.tc-contact-btn-outline span {
+        color: #721835 !important;
+    }
+    .tc-contact-btn-outline:hover, .tc-contact-btn-outline:focus,
+    .maincontent .btn.tc-contact-btn-outline:hover, .maincontent .btn.tc-contact-btn-outline:focus {
+        background: #721835 !important;
+        color: #ffffff !important;
+        border-color: #721835 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 14px rgba(114, 24, 53, 0.25) !important;
+        text-decoration: none !important;
+    }
+    .tc-contact-btn-outline:hover i, .tc-contact-btn-outline:hover span,
+    .maincontent .btn.tc-contact-btn-outline:hover i, .maincontent .btn.tc-contact-btn-outline:hover span {
+        color: #ffffff !important;
+    }
+
+    /* ============================================================
+       DOCUMENT / PDF CARD & FILTER BAR (Matching Image Component)
+       ============================================================ */
+    .dbim-doc-filter-bar {
+        margin-bottom: 14px;
+    }
+    .dbim-doc-search-input {
+        height: 38px !important;
+        border: 1.5px solid #d48ba8 !important;
+        border-radius: 6px !important;
+        font-size: 1.4rem !important;
+        color: #212529 !important;
+        padding-left: 38px !important;
+        box-shadow: none !important;
+        background-color: #ffffff !important;
+    }
+    .dbim-doc-search-input:focus {
+        border-color: #500a2f !important;
+        box-shadow: 0 0 0 3px rgba(80, 10, 47, 0.15) !important;
+    }
+    .dbim-doc-filter-select, .dbim-doc-sort-select, .dbim-doc-category-select, .dbim-doc-per-page-select {
+        height: 38px !important;
+        border: 1.5px solid #d48ba8 !important;
+        border-radius: 6px !important;
+        font-size: 1.35rem !important;
+        color: #333333 !important;
+        padding: 4px 30px 4px 12px !important;
+        background-color: #ffffff !important;
+        cursor: pointer;
+        box-shadow: none !important;
+    }
+    .dbim-doc-filter-select:focus, .dbim-doc-sort-select:focus, .dbim-doc-category-select:focus, .dbim-doc-per-page-select:focus {
+        border-color: #500a2f !important;
+        box-shadow: 0 0 0 3px rgba(80, 10, 47, 0.15) !important;
+    }
+    .dbim-doc-header-bar {
+        background: #e59cb7 !important;
+        border-radius: 6px !important;
+        color: #500a2f !important;
+        font-weight: 700 !important;
+        font-size: 1.25rem !important;
+        letter-spacing: 0.5px !important;
+        text-transform: uppercase !important;
+        padding: 10px 20px !important;
+        margin-bottom: 10px !important;
+    }
+    .dbim-doc-card-row, .box[data-doc-box="true"], .dbim-doc-card {
+        background: #ffffff !important;
+        border: 1px solid #ebd0de !important;
+        border-radius: 8px !important;
+        padding: 12px 20px !important;
+        margin-bottom: 10px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    }
+    .dbim-doc-card-row:hover, .box[data-doc-box="true"]:hover, .dbim-doc-card:hover {
+        border-color: #500a2f !important;
+        box-shadow: 0 4px 12px rgba(80, 10, 47, 0.08) !important;
+    }
+    .dbim-doc-card-row .doc-title-text, .dbim-doc-card .doc-title-text {
+        color: #150202 !important;
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
+        line-height: 1.4 !important;
+        text-decoration: none !important;
+    }
+    .dbim-doc-card-row .doc-date-col {
+        color: #333333 !important;
+        font-size: 1.35rem !important;
+        font-weight: 500 !important;
+    }
+    .dbim-doc-card-row .doc-size-text {
+        font-size: 1.35rem !important;
+        font-weight: 600 !important;
+        color: #333333 !important;
+    }
+    .doc-view-btn {
+        background: #faeef3 !important;
+        color: #500a2f !important;
+        border: 1px solid #ebd0de !important;
+        border-radius: 6px !important;
+        padding: 6px 16px !important;
+        font-size: 1.3rem !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        transition: all 0.2s ease !important;
+        white-space: nowrap !important;
+    }
+    .doc-view-btn:hover {
+        background: #500a2f !important;
+        color: #ffffff !important;
+        border-color: #500a2f !important;
+        box-shadow: 0 2px 6px rgba(80, 10, 47, 0.2) !important;
+    }
+    .doc-view-btn .material-symbols-outlined {
+        font-size: 1.8rem !important;
+        line-height: 1 !important;
+    }
+    .box .doc-type-badge, .dbim-doc-card .doc-type-badge {
+        background: #500a2f !important;
+        color: #ffffff !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+        letter-spacing: 0.5px;
+    }
+    .box .doc-size-badge, .dbim-doc-card .doc-size-badge, .type-size small {
+        color: #666666 !important;
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
+        background: #f7eef3 !important;
+        padding: 4px 10px !important;
+        border-radius: 4px !important;
+        border: 1px solid #e8d0dd !important;
+    }
+    .download-btn {
+        background: #faebf2 !important;
+        color: #500a2f !important;
+        border: 1px solid #ebd0de !important;
+        border-radius: 6px !important;
+        padding: 7px 18px !important;
+        font-size: 1.35rem !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        transition: all 0.2s ease;
+    }
+    .download-btn:hover {
+        background: #500a2f !important;
+        color: #ffffff !important;
+        border-color: #500a2f !important;
     }
 
     /* ============================================================
@@ -1882,146 +2361,43 @@
     }
 
     /* ============================================================
-       OFFICIAL DBIM FAQ / ACCORDION COMPONENT
+       CLEAN ACCORDION & FAQ COMPONENT
        ============================================================ */
-    .dbim-faq-wrapper {
-        margin: 32px 0;
+    .accordion-item {
+        border: 1.5px solid #ebd0de !important;
+        border-radius: 8px !important;
+        background: #ffffff !important;
+        margin-bottom: 12px !important;
+        overflow: hidden !important;
+        box-shadow: 0 1px 3px rgba(80, 10, 47, 0.03) !important;
     }
-    .dbim-faq-header-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-bottom: 22px;
+    .accordion-button {
+        font-family: 'Noto Sans', sans-serif !important;
+        font-size: 1.6rem !important;
+        font-weight: 600 !important;
+        color: #500a2f !important;
+        background: #ffffff !important;
+        padding: 14px 20px !important;
+        box-shadow: none !important;
+        border: none !important;
     }
-    .dbim-faq-title {
-        color: #500a2f;
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin: 0;
-        font-family: 'Noto Sans', sans-serif;
+    .accordion-button:not(.collapsed) {
+        background-color: #fdf5f8 !important;
+        color: #500a2f !important;
+        border-bottom: 1px solid #ebd0de !important;
+        box-shadow: none !important;
     }
-    .dbim-faq-controls {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
+    .accordion-button:focus {
+        box-shadow: none !important;
+        border-color: #d4aabf !important;
     }
-    .dbim-faq-search {
-        position: relative;
-        width: 240px;
-    }
-    .dbim-faq-search input {
-        width: 100%;
-        padding: 7px 12px 7px 32px;
-        border-radius: 20px;
-        border: 1px solid #ebd0de;
-        font-size: 1.25rem;
-        outline: none;
-        transition: all 0.2s;
-        background: #ffffff;
-    }
-    .dbim-faq-search input:focus {
-        border-color: #721835;
-        box-shadow: 0 0 0 3px rgba(114, 24, 53, 0.12);
-    }
-    .dbim-faq-search i {
-        position: absolute;
-        left: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #721835;
-        font-size: 13px;
-    }
-    .dbim-faq-item {
-        border: 1.5px solid #ebd0de;
-        border-radius: 10px;
-        background: #ffffff;
-        margin-bottom: 14px;
-        overflow: hidden;
-        transition: all 0.2s ease;
-        box-shadow: 0 2px 6px rgba(114, 24, 53, 0.03);
-    }
-    .dbim-faq-item:hover {
-        border-color: #ba2369;
-        box-shadow: 0 4px 12px rgba(114, 24, 53, 0.08);
-    }
-    .dbim-faq-item.is-active {
-        border-color: #721835;
-        border-left: 5px solid #721835;
-    }
-    .dbim-faq-question {
-        padding: 16px 20px;
-        background: #ffffff;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-        user-select: none;
-        transition: background 0.15s;
-    }
-    .dbim-faq-item.is-active .dbim-faq-question {
-        background: #fdf5f8;
-    }
-    .dbim-faq-q-left {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex: 1;
-    }
-    .dbim-faq-badge {
-        background: #ebd0de;
-        color: #721835;
-        font-size: 1.15rem;
-        font-weight: 700;
-        padding: 4px 10px;
-        border-radius: 6px;
-        letter-spacing: 0.5px;
-        flex-shrink: 0;
-    }
-    .dbim-faq-q-text {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #1a1a1a;
-        line-height: 1.4;
-        margin: 0;
-        font-family: 'Noto Sans', sans-serif;
-    }
-    .dbim-faq-item.is-active .dbim-faq-q-text {
-        color: #721835;
-    }
-    .dbim-faq-chevron {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: #f7eef3;
-        color: #721835;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        transition: transform 0.25s ease, background 0.2s;
-        flex-shrink: 0;
-    }
-    .dbim-faq-item.is-active .dbim-faq-chevron {
-        transform: rotate(180deg);
-        background: #721835;
-        color: #ffffff;
-    }
-    .dbim-faq-answer {
-        padding: 0 22px 20px 58px;
-        font-size: 1.35rem;
-        line-height: 1.8;
-        color: #2b2b2b;
-        border-top: 1px dashed #f2e2ec;
-        padding-top: 16px;
-        display: none;
-        font-family: 'Noto Sans', sans-serif;
-    }
-    .dbim-faq-item.is-active .dbim-faq-answer {
-        display: block;
+    .accordion-body {
+        font-family: 'Noto Sans', sans-serif !important;
+        font-size: 1.55rem !important;
+        line-height: 1.8 !important;
+        color: #212529 !important;
+        background: #ffffff !important;
+        padding: 16px 20px !important;
     }
 
     /* Universal Clean Data Table (Ministry of Textiles Theme) */
@@ -2153,6 +2529,35 @@
         font-weight: 700 !important;
         text-align: center !important;
         margin: 0 !important;
+        transition: color 0.2s ease;
+    }
+    .dbim-book-card {
+        cursor: pointer !important;
+    }
+    .dbim-book-card:hover .dbim-book-title {
+        color: #721835 !important;
+    }
+    .dbim-book-view-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #721835;
+        background: #ffffff;
+        border: 1px solid #ebd0de;
+        padding: 5px 14px;
+        border-radius: 20px;
+        box-shadow: 0 1px 3px rgba(114, 24, 53, 0.06);
+        transition: all 0.25s ease;
+        user-select: none;
+    }
+    .dbim-book-card:hover .dbim-book-view-pill {
+        background: #721835 !important;
+        color: #ffffff !important;
+        border-color: #721835 !important;
+        box-shadow: 0 4px 10px rgba(114, 24, 53, 0.25);
     }
     .inner-page-main .editor-book-grid-ctrl,
     .inner-page-main .editor-book-btn-bar,
@@ -2160,7 +2565,11 @@
         display: none !important;
     }
     .inner-page-main .dbim-book-cover-img {
-        cursor: default !important;
+        cursor: pointer !important;
+        transition: transform 0.25s ease;
+    }
+    .dbim-book-card:hover .dbim-book-cover-img {
+        transform: scale(1.02);
     }
     /* ============================================================
        DBIM MEDIA GALLERIES: PHOTO, VIDEO & PRESENTATION/EVENTS
@@ -2594,6 +3003,24 @@ function openPhotoAlbum(albumSlug, el) {
     } else {
         var firstGrid = detailView.querySelector('.dbim-album-subgrid');
         if (firstGrid) firstGrid.style.display = '';
+        targetSubgrid = firstGrid;
+    }
+
+    // Update photo count badge in detail view header
+    var isHi = document.documentElement.lang === 'hi' || {{ session('locale') == 'hi' ? 'true' : 'false' }};
+    var photosCount = targetSubgrid ? (targetSubgrid.querySelectorAll('.dbim-album-photo-col').length || targetSubgrid.querySelectorAll('.dbim-album-photo-card').length) : 0;
+    var countBadge = detailView.querySelector('.dbim-album-count-badge');
+    if (!countBadge) {
+        var headerBar = detailView.querySelector('.dbim-back-to-albums-btn')?.parentElement;
+        if (headerBar) {
+            countBadge = document.createElement('span');
+            countBadge.className = 'badge ms-2 dbim-album-count-badge';
+            countBadge.style.cssText = 'background: #721835; font-size: 1rem; padding: 6px 14px; border-radius: 20px;';
+            headerBar.appendChild(countBadge);
+        }
+    }
+    if (countBadge) {
+        countBadge.innerText = photosCount + (isHi ? ' तस्वीरें' : (photosCount === 1 ? ' Photo' : ' Photos'));
     }
 
     section.classList.add('viewing-album');
@@ -2803,9 +3230,12 @@ function openPresentationModal(el) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Strictly strip all contenteditable attributes on public frontend
+    // Strictly strip all contenteditable attributes and editor controls on public frontend
     document.querySelectorAll('[contenteditable]').forEach(function(el) {
         el.removeAttribute('contenteditable');
+    });
+    document.querySelectorAll('.whos-who-cam-badge, .editor-row-ctrl, .editor-avatar-btn, .editor-img-btn, .editor-table-btn, .editor-doc-btn, .editor-pro-table-ctrl').forEach(function(el) {
+        el.remove();
     });
 
     var activePill = document.querySelector('.inner-pill-bar .inner-pill-link.active');
@@ -2813,6 +3243,7 @@ document.addEventListener('DOMContentLoaded', function() {
         activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
     initAllDbimTables();
+    initDocSections();
 
     // Check if album query parameter is present in URL
     var params = new URLSearchParams(window.location.search);
@@ -2829,7 +3260,137 @@ document.addEventListener('DOMContentLoaded', function() {
             if (detailView) detailView.style.setProperty('display', 'none', 'important');
         });
     }
+
+    // Auto-sync accurate photo counts for every album card from subgrids
+    document.querySelectorAll('.dbim-photo-gallery-section').forEach(function(sec) {
+        var detailView = sec.querySelector('.dbim-album-detail-view');
+        if (!detailView) return;
+        var isHi = document.documentElement.lang === 'hi' || {{ session('locale') == 'hi' ? 'true' : 'false' }};
+
+        sec.querySelectorAll('.dbim-photo-col').forEach(function(card) {
+            var slug = card.getAttribute('data-album-slug');
+            if (!slug) return;
+            var subgrid = detailView.querySelector('.dbim-album-subgrid[data-album-slug="' + slug + '"]');
+            var count = subgrid ? (subgrid.querySelectorAll('.dbim-album-photo-col').length || subgrid.querySelectorAll('.dbim-album-photo-card').length) : 0;
+            var countEl = card.querySelector('.dbim-photo-items');
+            if (countEl) {
+                countEl.innerText = count + ' ' + (isHi ? 'तस्वीरें' : (count === 1 ? 'PHOTO' : 'PHOTOS'));
+            }
+        });
+    });
+
+    // Auto-inject View Description pill to any dbim book cards if missing
+    document.querySelectorAll('.dbim-book-card').forEach(function(card) {
+        if (!card.querySelector('.dbim-book-view-pill')) {
+            var pillWrap = document.createElement('div');
+            pillWrap.className = 'text-center mt-2';
+            var isHi = document.documentElement.lang === 'hi' || {{ session('locale') == 'hi' ? 'true' : 'false' }};
+            pillWrap.innerHTML = '<span class="dbim-book-view-pill"><i class="fa-solid fa-circle-info me-1"></i> ' + (isHi ? 'विवरण देखें' : 'View Description') + '</span>';
+            var titleWrap = card.querySelector('.dbim-book-title-wrap');
+            if (titleWrap) {
+                titleWrap.appendChild(pillWrap);
+            } else {
+                card.appendChild(pillWrap);
+            }
+        }
+    });
 });
+
+function initDocSections() {
+    document.querySelectorAll('.dbim-doc-section, .dbim-doc-list-section').forEach(function(sec) {
+        var searchInput = sec.querySelector('.dbim-doc-search-input');
+        var sortSelect = sec.querySelector('.dbim-doc-sort-select');
+        var catSelect = sec.querySelector('.dbim-doc-category-select');
+        var perPageSelect = sec.querySelector('.dbim-doc-per-page-select');
+        var rowsContainer = sec.querySelector('.dbim-doc-items-stack') || sec;
+        var rows = Array.from(rowsContainer.querySelectorAll('.dbim-doc-card-row'));
+
+        if (!rows.length) return;
+
+        // Auto-populate Category dropdown if present
+        if (catSelect) {
+            var existingOpts = Array.from(catSelect.options).map(function(o) { return o.value; });
+            var categories = new Set();
+            rows.forEach(function(r) {
+                var cat = r.getAttribute('data-category');
+                if (cat) categories.add(cat.trim());
+            });
+            categories.forEach(function(cat) {
+                if (!existingOpts.includes(cat)) {
+                    var opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.textContent = cat;
+                    catSelect.appendChild(opt);
+                }
+            });
+            if (categories.size === 0 && catSelect.options.length <= 1) {
+                if (catSelect.closest('.dbim-doc-select-wrap')) {
+                    catSelect.closest('.dbim-doc-select-wrap').style.display = 'none';
+                }
+            }
+        }
+
+        function filterAndSort() {
+            var q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            var sortBy = sortSelect ? sortSelect.value : 'default';
+            var selectedCat = catSelect ? catSelect.value : 'all';
+            var perPage = perPageSelect ? (perPageSelect.value === 'all' ? 9999 : parseInt(perPageSelect.value, 10)) : 9999;
+
+            var filtered = rows.filter(function(r) {
+                var title = (r.querySelector('.doc-title-text')?.innerText || '').toLowerCase();
+                var date = (r.querySelector('.doc-date-col')?.innerText || '').toLowerCase();
+                var cat = (r.getAttribute('data-category') || '').toLowerCase();
+                
+                var matchesQ = !q || title.includes(q) || date.includes(q);
+                var matchesCat = selectedCat === 'all' || cat === selectedCat.toLowerCase();
+                return matchesQ && matchesCat;
+            });
+
+            // Sorting
+            if (sortBy === 'title-asc') {
+                filtered.sort(function(a, b) {
+                    var tA = a.querySelector('.doc-title-text')?.innerText || '';
+                    var tB = b.querySelector('.doc-title-text')?.innerText || '';
+                    return tA.localeCompare(tB);
+                });
+            } else if (sortBy === 'title-desc') {
+                filtered.sort(function(a, b) {
+                    var tA = a.querySelector('.doc-title-text')?.innerText || '';
+                    var tB = b.querySelector('.doc-title-text')?.innerText || '';
+                    return tB.localeCompare(a.querySelector('.doc-title-text')?.innerText || '');
+                });
+            } else if (sortBy === 'date-desc' || sortBy === 'date-asc') {
+                filtered.sort(function(a, b) {
+                    var dA = parseDateStr(a.querySelector('.doc-date-col')?.innerText || '');
+                    var dB = parseDateStr(b.querySelector('.doc-date-col')?.innerText || '');
+                    return sortBy === 'date-desc' ? dB - dA : dA - dB;
+                });
+            }
+
+            // Render
+            rows.forEach(function(r) { r.style.display = 'none'; });
+            filtered.forEach(function(r, index) {
+                if (index < perPage) {
+                    r.style.display = '';
+                    rowsContainer.appendChild(r);
+                }
+            });
+        }
+
+        function parseDateStr(str) {
+            var parts = str.trim().split('.');
+            if (parts.length === 3) {
+                return new Date(parts[2], parts[1] - 1, parts[0]).getTime() || 0;
+            }
+            return 0;
+        }
+
+        if (searchInput) searchInput.addEventListener('input', filterAndSort);
+        if (sortSelect) sortSelect.addEventListener('change', filterAndSort);
+        if (catSelect) catSelect.addEventListener('change', filterAndSort);
+        if (perPageSelect) perPageSelect.addEventListener('change', filterAndSort);
+    });
+}
 
 // Handle browser Back / Forward buttons for album navigation
 window.addEventListener('popstate', function(e) {
@@ -2840,6 +3401,102 @@ window.addEventListener('popstate', function(e) {
     } else {
         closePhotoAlbum();
     }
+});
+
+// ============================================================
+// DBIM BOOK, PUBLICATION & MAGAZINE DETAIL MODAL
+// ============================================================
+function openBookDetailModal(card) {
+    if (!card) return;
+    
+    // Extract metadata from card
+    var titleEl = card.querySelector('.dbim-book-title, .wbg-details-book-title, h1, h2, h3, h4');
+    var title = card.getAttribute('data-book-title') || (titleEl ? titleEl.innerText.trim() : 'Publication Overview');
+    
+    var imgEl = card.querySelector('.dbim-book-cover-img, img');
+    var imgSrc = card.getAttribute('data-book-img') || (imgEl ? imgEl.src : '');
+    
+    var descEl = card.querySelector('.dbim-book-description');
+    var desc = card.getAttribute('data-book-description') || (descEl ? descEl.innerHTML.trim() : '');
+    
+    var badge = card.getAttribute('data-book-badge') || (card.querySelector('.dbim-book-badge')?.innerText.trim()) || 'Textiles Committee Publication';
+    var publisher = card.getAttribute('data-book-publisher') || 'Textiles Committee, Ministry of Textiles, Govt. of India';
+    
+    var isHi = document.documentElement.lang === 'hi' || {{ session('locale') == 'hi' ? 'true' : 'false' }};
+    
+    var modal = document.getElementById('dbimBookDetailModal');
+    if (!modal) {
+        var modalHtml = '<div class="modal fade" id="dbimBookDetailModal" tabindex="-1" aria-labelledby="dbimBookDetailModalLabel" aria-hidden="true" style="z-index: 2500;">' +
+            '<div class="modal-dialog modal-lg modal-dialog-centered">' +
+                '<div class="modal-content border-0 shadow-lg" style="border-radius: 12px; overflow: hidden; background: #ffffff;">' +
+                    '<div class="modal-header py-3 px-4 text-white d-flex align-items-center justify-content-between" style="background: linear-gradient(135deg, #500a2f 0%, #721835 100%); border-bottom: 2px solid #ba2369;">' +
+                        '<div class="d-flex align-items-center gap-2">' +
+                            '<i class="fa-solid fa-book-open" style="color: #f7c948; font-size: 1.25rem;"></i>' +
+                            '<h5 class="modal-title fs-5 fw-bold text-white mb-0" id="dbimBookDetailModalLabel">' + (isHi ? 'प्रकाशन / पत्रिका विवरण' : 'Publication Overview') + '</h5>' +
+                        '</div>' +
+                        '<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                    '</div>' +
+                    '<div class="modal-body p-4" style="background: #ffffff; color: #1e1b24;">' +
+                        '<div class="row g-4 align-items-center">' +
+                            '<div class="col-md-5 col-sm-12 text-center">' +
+                                '<div class="dbim-modal-cover-frame p-2 bg-white rounded shadow-sm border" style="border-color: #ebd0de !important; max-width: 270px; margin: 0 auto;">' +
+                                    '<img id="dbimBookModalImg" src="" alt="Cover" class="img-fluid rounded" style="max-height: 380px; width: 100%; object-fit: contain; aspect-ratio: 1 / 1.35; background: #ffffff;">' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-md-7 col-sm-12 text-start">' +
+                                '<div class="d-flex flex-wrap gap-2 mb-2 align-items-center">' +
+                                    '<span id="dbimBookModalBadge" class="badge" style="background: #fdf0f4; color: #721835; border: 1px solid #ebd0de; font-size: 0.8rem; font-weight: 600; padding: 6px 12px; border-radius: 20px;">' +
+                                    '</span>' +
+                                '</div>' +
+                                '<h3 id="dbimBookModalTitle" class="fw-bold mb-2" style="font-family: \'Merriweather\', serif; color: #500a2f; font-size: 1.45rem; line-height: 1.35;"></h3>' +
+                                '<div class="text-muted small mb-3 pb-2 border-bottom d-flex align-items-center gap-2" id="dbimBookModalMeta">' +
+                                    '<i class="fa-solid fa-building-columns text-secondary"></i>' +
+                                    '<span id="dbimBookModalPublisher"></span>' +
+                                '</div>' +
+                                '<div class="dbim-book-modal-desc-wrap" style="color: #374151; font-size: 0.95rem; line-height: 1.7; max-height: 280px; overflow-y: auto; padding-right: 6px;">' +
+                                    '<div id="dbimBookModalDesc" class="mb-0"></div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="modal-footer py-2 px-4 bg-light d-flex justify-content-end border-top" style="border-color: #ebd0de !important;">' +
+                        '<button type="button" class="btn btn-secondary px-4 fw-semibold" data-bs-dismiss="modal">' + (isHi ? 'बंद करें' : 'Close') + '</button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        modal = document.getElementById('dbimBookDetailModal');
+    }
+    
+    document.getElementById('dbimBookModalTitle').innerText = title;
+    document.getElementById('dbimBookModalImg').src = imgSrc;
+    document.getElementById('dbimBookModalImg').alt = title;
+    document.getElementById('dbimBookModalBadge').innerText = badge;
+    document.getElementById('dbimBookModalPublisher').innerText = publisher;
+    
+    var descContainer = document.getElementById('dbimBookModalDesc');
+    if (desc) {
+        descContainer.innerHTML = desc;
+    } else {
+        descContainer.innerText = (isHi 
+            ? 'वस्त्र समिति, वस्त्र मंत्रालय, भारत सरकार द्वारा तैयार और प्रकाशित आधिकारिक रिपोर्ट एवं पत्रिका।' 
+            : 'Detailed publication monograph prepared and released by Textiles Committee, Ministry of Textiles, Government of India.');
+    }
+    
+    var bsModal = bootstrap.Modal.getInstance(modal) || new bootstrap.Modal(modal);
+    bsModal.show();
+}
+
+// Global click delegation for all dbim book cards
+document.addEventListener('click', function(e) {
+    var card = e.target.closest('.dbim-book-card');
+    if (!card) return;
+    
+    // Ignore clicks if clicking inside editor toolbars
+    if (e.target.closest('.editor-book-btn-bar') || e.target.closest('.editor-book-btn')) return;
+    
+    openBookDetailModal(card);
 });
 </script>
 @endsection

@@ -13,12 +13,12 @@
             @endphp
 
             @if($siteEmblem && $siteLogo)
-                <img src="{{ asset($siteEmblem) }}" alt="State Emblem of India" class="exact-emblem-img" style="height: 95px; width: auto; object-fit: contain;">
-                <img src="{{ asset($siteLogo) }}" alt="Textiles Committee Logo" class="exact-emblem-img ms-1" style="height: 92px; width: auto; object-fit: contain;">
+                <img src="{{ asset($siteEmblem) }}" alt="State Emblem of India" class="exact-emblem-img">
+                <img src="{{ asset($siteLogo) }}" alt="Textiles Committee Logo" class="exact-emblem-img ms-1">
             @elseif($siteEmblem)
-                <img src="{{ asset($siteEmblem) }}" alt="State Emblem of India" class="exact-emblem-img" style="height: 62px; width: auto; object-fit: contain;">
+                <img src="{{ asset($siteEmblem) }}" alt="State Emblem of India" class="exact-emblem-img">
             @elseif($siteLogo)
-                <img src="{{ asset($siteLogo) }}" alt="Textiles Committee Logo" class="exact-emblem-img" style="height: 62px; width: auto; object-fit: contain;">
+                <img src="{{ asset($siteLogo) }}" alt="Textiles Committee Logo" class="exact-emblem-img">
             @else
                 <img src="{{ asset('assets/images/Textiles_Committee_Logo.png') }}" alt="Government of India Emblem" class="exact-emblem-img" onerror="this.onerror=null;this.src='{{ asset('assets/images/Textiles_Committee_Logo.png') }}'">
             @endif

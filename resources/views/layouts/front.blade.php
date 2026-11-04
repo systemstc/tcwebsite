@@ -159,6 +159,307 @@
             left: 190px;
         }
 
+        /* Official Outline Pill Button (Image 2 style - Documents & Links) */
+        .dbim-pill-link, .tc-download-pill, .tc-link-pill {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 7px 16px !important;
+            margin: 6px 0 !important;
+            border: 1.5px solid #d4aabf !important;
+            border-radius: 8px !important;
+            color: #500a2f !important;
+            background: #ffffff !important;
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            text-decoration: underline !important;
+            line-height: 1.4 !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 1px 3px rgba(80, 10, 47, 0.04) !important;
+            cursor: pointer !important;
+        }
+        .dbim-pill-link:hover, .tc-download-pill:hover, .tc-link-pill:hover {
+            background: #fdf2f7 !important;
+            border-color: #500a2f !important;
+            color: #500a2f !important;
+            text-decoration: underline !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 3px 8px rgba(80, 10, 47, 0.12) !important;
+        }
+        .dbim-pill-link .material-symbols-outlined,
+        .tc-download-pill .material-symbols-outlined,
+        .tc-link-pill .material-symbols-outlined {
+            font-size: 2rem !important;
+            color: #500a2f !important;
+            line-height: 1 !important;
+            display: inline-block !important;
+            text-decoration: none !important;
+            vertical-align: middle !important;
+        }
+        .dbim-pill-link small,
+        .tc-download-pill small,
+        .tc-link-pill small {
+            color: #666666 !important;
+            font-size: 1.25rem !important;
+            font-weight: 500 !important;
+            text-decoration: none !important;
+        }
+
+        /* Document / PDF Card Component */
+        .box[data-doc-box="true"],
+        .dbim-doc-card {
+            border-radius: 8px !important;
+            border: 1px solid #ebd0de !important;
+            background: #ffffff !important;
+            padding: 14px 20px !important;
+            margin-bottom: 14px !important;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02) !important;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .box[data-doc-box="true"]:hover,
+        .dbim-doc-card:hover {
+            border-color: #500a2f !important;
+            box-shadow: 0 4px 14px rgba(80, 10, 47, 0.08) !important;
+        }
+        .doc-type-badge {
+            background: #500a2f !important;
+            color: #ffffff !important;
+            font-size: 1.15rem !important;
+            font-weight: 700 !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+            letter-spacing: 0.5px;
+        }
+        .doc-size-badge {
+            color: #666666 !important;
+            font-size: 1.3rem !important;
+            font-weight: 600 !important;
+            background: #f7eef3 !important;
+            padding: 4px 10px !important;
+            border-radius: 4px !important;
+            border: 1px solid #e8d0dd !important;
+        }
+
+        /* ============================================================
+           CITIZEN FEEDBACK & INQUIRY MODAL (Full Solid Background & Styling)
+           ============================================================ */
+        #feedbackModal.modal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 1055 !important;
+            display: none;
+            width: 100vw !important;
+            height: 100vh !important;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            outline: 0 !important;
+            padding: 20px 12px !important;
+        }
+        #feedbackModal.modal.show {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .modal-backdrop {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 1050 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background-color: rgba(15, 23, 42, 0.72) !important;
+            backdrop-filter: blur(2px) !important;
+            -webkit-backdrop-filter: blur(2px) !important;
+        }
+        .modal-backdrop.show {
+            opacity: 1 !important;
+        }
+        #feedbackModal .modal-dialog {
+            position: relative !important;
+            width: 100% !important;
+            max-width: 560px !important;
+            margin: auto !important;
+            pointer-events: auto !important;
+            z-index: 1056 !important;
+        }
+        #feedbackModal .modal-content {
+            position: relative !important;
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            pointer-events: auto !important;
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            border: 1px solid #ebd0de !important;
+            border-radius: 12px !important;
+            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35) !important;
+            outline: 0 !important;
+            overflow: hidden !important;
+        }
+        #feedbackModal .modal-header {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 18px 24px !important;
+            background: #500a2f !important;
+            background: linear-gradient(135deg, #500a2f 0%, #6c1340 100%) !important;
+            color: #ffffff !important;
+            border-bottom: 2px solid #3d0520 !important;
+        }
+        #feedbackModal .modal-title {
+            margin: 0 !important;
+            line-height: 1.35 !important;
+            font-size: 1.85rem !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+        }
+        #feedbackModal .modal-btn-close-header {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 32px !important;
+            height: 32px !important;
+            border-radius: 50% !important;
+            background: rgba(255, 255, 255, 0.16) !important;
+            border: 1px solid rgba(255, 255, 255, 0.28) !important;
+            color: #ffffff !important;
+            font-size: 1.6rem !important;
+            line-height: 1 !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            transition: all 0.2s ease !important;
+        }
+        #feedbackModal .modal-btn-close-header:hover {
+            background: rgba(255, 255, 255, 0.32) !important;
+            transform: scale(1.08) !important;
+            color: #ffffff !important;
+        }
+        #feedbackModal .modal-body {
+            position: relative !important;
+            flex: 1 1 auto !important;
+            padding: 24px 26px !important;
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+        }
+        #feedbackModal .modal-footer {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            padding: 16px 26px !important;
+            background: #fbf8fa !important;
+            background-color: #fbf8fa !important;
+            border-top: 1px solid #ebd0dd !important;
+            gap: 12px !important;
+        }
+        #feedbackModal .form-label {
+            display: block !important;
+            font-size: 1.25rem !important;
+            font-weight: 700 !important;
+            color: #374151 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            margin-bottom: 6px !important;
+        }
+        #feedbackModal .form-control {
+            display: block !important;
+            width: 100% !important;
+            padding: 10px 14px !important;
+            font-size: 1.45rem !important;
+            font-weight: 400 !important;
+            line-height: 1.5 !important;
+            color: #111827 !important;
+            background: #fcfcfd !important;
+            background-color: #fcfcfd !important;
+            border: 1.5px solid #d1d5db !important;
+            border-radius: 6px !important;
+            transition: all 0.2s ease !important;
+            outline: none !important;
+            box-sizing: border-box !important;
+        }
+        #feedbackModal .form-control:focus {
+            color: #111827 !important;
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            border-color: #500a2f !important;
+            outline: 0 !important;
+            box-shadow: 0 0 0 3px rgba(80, 10, 47, 0.14) !important;
+        }
+        #feedbackModal .form-control::placeholder {
+            color: #9ca3af !important;
+            font-size: 1.35rem !important;
+        }
+        #feedbackModal .modal-btn-cancel {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            color: #4b5563 !important;
+            border: 1.5px solid #d1d5db !important;
+            border-radius: 6px !important;
+            padding: 9px 22px !important;
+            font-size: 1.4rem !important;
+            font-weight: 600 !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+            transition: all 0.2s ease !important;
+        }
+        #feedbackModal .modal-btn-cancel:hover {
+            background: #f3f4f6 !important;
+            background-color: #f3f4f6 !important;
+            border-color: #9ca3af !important;
+            color: #111827 !important;
+        }
+        #feedbackModal .modal-btn-submit {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            background: #500a2f !important;
+            background: linear-gradient(135deg, #500a2f 0%, #6c1340 100%) !important;
+            color: #ffffff !important;
+            border: 1.5px solid #500a2f !important;
+            border-radius: 6px !important;
+            padding: 9px 26px !important;
+            font-size: 1.45rem !important;
+            font-weight: 700 !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+            box-shadow: 0 3px 8px rgba(80, 10, 47, 0.22) !important;
+            transition: all 0.2s ease !important;
+        }
+        #feedbackModal .modal-btn-submit:hover {
+            background: #6a0d3f !important;
+            background: linear-gradient(135deg, #6a0d3f 0%, #801244 100%) !important;
+            border-color: #6a0d3f !important;
+            color: #ffffff !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 5px 15px rgba(80, 10, 47, 0.32) !important;
+        }
+        #feedbackModal .modal-btn-submit:disabled {
+            opacity: 0.65 !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+        }
+        #feedbackModal .alert-success {
+            background-color: #d1e7dd !important;
+            color: #0f5132 !important;
+            border: 1px solid #badbcc !important;
+            border-radius: 6px !important;
+            font-size: 1.4rem !important;
+        }
+        #feedbackModal .alert-danger {
+            background-color: #f8d7da !important;
+            color: #842029 !important;
+            border: 1px solid #f5c2c7 !important;
+            border-radius: 6px !important;
+            font-size: 1.4rem !important;
+        }
+
         /* ============================================================
            ACCESSIBILITY MODES & CONTROLS DRAWER
            ============================================================ */
@@ -377,11 +678,11 @@
             width: 90%;
             /*max-width: 1400px;*/
             margin: 0 auto;
-            padding: 30px 24px 16px;
+            padding: 20px 24px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 22px;
+            gap: 20px;
             border-bottom: 1px solid #f2f2f2;
         }
 
@@ -389,13 +690,14 @@
         .exact-brand {
             display: inline-flex;
             align-items: center;
-            /*gap: 16px;*/
+            gap: 12px;
             text-decoration: none !important;
             color: inherit;
             flex-shrink: 0;
         }
         .exact-emblem-img {
-            height: 106px;
+            height: 80px;
+            max-height: 80px;
             width: auto;
             display: block;
             object-fit: contain;
@@ -407,7 +709,7 @@
             line-height: 1.25;
         }
         .exact-brand-title {
-            font-size: 2.85rem;
+            font-size: 2.35rem;
             font-weight: 800;
             color: #000000;
             font-family: 'Noto Sans', sans-serif;
@@ -416,7 +718,7 @@
             padding: 0;
         }
         .exact-brand-sub {
-            font-size: 1.95rem;
+            font-size: 1.65rem;
             font-weight: 600;
             color: #2b2b2b;
             font-family: 'Noto Sans', sans-serif;
@@ -430,9 +732,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex: 1;
-            max-width: 380px;
-            margin: 0 20px;
+            flex: 1 1 220px;
+            min-width: 170px;
+            max-width: 360px;
+            margin: 0 16px;
         }
         .exact-search-wrap {
             display: flex;
@@ -496,7 +799,8 @@
             margin: 0;
         }
         .exact-di-img {
-            height: 75px;
+            height: 58px;
+            max-height: 58px;
             width: auto;
             display: block;
             object-fit: contain;
@@ -844,24 +1148,71 @@
         /* Responsive Breakpoints */
         @media (max-width: 1200px) {
             .exact-header-top {
-                padding: 18px 24px 16px;
-                gap: 16px;
-            }
-            .gov-nav-container-exact {
-                padding: 0 24px;
+                width: 94%;
+                padding: 12px 14px;
+                gap: 10px;
             }
             .exact-emblem-img {
-                height: 88px;
+                height: 56px !important;
+                max-height: 56px !important;
+            }
+            .exact-brand {
+                gap: 8px;
             }
             .exact-brand-title {
-                font-size: 2.3rem;
+                font-size: 1.85rem !important;
+                line-height: 1.2;
             }
             .exact-brand-sub {
-                font-size: 1.65rem;
+                font-size: 1.3rem !important;
+                line-height: 1.2;
+            }
+            .exact-search-menu-bar {
+                flex: 1 1 180px;
+                min-width: 150px;
+                max-width: 280px;
+                margin: 0 8px;
+            }
+            .exact-search-box {
+                height: 42px;
+                padding: 0 8px;
+            }
+            .exact-search-box input {
+                font-size: 1.4rem;
+                padding: 0 4px;
+            }
+            .exact-di-img {
+                height: 42px !important;
+                max-height: 42px !important;
+            }
+            .exact-utilities {
+                gap: 6px;
+            }
+            .exact-util-img {
+                height: 24px !important;
+            }
+            .exact-util-divider {
+                font-size: 1.8rem;
+                margin: 0 2px;
+            }
+            .gov-nav-container-exact {
+                width: 94%;
+                padding: 0 14px;
+            }
+            .gov-nav-ul {
+                gap: clamp(8px, 1.8vw, 24px);
             }
             .gov-nav-a {
-                font-size: 1.85rem;
-                padding: 12px 4px 14px;
+                font-size: 1.55rem !important;
+                padding: 11px 4px 13px;
+                letter-spacing: -0.2px;
+            }
+            .gov-nav-a.active {
+                font-size: 1.65rem !important;
+            }
+            .gov-nav-caret {
+                font-size: 1.1rem;
+                margin-left: 2px;
             }
         }
 
@@ -1457,32 +1808,23 @@
         /* 5. PM MODI QUOTE CARD */
         .pm-quote-section {
             background: #ffffff;
-            padding: 0px 0 20px;
+            padding: 20px 0;
         }
         .pm-quote-box {
             background: #ebeaea;
-            border-radius: 8px;
-            /*padding: 32px 40px 48px;*/
-            padding: 5rem 25rem 5rem;
+            border-radius: 10px;
+            padding: 34px 44px;
             display: flex;
             align-items: center;
             gap: 36px;
             border: 1px solid #e0d5db;
         }
-        @media (max-width: 768px) {
-            .pm-quote-box {
-                flex-direction: column;
-                padding: 24px 20px;
-                gap: 20px;
-            }
-        }
         .pm-quote-avatar-wrap {
             flex-shrink: 0;
-            width: 21%;
-            /*width: 140px;*/
-            height: 23%;
-            /*height: 140px;*/
+            width: 140px;
+            height: 140px;
             min-width: 140px;
+            aspect-ratio: 1 / 1;
             border-radius: 50%;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(35,35,47,.08);
@@ -1492,24 +1834,19 @@
             justify-content: center;
             border: 3px solid #6c1340;
         }
-        @media (max-width: 991px) {
-            .pm-quote-avatar-wrap {
-                width: 120px;
-                height: 120px;
-                min-width: 120px;
-            }
-        }
         .pm-quote-avatar-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+            display: block;
         }
         .pm-quote-content {
             flex-grow: 1;
+            min-width: 0;
         }
         .pm-quote-mark {
-            font-size: 4.8rem !important;
+            font-size: 4.2rem !important;
             font-family: 'Material Symbols Outlined', sans-serif;
             color: #6c1340;
             line-height: 1;
@@ -1517,10 +1854,10 @@
             vertical-align: middle;
         }
         .pm-quote-text {
-            font-size: 2.4rem !important;
+            font-size: 2.1rem !important;
             font-family: 'Noto Sans', sans-serif;
             font-weight: 500;
-            line-height: 36px !important;
+            line-height: 1.55 !important;
             letter-spacing: -0.12px;
             color: #6c1340 !important;
             display: inline;
@@ -1530,6 +1867,66 @@
             justify-content: space-between;
             align-items: flex-end;
             margin-top: 18px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 1199px) {
+            .pm-quote-box {
+                padding: 26px 30px;
+                gap: 24px;
+            }
+            .pm-quote-avatar-wrap {
+                width: 125px;
+                height: 125px;
+                min-width: 125px;
+            }
+            .pm-quote-text {
+                font-size: 1.95rem !important;
+            }
+        }
+        @media (max-width: 991px) {
+            .pm-quote-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 26px 20px;
+                gap: 18px;
+            }
+            .pm-quote-avatar-wrap {
+                width: 120px;
+                height: 120px;
+                min-width: 120px;
+                margin: 0 auto;
+            }
+            .pm-quote-text {
+                font-size: 1.85rem !important;
+                line-height: 1.55 !important;
+            }
+            .pm-quote-footer {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                text-align: center;
+                margin-top: 16px;
+            }
+        }
+        @media (max-width: 575px) {
+            .pm-quote-box {
+                padding: 20px 14px;
+                gap: 14px;
+            }
+            .pm-quote-avatar-wrap {
+                width: 96px;
+                height: 96px;
+                min-width: 96px;
+            }
+            .pm-quote-mark {
+                font-size: 3.2rem !important;
+            }
+            .pm-quote-text {
+                font-size: 1.6rem !important;
+                line-height: 1.55 !important;
+            }
         }
         .pm-quote-meta {
             font-size: 1.6rem !important;
@@ -1545,25 +1942,89 @@
             font-family: 'Noto Sans', sans-serif;
             margin-top: 3px;
         }
-        .btn-read-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border: 1.5px solid #6c1340;
-            background: #ffffff;
-            color: #6c1340;
-            padding: 10px 18px;
-            border-radius: 4px;
-            font-size: 1.55rem !important;
-            font-weight: 600;
-            font-family: 'Noto Sans', sans-serif;
-            text-decoration: none;
-            text-transform: uppercase;
-            transition: all 0.2s;
+        /* Standardized Action Buttons: READ MORE / VIEW MORE (No Underline, Uniform 14px / 700) */
+        .btn-read-more,
+        .btn-view-more-outline {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            border: 1.5px solid #6c1340 !important;
+            background: #ffffff !important;
+            color: #6c1340 !important;
+            padding: 8px 18px !important;
+            border-radius: 6px !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            text-decoration: none !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            line-height: 1.2 !important;
+            box-shadow: 0 1px 3px rgba(108, 19, 64, 0.08) !important;
+            transition: all 0.2s ease !important;
+            cursor: pointer !important;
         }
-        .btn-read-more:hover {
-            background: #6c1340;
-            color: #ffffff;
+        .btn-read-more:hover,
+        .btn-view-more-outline:hover {
+            background: #6c1340 !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            border-color: #6c1340 !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 10px rgba(108, 19, 64, 0.2) !important;
+        }
+        .btn-view-more-white {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            border: 1.5px solid #ffffff !important;
+            color: #ffffff !important;
+            background: transparent !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            padding: 8px 18px !important;
+            border-radius: 6px !important;
+            text-decoration: none !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            line-height: 1.2 !important;
+            float: right;
+            margin-top: 14px;
+            transition: all 0.2s ease !important;
+            cursor: pointer !important;
+        }
+        .btn-view-more-white:hover {
+            background: #ffffff !important;
+            color: #6c1340 !important;
+            text-decoration: none !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25) !important;
+        }
+        .about-readmore-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            color: #6c1340 !important;
+            font-weight: 700 !important;
+            font-size: 14px !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            text-decoration: none !important;
+            border: 1.5px solid #6c1340 !important;
+            background: #ffffff !important;
+            padding: 4px 12px !important;
+            border-radius: 6px !important;
+            margin-left: 8px !important;
+            white-space: nowrap !important;
+            transition: all 0.2s ease !important;
+        }
+        .about-readmore-btn:hover {
+            background: #6c1340 !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            transform: translateY(-1px) !important;
         }
 
         /* 6. SECTION HEADINGS (Exact Noto Sans Bold in Deep Maroon #6c1340) */
@@ -1708,13 +2169,15 @@
         }
 
         /* About Us Responsive Breakpoints */
+        @media (max-width: 1080px) {
+            .about-dignitaries-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
         @media (max-width: 991px) {
             .about-section {
                 padding: 24px 0;
-            }
-            .about-dignitaries-grid {
-                grid-template-columns: 1fr;
-                gap: 26px;
             }
             .about-text {
                 font-size: 1.7rem !important;
@@ -1791,15 +2254,17 @@
                 gap: 6px;
             }
             .dignitary-photo {
-                max-width: 92px;
+                max-width: 88px;
                 border-bottom-width: 3px;
                 margin-bottom: 4px;
             }
             .dignitary-name-exact {
-                font-size: 1.25rem !important;
+                font-size: 1.2rem !important;
+                line-height: 1.25;
             }
             .dignitary-desig-exact {
-                font-size: 1.08rem !important;
+                font-size: 1.05rem !important;
+                line-height: 1.2;
             }
         }
 
@@ -1814,9 +2279,10 @@
             /*grid-template-columns: 58% 42%;*/
             gap: 32px;
         }
-        @media (max-width: 991px) {
+        @media (max-width: 1080px) {
             .offerings-grid {
                 grid-template-columns: 1fr;
+                gap: 26px;
             }
         }
 
@@ -1848,6 +2314,26 @@
         .offerings-tab-btn.active {
             background: #6c1340;
             color: #ffffff;
+        }
+        @media (max-width: 768px) {
+            .offerings-tab-btn {
+                padding: 11px 10px;
+                font-size: 1.5rem !important;
+            }
+            .offerings-item {
+                padding: 12px 14px;
+                font-size: 1.5rem !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .offerings-tab-btn {
+                padding: 9px 4px;
+                font-size: 1.3rem !important;
+            }
+            .offerings-item {
+                padding: 10px 8px;
+                font-size: 1.4rem !important;
+            }
         }
         .offerings-list-box {
             border-radius: 4px;
@@ -2000,10 +2486,10 @@
             gap: 32px;
             align-items: start;
         }
-        @media (max-width: 991px) {
+        @media (max-width: 1080px) {
             .docs-schemes-grid {
                 grid-template-columns: 1fr;
-                gap: 35px;
+                gap: 30px;
             }
         }
 
@@ -2012,6 +2498,16 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 14px;
+        }
+        @media (max-width: 575px) {
+            .docs-2x2-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .doc-item-box {
+                padding: 14px 14px;
+                min-height: auto;
+            }
         }
         .doc-item-box {
             border: 1px solid #e5d7dc;
@@ -2058,9 +2554,27 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 12px 10px;
         }
-        @media (max-width: 680px) {
+        @media (max-width: 768px) {
             .govt-stats-theme-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+        @media (max-width: 420px) {
+            .govt-stats-theme-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px 6px;
+            }
+            .govt-stat-theme-card {
+                padding: 10px 4px;
+                min-height: 80px;
+            }
+            .govt-stat-theme-label {
+                font-size: 1.25rem !important;
+                min-height: 28px;
+            }
+            .govt-stat-theme-value {
+                font-size: 2.1rem !important;
             }
         }
         .govt-stat-theme-card {
@@ -2228,14 +2742,22 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
-        @media (max-width: 991px) {
+        @media (max-width: 1100px) {
             .social-cards-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
             }
         }
-        @media (max-width: 575px) {
+        @media (max-width: 600px) {
             .social-cards-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .social-feed-card {
+                height: 380px;
+                max-width: 440px;
+                margin: 0 auto;
+                width: 100%;
             }
         }
         .social-feed-card {
@@ -2723,12 +3245,23 @@
         }
         .campaign-banners-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
         }
         @media (max-width: 991px) {
             .campaign-banners-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 16px;
+            }
+        }
+        @media (max-width: 600px) {
+            .campaign-banners-grid {
                 grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .campaign-item-card {
+                height: auto;
+                max-height: 180px;
             }
         }
         .campaign-item-card {
@@ -3212,6 +3745,18 @@
             border-color: #500a2f !important;
             box-shadow: 0 4px 14px rgba(80, 10, 47, 0.08) !important;
         }
+
+        /* Grievance Action Buttons */
+        .tc-grievance-btn,
+        .tc-grievance-btn span,
+        .tc-grievance-btn i {
+            color: #ffffff !important;
+        }
+        .tc-grievance-btn:hover {
+            background-color: #500a2f !important;
+            border-color: #500a2f !important;
+            color: #ffffff !important;
+        }
     </style>
 </head>
 <body class="default-theme group1">
@@ -3386,38 +3931,70 @@
     <!-- Feedback Modal -->
     <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 8px; overflow: hidden; border: none; font-size: 1.6rem !important;">
-                <div class="modal-header" style="background: #6c1340; color: #fff; padding: 14px 20px;">
-                    <h5 class="modal-title fs-5" id="feedbackModalLabel" style="font-weight: 700;">Citizen Feedback & Inquiry</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content shadow-lg border-0" style="background-color: #ffffff !important; border-radius: 12px; overflow: hidden;">
+                <div class="modal-header text-white" style="background-color: #500a2f !important; padding: 18px 24px; border-bottom: 2px solid #3d0520;">
+                    <div>
+                        <h5 class="modal-title fs-5 fw-bold d-flex align-items-center gap-2 mb-1" id="feedbackModalLabel" style="color: #ffffff !important; font-size: 1.85rem !important;">
+                            <i class="fa-solid fa-comment-dots text-warning"></i>
+                            <span>{{ session('locale') == 'hi' ? 'नागरिक प्रतिक्रिया एवं पूछताछ' : 'Citizen Feedback & Inquiry' }}</span>
+                        </h5>
+                        <p class="mb-0 text-white-50" style="font-size: 1.25rem; font-weight: 400;">
+                            {{ session('locale') == 'hi' ? 'वस्त्र समिति की सेवाओं को और बेहतर बनाने हेतु अपने सुझाव साझा करें।' : 'Share your valuable suggestions, inquiries or feedback with Textiles Committee.' }}
+                        </p>
+                    </div>
+                    <button type="button" class="modal-btn-close-header" onclick="closeFeedbackModal()" data-bs-dismiss="modal" aria-label="Close" title="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
-                <form action="{{ route('inquiry.submit') }}" method="POST">
+                <form action="{{ route('inquiry.submit') }}" method="POST" id="citizenFeedbackForm">
                     @csrf
-                    <div class="modal-body" style="padding: 20px;">
+                    <div class="modal-body p-4" style="background-color: #ffffff !important;">
+                        <div id="feedbackModalStatus" class="alert d-none mb-3 py-2 small"></div>
+
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Your Full Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control" required placeholder="Enter full name">
+                            <label class="form-label fw-bold mb-1" style="font-size: 1.25rem; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">
+                                {{ session('locale') == 'hi' ? 'पूरा नाम' : 'Your Full Name' }} <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="name" id="feedbackName" class="form-control" required placeholder="{{ session('locale') == 'hi' ? 'उदा. राजेश शर्मा' : 'e.g. Rajesh Sharma' }}" value="{{ old('name') }}">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Email Address <span class="text-danger">*</span></label>
-                            <input type="email" name="email" class="form-control" required placeholder="name@example.gov.in">
+                            <label class="form-label fw-bold mb-1" style="font-size: 1.25rem; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">
+                                {{ session('locale') == 'hi' ? 'ईमेल पता' : 'Email Address' }} <span class="text-danger">*</span>
+                            </label>
+                            <input type="email" name="email" id="feedbackEmail" class="form-control" required placeholder="name@example.gov.in" value="{{ old('email') }}">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Phone Number</label>
-                            <input type="tel" name="phone" class="form-control" placeholder="Mobile / Telephone">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold mb-1" style="font-size: 1.25rem; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    {{ session('locale') == 'hi' ? 'फ़ोन नंबर' : 'Phone Number' }}
+                                </label>
+                                <input type="tel" name="phone" id="feedbackPhone" class="form-control" placeholder="{{ session('locale') == 'hi' ? 'उदा. 9876543210' : 'e.g. 9876543210' }}" value="{{ old('phone') }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold mb-1" style="font-size: 1.25rem; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    {{ session('locale') == 'hi' ? 'विषय / क्षेत्र' : 'Subject / Topic' }}
+                                </label>
+                                <input type="text" name="subject" id="feedbackSubject" class="form-control" placeholder="{{ session('locale') == 'hi' ? 'उदा. हथकरघा, प्रयोगशाला परीक्षण' : 'e.g. Lab Testing, Handloom Mark' }}" value="{{ old('subject') }}">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Subject / Sector</label>
-                            <input type="text" name="subject" class="form-control" placeholder="e.g., Handloom Certification, Testing">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Message <span class="text-danger">*</span></label>
-                            <textarea name="message" class="form-control" rows="4" required placeholder="Write your feedback or query here..."></textarea>
+                        <div class="mb-2">
+                            <label class="form-label fw-bold mb-1" style="font-size: 1.25rem; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">
+                                {{ session('locale') == 'hi' ? 'संदेश / प्रतिक्रिया' : 'Feedback / Inquiry Message' }} <span class="text-danger">*</span>
+                            </label>
+                            <textarea name="message" id="feedbackMessage" class="form-control" rows="4" required placeholder="{{ session('locale') == 'hi' ? 'अपनी प्रतिक्रिया, सुझाव या पूछताछ का विवरण यहाँ लिखें...' : 'Write your suggestions, inquiry or feedback details here...' }}">{{ old('message') }}</textarea>
                         </div>
                     </div>
-                    <div class="modal-footer" style="padding: 12px 20px; background: #f8f8f8;">
-                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-sm text-white" style="background: #6c1340; font-weight: 600;">Submit Inquiry</button>
+                    <div class="modal-footer px-4 py-3 border-top" style="background-color: #fbf8fa !important; border-top: 1px solid #ebd0dd !important;">
+                        <button type="button" class="modal-btn-cancel" onclick="closeFeedbackModal()" data-bs-dismiss="modal">
+                            {{ session('locale') == 'hi' ? 'रद्द करें' : 'Close' }}
+                        </button>
+                        <button type="submit" id="feedbackSubmitBtn" class="modal-btn-submit">
+                            <span class="normal-text d-inline-flex align-items-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>{{ session('locale') == 'hi' ? 'प्रतिक्रिया भेजें' : 'Submit Feedback' }}</span>
+                            </span>
+                            <span class="spinner-text d-none"><i class="fa-solid fa-spinner fa-spin me-1"></i> Sending...</span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -3787,6 +4364,106 @@
             }
         });
         langObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        // 8. Feedback Modal Handlers (AJAX submit + Hash auto-opener)
+        function closeFeedbackModal() {
+            const fbModalEl = document.getElementById('feedbackModal');
+            if (fbModalEl) {
+                if (window.bootstrap && bootstrap.Modal) {
+                    const instance = bootstrap.Modal.getInstance(fbModalEl);
+                    if (instance) instance.hide();
+                }
+                fbModalEl.classList.remove('show');
+                fbModalEl.style.display = 'none';
+            }
+            document.querySelectorAll('.modal-backdrop').forEach(b => b.remove());
+            document.body.classList.remove('modal-open');
+            document.body.style.removeProperty('overflow');
+            document.body.style.removeProperty('padding-right');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Auto open if URL has #feedbackModal or ?feedback=1
+            if (window.location.hash === '#feedbackModal' || window.location.search.includes('feedback=1')) {
+                const fbModalEl = document.getElementById('feedbackModal');
+                if (fbModalEl && window.bootstrap && bootstrap.Modal) {
+                    const fbModal = bootstrap.Modal.getOrCreateInstance(fbModalEl);
+                    fbModal.show();
+                }
+            }
+
+            const fbForm = document.getElementById('citizenFeedbackForm');
+            if (fbForm) {
+                fbForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const statusEl = document.getElementById('feedbackModalStatus');
+                    const submitBtn = document.getElementById('feedbackSubmitBtn');
+                    const normalText = submitBtn ? submitBtn.querySelector('.normal-text') : null;
+                    const spinnerText = submitBtn ? submitBtn.querySelector('.spinner-text') : null;
+
+                    if (submitBtn) submitBtn.disabled = true;
+                    if (normalText) normalText.classList.add('d-none');
+                    if (spinnerText) spinnerText.classList.remove('d-none');
+
+                    if (statusEl) {
+                        statusEl.classList.add('d-none');
+                        statusEl.classList.remove('alert-success', 'alert-danger');
+                    }
+
+                    const formData = new FormData(fbForm);
+
+                    fetch(fbForm.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    })
+                    .then(async res => {
+                        let data = null;
+                        try { data = await res.json(); } catch(err) {}
+                        if (!res.ok) {
+                            let msg = (data && data.message) ? data.message : 'Submission failed. Please check the form.';
+                            if (data && data.errors) {
+                                msg = Object.values(data.errors).flat().join('<br>');
+                            }
+                            throw new Error(msg);
+                        }
+                        return data;
+                    })
+                    .then(data => {
+                        if (statusEl) {
+                            statusEl.classList.remove('d-none', 'alert-danger');
+                            statusEl.classList.add('alert-success');
+                            statusEl.innerHTML = '<i class="fa-solid fa-circle-check me-2"></i>' + (data.message || 'Feedback submitted successfully!');
+                        }
+                        fbForm.reset();
+
+                        setTimeout(() => {
+                            const fbModalEl = document.getElementById('feedbackModal');
+                            if (fbModalEl && window.bootstrap && bootstrap.Modal) {
+                                const fbModal = bootstrap.Modal.getInstance(fbModalEl);
+                                if (fbModal) fbModal.hide();
+                            }
+                            if (statusEl) statusEl.classList.add('d-none');
+                        }, 2200);
+                    })
+                    .catch(err => {
+                        if (statusEl) {
+                            statusEl.classList.remove('d-none', 'alert-success');
+                            statusEl.classList.add('alert-danger');
+                            statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation me-2"></i>' + err.message;
+                        }
+                    })
+                    .finally(() => {
+                        if (submitBtn) submitBtn.disabled = false;
+                        if (normalText) normalText.classList.remove('d-none');
+                        if (spinnerText) spinnerText.classList.add('d-none');
+                    });
+                });
+            }
+        });
     </script>
     <!-- Leaflet GIS Map Engine (Local) -->
     <script src="{{ asset('js/leaflet.js') }}"></script>

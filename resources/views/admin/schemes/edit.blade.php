@@ -11,7 +11,7 @@
         <a href="{{ route('admin.schemes.index') }}" class="btn btn-outline-secondary btn-sm">&larr; Back to List</a>
     </div>
     <div class="cms-card-body">
-        <form action="{{ route('admin.schemes.update', $scheme->id) }}" method="POST">
+        <form action="{{ route('admin.schemes.update', $scheme->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row g-3">
@@ -26,11 +26,33 @@
 
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
-                    <input type="text" name="category" class="form-control" value="{{ old('category', $scheme->category) }}" required>
+                    <select name="category" class="form-select" required>
+                        <option value="scheme" {{ old('category', $scheme->category) == 'scheme' ? 'selected' : '' }}>General Scheme</option>
+                        <option value="centrally-sponsored" {{ old('category', $scheme->category) == 'centrally-sponsored' ? 'selected' : '' }}>Centrally Sponsored</option>
+                        <option value="cotton" {{ old('category', $scheme->category) == 'cotton' ? 'selected' : '' }}>Mission & Modernization</option>
+                        <option value="research" {{ old('category', $scheme->category) == 'research' ? 'selected' : '' }}>Research & Start-Up</option>
+                        <option value="infrastructure" {{ old('category', $scheme->category) == 'infrastructure' ? 'selected' : '' }}>Infrastructure & Parks</option>
+                        <option value="skills" {{ old('category', $scheme->category) == 'skills' ? 'selected' : '' }}>Skill Development</option>
+                        <option value="quality" {{ old('category', $scheme->category) == 'quality' ? 'selected' : '' }}>Quality & Brand Certification</option>
+                    </select>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Icon (Material Symbols)</label>
-                    <input type="text" name="icon" class="form-control" value="{{ old('icon', $scheme->icon) }}">
+                    <label class="form-label fw-semibold">Apply / Portal URL</label>
+                    <input type="text" name="link_url" class="form-control" value="{{ old('link_url', $scheme->link_url) }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Upload Banner Image</label>
+                    <input type="file" name="banner_image" class="form-control" accept="image/*">
+                    @if(!empty($scheme->guidelines_doc))
+                        <div class="mt-2 small text-muted">
+                            Current Banner: <a href="{{ asset($scheme->guidelines_doc) }}" target="_blank">{{ $scheme->guidelines_doc }}</a>
+                        </div>
+                    @endif
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Or Image Asset Path / URL</label>
+                    <input type="text" name="guidelines_doc" class="form-control" value="{{ old('guidelines_doc', $scheme->guidelines_doc) }}" placeholder="assets/images/schemes/... or https://">
                 </div>
 
                 <div class="col-12">
@@ -42,10 +64,6 @@
                     <textarea name="description_hi" class="form-control" rows="3">{{ old('description_hi', $scheme->description_hi) }}</textarea>
                 </div>
 
-                <div class="col-md-6">
-                    <label class="form-label fw-semibold">Apply / Portal URL</label>
-                    <input type="text" name="link_url" class="form-control" value="{{ old('link_url', $scheme->link_url) }}">
-                </div>
                 <div class="col-md-3">
                     <label class="form-label fw-semibold">Sort Order</label>
                     <input type="number" name="sort_order" class="form-control" value="{{ old('sort_order', $scheme->sort_order) }}">

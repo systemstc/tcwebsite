@@ -11,7 +11,7 @@ class ImportantLinkController extends Controller
 {
     public function index()
     {
-        $links = ImportantLink::orderBy('sort_order')->get();
+        $links = ImportantLink::orderBy('sort_order')->orderBy('id', 'asc')->get();
         return view('admin.important-links.index', compact('links'));
     }
 
@@ -23,27 +23,32 @@ class ImportantLinkController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title_hi' => 'required|string|max:200',
-            'title_en' => 'nullable|string|max:200',
-            'url' => 'required|string',
-            'target' => 'required|string',
-            'category' => 'required|string',
-            'sort_order' => 'integer',
+            'title_en' => 'required_without:title_hi|nullable|string|max:200',
+            'title_hi' => 'nullable|string|max:200',
+            'url' => 'required|string|max:500',
+            'target' => 'nullable|string|max:20',
+            'category' => 'nullable|string|max:50',
+            'sort_order' => 'nullable|integer',
         ]);
 
+        $titleEn = trim($request->input('title_en') ?? '');
+        $titleHi = trim($request->input('title_hi') ?? '');
+        if (empty($titleHi) && !empty($titleEn)) $titleHi = $titleEn;
+        if (empty($titleEn) && !empty($titleHi)) $titleEn = $titleHi;
+
         $link = ImportantLink::create([
-            'title_hi' => $validated['title_hi'],
-            'title_en' => $validated['title_en'] ?? null,
+            'title_hi' => $titleHi,
+            'title_en' => $titleEn,
             'url' => $validated['url'],
-            'target' => $validated['target'],
-            'category' => $validated['category'],
-            'sort_order' => $validated['sort_order'] ?? 0,
+            'target' => $request->input('target') ?: '_blank',
+            'category' => $request->input('category') ?: 'Government Portals',
+            'sort_order' => (int)($request->input('sort_order') ?? 0),
             'is_active' => $request->has('is_active'),
         ]);
 
-        ActivityLog::record('create', 'important_links', $link->id, "Created link: {$link->title_hi}");
+        ActivityLog::record('create', 'important_links', $link->id, "Created portal/link: {$link->title_en}");
 
-        return redirect()->route('admin.important-links.index')->with('success', 'Important link created successfully.');
+        return redirect()->route('admin.important-links.index')->with('success', 'Portal / Related link created successfully.');
     }
 
     public function edit(ImportantLink $importantLink)
@@ -54,37 +59,42 @@ class ImportantLinkController extends Controller
     public function update(Request $request, ImportantLink $importantLink)
     {
         $validated = $request->validate([
-            'title_hi' => 'required|string|max:200',
-            'title_en' => 'nullable|string|max:200',
-            'url' => 'required|string',
-            'target' => 'required|string',
-            'category' => 'required|string',
-            'sort_order' => 'integer',
+            'title_en' => 'required_without:title_hi|nullable|string|max:200',
+            'title_hi' => 'nullable|string|max:200',
+            'url' => 'required|string|max:500',
+            'target' => 'nullable|string|max:20',
+            'category' => 'nullable|string|max:50',
+            'sort_order' => 'nullable|integer',
         ]);
 
+        $titleEn = trim($request->input('title_en') ?? '');
+        $titleHi = trim($request->input('title_hi') ?? '');
+        if (empty($titleHi) && !empty($titleEn)) $titleHi = $titleEn;
+        if (empty($titleEn) && !empty($titleHi)) $titleEn = $titleHi;
+
         $importantLink->update([
-            'title_hi' => $validated['title_hi'],
-            'title_en' => $validated['title_en'] ?? null,
+            'title_hi' => $titleHi,
+            'title_en' => $titleEn,
             'url' => $validated['url'],
-            'target' => $validated['target'],
-            'category' => $validated['category'],
-            'sort_order' => $validated['sort_order'] ?? 0,
+            'target' => $request->input('target') ?: ($importantLink->target ?: '_blank'),
+            'category' => $request->input('category') ?: ($importantLink->category ?: 'Government Portals'),
+            'sort_order' => (int)($request->input('sort_order') ?? 0),
             'is_active' => $request->has('is_active'),
         ]);
 
-        ActivityLog::record('update', 'important_links', $importantLink->id, "Updated link: {$importantLink->title_hi}");
+        ActivityLog::record('update', 'important_links', $importantLink->id, "Updated portal/link: {$importantLink->title_en}");
 
-        return redirect()->route('admin.important-links.index')->with('success', 'Important link updated successfully.');
+        return redirect()->route('admin.important-links.index')->with('success', 'Portal / Related link updated successfully.');
     }
 
     public function destroy(ImportantLink $importantLink)
     {
-        $title = $importantLink->title_hi;
+        $title = $importantLink->title_en ?: $importantLink->title_hi;
         $id = $importantLink->id;
         $importantLink->delete();
 
-        ActivityLog::record('delete', 'important_links', $id, "Deleted link: {$title}");
+        ActivityLog::record('delete', 'important_links', $id, "Deleted portal/link: {$title}");
 
-        return redirect()->route('admin.important-links.index')->with('success', 'Important link deleted successfully.');
+        return redirect()->route('admin.important-links.index')->with('success', 'Portal / Related link deleted successfully.');
     }
 }

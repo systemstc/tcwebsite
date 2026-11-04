@@ -50,7 +50,7 @@ class FooterController extends Controller
             [
                 'id' => 5,
                 'title' => 'Related Links',
-                'url' => '/page/office-network',
+                'url' => '/related-links',
                 'col' => 3,
                 'target' => '_self',
                 'is_active' => true,

@@ -38,7 +38,8 @@ class HomeController extends Controller
         $vacancies = Tender::where('is_active', true)->where('type', 'vacancy')->orderBy('sort_order')->take(6)->get();
         
         $whatsNews = WhatsNew::where('is_active', true)->orderBy('sort_order')->take(5)->get();
-        $documents = Document::where('is_active', true)->orderBy('sort_order')->take(6)->get();
+        // Aggregates most recently uploaded/published documents from across all portal sections (Pages, Documents CMS, Media uploads)
+        $documents = \App\Services\PortalDocumentService::getRecentDocuments(4);
         $personas = Persona::where('is_active', true)->orderBy('sort_order')->get();
         $importantLinks = ImportantLink::where('is_active', true)->orderBy('sort_order')->take(8)->get();
         
@@ -361,6 +362,10 @@ class HomeController extends Controller
 
             // Strip editor-only image upload tooltips
             $html = preg_replace('/\s*title=["\'](?:Click to upload\/change|Change Photo|Change Thumbnail|Change Slide)[^"\']*["\']/i', '', $html);
+
+            // Dynamically resolve actual file sizes and types for document links
+            $html = \App\Services\PortalDocumentService::normalizeDocumentRowsHtml($html);
+
             return $html;
         };
         $page->content_en = $cleanFrontendContent($page->content_en);
@@ -392,6 +397,13 @@ class HomeController extends Controller
         ]);
 
         ActivityLog::record('submit_inquiry', 'inquiries', $inquiry->id, 'New feedback submitted by ' . $inquiry->name);
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'आपकी प्रतिक्रिया/पूछताछ सफलतापूर्वक प्राप्त हो गई है। धन्यवाद! / Your feedback has been submitted successfully.'
+            ]);
+        }
 
         return redirect()->back()->with('success', 'आपकी प्रतिक्रिया/पूछताछ सफलतापूर्वक प्राप्त हो गई है। धन्यवाद! / Your inquiry has been submitted successfully.');
     }
@@ -427,5 +439,86 @@ class HomeController extends Controller
         $documents = Document::where('is_active', true)->orderBy('published_date', 'desc')->get();
 
         return view('front.whats-new', compact('whatsNews', 'schemes', 'documents'));
+    }
+
+    public function govtSponsoredSchemes(Request $request)
+    {
+        $page = Page::where('slug', 'govt-sponsored-scheme')->first() ?? new Page([
+            'title_en' => 'Govt. Sponsored Scheme',
+            'title_hi' => 'सरकारी प्रायोजित योजनाएं',
+            'slug' => 'govt-sponsored-scheme',
+            'menu_location' => 'offerings',
+        ]);
+        $schemes = Scheme::where('is_active', true)->orderBy('sort_order')->get();
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+
+        // Sub-navigation pills (Samarth, Handloom Mark, Jute Mark, Star Rating, RSA, etc.)
+        $parentMenu = MenuItem::where('title_en', 'like', '%Govt%')->orWhere('title_en', 'like', '%Scheme%')->first();
+        $navPills = collect();
+        if ($parentMenu) {
+            $children = MenuItem::where('parent_id', $parentMenu->id)->where('is_active', true)->orderBy('sort_order')->get();
+            $navPills->push((object)[
+                'id' => $parentMenu->id,
+                'title_en' => 'All Schemes',
+                'title_hi' => 'सभी योजनाएं',
+                'url' => route('schemes.index'),
+                'is_active' => true,
+            ]);
+            foreach ($children as $c) {
+                $navPills->push((object)[
+                    'id' => $c->id,
+                    'title_en' => $c->title_en,
+                    'title_hi' => $c->title_hi ?: $c->title_en,
+                    'url' => $c->resolved_url,
+                    'is_active' => false,
+                ]);
+            }
+        }
+
+        return view('front.schemes', compact('page', 'schemes', 'navPills', 'settings'));
+    }
+
+    public function vacancies(Request $request)
+    {
+        $page = Page::where('slug', 'vacancies')->first() ?? new Page([
+            'title_en' => 'Vacancies',
+            'title_hi' => 'रिक्तियां एवं भर्ती',
+            'slug' => 'vacancies',
+            'menu_location' => 'offerings',
+        ]);
+        $vacancies = Tender::where('is_active', true)->where('type', 'vacancy')->orderBy('sort_order')->orderBy('published_date', 'desc')->get();
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+
+        return view('front.vacancies', compact('page', 'vacancies', 'settings'));
+    }
+
+    public function tenders(Request $request)
+    {
+        $page = Page::where('slug', 'tenders')->first() ?? new Page([
+            'title_en' => 'Tenders',
+            'title_hi' => 'निविदाएं एवं प्रस्ताव',
+            'slug' => 'tenders',
+            'menu_location' => 'offerings',
+        ]);
+        $tenders = Tender::where('is_active', true)->where('type', 'tender')->orderBy('sort_order')->orderBy('published_date', 'desc')->get();
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+
+        return view('front.tenders', compact('page', 'tenders', 'settings'));
+    }
+
+    public function relatedLinks(Request $request)
+    {
+        $page = Page::where('slug', 'related-links')->first() ?? new Page([
+            'title_en' => 'Related Links',
+            'title_hi' => 'संबंधित लिंक / पोर्टल',
+            'slug' => 'related-links',
+        ]);
+        $links = \App\Models\ImportantLink::where('is_active', true)
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+
+        return view('front.related-links', compact('page', 'links', 'settings'));
     }
 }

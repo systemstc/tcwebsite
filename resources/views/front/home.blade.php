@@ -61,7 +61,7 @@
 
     <!-- 3. HON'BLE PRIME MINISTER'S QUOTE CARD -->
     <section class="pm-quote-section">
-        <!-- <div class="page-container"> -->
+        <div class="page-container">
             <div class="pm-quote-box">
                 <!-- PM Circular Avatar -->
                 <div class="pm-quote-avatar-wrap">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </div>
-        <!-- </div> -->
+        </div>
     </section>
 
     <!-- 4. ABOUT US & DIGNITARIES -->
@@ -109,23 +109,20 @@
                         <a href="{{ route('page.show', 'history') }}" class="about-readmore-btn">Read More <i class="fa fa-arrow-right ms-1"></i></a>
                     </p>
 
-                    <div class="about-action-btns-group">
+               <!--      <div class="about-action-btns-group">
                         <a href="{{ route('page.show', 'team') }}" class="about-pill-btn">
-                            <!-- <span class="material-symbols-outlined" style="font-size: 30px;">groups</span> -->
                             <img src="{{ asset('assets/images/Group.svg') }}" alt="our team" width="45" height="45">
                             <span class="about-pill-title">Our Team</span>
                         </a>
                         <a href="{{ route('page.show', 'organization-setup') }}" class="about-pill-btn">
-                            <!-- <span class="material-symbols-outlined" style="font-size: 30px;">schema</span> -->
                             <img src="{{ asset('assets/images/Organisation.svg') }}" alt="Organisation" width="45" height="45">
                             <span class="about-pill-title">Our Organisation</span>
                         </a>
                         <a href="{{ route('page.show', 'dashboard') }}" class="about-pill-btn">
-                            <!-- <span class="material-symbols-outlined" style="font-size: 30px;">leaderboard</span> -->
                             <img src="{{ asset('assets/images/Bar_Chart.svg') }}" alt="dashboard" width="45" height="45">
                             <span class="about-pill-title">Our Dashboard</span>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Right: Dignitaries Row (Fully Connected to CMS) -->
@@ -214,7 +211,7 @@
                         @endforelse
                     </div>
 
-                    <a href="{{ route('page.show', 'testing-services') }}" class="btn-view-more-outline">VIEW MORE &gt;</a>
+                    <!-- <a href="{{ route('schemes.index') }}" class="btn-view-more-outline" id="offeringsViewMoreBtn">VIEW MORE &gt;</a> -->
                     <div style="clear: both;"></div>
                 </div>
 
@@ -237,7 +234,7 @@
                             <div class="p-3 text-white-50" style="font-size: 1.55rem;">No recent announcements.</div>
                         @endforelse
 
-                        <a href="{{ route('whats-new.index') }}" class="btn-view-more-white">VIEW MORE &gt;</a>
+                        <!-- <a href="{{ route('whats-new.index') }}" class="btn-view-more-white">VIEW MORE &gt;</a> -->
                         <div style="clear: both;"></div>
                     </div>
                 </div>
@@ -260,16 +257,24 @@
 
                     <div class="docs-2x2-grid">
                         @forelse($documents->take(4) as $doc)
-                            <a href="{{ asset($doc->file_url ?? 'assets/images/sample_doc.pdf') }}" target="_blank" class="doc-item-box">
-                                <h3 class="doc-box-title" style="text-decoration: underline;">{{ $doc->title_en }}</h3>
-                                <div class="doc-box-sub">{{ $doc->description_en }}</div>
+                            @php
+                                $dTitle = is_array($doc) ? ($doc['title'] ?? '') : ($doc->title_en ?? $doc->title_hi ?? '');
+                                $dSub = is_array($doc) ? ($doc['sub'] ?? $doc['category'] ?? '') : ($doc->description_en ?? $doc->description_hi ?? $doc->category ?? '');
+                                $dUrl = is_array($doc) ? ($doc['url'] ?? '#') : ($doc->file_url ?? 'assets/images/sample_doc.pdf');
+                                if (!empty($dUrl) && !str_starts_with($dUrl, 'http://') && !str_starts_with($dUrl, 'https://')) {
+                                    $dUrl = asset(ltrim($dUrl, '/'));
+                                }
+                            @endphp
+                            <a href="{{ $dUrl }}" target="_blank" rel="noopener noreferrer" class="doc-item-box" title="{{ $dTitle }}">
+                                <h3 class="doc-box-title" style="text-decoration: underline;">{{ $dTitle }}</h3>
+                                <div class="doc-box-sub">{{ $dSub }}</div>
                             </a>
                         @empty
                             <div class="p-3 text-muted" style="font-size: 1.55rem;">No documents published yet.</div>
                         @endforelse
                     </div>
 
-                    <a href="{{ route('page.show', 'reports-budget') }}" class="btn-view-more-outline mt-3">VIEW MORE &gt;</a>
+                    <!-- <a href="{{ route('page.show', 'reports-budget') }}" class="btn-view-more-outline mt-3">VIEW MORE &gt;</a> -->
                     <div style="clear: both;"></div>
                 </div>
 
@@ -287,37 +292,37 @@
                     <div class="govt-stats-theme-grid">
                         <!-- Card 1 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Registrations</div>
+                            <div class="govt-stat-theme-label">HLM: Registrations</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_registrations'] ?? '29379') }}">{{ $settings['stat_registrations'] ?? '29,379' }}</div>
                         </div>
 
                         <!-- Card 2 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Handlooms covered</div>
+                            <div class="govt-stat-theme-label">HLM: Handlooms covered</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_handlooms_covered'] ?? '968018') }}">{{ $settings['stat_handlooms_covered'] ?? '968,018' }}</div>
                         </div>
 
                         <!-- Card 3 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Active Assessors</div>
+                            <div class="govt-stat-theme-label">SAMARTH: Active Assessors</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_active_assessors'] ?? '4301') }}">{{ $settings['stat_active_assessors'] ?? '4,301' }}</div>
                         </div>
 
                         <!-- Card 4 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Entry-level Trainees</div>
+                            <div class="govt-stat-theme-label">SAMARTH: Entry-level Trainees</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_entry_trainees_covered'] ?? '682414') }}">{{ $settings['stat_entry_trainees_covered'] ?? '682,414' }}</div>
                         </div>
 
                         <!-- Card 5 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Total Weavers</div>
+                            <div class="govt-stat-theme-label">HLM: Total Weavers</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_total_weavers'] ?? '21245') }}">{{ $settings['stat_total_weavers'] ?? '21,245' }}</div>
                         </div>
 
                         <!-- Card 6 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Societies</div>
+                            <div class="govt-stat-theme-label">HLM: Societies</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_societies'] ?? '5867') }}">{{ $settings['stat_societies'] ?? '5,867' }}</div>
                         </div>
 
@@ -341,19 +346,19 @@
 
                         <!-- Card 10 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Upskill Trainees</div>
+                            <div class="govt-stat-theme-label">SAMARTH: Upskill Trainees</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_upskill_trainees'] ?? '25220') }}">{{ $settings['stat_upskill_trainees'] ?? '25,220' }}</div>
                         </div>
 
                         <!-- Card 11 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Labels issued PTL</div>
+                            <div class="govt-stat-theme-label">HLM: Labels issued PTL</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_labels_ptl'] ?? '216850838') }}">{{ $settings['stat_labels_ptl'] ?? '216,850,838' }}</div>
                         </div>
 
                         <!-- Card 12 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Trainees Assessed</div>
+                            <div class="govt-stat-theme-label">SAMARTH: Trainees Assessed</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_trainees_assessed'] ?? '635305') }}">{{ $settings['stat_trainees_assessed'] ?? '635,305' }}</div>
                         </div>
                     </div>
@@ -641,12 +646,17 @@
             document.getElementById('tabContentVacancies').classList.add('d-none');
             document.getElementById('tabContentTenders').classList.add('d-none');
 
+            var viewMoreBtn = document.getElementById('offeringsViewMoreBtn');
+
             if (tabName === 'schemes') {
                 document.getElementById('tabContentSchemes').classList.remove('d-none');
+                if (viewMoreBtn) viewMoreBtn.href = "{{ route('schemes.index') }}";
             } else if (tabName === 'vacancies') {
                 document.getElementById('tabContentVacancies').classList.remove('d-none');
+                if (viewMoreBtn) viewMoreBtn.href = "{{ route('vacancies.index') }}";
             } else if (tabName === 'tenders') {
                 document.getElementById('tabContentTenders').classList.remove('d-none');
+                if (viewMoreBtn) viewMoreBtn.href = "{{ route('tenders.index') }}";
             }
         }
 

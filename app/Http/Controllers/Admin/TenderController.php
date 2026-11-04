@@ -24,37 +24,45 @@ class TenderController extends Controller
     {
         $validated = $request->validate([
             'reference_no' => 'nullable|string|max:100',
-            'title_hi' => 'required|string|max:255',
-            'title_en' => 'nullable|string|max:255',
+            'title_en' => 'required_without:title_hi|nullable|string|max:255',
+            'title_hi' => 'required_without:title_en|nullable|string|max:255',
             'type' => 'required|string',
             'published_date' => 'nullable|date',
             'closing_date' => 'nullable|date',
             'document_url' => 'nullable|string',
+            'file_url' => 'nullable|string',
             'document_file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
             'status' => 'required|string',
-            'sort_order' => 'integer',
+            'sort_order' => 'nullable|integer',
         ]);
 
-        $docUrl = $validated['document_url'] ?? 'assets/images/sample_doc.pdf';
+        $titleEn = $validated['title_en'] ?? ($validated['title_hi'] ?? 'Untitled');
+        $titleHi = $validated['title_hi'] ?? $titleEn;
+
+        $docUrl = $request->input('document_url') ?: ($request->input('file_url') ?: 'assets/documents/sample_doc.pdf');
         if ($request->hasFile('document_file')) {
             $path = $request->file('document_file')->store('tenders', 'public');
+            $docUrl = 'storage/' . $path;
+        } elseif ($request->hasFile('file')) {
+            $path = $request->file('file')->store('tenders', 'public');
             $docUrl = 'storage/' . $path;
         }
 
         $tender = Tender::create([
             'reference_no' => $validated['reference_no'] ?? null,
-            'title_hi' => $validated['title_hi'],
-            'title_en' => $validated['title_en'] ?? null,
+            'title_en' => $titleEn,
+            'title_hi' => $titleHi,
             'type' => $validated['type'],
             'published_date' => $validated['published_date'] ?? now(),
             'closing_date' => $validated['closing_date'] ?? null,
             'document_url' => $docUrl,
             'status' => $validated['status'],
             'sort_order' => $validated['sort_order'] ?? 0,
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->has('is_active') || $request->input('status') === 'open',
         ]);
 
-        ActivityLog::record('create', 'tenders', $tender->id, "Created tender/vacancy: {$tender->title_hi}");
+        ActivityLog::record('create', 'tenders', $tender->id, "Created tender/vacancy: {$tender->title_en}");
 
         return redirect()->route('admin.tenders.index')->with('success', 'Tender/Vacancy created successfully.');
     }
@@ -68,44 +76,52 @@ class TenderController extends Controller
     {
         $validated = $request->validate([
             'reference_no' => 'nullable|string|max:100',
-            'title_hi' => 'required|string|max:255',
-            'title_en' => 'nullable|string|max:255',
+            'title_en' => 'required_without:title_hi|nullable|string|max:255',
+            'title_hi' => 'required_without:title_en|nullable|string|max:255',
             'type' => 'required|string',
             'published_date' => 'nullable|date',
             'closing_date' => 'nullable|date',
             'document_url' => 'nullable|string',
+            'file_url' => 'nullable|string',
             'document_file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
             'status' => 'required|string',
-            'sort_order' => 'integer',
+            'sort_order' => 'nullable|integer',
         ]);
 
-        $docUrl = $validated['document_url'] ?? $tender->document_url;
+        $titleEn = $validated['title_en'] ?? ($validated['title_hi'] ?? $tender->title_en);
+        $titleHi = $validated['title_hi'] ?? ($tender->title_hi ?: $titleEn);
+
+        $docUrl = $request->input('document_url') ?: ($request->input('file_url') ?: $tender->document_url);
         if ($request->hasFile('document_file')) {
             $path = $request->file('document_file')->store('tenders', 'public');
+            $docUrl = 'storage/' . $path;
+        } elseif ($request->hasFile('file')) {
+            $path = $request->file('file')->store('tenders', 'public');
             $docUrl = 'storage/' . $path;
         }
 
         $tender->update([
             'reference_no' => $validated['reference_no'] ?? null,
-            'title_hi' => $validated['title_hi'],
-            'title_en' => $validated['title_en'] ?? null,
+            'title_en' => $titleEn,
+            'title_hi' => $titleHi,
             'type' => $validated['type'],
             'published_date' => $validated['published_date'] ?? $tender->published_date,
             'closing_date' => $validated['closing_date'] ?? null,
             'document_url' => $docUrl,
             'status' => $validated['status'],
             'sort_order' => $validated['sort_order'] ?? 0,
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->has('is_active') || $request->input('status') === 'open',
         ]);
 
-        ActivityLog::record('update', 'tenders', $tender->id, "Updated tender/vacancy: {$tender->title_hi}");
+        ActivityLog::record('update', 'tenders', $tender->id, "Updated tender/vacancy: {$tender->title_en}");
 
         return redirect()->route('admin.tenders.index')->with('success', 'Tender/Vacancy updated successfully.');
     }
 
     public function destroy(Tender $tender)
     {
-        $title = $tender->title_hi;
+        $title = $tender->title_en ?: $tender->title_hi;
         $id = $tender->id;
         $tender->delete();
 

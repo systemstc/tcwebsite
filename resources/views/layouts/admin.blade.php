@@ -285,7 +285,7 @@
             <li>
                 <a href="{{ route('admin.important-links.index') }}" class="sidebar-link {{ request()->routeIs('admin.important-links.*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">link</span>
-                    <span>Important Links</span>
+                    <span>Related Links / Portals</span>
                 </a>
             </li>
             <li>
@@ -345,7 +345,7 @@
             <li>
                 <a href="{{ route('admin.inquiries.index') }}" class="sidebar-link {{ request()->routeIs('admin.inquiries.*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">mail</span>
-                    <span>Citizen Inquiries</span>
+                    <span>Feedback & Inquiries</span>
                     @php $newInq = \App\Models\Inquiry::where('status', 'new')->count(); @endphp
                     @if($newInq > 0)
                         <span class="badge bg-danger ms-auto">{{ $newInq }}</span>

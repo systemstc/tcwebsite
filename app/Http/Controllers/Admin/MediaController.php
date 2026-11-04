@@ -104,7 +104,20 @@ class MediaController extends Controller
             $safeSlug = Str::slug($baseName);
             $fileName = ($safeSlug ?: 'file') . '_' . time() . '_' . Str::random(5) . '.' . $ext;
 
-            $file->move($targetDir, $fileName);
+            $targetPath = rtrim($targetDir, '/\\') . DIRECTORY_SEPARATOR . $fileName;
+            try {
+                $file->move($targetDir, $fileName);
+            } catch (\Throwable $e) {
+                $src = $file->getPathname();
+                if ($src && file_exists($src)) {
+                    if (is_uploaded_file($src)) {
+                        @move_uploaded_file($src, $targetPath);
+                    } else {
+                        @copy($src, $targetPath);
+                        @unlink($src);
+                    }
+                }
+            }
 
             $relativeUrl = '/uploads/media/' . $fileName;
             $fullUrl = asset('uploads/media/' . $fileName);

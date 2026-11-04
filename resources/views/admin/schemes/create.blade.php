@@ -11,7 +11,7 @@
         <a href="{{ route('admin.schemes.index') }}" class="btn btn-outline-secondary btn-sm">&larr; Back to List</a>
     </div>
     <div class="cms-card-body">
-        <form action="{{ route('admin.schemes.store') }}" method="POST">
+        <form action="{{ route('admin.schemes.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row g-3">
                 <div class="col-md-6">
@@ -25,11 +25,28 @@
 
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
-                    <input type="text" name="category" class="form-control" value="Citizen" placeholder="Citizen / Handloom / Handicrafts">
+                    <select name="category" class="form-select" required>
+                        <option value="scheme">General Scheme</option>
+                        <option value="centrally-sponsored">Centrally Sponsored</option>
+                        <option value="cotton">Mission & Modernization</option>
+                        <option value="research">Research & Start-Up</option>
+                        <option value="infrastructure">Infrastructure & Parks</option>
+                        <option value="skills">Skill Development</option>
+                        <option value="quality">Quality & Brand Certification</option>
+                    </select>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Icon (Material Symbols)</label>
-                    <input type="text" name="icon" class="form-control" value="verified" placeholder="e.g. verified, school, handshake">
+                    <label class="form-label fw-semibold">Apply / Portal URL</label>
+                    <input type="text" name="link_url" class="form-control" value="#" placeholder="https:// or #">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Upload Banner Image</label>
+                    <input type="file" name="banner_image" class="form-control" accept="image/*">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Or Image Asset Path / URL</label>
+                    <input type="text" name="guidelines_doc" class="form-control" placeholder="assets/images/schemes/... or https://">
                 </div>
 
                 <div class="col-12">
@@ -41,10 +58,6 @@
                     <textarea name="description_hi" class="form-control" rows="3" placeholder="Enter Hindi text (optional)"></textarea>
                 </div>
 
-                <div class="col-md-6">
-                    <label class="form-label fw-semibold">Apply / Portal URL</label>
-                    <input type="text" name="link_url" class="form-control" value="#" placeholder="https:// or #">
-                </div>
                 <div class="col-md-3">
                     <label class="form-label fw-semibold">Sort Order</label>
                     <input type="number" name="sort_order" class="form-control" value="0">

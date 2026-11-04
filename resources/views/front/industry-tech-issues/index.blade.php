@@ -47,26 +47,40 @@
         </div>
 
         <!-- In-banner Sub-Nav Pill Bar -->
+        @php
+            $connectMenu = \App\Models\MenuItem::with(['activeChildren.page'])->where(function($q) {
+                $q->where('title_en', 'like', '%Connect%')->whereNull('parent_id');
+            })->first();
+            $connectPills = $connectMenu && $connectMenu->activeChildren->count() 
+                ? $connectMenu->activeChildren 
+                : collect([
+                    (object)['title_en' => 'Contact Us', 'title_hi' => 'संपर्क करें', 'resolved_url' => route('page.show', 'contact-us'), 'is_current' => false],
+                    (object)['title_en' => 'Industry Tech Issues', 'title_hi' => 'उद्योग तकनीकी मुद्दे', 'resolved_url' => route('industry-tech-issues.index'), 'is_current' => true],
+                    (object)['title_en' => 'Grievance', 'title_hi' => 'शिकायत', 'resolved_url' => route('page.show', 'grievance'), 'is_current' => false],
+                    (object)['title_en' => 'RTI', 'title_hi' => 'आरटीआई', 'resolved_url' => route('page.show', 'rti'), 'is_current' => false],
+                ]);
+        @endphp
+        @if($connectPills->count() > 1)
         <div class="inner-pill-bar-wrap">
             <nav class="inner-pill-bar" aria-label="Sub Navigation">
-                <a href="{{ route('page.show', 'contact-us') }}" class="inner-pill-link">
-                    <span>Contact Us</span>
-                </a>
-                <a href="{{ route('industry-tech-issues.index') }}" class="inner-pill-link active" aria-current="page">
-                    <span class="material-symbols-outlined inner-pill-icon" aria-hidden="true">drag_indicator</span>
-                    <span>Industry Tech Issues</span>
-                </a>
-                <a href="{{ route('page.show', 'grievance') }}" class="inner-pill-link">
-                    <span>Grievance</span>
-                </a>
-                <a href="{{ route('page.show', 'contact-us') }}#footerContact" class="inner-pill-link">
-                    <span>Contact Directory</span>
-                </a>
-                <a href="{{ route('page.show', 'contact-us') }}#feedbackModal" class="inner-pill-link">
-                    <span>Citizen Feedback &amp; Query</span>
-                </a>
+                @foreach($connectPills as $sib)
+                    @php
+                        $sibTitle = session('locale') == 'hi' ? ($sib->title_hi ?: $sib->title_en) : ($sib->title_en ?: $sib->title_hi);
+                        $sibUrl = $sib->resolved_url ?? (!empty($sib->url) ? $sib->url : (isset($sib->page) && $sib->page ? route('page.show', $sib->page->slug) : '#'));
+                        $isActive = isset($sib->is_current) 
+                            ? $sib->is_current 
+                            : (str_contains($sibUrl, 'industry-tech-issues') || (isset($sib->page) && $sib->page && $sib->page->slug === 'industry-tech-issues'));
+                    @endphp
+                    <a href="{{ $sibUrl }}" class="inner-pill-link {{ $isActive ? 'active' : '' }}" {!! $isActive ? 'aria-current="page"' : '' !!}>
+                        @if($isActive)
+                            <span class="material-symbols-outlined inner-pill-icon" aria-hidden="true">drag_indicator</span>
+                        @endif
+                        <span>{{ $sibTitle }}</span>
+                    </a>
+                @endforeach
             </nav>
         </div>
+        @endif
     </div>
 </section>
 

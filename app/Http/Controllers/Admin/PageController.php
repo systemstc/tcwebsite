@@ -212,10 +212,22 @@ class PageController extends Controller
             'content_hi' => 'nullable|string',
         ]);
 
+        $contentEn = $validated['content_en'] ?? $page->content_en;
+        $contentHi = $validated['content_hi'] ?? $page->content_hi;
+
+        if ($contentEn) {
+            $contentEn = \App\Services\PortalDocumentService::normalizeDocumentRowsHtml($contentEn);
+        }
+        if ($contentHi) {
+            $contentHi = \App\Services\PortalDocumentService::normalizeDocumentRowsHtml($contentHi);
+        }
+
         $page->update([
-            'content_en' => $validated['content_en'] ?? $page->content_en,
-            'content_hi' => $validated['content_hi'] ?? $page->content_hi,
+            'content_en' => $contentEn,
+            'content_hi' => $contentHi,
         ]);
+
+        \App\Services\PortalDocumentService::clearCache();
 
         ActivityLog::record('update', 'pages', $page->id, "Visual Editor updated content for: {$page->title_en}");
 
@@ -234,10 +246,7 @@ class PageController extends Controller
         $file = $request->file('image');
         $fileName = 'page_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
         $targetDir = public_path('uploads/pages');
-        if (!file_exists($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
-        $file->move($targetDir, $fileName);
+        $this->saveUploadedFile($file, $targetDir, $fileName);
 
         $url = asset('uploads/pages/' . $fileName);
         $relativeUrl = '/uploads/pages/' . $fileName;
@@ -252,26 +261,87 @@ class PageController extends Controller
 
     public function uploadPdf(Request $request)
     {
-        $request->validate([
-            'pdf' => 'required|file|mimes:pdf|max:20480', // up to 20MB
-        ]);
+        try {
+            \App\Services\PortalDocumentService::clearCache();
+        } catch (\Throwable $e) {
+            // Ignore cache clearing failure so it never blocks file uploads
+        }
 
-        $file = $request->file('pdf');
-        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // 1. Locate file from common field names or any attached file
+        $file = $request->file('document') ?? $request->file('pdf') ?? $request->file('file');
+        if (!$file) {
+            $allFiles = $request->allFiles();
+            if (!empty($allFiles)) {
+                $first = reset($allFiles);
+                $file = is_array($first) ? reset($first) : $first;
+            }
+        }
+
+        // 2. Check for missing file or server POST limit overflow
+        if (!$file) {
+            $contentLength = isset($_SERVER['CONTENT_LENGTH']) ? (int)$_SERVER['CONTENT_LENGTH'] : 0;
+            $postMaxSize = ini_get('post_max_size');
+            return response()->json([
+                'success' => false,
+                'message' => 'No file received. ' . ($contentLength > 0 ? "Upload may have exceeded post_max_size ({$postMaxSize})." : 'Please select a valid document.')
+            ], 422);
+        }
+
+        // 3. Check upload errors from PHP
+        if (!$file->isValid()) {
+            $error = $file->getError();
+            $msg = match ($error) {
+                UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds server upload_max_filesize (' . ini_get('upload_max_filesize') . ').',
+                UPLOAD_ERR_FORM_SIZE => 'The uploaded file exceeds the MAX_FILE_SIZE directive in the HTML form.',
+                UPLOAD_ERR_PARTIAL => 'The uploaded file was only partially uploaded.',
+                UPLOAD_ERR_NO_FILE => 'No file was uploaded.',
+                UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary upload folder on server.',
+                UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
+                UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload.',
+                default => 'Upload error: ' . $file->getErrorMessage(),
+            };
+            return response()->json(['success' => false, 'message' => $msg], 422);
+        }
+
+        // 4. Validate allowed document extensions
+        $allowedExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'zip', 'rar', 'csv'];
+        $ext = strtolower($file->getClientOriginalExtension() ?: pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION) ?: 'pdf');
+        if (!in_array($ext, $allowedExtensions)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid file format (.' . $ext . '). Supported formats: ' . implode(', ', $allowedExtensions) . '.'
+            ], 422);
+        }
+
+        // 5. Validate file size (max 200MB)
         $sizeBytes = $file->getSize();
+        if ($sizeBytes > 209715200) {
+            return response()->json([
+                'success' => false,
+                'message' => 'File size (' . round($sizeBytes / 1048576, 2) . ' MB) exceeds the maximum allowed limit of 200 MB.'
+            ], 422);
+        }
+
+        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $sizeFormatted = $sizeBytes >= 1048576 
             ? round($sizeBytes / 1048576, 2) . ' MB' 
             : round($sizeBytes / 1024, 2) . ' KB';
 
-        $fileName = 'doc_' . time() . '_' . uniqid() . '.pdf';
+        $fileName = 'doc_' . time() . '_' . uniqid() . '.' . $ext;
         $targetDir = public_path('uploads/documents');
         if (!file_exists($targetDir)) {
-            mkdir($targetDir, 0777, true);
+            @mkdir($targetDir, 0777, true);
         }
-        $file->move($targetDir, $fileName);
+        
+        $saved = $this->saveUploadedFile($file, $targetDir, $fileName);
+        if (!$saved) {
+            return response()->json(['success' => false, 'message' => 'Failed to save document to server directory.'], 500);
+        }
 
         $relativeUrl = '/uploads/documents/' . $fileName;
         $url = asset('uploads/documents/' . $fileName);
+        $fileDate = date('d.m.Y');
+        $fileExt = strtoupper($ext);
 
         return response()->json([
             'success' => true,
@@ -280,6 +350,8 @@ class PageController extends Controller
             'fileName' => $file->getClientOriginalName(),
             'title' => ucwords(str_replace(['_', '-'], ' ', $originalName)),
             'fileSize' => $sizeFormatted,
+            'fileExt' => $fileExt,
+            'fileDate' => $fileDate,
         ]);
     }
 
@@ -292,10 +364,7 @@ class PageController extends Controller
         $file = $request->file('video');
         $fileName = 'video_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
         $targetDir = public_path('uploads/videos');
-        if (!file_exists($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
-        $file->move($targetDir, $fileName);
+        $this->saveUploadedFile($file, $targetDir, $fileName);
 
         $url = asset('uploads/videos/' . $fileName);
         $relativeUrl = '/uploads/videos/' . $fileName;
@@ -306,6 +375,38 @@ class PageController extends Controller
             'relative_url' => $relativeUrl,
             'fileName' => $file->getClientOriginalName(),
         ]);
+    }
+
+    /**
+     * Safely store uploaded file on disk, bypassing Windows ACL is_writable check issues in Symfony HttpFoundation
+     */
+    protected function saveUploadedFile($file, string $targetDir, string $fileName): bool
+    {
+        if (!file_exists($targetDir)) {
+            @mkdir($targetDir, 0777, true);
+        }
+        $targetPath = rtrim($targetDir, '/\\') . DIRECTORY_SEPARATOR . $fileName;
+
+        try {
+            $file->move($targetDir, $fileName);
+            return true;
+        } catch (\Throwable $e) {
+            $sourcePath = $file->getPathname();
+            if ($sourcePath && file_exists($sourcePath)) {
+                if (is_uploaded_file($sourcePath) && @move_uploaded_file($sourcePath, $targetPath)) {
+                    return true;
+                }
+                if (@copy($sourcePath, $targetPath)) {
+                    @unlink($sourcePath);
+                    return true;
+                }
+                if (@file_put_contents($targetPath, file_get_contents($sourcePath)) !== false) {
+                    @unlink($sourcePath);
+                    return true;
+                }
+            }
+            return file_exists($targetPath);
+        }
     }
 
     public function destroy(Page $page)

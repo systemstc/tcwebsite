@@ -59,6 +59,7 @@ class DocumentController extends Controller
 
         ActivityLog::record('create', 'documents', $doc->id, "Created document: {$doc->title_hi}");
 
+        \App\Services\PortalDocumentService::clearCache();
         return redirect()->route('admin.documents.index')->with('success', 'Document uploaded successfully.');
     }
 
@@ -106,6 +107,7 @@ class DocumentController extends Controller
 
         ActivityLog::record('update', 'documents', $document->id, "Updated document: {$document->title_hi}");
 
+        \App\Services\PortalDocumentService::clearCache();
         return redirect()->route('admin.documents.index')->with('success', 'Document updated successfully.');
     }
 
@@ -117,6 +119,7 @@ class DocumentController extends Controller
 
         ActivityLog::record('delete', 'documents', $id, "Deleted document: {$title}");
 
+        \App\Services\PortalDocumentService::clearCache();
         return redirect()->route('admin.documents.index')->with('success', 'Document deleted successfully.');
     }
 }

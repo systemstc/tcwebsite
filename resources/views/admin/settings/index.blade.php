@@ -203,28 +203,28 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Registrations</label>
+                    <label class="form-label fw-semibold">HLM: Registrations</label>
                     <input type="text" name="stat_registrations" class="form-control" value="{{ \App\Models\Setting::get('stat_registrations', '29,379') }}">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Handlooms covered</label>
+                    <label class="form-label fw-semibold">HLM: Handlooms covered</label>
                     <input type="text" name="stat_handlooms_covered" class="form-control" value="{{ \App\Models\Setting::get('stat_handlooms_covered', '968,018') }}">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Active Assessors</label>
+                    <label class="form-label fw-semibold">SAMARTH: Active Assessors</label>
                     <input type="text" name="stat_active_assessors" class="form-control" value="{{ \App\Models\Setting::get('stat_active_assessors', '4,301') }}">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Entry-level Trainees covered</label>
+                    <label class="form-label fw-semibold">SAMARTH: Entry-level Trainees covered</label>
                     <input type="text" name="stat_entry_trainees_covered" class="form-control" value="{{ \App\Models\Setting::get('stat_entry_trainees_covered', '682,414') }}">
                 </div>
 
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Total Weavers</label>
+                    <label class="form-label fw-semibold">HLM: Total Weavers</label>
                     <input type="text" name="stat_total_weavers" class="form-control" value="{{ \App\Models\Setting::get('stat_total_weavers', '21,245') }}">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Societies</label>
+                    <label class="form-label fw-semibold">HLM: Societies</label>
                     <input type="text" name="stat_societies" class="form-control" value="{{ \App\Models\Setting::get('stat_societies', '5,867') }}">
                 </div>
                 <div class="col-md-3">
@@ -241,15 +241,15 @@
                     <input type="text" name="stat_exporters_rex" class="form-control" value="{{ \App\Models\Setting::get('stat_exporters_rex', '6,786') }}">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Upskill Trainees covered</label>
+                    <label class="form-label fw-semibold">SAMARTH: Upskill Trainees covered</label>
                     <input type="text" name="stat_upskill_trainees" class="form-control" value="{{ \App\Models\Setting::get('stat_upskill_trainees', '25,220') }}">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Labels issued PTL</label>
+                    <label class="form-label fw-semibold">HLM: Labels issued PTL</label>
                     <input type="text" name="stat_labels_ptl" class="form-control" value="{{ \App\Models\Setting::get('stat_labels_ptl', '216,850,838') }}">
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-semibold">Entry Level Trainees Assessed</label>
+                    <label class="form-label fw-semibold">SAMARTH: Entry Level Trainees Assessed</label>
                     <input type="text" name="stat_trainees_assessed" class="form-control" value="{{ \App\Models\Setting::get('stat_trainees_assessed', '635,305') }}">
                 </div>
             </div>

@@ -330,6 +330,273 @@
             outline: none;
             flex-grow: 1;
             cursor: text;
+            font-family: 'Noto Sans', sans-serif !important;
+            font-size: 16px !important;
+            line-height: 1.7 !important;
+            color: #212529 !important;
+        }
+        .live-page-canvas h1, .live-page-canvas h2, .live-page-canvas h3, .live-page-canvas h4, .live-page-canvas h5, .live-page-canvas h6, .live-page-canvas .dbim-section-title {
+            color: #500a2f !important;
+            font-family: 'Noto Sans', sans-serif !important;
+            line-height: 1.35 !important;
+            margin-top: 2rem !important;
+            margin-bottom: 1rem !important;
+        }
+        /* Heading 1 (Desktop: 36px, Bold / Semi Bold / Medium) */
+        .live-page-canvas h1 { font-size: 36px !important; font-weight: 700 !important; }
+        /* Heading 2 (Desktop: 24px, Bold / Semi Bold / Medium) */
+        .live-page-canvas h2, .live-page-canvas .dbim-section-title { font-size: 24px !important; font-weight: 700 !important; }
+        /* Heading 3 / Subtitle (Desktop: 20px, Bold / Semi Bold / Medium) */
+        .live-page-canvas h3, .live-page-canvas .dbim-section-sub { font-size: 20px !important; font-weight: 600 !important; }
+        /* Heading 4 (Desktop: 20px) */
+        .live-page-canvas h4 { font-size: 20px !important; font-weight: 600 !important; }
+
+        /* Paragraph 1 (Desktop: 16px, Bold / Regular) */
+        .live-page-canvas p, .live-page-canvas li {
+            font-family: 'Noto Sans', sans-serif !important;
+            font-size: 16px !important;
+            line-height: 1.7 !important;
+            color: #212529 !important;
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+        }
+        /* Paragraph 2 (Desktop: 14px, Bold / Semi Bold / Regular) */
+        .live-page-canvas p.para-secondary, .live-page-canvas .para-2,
+        .live-page-canvas td, .live-page-canvas th {
+            font-size: 14px !important;
+        }
+        /* Small Text 1 (Desktop: 12px, Semi Bold / Regular) */
+        .live-page-canvas small, .live-page-canvas .small-text, .live-page-canvas .text-muted,
+        .live-page-canvas .doc-date-col, .live-page-canvas .doc-size-text {
+            font-size: 13px !important;
+        }
+
+        /* Responsive Mobile View for Editor Preview */
+        .editor-device-mobile .live-page-canvas {
+            font-size: 14px !important;
+        }
+        .editor-device-mobile .live-page-canvas h1 { font-size: 24px !important; }
+        .editor-device-mobile .live-page-canvas h2, .editor-device-mobile .live-page-canvas .dbim-section-title { font-size: 20px !important; }
+        .editor-device-mobile .live-page-canvas h3, .editor-device-mobile .live-page-canvas h4 { font-size: 16px !important; }
+        .editor-device-mobile .live-page-canvas p, .editor-device-mobile .live-page-canvas li { font-size: 14px !important; }
+        .editor-device-mobile .live-page-canvas td, .editor-device-mobile .live-page-canvas th { font-size: 12px !important; }
+        .editor-device-mobile .live-page-canvas small, .editor-device-mobile .live-page-canvas .doc-date-col, .editor-device-mobile .live-page-canvas .doc-size-text { font-size: 10px !important; }
+
+        /* Prevent rogue nested inline font sizes inside canvas */
+        .live-page-canvas p span:not(.badge):not(.doc-size-badge):not(.doc-type-badge):not(.material-symbols-outlined),
+        .live-page-canvas li span:not(.badge):not(.doc-size-badge):not(.doc-type-badge):not(.material-symbols-outlined) {
+            font-size: inherit !important;
+            line-height: inherit !important;
+        }
+        .live-page-canvas h1 span, .live-page-canvas h2 span, .live-page-canvas h3 span, .live-page-canvas h4 span {
+            font-size: inherit !important;
+            line-height: inherit !important;
+            color: inherit !important;
+            font-weight: inherit !important;
+        }
+
+        /* Official Outline Pill Button (Image 2 style - Documents & Links) */
+        .dbim-pill-link, .tc-download-pill, .tc-link-pill {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 7px 16px !important;
+            margin: 6px 0 !important;
+            border: 1.5px solid #d4aabf !important;
+            border-radius: 8px !important;
+            color: #500a2f !important;
+            background: #ffffff !important;
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            text-decoration: underline !important;
+            line-height: 1.4 !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 1px 3px rgba(80, 10, 47, 0.04) !important;
+            cursor: pointer !important;
+        }
+        .dbim-pill-link:hover, .tc-download-pill:hover, .tc-link-pill:hover {
+            background: #fdf2f7 !important;
+            border-color: #500a2f !important;
+            color: #500a2f !important;
+            text-decoration: underline !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 3px 8px rgba(80, 10, 47, 0.12) !important;
+        }
+        .dbim-pill-link .material-symbols-outlined,
+        .tc-download-pill .material-symbols-outlined,
+        .tc-link-pill .material-symbols-outlined {
+            font-size: 2rem !important;
+            color: #500a2f !important;
+            line-height: 1 !important;
+            display: inline-block !important;
+            text-decoration: none !important;
+            vertical-align: middle !important;
+        }
+        .dbim-pill-link small,
+        .tc-download-pill small,
+        .tc-link-pill small {
+            color: #666666 !important;
+            font-size: 1.25rem !important;
+            font-weight: 500 !important;
+            text-decoration: none !important;
+        }
+
+        /* Document Card Component (Matching Image Component) */
+        .live-page-canvas .box[data-doc-box="true"],
+        .live-page-canvas .dbim-doc-card,
+        .live-page-canvas .dbim-doc-card-row {
+            border-radius: 8px !important;
+            border: 1px solid #ebd0de !important;
+            background: #ffffff !important;
+            padding: 12px 20px !important;
+            margin-bottom: 10px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+            transition: all 0.2s ease !important;
+        }
+        .live-page-canvas .dbim-doc-card-row:hover,
+        .live-page-canvas .box[data-doc-box="true"]:hover,
+        .live-page-canvas .dbim-doc-card:hover {
+            border-color: #500a2f !important;
+            box-shadow: 0 4px 12px rgba(80, 10, 47, 0.08) !important;
+        }
+        .live-page-canvas .dbim-doc-filter-bar {
+            margin-bottom: 14px;
+        }
+        .live-page-canvas .dbim-doc-search-input {
+            height: 38px !important;
+            border: 1.5px solid #d48ba8 !important;
+            border-radius: 6px !important;
+            font-size: 1.4rem !important;
+            color: #212529 !important;
+            padding-left: 38px !important;
+            background-color: #ffffff !important;
+        }
+        .live-page-canvas .dbim-doc-filter-select,
+        .live-page-canvas .dbim-doc-sort-select,
+        .live-page-canvas .dbim-doc-category-select,
+        .live-page-canvas .dbim-doc-per-page-select {
+            height: 38px !important;
+            border: 1.5px solid #d48ba8 !important;
+            border-radius: 6px !important;
+            font-size: 1.35rem !important;
+            color: #333333 !important;
+            padding: 4px 30px 4px 12px !important;
+            background-color: #ffffff !important;
+        }
+        .live-page-canvas .dbim-doc-header-bar {
+            background: #e59cb7 !important;
+            border-radius: 6px !important;
+            color: #500a2f !important;
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            letter-spacing: 0.5px !important;
+            text-transform: uppercase !important;
+            padding: 10px 20px !important;
+            margin-bottom: 10px !important;
+        }
+        .live-page-canvas .doc-view-btn {
+            background: #faeef3 !important;
+            color: #500a2f !important;
+            border: 1px solid #ebd0de !important;
+            border-radius: 6px !important;
+            padding: 6px 16px !important;
+            font-size: 1.3rem !important;
+            font-weight: 700 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            transition: all 0.2s ease !important;
+            white-space: nowrap !important;
+        }
+        .live-page-canvas .doc-view-btn:hover {
+            background: #500a2f !important;
+            color: #ffffff !important;
+            border-color: #500a2f !important;
+        }
+        .live-page-canvas .doc-type-badge {
+            background: #500a2f !important;
+            color: #ffffff !important;
+            font-size: 1.15rem !important;
+            font-weight: 700 !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+        }
+        .live-page-canvas .doc-size-badge {
+            color: #666666 !important;
+            font-size: 1.3rem !important;
+            font-weight: 600 !important;
+            background: #f7eef3 !important;
+            padding: 4px 10px !important;
+            border-radius: 4px !important;
+            border: 1px solid #e8d0dd !important;
+        }
+        .live-page-canvas .download-btn {
+            background: #faebf2 !important;
+            color: #500a2f !important;
+            border: 1px solid #ebd0de !important;
+            border-radius: 6px !important;
+            padding: 7px 18px !important;
+            font-size: 1.35rem !important;
+            font-weight: 700 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+        }
+
+        body:not(.modal-open) .modal-backdrop {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        .modal-backdrop:not(.show) {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* Action Buttons for Document Pill & Cards inside Live Canvas */
+        .editor-doc-btn {
+            background: #721835 !important;
+            color: #ffffff !important;
+            border: 1px solid #721835 !important;
+            border-radius: 6px !important;
+            padding: 6px 14px !important;
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            white-space: nowrap !important;
+            box-shadow: 0 2px 4px rgba(114, 24, 53, 0.15) !important;
+            text-decoration: none !important;
+        }
+        .editor-doc-btn:hover {
+            background: #500a2f !important;
+            border-color: #500a2f !important;
+            color: #ffffff !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 8px rgba(80, 10, 47, 0.25) !important;
+        }
+        .editor-pill-doc-btn {
+            border-radius: 20px !important;
+            padding: 4px 12px !important;
+            font-size: 1.15rem !important;
+            margin-left: 8px !important;
+        }
+        .live-page-canvas .doc-action-col {
+            width: auto !important;
+            min-width: 220px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            gap: 8px !important;
         }
         .live-page-canvas:focus {
             box-shadow: inset 0 0 0 2px rgba(114, 24, 53, 0.2);
@@ -2025,334 +2292,118 @@
                 <input type="text" class="widget-search-input" placeholder="Search widgets & components..." onkeyup="filterWidgets(this.value)">
             </div>
 
-            <!-- DBIM THEME COMPONENTS (texmin.gov.in) -->
+            <!-- 1. TYPOGRAPHY & TEXT (Image 1 Styling: Clean Maroon Heading & 16px Body) -->
             <div class="widget-section-title">
-                <span>DBIM Theme Sections (texmin.gov.in)</span>
-                <span class="badge" style="background: #721835; font-size: 9px; color: #fff;">OFFICIAL</span>
+                <span>Typography & Content</span>
+                <span class="badge" style="background: #500a2f; font-size: 9px; color: #fff;">BASIC</span>
             </div>
             <div class="widget-grid">
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_objectives_3col')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_objectives_3col')" title="Drag into canvas or click to add: Objectives heading with 3 numbered cards in #ebd0de">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">3-CARD</span>
-                    <i class="fa-solid fa-bullseye text-danger"></i>
-                    <span>Objectives (3 Outcome Cards)</span>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'heading')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('heading')" title="Section Heading in official maroon #500a2f">
+                    <i class="fa-solid fa-heading" style="color: #500a2f;"></i>
+                    <span>Section Heading</span>
                 </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_section_doc_box')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_section_doc_box')" title="Drag into canvas or click to add: Section heading with intro text and single document View card">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">DOC</span>
-                    <i class="fa-solid fa-file-lines text-danger"></i>
-                    <span>Section + Doc Download Box</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_doc_list_section')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_doc_list_section')" title="Drag into canvas or click to add: Section heading with stacked document download cards & Add button">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">STACK</span>
-                    <i class="fa-solid fa-folder-tree text-danger"></i>
-                    <span>Document List (Stacked Cards)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_single_doc_card')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_single_doc_card')" title="Drag into canvas or click to add: Single document download row with View button">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">VIEW</span>
-                    <i class="fa-regular fa-file-pdf text-danger"></i>
-                    <span>Document Card (Single)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_vision_box')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_vision_box')" title="Drag into canvas or click to add: Sticky vision/mandate box in #ebeaea with maroon text">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">VISION</span>
-                    <i class="fa-solid fa-lightbulb text-danger"></i>
-                    <span>Vision / Mandate Box</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_full_layout')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_full_layout')" title="Drag into canvas or click to add: Full 2-column DBIM page (Vision left + Objectives & Docs right)">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">2-COL</span>
-                    <i class="fa-solid fa-table-columns text-danger"></i>
-                    <span>Full 2-Col DBIM Page</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_directory_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_directory_table')" title="Drag into canvas or click to add: Official Ministry & Officer Contact Directory Table (Hon'ble Minister, Secretary, etc.)">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">TABLE</span>
-                    <i class="fa-solid fa-table-list text-danger"></i>
-                    <span>Official Directory Table</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_whos_who_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_whos_who_table')" title="Drag into canvas or click to add: Official Who's Who Directory Table with Employee Photos, Name & Designation, Contact & Work Allocation">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #9c2759; color: #fff;">WHO'S WHO</span>
-                    <i class="fa-solid fa-address-book text-danger"></i>
-                    <span>Who's Who Table (with Photos)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_data_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_data_table')" title="Drag into canvas or click to add: Universal Clean Data Table (No icons in cells, Add/Remove Rows & Columns, Cell Images, Pagination, Action Buttons)">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #0f766e; color: #fff;">DATA TABLE</span>
-                    <i class="fa-solid fa-table text-success"></i>
-                    <span>Universal Data Table</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_advanced_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_advanced_table')" title="Drag into canvas or section: Advanced Grid Table with Header Rows, Rowspan, Colspan, Cell Alignment, Spans & Colors">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">PRO TABLE</span>
-                    <i class="fa-solid fa-table-cells text-danger"></i>
-                    <span>Pro Grid Table (Spans & Layout)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_avatar_profile_card')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_avatar_profile_card')" title="Drag into canvas or click to add: Officer Profile Card with circular photo avatar, dynamic image uploader, role & contact">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">AVATAR</span>
-                    <i class="fa-solid fa-circle-user text-danger"></i>
-                    <span>Officer Avatar Card</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_avatar_leadership_grid')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_avatar_leadership_grid')" title="Drag into canvas or click to add: Leadership 3-column avatar grid (Hon'ble Minister, MoS, Secretary)">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">LEADERS</span>
-                    <i class="fa-solid fa-users-gear text-danger"></i>
-                    <span>Leadership Avatar Grid</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_avatar_inline')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_avatar_inline')" title="Drag into canvas or click to add: Standalone circular profile avatar with instant photo uploader">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">PHOTO</span>
-                    <i class="fa-regular fa-user text-danger"></i>
-                    <span>Avatar Circle (Inline)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_faq_component')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_faq_component')" title="Drag into canvas or click to add: Official Government FAQ Component with search, expand/collapse, and Add Question controls">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">FAQ</span>
-                    <i class="fa-solid fa-circle-question text-danger"></i>
-                    <span>Govt FAQ Component</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_custom_image')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_custom_image')" title="Drag into canvas or section: Standalone Image with Shape (Circle, Rounded, Square, Frame) & Size Controls">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #0f766e; color: #fff;">IMAGE</span>
-                    <i class="fa-regular fa-image text-danger"></i>
-                    <span>Dynamic Image (Custom Shape/Size)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_image_with_text')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_image_with_text')" title="Drag into canvas or section: Image with Text with Shape, Size, and Left/Right Flip Controls">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">MEDIA</span>
-                    <i class="fa-solid fa-newspaper text-danger"></i>
-                    <span>Image with Text (Media Feature)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_book_magazine_grid')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_book_magazine_grid')" title="Drag into canvas or click to add: DBIM Book / Publication / Magazine Cards Grid with cover upload, PDF download, and responsive columns">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">BOOKS / PUBS</span>
-                    <i class="fa-solid fa-book-open text-danger"></i>
-                    <span>Books & Magazines Grid</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_photo_gallery')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_photo_gallery')" title="Drag into canvas or click to add: Photo Gallery Grid with search, sort, category filtering, photo count, and image lightbox">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">PHOTOS</span>
-                    <i class="fa-solid fa-camera-retro text-danger"></i>
-                    <span>Photo Gallery Grid</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_video_gallery')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_video_gallery')" title="Drag into canvas or click to add: Video Gallery Grid with video player, duration, category filter, and sort">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">VIDEOS</span>
-                    <i class="fa-solid fa-circle-play text-danger"></i>
-                    <span>Video Gallery Grid</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_presentation_events')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_presentation_events')" title="Drag into canvas or click to add: Presentation & Events Grid with slide banner, date, View button, and search/sort">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">EVENTS</span>
-                    <i class="fa-solid fa-person-chalkboard text-danger"></i>
-                    <span>Presentations / Events</span>
-                </div>
-            </div>
-
-            <!-- FEATURED FULL-PAGE TEMPLATES (1-Click Complete Layouts) -->
-            <div class="widget-section-title">
-                <span>Featured Complete Layouts</span>
-                <span class="badge bg-success" style="font-size: 9px;">1-CLICK</span>
-            </div>
-            <div class="widget-grid" style="grid-template-columns: 1fr;">
-                <div class="widget-card text-start p-3" draggable="true" ondragstart="handleWidgetDragStart(event, 'template_act_history')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('template_act_history')" title="Drag into canvas or click to insert this complete layout" style="background: #fdf5f8; border: 1.5px solid #ebd0de;">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                        <span class="badge" style="background: #721835; font-size: 10px;">OFFICIAL TEXMIN LAYOUT</span>
-                        <i class="fa-solid fa-wand-magic-sparkles text-danger mb-0" style="font-size: 16px;"></i>
-                    </div>
-                    <strong class="d-block text-dark mb-1" style="font-size: 12.5px;">Act, History & Decades Evolution Layout</strong>
-                    <small class="text-muted d-block" style="font-size: 11px; line-height: 1.4;">
-                        Complete 2-column statutory layout with overview grey box, downloadable Act PDF card, historical timeline bullets, and Core Mission callout box.
-                    </small>
-                </div>
-                <div class="widget-card text-start p-3 mt-2" draggable="true" ondragstart="handleWidgetDragStart(event, 'template_dbim_contact_us')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('template_dbim_contact_us')" title="Drag into canvas or click to insert official DBIM Contact Us & Citizen Inquiry layout" style="background: #fdf5f8; border: 1.5px solid #ebd0de;">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                        <span class="badge" style="background: #721835; font-size: 10px;">DBIM CONNECT LAYOUT</span>
-                        <i class="fa-solid fa-address-card text-danger mb-0" style="font-size: 16px;"></i>
-                    </div>
-                    <strong class="d-block text-dark mb-1" style="font-size: 12.5px;">Contact Us & Citizen Inquiry Layout</strong>
-                    <small class="text-muted d-block" style="font-size: 11px; line-height: 1.4;">
-                        Headquarters address card, office hours notice, citizen inquiry form, Google Maps embed, transit directions, and key division officers directory.
-                    </small>
-                </div>
-            </div>
-
-            <!-- SECTION A: CONTAINERS & LAYOUTS (Elementor Pro Flexbox) -->
-            <div class="widget-section-title">
-                <span>Layout & Grid Containers</span>
-                <span class="badge bg-secondary" style="font-size: 9px;">5 GRIDS</span>
-            </div>
-            <div class="widget-grid">
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'container_1col')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('container_1col')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-square"></i>
-                    <span>1-Col Container</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'container_2col')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('container_2col')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-table-columns"></i>
-                    <span>2-Col Grid (50/50)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'container_3col')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('container_3col')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-table-cells-large"></i>
-                    <span>3-Col Grid (33%)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'container_4col')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('container_4col')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-table-cells"></i>
-                    <span>4-Col Grid (25%)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'container_sidebar')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('container_sidebar')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-columns"></i>
-                    <span>1/3 + 2/3 Sidebar</span>
-                </div>
-            </div>
-
-            <!-- SECTION B: ELEMENTOR PRO COMPONENTS -->
-            <div class="widget-section-title">
-                <span>Elementor Pro Widgets</span>
-                <span class="badge bg-danger" style="font-size: 9px;">PRO</span>
-            </div>
-            <div class="widget-grid">
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_dual_heading')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_dual_heading')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-heading text-danger"></i>
-                    <span>Dual / Animated Heading</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_cta')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_cta')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-bullhorn text-danger"></i>
-                    <span>Call To Action (CTA)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_pricing')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_pricing')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-indian-rupee-sign text-danger"></i>
-                    <span>Charges / Pricing Box</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_counter')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_counter')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-arrow-up-right-dots text-danger"></i>
-                    <span>Stats / Counter Box</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_testimonial')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_testimonial')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-comment-dots text-danger"></i>
-                    <span>Testimonial / Quote</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_tabs')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_tabs')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-folder-open text-danger"></i>
-                    <span>Interactive Tabs</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_progressbar')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_progressbar')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-bars-progress text-danger"></i>
-                    <span>Progress / Skill Bar</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_timeline')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_timeline')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-timeline text-danger"></i>
-                    <span>Milestone Timeline</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_iconbox')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_iconbox')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-icons text-danger"></i>
-                    <span>Feature Icon Box</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_flipbox')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_flipbox')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-repeat text-danger"></i>
-                    <span>Interactive Flip Box</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_alert')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_alert')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-bell text-danger"></i>
-                    <span>Notice / Alert Callout</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_video')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_video')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-circle-play text-danger"></i>
-                    <span>Video Player Card</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_doc_card')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_doc_card')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-file-shield text-danger"></i>
-                    <span>Doc Download Card</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'pro_gallery')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('pro_gallery')" title="Drag into canvas or click to add">
-                    <span class="badge-pro">PRO</span>
-                    <i class="fa-solid fa-images text-danger"></i>
-                    <span>Image Gallery (3-Col)</span>
-                </div>
-            </div>
-
-            <!-- SECTION C: GOVERNMENT LAYOUTS (texmin.gov.in) -->
-            <div class="widget-section-title">
-                <span>Government Layouts (texmin.gov.in)</span>
-            </div>
-            <div class="widget-grid">
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'about_layout')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('about_layout')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-landmark"></i>
-                    <span>Vision + Mission (2-Col)</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'officer_card')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('officer_card')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-id-card"></i>
-                    <span>Officer Profile Badge</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'gov_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('gov_table')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-table"></i>
-                    <span>Govt Data Table</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'download_btn')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('download_btn')" title="Drag into canvas or click to add">
-                    <i class="fa-regular fa-file-pdf"></i>
-                    <span>PDF Download Badge</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'acts_card')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('acts_card')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-scale-balanced"></i>
-                    <span>Act / Org Card</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'flowchart_node')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('flowchart_node')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-diagram-project"></i>
-                    <span>Org Flowchart</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'accordion')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('accordion')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-layer-group"></i>
-                    <span>FAQ Accordion</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'office_network_map')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('office_network_map')" title="Interactive Regional Offices Map & RO Cards (#ebd0de)">
-                    <i class="fa-solid fa-map-location-dot text-primary"></i>
-                    <span>RO Network & Map</span>
-                </div>
-                <div class="widget-card" onclick="openPdfUploader()" title="Upload a PDF file from your device">
-                    <i class="fa-solid fa-file-arrow-up text-danger"></i>
-                    <span>Upload PDF Doc</span>
-                </div>
-            </div>
-
-            <!-- SECTION D: BASIC ELEMENTS -->
-            <div class="widget-section-title">
-                <span>Basic Typography & Media</span>
-            </div>
-            <div class="widget-grid">
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'heading')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('heading')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-heading"></i>
-                    <span>Standard Heading</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'paragraph')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('paragraph')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-paragraph"></i>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'paragraph')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('paragraph')" title="Standard 16px body paragraph text">
+                    <i class="fa-solid fa-paragraph" style="color: #500a2f;"></i>
                     <span>Paragraph Text</span>
                 </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'bullet_list')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('bullet_list')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-list-ul"></i>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'bullet_list')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('bullet_list')" title="Clean bulleted list">
+                    <i class="fa-solid fa-list-ul" style="color: #500a2f;"></i>
                     <span>Bullet List</span>
                 </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'callout_box')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('callout_box')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-quote-left"></i>
-                    <span>Callout Box</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'image')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('image')" title="Drag into canvas or click to add">
-                    <i class="fa-regular fa-image"></i>
-                    <span>Image / Photo</span>
-                </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'divider')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('divider')" title="Drag into canvas or click to add">
-                    <i class="fa-solid fa-minus"></i>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'divider')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('divider')" title="Clean section divider line">
+                    <i class="fa-solid fa-minus" style="color: #500a2f;"></i>
                     <span>Divider Line</span>
                 </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'redirection_button')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('redirection_button')" title="Redirection Button with link, icon, custom styles & target">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">LINK</span>
-                    <i class="fa-solid fa-arrow-pointer text-danger"></i>
-                    <span>Redirection Button</span>
+            </div>
+
+            <!-- 2. DOCUMENTS & LINKS (Matching Reference Image 2) -->
+            <div class="widget-section-title">
+                <span>Documents & Links</span>
+                <span class="badge" style="background: #500a2f; font-size: 9px; color: #fff;">PILLS</span>
+            </div>
+            <div class="widget-grid">
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_doc_pill')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_doc_pill')" title="Document Download Pill Button with PDF/Doc Icon (Image 2 style)">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">PDF</span>
+                    <i class="fa-regular fa-file-pdf" style="color: #500a2f;"></i>
+                    <span>Document Pill (PDF)</span>
                 </div>
-                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'anchor_tag')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('anchor_tag')" title="Hyperlink / A-Tag Component with URL redirection">
-                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #721835; color: #fff;">LINK</span>
-                    <i class="fa-solid fa-link text-primary"></i>
-                    <span>Link / Anchor Tag (A-Tag)</span>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_link_pill')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_link_pill')" title="Resource Link Pill Button with Link Icon (Image 2 style)">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">LINK</span>
+                    <i class="fa-solid fa-link" style="color: #500a2f;"></i>
+                    <span>Resource Link (URL)</span>
+                </div>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_doc_list_section')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_doc_list_section')" title="Group of Document Download Pill Buttons">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">GROUP</span>
+                    <i class="fa-solid fa-folder-open" style="color: #500a2f;"></i>
+                    <span>Document Group (Pills)</span>
+                </div>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'redirection_button')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('redirection_button')" title="Redirection Action Button with link & icon">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">BTN</span>
+                    <i class="fa-solid fa-arrow-pointer" style="color: #500a2f;"></i>
+                    <span>Action / Portal Button</span>
+                </div>
+            </div>
+
+            <!-- 3. MEDIA & SECTIONS (Matching Reference Image 1) -->
+            <div class="widget-section-title">
+                <span>Media & Sections</span>
+                <span class="badge" style="background: #500a2f; font-size: 9px; color: #fff;">MEDIA</span>
+            </div>
+            <div class="widget-grid">
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_image_with_text')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_image_with_text')" title="Image with Text Feature section with badge, heading, buttons & layout flip (Image 1 style)">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">FEATURE</span>
+                    <i class="fa-solid fa-newspaper" style="color: #500a2f;"></i>
+                    <span>Image with Text</span>
+                </div>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_custom_image')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_custom_image')" title="Standalone Image with Shape & Size Controls">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #0f766e; color: #fff;">PHOTO</span>
+                    <i class="fa-regular fa-image" style="color: #0f766e;"></i>
+                    <span>Dynamic Image</span>
+                </div>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_photo_gallery')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_photo_gallery')" title="Photo Gallery Grid with search & image lightbox">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">GALLERY</span>
+                    <i class="fa-solid fa-camera-retro" style="color: #500a2f;"></i>
+                    <span>Photo Gallery Grid</span>
+                </div>
+                <div class="widget-card" onclick="openPdfUploader()" title="Upload a PDF or document file from your device">
+                    <i class="fa-solid fa-file-arrow-up" style="color: #dc2626;"></i>
+                    <span>Upload Document</span>
+                </div>
+            </div>
+
+            <!-- 4. TABLES & DIRECTORY -->
+            <div class="widget-section-title">
+                <span>Tables & Directory</span>
+                <span class="badge" style="background: #0f766e; font-size: 9px; color: #fff;">DATA</span>
+            </div>
+            <div class="widget-grid">
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_data_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_data_table')" title="Universal Clean Data Table with Add/Remove Rows & Columns">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #0f766e; color: #fff;">TABLE</span>
+                    <i class="fa-solid fa-table" style="color: #0f766e;"></i>
+                    <span>Universal Data Table</span>
+                </div>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_whos_who_table')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_whos_who_table')" title="Official Who's Who Directory Table with Photos, Name, Designation & Contact">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">WHO'S WHO</span>
+                    <i class="fa-solid fa-address-book" style="color: #500a2f;"></i>
+                    <span>Who's Who Table</span>
+                </div>
+            </div>
+
+            <!-- 5. INTERACTIVE ACCORDION & FAQ -->
+            <div class="widget-section-title">
+                <span>Interactive & FAQ</span>
+                <span class="badge" style="background: #500a2f; font-size: 9px; color: #fff;">FAQ</span>
+            </div>
+            <div class="widget-grid">
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'dbim_faq_component')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('dbim_faq_component')" title="Official Government FAQ Component with expandable accordion & Add Question">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">ACCORDION</span>
+                    <i class="fa-solid fa-circle-question" style="color: #500a2f;"></i>
+                    <span>Govt FAQ / Accordion</span>
+                </div>
+                <div class="widget-card" draggable="true" ondragstart="handleWidgetDragStart(event, 'callout_box')" ondragend="handleWidgetDragEnd(event)" onclick="insertWidget('callout_box')" title="Official Callout / Notice Box">
+                    <span class="badge" style="position: absolute; top: 4px; right: 4px; font-size: 8px; background: #500a2f; color: #fff;">NOTICE</span>
+                    <i class="fa-solid fa-quote-left" style="color: #500a2f;"></i>
+                    <span>Notice / Callout Box</span>
                 </div>
             </div>
 
@@ -2533,6 +2584,22 @@
                         $editorCanvasContent = $page->content_en;
                         $editorCanvasContent = preg_replace('/src="\/assets\//i', 'src="' . asset('assets') . '/', $editorCanvasContent);
                         $editorCanvasContent = preg_replace('/src="\/uploads\//i', 'src="' . asset('uploads') . '/', $editorCanvasContent);
+
+                        // Ensure every document card row in the editor has a prominent Change / Upload button
+                        $docUploadBtnHtml = '<button type="button" class="btn btn-sm editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or change document file"><i class="fa-solid fa-file-arrow-up"></i> <span>Change / Upload</span></button>';
+
+                        $editorCanvasContent = preg_replace_callback('/(<div[^>]*class=["\'][^"\']*doc-action-col[^"\']*["\'][^>]*>)([\s\S]*?)(<\/div>)/i', function($m) use ($docUploadBtnHtml) {
+                            if (strpos($m[2], 'editor-doc-btn') !== false) return $m[0];
+                            return $m[1] . $m[2] . ' ' . $docUploadBtnHtml . $m[3];
+                        }, $editorCanvasContent);
+
+                        // Ensure every pill link wrapper has a Change File button
+                        $pillUploadBtnHtml = '<button type="button" class="btn btn-sm editor-doc-btn editor-pill-doc-btn" onclick="openDocMediaModal(this)" title="Upload or change linked document/file"><i class="fa-solid fa-file-arrow-up"></i> <span>Change File</span></button>';
+
+                        $editorCanvasContent = preg_replace_callback('/(<div[^>]*class=["\'][^"\']*(?:dbim-pill-link-wrapper|tc-pill-wrapper)[^"\']*["\'][^>]*>)([\s\S]*?)(<\/div>)/i', function($m) use ($pillUploadBtnHtml) {
+                            if (strpos($m[2], 'editor-doc-btn') !== false) return $m[0];
+                            return $m[1] . $m[2] . ' ' . $pillUploadBtnHtml . $m[3];
+                        }, $editorCanvasContent);
                     @endphp
                     {!! $editorCanvasContent !!}
                 @else
@@ -3186,11 +3253,16 @@
 
             return `
             <div class="col-lg-3 col-md-6 dbim-book-col">
-                <div class="dbim-book-card h-100 position-relative d-flex flex-column" style="background: #fdf5f8; border: 1px solid #ebd0de; border-radius: 6px; padding: 12px; transition: all 0.25s ease;">
+                <div class="dbim-book-card h-100 position-relative d-flex flex-column" 
+                     data-book-title="${opts.title}" 
+                     data-book-badge="${opts.badge || 'Textiles Committee Publication'}"
+                     data-book-publisher="${opts.publisher || 'Textiles Committee, Ministry of Textiles, Govt. of India'}"
+                     style="background: #fdf5f8; border: 1px solid #ebd0de; border-radius: 6px; padding: 12px; transition: all 0.25s ease; cursor: pointer;">
                     <!-- Card Admin Controls -->
                     <div class="editor-book-btn-bar position-absolute top-0 end-0 m-2 d-flex gap-1" style="z-index: 10;">
                         <button type="button" class="btn btn-sm btn-light border shadow-sm editor-book-btn p-1 px-2" onclick="moveBookCard(this, -1)" title="Move Left"><i class="fa-solid fa-arrow-left"></i></button>
                         <button type="button" class="btn btn-sm btn-light border shadow-sm editor-book-btn p-1 px-2" onclick="moveBookCard(this, 1)" title="Move Right"><i class="fa-solid fa-arrow-right"></i></button>
+                        <button type="button" class="btn btn-sm btn-light border shadow-sm text-info editor-book-btn p-1 px-2" onclick="editBookDescriptionModal(this)" title="Edit Description"><i class="fa-solid fa-file-lines"></i></button>
                         <button type="button" class="btn btn-sm btn-light border shadow-sm text-primary editor-book-btn p-1 px-2" onclick="duplicateBookCard(this)" title="Duplicate Card"><i class="fa-solid fa-clone"></i></button>
                         <button type="button" class="btn btn-sm btn-light border shadow-sm text-danger editor-book-btn p-1 px-2" onclick="deleteBookCard(this)" title="Delete Card"><i class="fa-solid fa-trash"></i></button>
                     </div>
@@ -3204,9 +3276,13 @@
                     </div>
 
                     <!-- Book Title Only (Centered beneath image, exactly as in user reference) -->
-                    <div class="dbim-book-title-wrap text-center pt-3 pb-1 flex-grow-1 d-flex align-items-center justify-content-center">
+                    <div class="dbim-book-title-wrap text-center pt-3 pb-1 flex-grow-1 d-flex flex-column align-items-center justify-content-center">
                         <h3 class="dbim-book-title fw-bold m-0" contenteditable="true" style="font-family: 'Merriweather', serif; color: #1e1b24; font-size: 1.55rem; line-height: 1.4; text-align: center;">${opts.title}</h3>
+                        <div class="text-center mt-2">
+                            <span class="dbim-book-view-pill"><i class="fa-solid fa-circle-info me-1"></i> View Description</span>
+                        </div>
                     </div>
+                    <div class="dbim-book-description d-none">${opts.description || ''}</div>
                 </div>
             </div>`;
         }
@@ -3233,8 +3309,10 @@
                 <div class="dbim-photo-card h-100 position-relative d-flex flex-column" onclick="openPhotoAlbum('${opts.slug}', this)" style="background: transparent; transition: all 0.25s ease; cursor: pointer;">
                     <!-- Card Admin Controls -->
                     <div class="editor-photo-btn-bar position-absolute top-0 end-0 m-2 d-flex gap-1" style="z-index: 10;">
+                        <button type="button" class="btn btn-sm btn-success border shadow-sm editor-photo-btn p-1 px-2 fw-semibold" onclick="event.stopPropagation(); openPhotoAlbum('${opts.slug}', this)" title="Open Album to Manage Photos"><i class="fa-solid fa-folder-open me-1"></i> Open</button>
                         <button type="button" class="btn btn-sm btn-light border shadow-sm editor-photo-btn p-1 px-2" onclick="event.stopPropagation(); movePhotoCard(this, -1)" title="Move Left"><i class="fa-solid fa-arrow-left"></i></button>
                         <button type="button" class="btn btn-sm btn-light border shadow-sm editor-photo-btn p-1 px-2" onclick="event.stopPropagation(); movePhotoCard(this, 1)" title="Move Right"><i class="fa-solid fa-arrow-right"></i></button>
+                        <button type="button" class="btn btn-sm btn-light border shadow-sm text-info editor-photo-btn p-1 px-2" onclick="event.stopPropagation(); editAlbumInfoModal(this)" title="Edit Album Info"><i class="fa-solid fa-pen-to-square"></i></button>
                         <button type="button" class="btn btn-sm btn-light border shadow-sm text-primary editor-photo-btn p-1 px-2" onclick="event.stopPropagation(); duplicatePhotoCard(this)" title="Duplicate Card"><i class="fa-solid fa-clone"></i></button>
                         <button type="button" class="btn btn-sm btn-light border shadow-sm text-danger editor-photo-btn p-1 px-2" onclick="event.stopPropagation(); deletePhotoCard(this)" title="Delete Card"><i class="fa-solid fa-trash"></i></button>
                     </div>
@@ -3244,20 +3322,20 @@
                         <img src="${opts.imgUrl}" alt="${opts.title}" class="dbim-photo-img w-100 h-100" style="object-fit: cover; display: block; transition: transform 0.3s ease;">
                         
                         <!-- Bottom-right action icon button -->
-                        <button type="button" class="dbim-photo-action-btn position-absolute bottom-0 end-0 m-2 border-0 text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(30, 27, 36, 0.78); border-radius: 4px; z-index: 5;" title="View Album">
+                        <button type="button" class="dbim-photo-action-btn position-absolute bottom-0 end-0 m-2 border-0 text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(30, 27, 36, 0.78); border-radius: 4px; z-index: 5;" onclick="event.stopPropagation(); openPhotoAlbum('${opts.slug}', this)" title="View Album">
                             <i class="fa-solid fa-arrow-right" style="font-size: 13px;"></i>
                         </button>
 
                         <!-- Admin Image Upload Button -->
-                        <button type="button" class="btn btn-sm btn-dark position-absolute top-0 start-0 m-2 editor-photo-btn opacity-90 shadow-sm" style="font-size: 1.15rem; z-index: 6; white-space: nowrap;" onclick="event.stopPropagation(); openAvatarModal(this)" title="Change Album Cover"><i class="fa-solid fa-camera me-1"></i> Change Cover</button>
+                        <button type="button" class="btn btn-sm btn-dark position-absolute top-0 start-0 m-2 editor-photo-btn opacity-90 shadow-sm" style="font-size: 1.15rem; z-index: 6; white-space: nowrap;" onclick="event.stopPropagation(); changePhotoItemImage(this)" title="Change Album Cover"><i class="fa-solid fa-camera me-1"></i> Change Cover</button>
                     </div>
 
                     <!-- Card Details -->
                     <div class="dbim-photo-details pt-2 pb-1 d-flex flex-column flex-grow-1">
-                        <h3 class="dbim-photo-title fw-bold m-0" contenteditable="true" style="font-family: 'Noto Sans', sans-serif; color: #1e1b24; font-size: 1.55rem; line-height: 1.35; margin-top: 10px; margin-bottom: 6px !important;">${opts.title}</h3>
+                        <h3 class="dbim-photo-title fw-bold m-0" contenteditable="true" onclick="event.stopPropagation();" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}" style="font-family: 'Noto Sans', sans-serif; color: #1e1b24; font-size: 1.55rem; line-height: 1.35; margin-top: 10px; margin-bottom: 6px !important;">${opts.title}</h3>
                         <div class="d-flex align-items-center justify-content-between mt-auto pt-1" style="color: #6c757d; font-size: 1.25rem;">
-                            <span class="dbim-photo-date" contenteditable="true"><i class="fa-regular fa-calendar me-1" style="font-size: 1.15rem;"></i>${opts.date}</span>
-                            <span class="dbim-photo-items text-uppercase fw-semibold" contenteditable="true">${opts.itemsCount} ITEMS</span>
+                            <span class="dbim-photo-date" contenteditable="true" onclick="event.stopPropagation();" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}"><i class="fa-regular fa-calendar me-1" style="font-size: 1.15rem;"></i>${opts.date}</span>
+                            <span class="dbim-photo-items text-uppercase fw-semibold">${opts.itemsCount} ITEMS</span>
                         </div>
                     </div>
                 </div>
@@ -3280,7 +3358,7 @@
                         <button type="button" class="btn btn-sm btn-light border shadow-sm text-primary editor-album-photo-btn p-1 px-2" onclick="event.stopPropagation(); duplicateAlbumPhoto(this)" title="Duplicate Photo"><i class="fa-solid fa-clone"></i></button>
                         <button type="button" class="btn btn-sm btn-light border shadow-sm text-danger editor-album-photo-btn p-1 px-2" onclick="event.stopPropagation(); deleteAlbumPhoto(this)" title="Delete Photo"><i class="fa-solid fa-trash"></i></button>
                     </div>
-                    <button type="button" class="btn btn-sm btn-dark position-absolute top-0 start-0 m-2 editor-album-photo-btn opacity-90 shadow-sm" style="font-size: 1.15rem; z-index: 6; white-space: nowrap;" onclick="event.stopPropagation(); openAvatarModal(this)" title="Change Photo"><i class="fa-solid fa-camera me-1"></i> Change</button>
+                    <button type="button" class="btn btn-sm btn-dark position-absolute top-0 start-0 m-2 editor-album-photo-btn opacity-90 shadow-sm" style="font-size: 1.15rem; z-index: 6; white-space: nowrap;" onclick="event.stopPropagation(); changePhotoItemImage(this)" title="Change Photo"><i class="fa-solid fa-camera me-1"></i> Change</button>
 
                     <!-- Photo Image -->
                     <img src="${opts.imgUrl}" alt="${opts.title}" class="dbim-album-photo-img w-100 h-100" style="object-fit: cover; display: block; transition: transform 0.3s ease;">
@@ -3447,217 +3525,193 @@
                     return `<div class="dbim-doc-section my-4" data-component="dbim_section_doc_box">
                         <h2 class="dbim-section-title" contenteditable="true" style="color: #500a2f; font-weight: 700; font-size: 2.4rem; margin-bottom: 8px;">Citizen’s Charter</h2>
                         <p class="dbim-section-desc" contenteditable="true" style="color: #150202; font-size: 1.55rem; line-height: 1.7; margin-bottom: 18px;">The Citizen’s Charter of the Textiles Committee outlines our commitment to transparency, timely testing services, grievance redressal, and service standards for all stakeholders.</p>
-                        <div class="box row row-gap-2 align-items-center ms-0 me-0" data-doc-box="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 14px 20px; margin-bottom: 14px;">
-                            <div class="col-lg-8 col-md-12 col-sm-12">
-                                <p class="mb-0 d-flex align-items-center gap-2" style="font-weight: 600; font-size: 1.6rem; color: #150202;">
-                                    <span class="material-symbols-outlined" style="color: #500a2f; font-size: 2.2rem;">draft</span>
-                                    <span class="doc-title-text" contenteditable="true">Citizen’s Charter - Textiles Committee</span>
-                                </p>
-                            </div>
-                            <div class="col-lg-2 col-md-12 col-sm-12">
-                                <div class="d-flex gap-4 align-items-center type-size">
-                                    <small class="text-uppercase mb-0 doc-size-badge" contenteditable="true" style="color: #666; font-size: 1.3rem; font-weight: 600; background: #f7eef3; padding: 4px 10px; border-radius: 4px; border: 1px solid #e8d0dd;">1.45 MB</small>
+                        <div class="dbim-doc-card-row mb-2" data-doc-row="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 12px 20px; transition: all 0.2s ease;">
+                            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                                <div class="d-flex align-items-center gap-3 doc-title-col" style="flex: 1 1 50%; min-width: 0;">
+                                    <span class="material-symbols-outlined flex-shrink-0" style="color: #500a2f; font-size: 2.2rem;">draft</span>
+                                    <span class="doc-title-text fw-semibold" contenteditable="true" style="font-size: 1.5rem; color: #150202; line-height: 1.4;">Citizen’s Charter - Textiles Committee</span>
                                 </div>
-                            </div>
-                            <div class="col-lg-2 col-md-12 col-sm-12">
-                                <div class="d-flex justify-content-end align-items-center gap-2">
-                                    <a class="download-btn d-flex align-items-center text-uppercase w-ft" target="_blank" rel="noopener noreferrer" title="View PDF" href="/uploads/documents/sample.pdf" style="background: #faebf2; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 8px 18px; font-size: 1.35rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                                <div class="doc-date-col text-md-center text-muted" contenteditable="true" style="width: 130px; flex-shrink: 0; font-size: 1.35rem; font-weight: 500;">
+                                    16.10.2026
+                                </div>
+                                <div class="doc-type-size-col text-md-center d-flex align-items-center justify-content-md-center gap-2" style="width: 140px; flex-shrink: 0;">
+                                    <svg class="doc-pdf-svg" width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="#500a2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; vertical-align: middle;">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <text x="6" y="18" fill="#500a2f" font-size="6.5" font-family="'Noto Sans', sans-serif" font-weight="900" stroke="none">PDF</text>
+                                    </svg>
+                                    <span class="doc-size-text" contenteditable="true" style="font-size: 1.35rem; font-weight: 600; color: #333333;">1.45 MB</span>
+                                </div>
+                                <div class="doc-action-col text-end d-flex align-items-center justify-content-end gap-2" style="width: auto; min-width: 220px; flex-shrink: 0;">
+                                    <a href="/uploads/documents/sample.pdf" target="_blank" rel="noopener noreferrer" class="doc-view-btn" style="background: #faeef3; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 6px 16px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s;">
                                         <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
-                                        VIEW
+                                        <span>VIEW</span>
                                     </a>
-                                    <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF/Media for this VIEW button">
-                                        <i class="fa-solid fa-file-arrow-up"></i>
+                                    <button type="button" class="btn btn-sm editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or change document file">
+                                        <i class="fa-solid fa-file-arrow-up"></i> <span>Change / Upload</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>`;
 
-                case 'dbim_doc_list_section':
-                    return `<div class="dbim-doc-list-section my-4" data-component="dbim_doc_list_section">
-                        <h2 class="dbim-section-title" contenteditable="true" style="color: #500a2f; font-weight: 700; font-size: 2.4rem; margin-bottom: 16px;">List of Secretary's of the Textiles Committee</h2>
-                        <div class="dbim-doc-items-stack">
-                            <div class="box row row-gap-2 align-items-center ms-0 me-0" data-doc-box="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 14px 20px; margin-bottom: 14px;">
-                                <div class="col-lg-8 col-md-12 col-sm-12">
-                                    <p class="mb-0 d-flex align-items-center gap-2" style="font-weight: 600; font-size: 1.6rem; color: #150202;">
-                                        <span class="material-symbols-outlined" style="color: #500a2f; font-size: 2.2rem;">draft</span>
-                                        <span class="doc-title-text" contenteditable="true">Textiles Committee Act, 1963 (Act No. 41 of 1963)</span>
-                                    </p>
-                                </div>
-                                <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <div class="d-flex gap-4 align-items-center type-size">
-                                        <small class="text-uppercase mb-0 doc-size-badge" contenteditable="true" style="color: #666; font-size: 1.3rem; font-weight: 600; background: #f7eef3; padding: 4px 10px; border-radius: 4px; border: 1px solid #e8d0dd;">2.10 MB</small>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <div class="d-flex justify-content-end align-items-center gap-2">
-                                        <a class="download-btn d-flex align-items-center text-uppercase w-ft" target="_blank" rel="noopener noreferrer" title="View PDF" href="/uploads/documents/sample.pdf" style="background: #faebf2; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 8px 18px; font-size: 1.35rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                                            <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
-                                            VIEW
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF/Media for this VIEW button">
-                                            <i class="fa-solid fa-file-arrow-up"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box row row-gap-2 align-items-center ms-0 me-0" data-doc-box="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 14px 20px; margin-bottom: 14px;">
-                                <div class="col-lg-8 col-md-12 col-sm-12">
-                                    <p class="mb-0 d-flex align-items-center gap-2" style="font-weight: 600; font-size: 1.6rem; color: #150202;">
-                                        <span class="material-symbols-outlined" style="color: #500a2f; font-size: 2.2rem;">draft</span>
-                                        <span class="doc-title-text" contenteditable="true">List of Secretaries of the Textiles Committee</span>
-                                    </p>
-                                </div>
-                                <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <div class="d-flex gap-4 align-items-center type-size">
-                                        <small class="text-uppercase mb-0 doc-size-badge" contenteditable="true" style="color: #666; font-size: 1.3rem; font-weight: 600; background: #f7eef3; padding: 4px 10px; border-radius: 4px; border: 1px solid #e8d0dd;">320 KB</small>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <div class="d-flex justify-content-end align-items-center gap-2">
-                                        <a class="download-btn d-flex align-items-center text-uppercase w-ft" target="_blank" rel="noopener noreferrer" title="View PDF" href="/uploads/documents/sample.pdf" style="background: #faebf2; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 8px 18px; font-size: 1.35rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                                            <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
-                                            VIEW
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF/Media for this VIEW button">
-                                            <i class="fa-solid fa-file-arrow-up"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box row row-gap-2 align-items-center ms-0 me-0" data-doc-box="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 14px 20px; margin-bottom: 14px;">
-                                <div class="col-lg-8 col-md-12 col-sm-12">
-                                    <p class="mb-0 d-flex align-items-center gap-2" style="font-weight: 600; font-size: 1.6rem; color: #150202;">
-                                        <span class="material-symbols-outlined" style="color: #500a2f; font-size: 2.2rem;">draft</span>
-                                        <span class="doc-title-text" contenteditable="true">Annual Report & Audited Accounts</span>
-                                    </p>
-                                </div>
-                                <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <div class="d-flex gap-4 align-items-center type-size">
-                                        <small class="text-uppercase mb-0 doc-size-badge" contenteditable="true" style="color: #666; font-size: 1.3rem; font-weight: 600; background: #f7eef3; padding: 4px 10px; border-radius: 4px; border: 1px solid #e8d0dd;">4.80 MB</small>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <div class="d-flex justify-content-end align-items-center gap-2">
-                                        <a class="download-btn d-flex align-items-center text-uppercase w-ft" target="_blank" rel="noopener noreferrer" title="View PDF" href="/uploads/documents/sample.pdf" style="background: #faebf2; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 8px 18px; font-size: 1.35rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                                            <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
-                                            VIEW
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF/Media for this VIEW button">
-                                            <i class="fa-solid fa-file-arrow-up"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-start mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-primary editor-doc-btn" onclick="addDocCardToStack(this)" title="Add another document item to this stack">
-                                <i class="fa-solid fa-plus me-1"></i> Add Document Card
-                            </button>
-                        </div>
+                case 'dbim_link_pill':
+                case 'dbim_pill_link':
+                    return `<div class="dbim-pill-link-wrapper my-2 d-inline-flex align-items-center gap-2" data-component="dbim_link_pill">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="dbim-pill-link tc-link-pill">
+                            <span class="material-symbols-outlined" style="color: #500a2f; font-size: 2rem;">link</span>
+                            <span contenteditable="true">Procedure for Import of Textile and Apparel from Sri Lanka</span>
+                            <small class="text-muted ms-1">(PDF, 150 KB)</small>
+                        </a>
+                        <button type="button" class="btn btn-sm editor-doc-btn editor-pill-doc-btn" onclick="openDocMediaModal(this)" title="Upload or change linked document/file">
+                            <i class="fa-solid fa-file-arrow-up"></i> <span>Change File</span>
+                        </button>
                     </div>`;
 
+                case 'dbim_doc_pill':
                 case 'dbim_single_doc_card':
-                    return `<div class="box row row-gap-2 align-items-center ms-0 me-0 my-3" data-component="dbim_single_doc_card" data-doc-box="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 14px 20px; margin-bottom: 14px;">
-                        <div class="col-lg-8 col-md-12 col-sm-12">
-                            <p class="mb-0 d-flex align-items-center gap-2" style="font-weight: 600; font-size: 1.6rem; color: #150202;">
-                                <span class="material-symbols-outlined" style="color: #500a2f; font-size: 2.2rem;">draft</span>
-                                <span class="doc-title-text" contenteditable="true">Official Notification / Document Title</span>
-                            </p>
-                        </div>
-                        <div class="col-lg-2 col-md-12 col-sm-12">
-                            <div class="d-flex gap-4 align-items-center type-size">
-                                <small class="text-uppercase mb-0 doc-size-badge" contenteditable="true" style="color: #666; font-size: 1.3rem; font-weight: 600; background: #f7eef3; padding: 4px 10px; border-radius: 4px; border: 1px solid #e8d0dd;">1.20 MB</small>
+                    return `<div class="dbim-doc-card-row mb-2" data-component="dbim_single_doc_card" data-doc-row="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 12px 20px; transition: all 0.2s ease;">
+                        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                            <div class="d-flex align-items-center gap-3 doc-title-col" style="flex: 1 1 50%; min-width: 0;">
+                                <span class="material-symbols-outlined flex-shrink-0" style="color: #500a2f; font-size: 2.2rem;">draft</span>
+                                <span class="doc-title-text fw-semibold" contenteditable="true" style="font-size: 1.5rem; color: #150202; line-height: 1.4;">Application form for Registration</span>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12 col-sm-12">
-                            <div class="d-flex justify-content-end align-items-center gap-2">
-                                <a class="download-btn d-flex align-items-center text-uppercase w-ft" target="_blank" rel="noopener noreferrer" title="View PDF" href="/uploads/documents/sample.pdf" style="background: #faebf2; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 8px 18px; font-size: 1.35rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                            <div class="doc-date-col text-md-center text-muted" contenteditable="true" style="width: 130px; flex-shrink: 0; font-size: 1.35rem; font-weight: 500;">
+                                16.10.2026
+                            </div>
+                            <div class="doc-type-size-col text-md-center d-flex align-items-center justify-content-md-center gap-2" style="width: 140px; flex-shrink: 0;">
+                                <svg class="doc-pdf-svg" width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="#500a2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; vertical-align: middle;">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <text x="6" y="18" fill="#500a2f" font-size="6.5" font-family="'Noto Sans', sans-serif" font-weight="900" stroke="none">PDF</text>
+                                </svg>
+                                <span class="doc-size-text" contenteditable="true" style="font-size: 1.35rem; font-weight: 600; color: #333333;">135 KB</span>
+                            </div>
+                            <div class="doc-action-col text-end d-flex align-items-center justify-content-end gap-2" style="width: auto; min-width: 220px; flex-shrink: 0;">
+                                <a href="/uploads/documents/sample.pdf" target="_blank" rel="noopener noreferrer" class="doc-view-btn" style="background: #faeef3; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 6px 16px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s;">
                                     <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
-                                    VIEW
+                                    <span>VIEW</span>
                                 </a>
-                                <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF/Media for this VIEW button">
-                                    <i class="fa-solid fa-file-arrow-up"></i>
+                                <button type="button" class="btn btn-sm editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or change document file">
+                                    <i class="fa-solid fa-file-arrow-up"></i> <span>Change / Upload</span>
                                 </button>
                             </div>
                         </div>
                     </div>`;
 
-                case 'dbim_vision_box':
-                    return `<div class="visionbox my-3" data-component="dbim_vision_box" style="background: #ebeaea; border-radius: 12px; padding: 32px 28px; border: 1px solid rgba(80, 10, 47, 0.08);">
-                        <div>
-                            <h2 contenteditable="true" style="color: #500a2f; font-size: 2.2rem; font-weight: 600; line-height: 1.55; margin-bottom: 24px; text-align: justify;">Unlock human capital to trigger a productivity dividend and bring aspirational employment and entrepreneurship pathways to all.</h2>
-                            <p contenteditable="true" style="color: #500a2f; font-size: 1.35rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin: 0;">VISION STATEMENT</p>
+                case 'dbim_doc_list_section':
+                    return `<div class="dbim-doc-section dbim-doc-list-section my-4" data-component="dbim_doc_list_section">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h2 class="dbim-section-title mb-0" contenteditable="true" style="color: #500a2f; font-weight: 700; font-size: 2.2rem;">Official Documents &amp; Notifications</h2>
+                            <div class="editor-row-ctrl d-inline-flex gap-1">
+                                <button type="button" class="btn btn-sm btn-outline-danger" onclick="addDocCardToStack(this)" title="Add another document row">
+                                    <i class="fa-solid fa-plus me-1"></i> Add Document
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Top Filter Bar (Optional) -->
+                        <div class="dbim-doc-filter-bar mb-3 d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div class="dbim-doc-search-wrap" style="position: relative; min-width: 240px; max-width: 320px;">
+                                <span class="material-symbols-outlined" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ba4a7a; font-size: 2rem; pointer-events: none;">search</span>
+                                <input type="text" class="form-control dbim-doc-search-input" placeholder="Search..." style="padding-left: 38px; height: 38px; border: 1.5px solid #d48ba8; border-radius: 6px; font-size: 1.4rem; color: #212529;">
+                            </div>
+                            <div class="d-flex flex-wrap align-items-center gap-2 ms-auto">
+                                <div class="dbim-doc-select-wrap">
+                                    <select class="form-select dbim-doc-sort-select" style="height: 38px; border: 1.5px solid #d48ba8; border-radius: 6px; font-size: 1.35rem; color: #333; padding: 4px 30px 4px 12px;">
+                                        <option value="default">Sort by</option>
+                                        <option value="title-asc">Title (A-Z)</option>
+                                        <option value="title-desc">Title (Z-A)</option>
+                                        <option value="date-desc">Newest First</option>
+                                        <option value="date-asc">Oldest First</option>
+                                    </select>
+                                </div>
+                                <div class="dbim-doc-select-wrap">
+                                    <select class="form-select dbim-doc-category-select" style="height: 38px; border: 1.5px solid #d48ba8; border-radius: 6px; font-size: 1.35rem; color: #333; padding: 4px 32px 4px 12px;">
+                                        <option value="all">Category</option>
+                                    </select>
+                                </div>
+                                <div class="dbim-doc-select-wrap">
+                                    <select class="form-select dbim-doc-per-page-select" style="height: 38px; border: 1.5px solid #d48ba8; border-radius: 6px; font-size: 1.35rem; color: #333; padding: 4px 32px 4px 12px;">
+                                        <option value="10">10 per page</option>
+                                        <option value="25">25 per page</option>
+                                        <option value="50">50 per page</option>
+                                        <option value="all">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pink Table Header Bar -->
+                        <div class="dbim-doc-header-bar d-none d-md-flex align-items-center px-4 py-2 mb-2" style="background: #e59cb7; border-radius: 6px; color: #500a2f; font-weight: 700; font-size: 1.25rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                            <div style="flex: 1 1 50%; min-width: 0;">TITLE</div>
+                            <div class="text-center" style="width: 130px; flex-shrink: 0;">PUBLISHED DATE</div>
+                            <div class="text-center" style="width: 140px; flex-shrink: 0;">TYPE/SIZE</div>
+                            <div style="width: 130px; flex-shrink: 0;"></div>
+                        </div>
+
+                        <!-- Document Items Stack -->
+                        <div class="dbim-doc-items-stack d-flex flex-column gap-2">
+                            <div class="dbim-doc-card-row mb-2" data-doc-row="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 12px 20px; transition: all 0.2s ease;">
+                                <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                                    <div class="d-flex align-items-center gap-3 doc-title-col" style="flex: 1 1 50%; min-width: 0;">
+                                        <span class="material-symbols-outlined flex-shrink-0" style="color: #500a2f; font-size: 2.2rem;">draft</span>
+                                        <span class="doc-title-text fw-semibold" contenteditable="true" style="font-size: 1.5rem; color: #150202; line-height: 1.4;">Draft Questionnaire under Integrated Textile Census For Comments / Inputs</span>
+                                    </div>
+                                    <div class="doc-date-col text-md-center text-muted" contenteditable="true" style="width: 130px; flex-shrink: 0; font-size: 1.35rem; font-weight: 500;">
+                                        16.10.2026
+                                    </div>
+                                    <div class="doc-type-size-col text-md-center d-flex align-items-center justify-content-md-center gap-2" style="width: 140px; flex-shrink: 0;">
+                                        <svg class="doc-pdf-svg" width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="#500a2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; vertical-align: middle;">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <text x="6" y="18" fill="#500a2f" font-size="6.5" font-family="'Noto Sans', sans-serif" font-weight="900" stroke="none">PDF</text>
+                                        </svg>
+                                        <span class="doc-size-text" contenteditable="true" style="font-size: 1.35rem; font-weight: 600; color: #333333;">1.02 MB</span>
+                                    </div>
+                                    <div class="doc-action-col text-end d-flex align-items-center justify-content-end gap-2" style="width: 130px; flex-shrink: 0;">
+                                        <a href="/uploads/documents/sample1.pdf" target="_blank" rel="noopener noreferrer" class="doc-view-btn" style="background: #faeef3; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 6px 16px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s;">
+                                            <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
+                                            <span>VIEW</span>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF for this VIEW button">
+                                            <i class="fa-solid fa-file-arrow-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dbim-doc-card-row mb-2" data-doc-row="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 12px 20px; transition: all 0.2s ease;">
+                                <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                                    <div class="d-flex align-items-center gap-3 doc-title-col" style="flex: 1 1 50%; min-width: 0;">
+                                        <span class="material-symbols-outlined flex-shrink-0" style="color: #500a2f; font-size: 2.2rem;">draft</span>
+                                        <span class="doc-title-text fw-semibold" contenteditable="true" style="font-size: 1.5rem; color: #150202; line-height: 1.4;">Make In India Investment Cell</span>
+                                    </div>
+                                    <div class="doc-date-col text-md-center text-muted" contenteditable="true" style="width: 130px; flex-shrink: 0; font-size: 1.35rem; font-weight: 500;">
+                                        01.08.2025
+                                    </div>
+                                    <div class="doc-type-size-col text-md-center d-flex align-items-center justify-content-md-center gap-2" style="width: 140px; flex-shrink: 0;">
+                                        <svg class="doc-pdf-svg" width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="#500a2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; vertical-align: middle;">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <text x="6" y="18" fill="#500a2f" font-size="6.5" font-family="'Noto Sans', sans-serif" font-weight="900" stroke="none">PDF</text>
+                                        </svg>
+                                        <span class="doc-size-text" contenteditable="true" style="font-size: 1.35rem; font-weight: 600; color: #333333;">355.29 KB</span>
+                                    </div>
+                                    <div class="doc-action-col text-end d-flex align-items-center justify-content-end gap-2" style="width: 130px; flex-shrink: 0;">
+                                        <a href="/uploads/documents/sample2.pdf" target="_blank" rel="noopener noreferrer" class="doc-view-btn" style="background: #faeef3; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 6px 16px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s;">
+                                            <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
+                                            <span>VIEW</span>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF for this VIEW button">
+                                            <i class="fa-solid fa-file-arrow-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>`;
 
-                case 'dbim_full_layout':
-                    return `<div class="row g-5 my-3" data-component="dbim_full_layout">
-                        <div class="col-md-12 col-lg-4 stickyBox">
-                            <div class="visionbox" style="background: #ebeaea; border-radius: 12px; padding: 32px 28px; border: 1px solid rgba(80, 10, 47, 0.08);">
-                                <div>
-                                    <h2 contenteditable="true" style="color: #500a2f; font-size: 2.2rem; font-weight: 600; line-height: 1.55; margin-bottom: 24px; text-align: justify;">To transform India into a premier global textile hub through world-class quality inspection, standardization, advanced laboratory testing, and skill empowerment across the entire textile value chain.</h2>
-                                    <p contenteditable="true" style="color: #500a2f; font-size: 1.35rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin: 0;">VISION STATEMENT</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-8">
-                            <div class="aboutcontent text-justify">
-                                <div>
-                                    <p contenteditable="true">The Textiles Committee is a statutory body established in 1963 by an Act of Parliament (Textiles Committee Act, 1963 - No. 41 of 1963) under the administrative control of the Ministry of Textiles, Government of India. The primary objective is to ensure the quality of textiles and textile machinery produced either for internal consumption or for export.</p>
-                                    <h2 contenteditable="true" style="color: #500a2f; font-weight: 700; font-size: 2.4rem; margin-top: 1.8rem; margin-bottom: 8px;">Objectives</h2>
-                                    <p contenteditable="true">The three key outcomes to be achieved through this vision are:</p>
-                                    <div class="row g-4">
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="objectivebox" style="background: #ebd0de; border-radius: 12px; padding: 22px 20px; height: 100%; border: 1px solid rgba(80, 10, 47, 0.12);">
-                                                <h3 contenteditable="true" style="color: #500a2f; font-size: 3.4rem; font-weight: 700; margin-bottom: 12px; line-height: 1;">1</h3>
-                                                <p contenteditable="true" style="color: #2b1320; font-size: 1.55rem; line-height: 1.65; margin-bottom: 0;">Ensure rigorous quality inspection, testing standards, and compliance for domestic and export textiles.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="objectivebox" style="background: #ebd0de; border-radius: 12px; padding: 22px 20px; height: 100%; border: 1px solid rgba(80, 10, 47, 0.12);">
-                                                <h3 contenteditable="true" style="color: #500a2f; font-size: 3.4rem; font-weight: 700; margin-bottom: 12px; line-height: 1;">2</h3>
-                                                <p contenteditable="true" style="color: #2b1320; font-size: 1.55rem; line-height: 1.65; margin-bottom: 0;">Create market confidence through certified origin (Non-Preferential COO), Handloom Mark, and GI initiatives.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="objectivebox" style="background: #ebd0de; border-radius: 12px; padding: 22px 20px; height: 100%; border: 1px solid rgba(80, 10, 47, 0.12);">
-                                                <h3 contenteditable="true" style="color: #500a2f; font-size: 3.4rem; font-weight: 700; margin-bottom: 12px; line-height: 1;">3</h3>
-                                                <p contenteditable="true" style="color: #2b1320; font-size: 1.55rem; line-height: 1.65; margin-bottom: 0;">Empower workforce and industry through Samarth skill training, technical consultancy, and market research.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <h2 contenteditable="true" style="color: #500a2f; font-weight: 700; font-size: 2.4rem; margin-top: 2rem; margin-bottom: 16px;">Citizen’s Charter</h2>
-                                    <div class="box row row-gap-2 align-items-center ms-0 me-0" data-doc-box="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 14px 20px; margin-bottom: 14px;">
-                                        <div class="col-lg-8 col-md-12 col-sm-12">
-                                            <p class="mb-0 d-flex align-items-center gap-2" style="font-weight: 600; font-size: 1.6rem; color: #150202;">
-                                                <span class="material-symbols-outlined" style="color: #500a2f; font-size: 2.2rem;">draft</span>
-                                                <span class="doc-title-text" contenteditable="true">Citizen’s Charter - Textiles Committee</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-2 col-md-12 col-sm-12">
-                                            <div class="d-flex gap-4 align-items-center type-size">
-                                                <small class="text-uppercase mb-0 doc-size-badge" contenteditable="true" style="color: #666; font-size: 1.3rem; font-weight: 600; background: #f7eef3; padding: 4px 10px; border-radius: 4px; border: 1px solid #e8d0dd;">1.45 MB</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 col-md-12 col-sm-12">
-                                            <div class="d-flex justify-content-end align-items-center gap-2">
-                                                <a class="download-btn d-flex align-items-center text-uppercase w-ft" target="_blank" rel="noopener noreferrer" title="View PDF" href="/uploads/documents/sample.pdf" style="background: #faebf2; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 8px 18px; font-size: 1.35rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                                                    <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
-                                                    VIEW
-                                                </a>
-                                                <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF/Media for this VIEW button">
-                                                    <i class="fa-solid fa-file-arrow-up"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
+
 
                 case 'dbim_whos_who_table':
                 case 'whos_who_table':
@@ -4636,124 +4690,38 @@
                     </div>`;
 
                 case 'dbim_faq_component':
-                    return `<div class="dbim-faq-wrapper my-4" data-component="dbim_faq_component">
-                        <div class="dbim-faq-header-bar">
-                            <div>
-                                <span class="badge mb-2" contenteditable="true" style="background: #ebd0de; color: #721835; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 4px 12px; border-radius: 20px;">HELP & KNOWLEDGE BASE</span>
-                                <h2 class="dbim-faq-title" contenteditable="true">Frequently Asked Questions (FAQs)</h2>
-                                <p class="text-muted mb-0" contenteditable="true" style="font-size: 1.3rem;">Find quick answers regarding Textiles Committee testing services, certification, Handloom Mark, and regulatory procedures.</p>
-                            </div>
-                            <div class="dbim-faq-controls">
-                                <div class="dbim-faq-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" placeholder="Search questions..." onkeyup="filterFaqItems(this)">
-                                </div>
-                                <button type="button" class="btn btn-sm btn-outline-dark fw-bold px-3 py-2 dbim-faq-toggle-all" onclick="toggleAllFaqs(this)" style="font-size: 1.2rem; border-radius: 20px;">
-                                    <i class="fa-solid fa-expand me-1"></i> Expand All
-                                </button>
-                                <button type="button" class="btn btn-sm text-white fw-bold px-3 py-2 editor-faq-btn" onclick="addFaqItem(this)" style="background: #721835; font-size: 1.2rem; border-radius: 20px;" title="Add new FAQ Question">
-                                    <i class="fa-solid fa-plus me-1"></i> Add Question
-                                </button>
-                            </div>
-                        </div>
-                        <div class="dbim-faq-list">
+                    return `<div class="my-5" data-component="dbim_faq_component">
+                        <h2 contenteditable="true" style="color: #500a2f; font-weight: 700; font-size: 2.2rem; margin-bottom: 20px;">Frequently Asked Questions (FAQs)</h2>
+                        <div class="accordion my-4" id="faqAccordionExample">
                             <!-- Q1 -->
-                            <div class="dbim-faq-item is-active" data-faq-item="true">
-                                <div class="dbim-faq-question" onclick="toggleFaqItem(this)">
-                                    <div class="dbim-faq-q-left">
-                                        <span class="dbim-faq-badge">Q1</span>
-                                        <h4 class="dbim-faq-q-text" contenteditable="true">What is the primary statutory mandate of the Textiles Committee?</h4>
+                            <div class="accordion-item mb-3" style="border: 1.5px solid #ebd0de; border-radius: 8px; overflow: hidden; background: #ffffff;">
+                                <h3 class="accordion-header" style="margin: 0 !important;">
+                                    <button class="accordion-button collapsed px-4 py-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq1" aria-expanded="false" style="background: #ffffff; color: #500a2f; font-size: 1.6rem; font-family: 'Noto Sans', sans-serif;">
+                                        <span contenteditable="true">What is the primary statutory mandate of the Textiles Committee?</span>
+                                    </button>
+                                </h3>
+                                <div id="collapseFaq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionExample">
+                                    <div class="accordion-body px-4 py-3" style="font-size: 1.55rem; line-height: 1.8; color: #212529; border-top: 1px solid #ebd0de;">
+                                        <p contenteditable="true" class="mb-0">The Textiles Committee is a statutory body established under <strong>The Textiles Committee Act, 1963 (No. 41 of 1963)</strong> under the administrative control of the Ministry of Textiles, Government of India. Its primary mandate is to ensure the quality of textiles and textile machinery manufactured in India, for both domestic consumption and international export markets.</p>
                                     </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <button type="button" class="btn btn-sm btn-link text-danger p-0 editor-faq-btn" onclick="removeFaqItem(this)" title="Delete Question" style="font-size: 15px; text-decoration: none;">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </button>
-                                        <span class="dbim-faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="dbim-faq-answer" contenteditable="true">
-                                    <p>The Textiles Committee is a statutory body established under <strong>The Textiles Committee Act, 1963 (No. 41 of 1963)</strong> under the administrative control of the Ministry of Textiles, Government of India. Its primary mandate is to ensure the quality of textiles and textile machinery manufactured in India, for both domestic consumption and international export markets.</p>
                                 </div>
                             </div>
                             <!-- Q2 -->
-                            <div class="dbim-faq-item" data-faq-item="true">
-                                <div class="dbim-faq-question" onclick="toggleFaqItem(this)">
-                                    <div class="dbim-faq-q-left">
-                                        <span class="dbim-faq-badge">Q2</span>
-                                        <h4 class="dbim-faq-q-text" contenteditable="true">What types of testing services are provided by Textiles Committee laboratories?</h4>
+                            <div class="accordion-item mb-3" style="border: 1.5px solid #ebd0de; border-radius: 8px; overflow: hidden; background: #ffffff;">
+                                <h3 class="accordion-header" style="margin: 0 !important;">
+                                    <button class="accordion-button collapsed px-4 py-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq2" aria-expanded="false" style="background: #ffffff; color: #500a2f; font-size: 1.6rem; font-family: 'Noto Sans', sans-serif;">
+                                        <span contenteditable="true">What types of testing services are provided by Textiles Committee laboratories?</span>
+                                    </button>
+                                </h3>
+                                <div id="collapseFaq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionExample">
+                                    <div class="accordion-body px-4 py-3" style="font-size: 1.55rem; line-height: 1.8; color: #212529; border-top: 1px solid #ebd0de;">
+                                        <p contenteditable="true" class="mb-0">The Committee operates 19 state-of-the-art testing laboratories across India accredited under <strong>NABL (ISO/IEC 17025:2017)</strong> covering Chemical Eco-Testing, Mechanical &amp; Physical Testing, and Fiber Composition analysis.</p>
                                     </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <button type="button" class="btn btn-sm btn-link text-danger p-0 editor-faq-btn" onclick="removeFaqItem(this)" title="Delete Question" style="font-size: 15px; text-decoration: none;">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </button>
-                                        <span class="dbim-faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="dbim-faq-answer" contenteditable="true">
-                                    <p>The Committee operates 19 state-of-the-art testing laboratories across India accredited under <strong>NABL (ISO/IEC 17025:2017)</strong>. Laboratory services include:</p>
-                                    <ul>
-                                        <li><strong>Chemical Eco-Testing:</strong> Formaldehyde, banned azo dyes, pentachlorophenol (PCP), heavy metals, phthalates, and pH determination.</li>
-                                        <li><strong>Mechanical & Physical Testing:</strong> Tensile strength, tearing strength, seam slippage, pilling resistance, dimensional stability, and colour fastness.</li>
-                                        <li><strong>Fiber Composition:</strong> Blend ratio analysis and microscopic identification of natural, synthetic, and specialized fibres.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Q3 -->
-                            <div class="dbim-faq-item" data-faq-item="true">
-                                <div class="dbim-faq-question" onclick="toggleFaqItem(this)">
-                                    <div class="dbim-faq-q-left">
-                                        <span class="dbim-faq-badge">Q3</span>
-                                        <h4 class="dbim-faq-q-text" contenteditable="true">How can exporters obtain a Certificate of Origin (COO)?</h4>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <button type="button" class="btn btn-sm btn-link text-danger p-0 editor-faq-btn" onclick="removeFaqItem(this)" title="Delete Question" style="font-size: 15px; text-decoration: none;">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </button>
-                                        <span class="dbim-faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="dbim-faq-answer" contenteditable="true">
-                                    <p>The Textiles Committee is an authorized agency of the Directorate General of Foreign Trade (DGFT) for issuing <strong>Non-Preferential Certificates of Origin (COO)</strong>. Exporters can apply through the DGFT Common Digital Platform (<a href="https://coo.dgft.gov.in" target="_blank">coo.dgft.gov.in</a>) selecting the nearest Regional Office of the Textiles Committee for endorsement and verification.</p>
-                                </div>
-                            </div>
-                            <!-- Q4 -->
-                            <div class="dbim-faq-item" data-faq-item="true">
-                                <div class="dbim-faq-question" onclick="toggleFaqItem(this)">
-                                    <div class="dbim-faq-q-left">
-                                        <span class="dbim-faq-badge">Q4</span>
-                                        <h4 class="dbim-faq-q-text" contenteditable="true">What is the Handloom Mark scheme and how does the Committee facilitate it?</h4>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <button type="button" class="btn btn-sm btn-link text-danger p-0 editor-faq-btn" onclick="removeFaqItem(this)" title="Delete Question" style="font-size: 15px; text-decoration: none;">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </button>
-                                        <span class="dbim-faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="dbim-faq-answer" contenteditable="true">
-                                    <p>The Handloom Mark is a collective identity for genuine Indian handloom products introduced by the Ministry of Textiles. The Textiles Committee acts as the <strong>Implementing Agency</strong> responsible for verification, registration of weavers and cooperatives, and issuing secure holographic labels to prevent spurious powerloom counterfeits.</p>
-                                </div>
-                            </div>
-                            <!-- Q5 -->
-                            <div class="dbim-faq-item" data-faq-item="true">
-                                <div class="dbim-faq-question" onclick="toggleFaqItem(this)">
-                                    <div class="dbim-faq-q-left">
-                                        <span class="dbim-faq-badge">Q5</span>
-                                        <h4 class="dbim-faq-q-text" contenteditable="true">Where are the Regional Offices located and how can I contact them?</h4>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <button type="button" class="btn btn-sm btn-link text-danger p-0 editor-faq-btn" onclick="removeFaqItem(this)" title="Delete Question" style="font-size: 15px; text-decoration: none;">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </button>
-                                        <span class="dbim-faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="dbim-faq-answer" contenteditable="true">
-                                    <p>The Textiles Committee is headquartered in Prabhadevi, Mumbai, with an extensive network of 28 Regional and Sub-Offices located in key textile clusters across India. You can explore the interactive contact map and address directory on the <a href="/page/office-network">Office Network</a> page.</p>
                                 </div>
                             </div>
                         </div>
                     </div>`;
+
 
                 // 0. FEATURED FULL-PAGE TEMPLATES
                 case 'template_act_history':
@@ -5431,14 +5399,15 @@
                     </div>`;
 
                 case 'heading':
-                    return '<h2 class="my-3 text-dark fw-bold">New Section Heading</h2>';
+                case 'dbim_heading':
+                    return '<h2 contenteditable="true" style="color: #500a2f; font-family: \'Noto Sans\', sans-serif; font-size: 2.2rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.4;">New Section Heading</h2>';
                 case 'paragraph':
-                    return '<p class="lead" style="font-size: 1.45rem; line-height: 1.8; color: #222;">Type your description paragraph here. You can highlight text to make it bold, link to documents, or copy typography styles using Format Painter.</p>';
+                    return '<p contenteditable="true" style="font-family: \'Noto Sans\', sans-serif; font-size: 1.6rem; line-height: 1.8; color: #212529; margin-bottom: 1.4rem;">Type your description paragraph here. You can edit text directly or link to official services.</p>';
                 case 'bullet_list':
-                    return `<ul style="font-size: 1.4rem; line-height: 1.8;">
-                        <li>First key milestone or objective of the initiative.</li>
-                        <li>Second policy item with essential information.</li>
-                        <li>Third action item for citizens or stakeholders.</li>
+                    return `<ul style="font-family: 'Noto Sans', sans-serif; font-size: 1.6rem; line-height: 1.8; color: #212529; margin-bottom: 1.4rem;">
+                        <li contenteditable="true">First key milestone or service detail.</li>
+                        <li contenteditable="true">Second policy or regulatory requirement.</li>
+                        <li contenteditable="true">Third action item for citizens or stakeholders.</li>
                     </ul>`;
                 case 'callout_box':
                     return `<div style="background: #fdf7fa; border-left: 4px solid #721835; padding: 20px 24px; border-radius: 6px; margin: 24px 0;">
@@ -5749,9 +5718,22 @@
         </h2>
 
         <!-- Admin Album Controls -->
-        <div class="editor-album-ctrl mb-4 p-3 bg-white border rounded shadow-sm d-flex align-items-center justify-content-between" style="border-color: #ebd0de !important;">
-            <span class="text-muted small fw-semibold"><i class="fa-solid fa-images me-1 text-primary"></i> Album Photos Manager</span>
-            <button type="button" class="btn btn-sm btn-success fw-bold editor-album-photo-btn" onclick="addPhotoToAlbum(this)"><i class="fa-solid fa-plus me-1"></i> Add Photo to Album</button>
+        <div class="editor-album-ctrl mb-4 p-3 bg-white border rounded shadow-sm d-flex flex-wrap align-items-center justify-content-between gap-2" style="border-color: #ebd0de !important;">
+            <div class="d-flex align-items-center gap-2">
+                <span class="badge" style="background: #721835; font-size: 1rem; padding: 6px 12px;"><i class="fa-solid fa-images me-1"></i> Album Photos</span>
+                <span class="text-muted small fw-semibold">Upload photos, choose from media gallery, or manage photos</span>
+            </div>
+            <div class="d-flex flex-wrap align-items-center gap-2 dbim-album-upload-btn-group">
+                <button type="button" class="btn btn-sm btn-success fw-bold editor-album-photo-btn" onclick="triggerAlbumUpload(this)" title="Upload photos directly from your computer">
+                    <i class="fa-solid fa-cloud-arrow-up me-1"></i> Upload Photos
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-primary fw-bold editor-album-photo-btn" onclick="addPhotoFromMediaLibrary(this)" title="Pick photo from Media Library">
+                    <i class="fa-solid fa-photo-film me-1"></i> Media Library
+                </button>
+                <button type="button" class="btn btn-sm btn-light border fw-bold editor-album-photo-btn" onclick="addBlankPhotoToAlbum(this)" title="Add an empty photo card">
+                    <i class="fa-solid fa-plus me-1"></i> Add Blank Card
+                </button>
+            </div>
         </div>
 
         <!-- Subgrid for NIFT CONVOCATION 2026 (11 authentic photos from Image 2) -->
@@ -5989,6 +5971,12 @@
 
             // Ensure Photo Gallery default state is always the Albums Overview before saving
             document.querySelectorAll('#liveCanvas .dbim-photo-gallery-section').forEach(sec => {
+                if (typeof syncDetailViewToActiveCard === 'function') {
+                    syncDetailViewToActiveCard(sec);
+                }
+                if (typeof updateAllAlbumPhotoCounts === 'function') {
+                    updateAllAlbumPhotoCounts(sec);
+                }
                 sec.classList.remove('viewing-album');
                 const albumsView = sec.querySelector('.dbim-albums-view');
                 const detailView = sec.querySelector('.dbim-album-detail-view');
@@ -6066,6 +6054,10 @@
 
         document.getElementById('liveCanvas').addEventListener('click', function(e) {
             if (isFormatPainterActive) return; // painter takes priority
+            // If click is inside photo gallery album cards or subgrids, do NOT hijack with openImagePicker
+            if (e.target.closest('.dbim-photo-card, .dbim-album-photo-card, .dbim-album-detail-view')) {
+                return;
+            }
             const imgTarget = e.target.closest('img') || (e.target.closest('.team-avatar-wrap') ? e.target.closest('.team-avatar-wrap').querySelector('img') : null);
             if (imgTarget) {
                 e.preventDefault();
@@ -6077,6 +6069,27 @@
         function selectImage(url) {
             if (imagePickerMode === 'replace' && targetImageElement) {
                 targetImageElement.src = url;
+                const section = targetImageElement.closest('.dbim-photo-gallery-section');
+                if (section && typeof updateAllAlbumPhotoCounts === 'function') {
+                    updateAllAlbumPhotoCounts(section);
+                }
+                showToast('Photo updated successfully!');
+            } else if (imagePickerMode === 'add_to_album' && targetAlbumSubgrid) {
+                const albumTitle = targetAlbumSubgrid.closest('.dbim-album-detail-view')?.querySelector('.dbim-album-title-text')?.innerText || 'Photo';
+                const currentCount = (targetAlbumSubgrid.querySelectorAll('.dbim-album-photo-col').length || targetAlbumSubgrid.querySelectorAll('.dbim-album-photo-card').length) + 1;
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = renderAlbumPhotoItemHtml({
+                    imgUrl: url,
+                    title: `${albumTitle} - Photo ${currentCount}`
+                }).trim();
+                const newCol = tempDiv.firstElementChild;
+                targetAlbumSubgrid.appendChild(newCol);
+                const section = targetAlbumSubgrid.closest('.dbim-photo-gallery-section');
+                if (section && typeof updateAllAlbumPhotoCounts === 'function') {
+                    updateAllAlbumPhotoCounts(section);
+                }
+                showToast('Photo added to album from library!');
+                newCol.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
                 const canvas = document.getElementById('liveCanvas');
                 canvas.focus();
@@ -6630,12 +6643,16 @@
             initDragToResize();
             initCleanPasteEngine();
             if (typeof initAllDbimTables === 'function') initAllDbimTables();
+            if (typeof updateAllAlbumPhotoCounts === 'function') updateAllAlbumPhotoCounts();
+            if (typeof enhanceAlbumControlBars === 'function') enhanceAlbumControlBars();
         });
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
             initSectionHoverOverlay();
             initDragToResize();
             initCleanPasteEngine();
             if (typeof initAllDbimTables === 'function') initAllDbimTables();
+            if (typeof updateAllAlbumPhotoCounts === 'function') updateAllAlbumPhotoCounts();
+            if (typeof enhanceAlbumControlBars === 'function') enhanceAlbumControlBars();
         }
     </script>
 
@@ -6850,7 +6867,7 @@
                          onclick="document.getElementById('modalMediaFileInput').click()">
                         <i class="fa-solid fa-cloud-arrow-up text-danger mb-2" style="font-size: 42px;"></i>
                         <h6 class="fw-bold mb-1">Click to browse or drag & drop files from your computer</h6>
-                        <p class="text-muted small mb-0">Supports Images (PNG, JPG, SVG, WEBP), Documents (PDF, DOCX, XLSX, TXT) up to 50MB</p>
+                        <p class="text-muted small mb-0">Supports Images (PNG, JPG, SVG, WEBP), Documents (PDF, DOCX, XLSX, TXT) up to 200MB</p>
                         <input type="file" id="modalMediaFileInput" class="d-none" multiple onchange="uploadModalMedia(this.files)">
                     </div>
                     <div id="modalMediaUploadStatus" class="alert alert-info d-none text-center py-2 mb-3"></div>
@@ -7054,24 +7071,114 @@
         let activeViewLink = null;
         let docModalMediaList = [];
 
+        function getDocTypeIconSvg(ext) {
+            ext = (ext || 'PDF').toUpperCase().trim();
+            let color = '#500a2f'; // default maroon for PDF
+            if (['DOC', 'DOCX'].includes(ext)) color = '#185abd';
+            else if (['XLS', 'XLSX', 'CSV'].includes(ext)) color = '#107c41';
+            else if (['PPT', 'PPTX'].includes(ext)) color = '#d83b01';
+            else if (['ZIP', 'RAR', '7Z', 'TAR', 'GZ'].includes(ext)) color = '#6f42c1';
+            else if (['TXT', 'RTF'].includes(ext)) color = '#555555';
+
+            let fontSize = ext.length > 3 ? '5.2' : '6.5';
+            let textX = ext.length > 3 ? '5' : '6';
+
+            return `<svg class="doc-pdf-svg" width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; vertical-align: middle;">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <text x="${textX}" y="18" fill="${color}" font-size="${fontSize}" font-family="'Noto Sans', sans-serif" font-weight="900" stroke="none">${ext}</text>
+            </svg>`;
+        }
+
+        function ensureDocUploadButtons() {
+            const canvas = document.getElementById('liveCanvas');
+            if (!canvas) return;
+
+            // 1. Process standard document card rows
+            const docRows = canvas.querySelectorAll('.dbim-doc-card-row, [data-doc-row="true"]');
+            docRows.forEach(row => {
+                const actionCol = row.querySelector('.doc-action-col');
+                if (actionCol && !actionCol.querySelector('.editor-doc-btn')) {
+                    actionCol.style.width = 'auto';
+                    actionCol.style.minWidth = '220px';
+                    actionCol.style.display = 'inline-flex';
+                    actionCol.style.alignItems = 'center';
+                    actionCol.style.justifyContent = 'flex-end';
+                    actionCol.style.gap = '8px';
+
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'btn btn-sm editor-doc-btn';
+                    btn.setAttribute('onclick', 'openDocMediaModal(this)');
+                    btn.setAttribute('title', 'Upload or change document file');
+                    btn.innerHTML = '<i class="fa-solid fa-file-arrow-up"></i> <span>Change / Upload</span>';
+                    actionCol.appendChild(btn);
+                }
+            });
+
+            // 2. Process document pill link wrappers
+            const pillWrappers = canvas.querySelectorAll('.dbim-pill-link-wrapper, .tc-pill-wrapper');
+            pillWrappers.forEach(wrap => {
+                if (!wrap.querySelector('.editor-doc-btn')) {
+                    wrap.style.display = 'inline-flex';
+                    wrap.style.alignItems = 'center';
+                    wrap.style.gap = '8px';
+
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'btn btn-sm editor-doc-btn editor-pill-doc-btn';
+                    btn.setAttribute('onclick', 'openDocMediaModal(this)');
+                    btn.setAttribute('title', 'Upload or change linked document/file');
+                    btn.innerHTML = '<i class="fa-solid fa-file-arrow-up"></i> <span>Change File</span>';
+                    wrap.appendChild(btn);
+                }
+            });
+        }
+
+        function forceCleanupModalBackdrops() {
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+            document.body.classList.remove('modal-open');
+            document.body.style.removeProperty('overflow');
+            document.body.style.removeProperty('padding-right');
+        }
+
+        function closeDocMediaModal() {
+            const modalEl = document.getElementById('docMediaModal');
+            if (modalEl) {
+                const modal = bootstrap.Modal.getInstance(modalEl) || bootstrap.Modal.getOrCreateInstance(modalEl);
+                if (modal) modal.hide();
+            }
+            forceCleanupModalBackdrops();
+            setTimeout(forceCleanupModalBackdrops, 150);
+            setTimeout(forceCleanupModalBackdrops, 350);
+        }
+
         function openDocMediaModal(triggerEl) {
-            // Find parent document box card and view button
-            activeDocBox = triggerEl.closest('[data-doc-box="true"]') || triggerEl.closest('.box') || triggerEl.closest('.row');
+            // Find parent document box card, row, pill wrapper, or table cell
+            activeDocBox = triggerEl.closest('[data-doc-row="true"]') || 
+                           triggerEl.closest('.dbim-doc-card-row') || 
+                           triggerEl.closest('[data-doc-box="true"]') || 
+                           triggerEl.closest('.dbim-pill-link-wrapper') || 
+                           triggerEl.closest('.tc-pill-wrapper') || 
+                           triggerEl.closest('.box') || 
+                           triggerEl.closest('tr') || 
+                           triggerEl.closest('.row');
+
             if (activeDocBox) {
-                activeViewLink = activeDocBox.querySelector('a.download-btn');
+                activeViewLink = activeDocBox.querySelector('a.doc-view-btn, a.download-btn, a.texmin-btn-view, a.btn-doc-view, a.dbim-pill-link, a.tc-download-pill, a.tc-link-pill, a');
             } else if (triggerEl.tagName.toLowerCase() === 'a') {
                 activeViewLink = triggerEl;
-                activeDocBox = triggerEl.closest('.box') || triggerEl.parentElement;
+                activeDocBox = triggerEl.closest('.dbim-doc-card-row, [data-doc-row="true"], .dbim-pill-link-wrapper, .box') || triggerEl.parentElement;
             }
 
             // Show current document title in modal
-            const currentTitleEl = activeDocBox ? activeDocBox.querySelector('.doc-title-text') : null;
-            const currentTitle = currentTitleEl ? currentTitleEl.innerText.trim() : 'Document';
+            const currentTitleEl = activeDocBox ? (activeDocBox.querySelector('.doc-title-text') || activeDocBox.querySelector('.dbim-pill-link span:not(.material-symbols-outlined)') || activeDocBox.querySelector('span:not(.material-symbols-outlined)')) : null;
+            const currentTitle = currentTitleEl ? currentTitleEl.innerText.trim() : (activeViewLink ? activeViewLink.innerText.trim() : 'Document');
             const modalTitleSpan = document.getElementById('docModalTargetName');
-            if (modalTitleSpan) modalTitleSpan.innerText = currentTitle;
+            if (modalTitleSpan) modalTitleSpan.innerText = currentTitle || 'Document';
 
             const modalEl = document.getElementById('docMediaModal');
-            const modal = new bootstrap.Modal(modalEl);
+            const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
             modal.show();
 
             loadDocModalMedia();
@@ -7081,11 +7188,12 @@
             if (!file) return;
 
             const status = document.getElementById('docModalUploadStatus');
-            status.classList.remove('d-none');
+            status.classList.remove('d-none', 'alert-danger');
+            status.classList.add('alert-info');
             status.innerHTML = '<div class="spinner-border spinner-border-sm text-danger me-2"></div> Uploading document to server...';
 
             const formData = new FormData();
-            formData.append('pdf', file);
+            formData.append('document', file);
 
             const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}';
 
@@ -7097,10 +7205,21 @@
                 },
                 body: formData
             })
-            .then(res => res.json())
+            .then(async res => {
+                let data = null;
+                try {
+                    data = await res.json();
+                } catch (e) {
+                    data = { success: false, message: 'Server returned status ' + res.status };
+                }
+                if (!res.ok && data && !data.message) {
+                    data.message = 'Upload error (HTTP ' + res.status + ')';
+                }
+                return data;
+            })
             .then(data => {
                 status.classList.add('d-none');
-                if (data.success) {
+                if (data && data.success) {
                     // Use relative URL so it works seamlessly in both local and production environments
                     const docUrl = data.relative_url || data.url;
 
@@ -7108,27 +7227,59 @@
                         activeViewLink.href = docUrl;
                     }
                     if (activeDocBox) {
-                        const sizeEl = activeDocBox.querySelector('.doc-size-badge');
+                        // 1. Update date automatically
+                        const dateEl = activeDocBox.querySelector('.doc-date-col, .doc-date-text');
+                        if (dateEl && data.fileDate) {
+                            dateEl.innerText = data.fileDate;
+                        }
+
+                        // 2. Update real file size automatically
+                        const sizeEl = activeDocBox.querySelector('.doc-size-text, .doc-size-badge');
                         if (sizeEl && data.fileSize) {
                             sizeEl.innerText = data.fileSize;
                         }
+
+                        // 3. Update file type SVG/badge automatically
+                        const typeSizeCol = activeDocBox.querySelector('.doc-type-size-col');
+                        if (typeSizeCol && data.fileExt) {
+                            const oldSvg = typeSizeCol.querySelector('svg');
+                            if (oldSvg) {
+                                oldSvg.outerHTML = getDocTypeIconSvg(data.fileExt);
+                            } else {
+                                typeSizeCol.insertAdjacentHTML('afterbegin', getDocTypeIconSvg(data.fileExt));
+                            }
+                        }
+
+                        // 4. Update pill small badge if present
+                        const pillSmall = activeDocBox.querySelector('.dbim-pill-link small, .tc-download-pill small, a small');
+                        if (pillSmall && data.fileSize) {
+                            pillSmall.innerText = `(${data.fileExt || 'PDF'}, ${data.fileSize})`;
+                        }
+
+                        // 5. Update title if generic placeholder
                         const titleEl = activeDocBox.querySelector('.doc-title-text');
-                        if (titleEl && data.title && (titleEl.innerText.includes('Official Notification') || titleEl.innerText.includes('Document Title'))) {
+                        if (titleEl && data.title && (titleEl.innerText.includes('Official Notification') || titleEl.innerText.includes('Document Title') || titleEl.innerText.includes('New Official Document') || titleEl.innerText.includes('Application form'))) {
                             titleEl.innerText = data.title;
                         }
                     }
 
-                    const modalEl = document.getElementById('docMediaModal');
-                    const modal = bootstrap.Modal.getInstance(modalEl);
-                    if (modal) modal.hide();
+                    closeDocMediaModal();
 
-                    showToast('Document uploaded & linked to VIEW button successfully!');
+                    showToast('Document uploaded successfully! File, date (' + (data.fileDate || '') + '), size (' + (data.fileSize || '') + ') and type (' + (data.fileExt || '') + ') updated.');
                 } else {
-                    alert(data.message || 'Upload failed. Please check the file.');
+                    const errorMsg = (data && data.message) 
+                        ? data.message 
+                        : (data && data.errors ? Object.values(data.errors).flat().join('\n') : 'Upload failed. Please check the file.');
+                    status.classList.remove('d-none', 'alert-info');
+                    status.classList.add('alert-danger');
+                    status.innerText = errorMsg;
+                    alert(errorMsg);
                 }
             })
             .catch(err => {
-                status.classList.add('d-none');
+                status.classList.remove('d-none', 'alert-info');
+                status.classList.add('alert-danger');
+                status.innerText = 'Upload failed: ' + err.message;
                 alert('Upload failed: ' + err.message);
             });
         }
@@ -7191,25 +7342,55 @@
         }
 
         function selectDocFromLibrary(fileUrl, fileSize, fileName) {
+            const ext = (fileUrl.split('.').pop() || 'pdf').split('?')[0].toUpperCase();
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            const fileDate = `${dd}.${mm}.${yyyy}`;
+
             if (activeViewLink) {
                 activeViewLink.href = fileUrl;
             }
             if (activeDocBox) {
-                const sizeEl = activeDocBox.querySelector('.doc-size-badge');
+                // Update file size
+                const sizeEl = activeDocBox.querySelector('.doc-size-text, .doc-size-badge');
                 if (sizeEl && fileSize) {
                     sizeEl.innerText = fileSize;
                 }
+
+                // Update date
+                const dateEl = activeDocBox.querySelector('.doc-date-col, .doc-date-text');
+                if (dateEl) {
+                    dateEl.innerText = fileDate;
+                }
+
+                // Update type SVG icon
+                const typeSizeCol = activeDocBox.querySelector('.doc-type-size-col');
+                if (typeSizeCol) {
+                    const oldSvg = typeSizeCol.querySelector('svg');
+                    if (oldSvg) {
+                        oldSvg.outerHTML = getDocTypeIconSvg(ext);
+                    } else {
+                        typeSizeCol.insertAdjacentHTML('afterbegin', getDocTypeIconSvg(ext));
+                    }
+                }
+
+                // Update pill small badge if present
+                const pillSmall = activeDocBox.querySelector('.dbim-pill-link small, .tc-download-pill small, a small');
+                if (pillSmall && fileSize) {
+                    pillSmall.innerText = `(${ext}, ${fileSize})`;
+                }
+
                 const titleEl = activeDocBox.querySelector('.doc-title-text');
-                if (titleEl && fileName && (titleEl.innerText.includes('Official Notification') || titleEl.innerText.includes('Document Title'))) {
+                if (titleEl && fileName && (titleEl.innerText.includes('Official Notification') || titleEl.innerText.includes('Document Title') || titleEl.innerText.includes('New Official Document'))) {
                     titleEl.innerText = fileName;
                 }
             }
 
-            const modalEl = document.getElementById('docMediaModal');
-            const modal = bootstrap.Modal.getInstance(modalEl);
-            if (modal) modal.hide();
+            closeDocMediaModal();
 
-            showToast('Document attached to VIEW button successfully!');
+            showToast('Document attached to VIEW button successfully! Date and type updated.');
         }
 
         function setManualDocUrl() {
@@ -7221,38 +7402,40 @@
                 activeViewLink.href = url;
             }
 
-            const modalEl = document.getElementById('docMediaModal');
-            const modal = bootstrap.Modal.getInstance(modalEl);
-            if (modal) modal.hide();
+            closeDocMediaModal();
 
             showToast('Custom link saved to VIEW button!');
         }
 
         function addDocCardToStack(btn) {
-            const stack = btn.closest('.dbim-doc-list-section')?.querySelector('.dbim-doc-items-stack');
+            const stack = btn.closest('.dbim-doc-list-section, .dbim-doc-section')?.querySelector('.dbim-doc-items-stack') || btn.closest('.dbim-doc-list-section, .dbim-doc-section');
             if (!stack) return;
 
             const temp = document.createElement('div');
-            temp.innerHTML = `<div class="box row row-gap-2 align-items-center ms-0 me-0" data-doc-box="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 14px 20px; margin-bottom: 14px;">
-                <div class="col-lg-8 col-md-12 col-sm-12">
-                    <p class="mb-0 d-flex align-items-center gap-2" style="font-weight: 600; font-size: 1.6rem; color: #150202;">
-                        <span class="material-symbols-outlined" style="color: #500a2f; font-size: 2.2rem;">draft</span>
-                        <span class="doc-title-text" contenteditable="true">New Official Document / Notification</span>
-                    </p>
-                </div>
-                <div class="col-lg-2 col-md-12 col-sm-12">
-                    <div class="d-flex gap-4 align-items-center type-size">
-                        <small class="text-uppercase mb-0 doc-size-badge" contenteditable="true" style="color: #666; font-size: 1.3rem; font-weight: 600; background: #f7eef3; padding: 4px 10px; border-radius: 4px; border: 1px solid #e8d0dd;">PDF</small>
+            temp.innerHTML = `<div class="dbim-doc-card-row mb-2" data-doc-row="true" style="background: #ffffff; border: 1px solid #ebd0de; border-radius: 8px; padding: 12px 20px; transition: all 0.2s ease;">
+                <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                    <div class="d-flex align-items-center gap-3 doc-title-col" style="flex: 1 1 50%; min-width: 0;">
+                        <span class="material-symbols-outlined flex-shrink-0" style="color: #500a2f; font-size: 2.2rem;">draft</span>
+                        <span class="doc-title-text fw-semibold" contenteditable="true" style="font-size: 1.5rem; color: #150202; line-height: 1.4;">New Official Document / Notification</span>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-12 col-sm-12">
-                    <div class="d-flex justify-content-end align-items-center gap-2">
-                        <a class="download-btn d-flex align-items-center text-uppercase w-ft" target="_blank" rel="noopener noreferrer" title="View PDF" href="/uploads/documents/sample.pdf" style="background: #faebf2; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 8px 18px; font-size: 1.35rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                    <div class="doc-date-col text-md-center text-muted" contenteditable="true" style="width: 130px; flex-shrink: 0; font-size: 1.35rem; font-weight: 500;">
+                        16.10.2026
+                    </div>
+                    <div class="doc-type-size-col text-md-center d-flex align-items-center justify-content-md-center gap-2" style="width: 140px; flex-shrink: 0;">
+                        <svg class="doc-pdf-svg" width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="#500a2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; vertical-align: middle;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <text x="6" y="18" fill="#500a2f" font-size="6.5" font-family="'Noto Sans', sans-serif" font-weight="900" stroke="none">PDF</text>
+                        </svg>
+                        <span class="doc-size-text" contenteditable="true" style="font-size: 1.35rem; font-weight: 600; color: #333333;">150 KB</span>
+                    </div>
+                    <div class="doc-action-col text-end d-flex align-items-center justify-content-end gap-2" style="width: auto; min-width: 220px; flex-shrink: 0;">
+                        <a href="/uploads/documents/sample.pdf" target="_blank" rel="noopener noreferrer" class="doc-view-btn" style="background: #faeef3; color: #500a2f; border: 1px solid #ebd0de; border-radius: 6px; padding: 6px 16px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s;">
                             <span class="material-symbols-outlined" style="font-size: 1.8rem;">visibility</span>
-                            VIEW
+                            <span>VIEW</span>
                         </a>
-                        <button type="button" class="btn btn-sm btn-outline-danger editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or link PDF/Media for this VIEW button">
-                            <i class="fa-solid fa-file-arrow-up"></i>
+                        <button type="button" class="btn btn-sm editor-doc-btn" onclick="openDocMediaModal(this)" title="Upload or change document file">
+                            <i class="fa-solid fa-file-arrow-up"></i> <span>Change / Upload</span>
                         </button>
                     </div>
                 </div>
@@ -8918,10 +9101,18 @@
 
         // Intercept clicks on View buttons and Avatar profile photos in editor canvas to open modals directly
         document.addEventListener('DOMContentLoaded', function() {
+            ensureDocUploadButtons();
+
             const canvas = document.getElementById('liveCanvas');
             if (canvas) {
+                // Ensure upload buttons on canvas mutations
+                const docObserver = new MutationObserver(function() {
+                    ensureDocUploadButtons();
+                });
+                docObserver.observe(canvas, { childList: true, subtree: true });
+
                 canvas.addEventListener('click', function(e) {
-                    const viewBtn = e.target.closest('a.download-btn');
+                    const viewBtn = e.target.closest('a.download-btn, a.doc-view-btn, a.texmin-btn-view, a.btn-doc-view, .editor-doc-btn, a.dbim-pill-link, a.tc-download-pill, a.tc-link-pill, .doc-type-size-col, .doc-pdf-svg');
                     if (viewBtn) {
                         e.preventDefault();
                         e.stopPropagation();
@@ -8938,6 +9129,20 @@
                     }
                 });
             }
+
+            // Automatically clean up any lingering modal backdrop when any modal hides
+            document.querySelectorAll('.modal').forEach(m => {
+                m.addEventListener('hidden.bs.modal', function() {
+                    forceCleanupModalBackdrops();
+                });
+            });
+
+            // Emergency click handler to dismiss lingering modal-backdrops
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList && e.target.classList.contains('modal-backdrop')) {
+                    forceCleanupModalBackdrops();
+                }
+            });
         });
 
         // ============================================================
@@ -9032,13 +9237,144 @@
             showToast(`Switched layout to ${cols} columns`);
         }
 
+        let activeBookCardForDesc = null;
+        function editBookDescriptionModal(btn) {
+            const card = btn.closest('.dbim-book-card');
+            if (!card) return;
+            activeBookCardForDesc = card;
+
+            let modal = document.getElementById('editorBookDescModal');
+            if (!modal) {
+                const modalHtml = `
+                <div class="modal fade" id="editorBookDescModal" tabindex="-1" aria-hidden="true" style="z-index: 2600;">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content border-0 shadow-lg">
+                            <div class="modal-header text-white" style="background: linear-gradient(135deg, #500a2f 0%, #721835 100%);">
+                                <h5 class="modal-title fs-5 fw-bold"><i class="fa-solid fa-file-lines me-2 text-warning"></i> Edit Publication Description</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Publication Title</label>
+                                    <input type="text" id="editorBookInputTitle" class="form-control">
+                                </div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Category / Badge</label>
+                                        <input type="text" id="editorBookInputBadge" class="form-control" placeholder="e.g. Official Publication">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Publisher Info</label>
+                                        <input type="text" id="editorBookInputPublisher" class="form-control" placeholder="e.g. Textiles Committee, Govt. of India">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Full Description / Overview (HTML supported)</label>
+                                    <textarea id="editorBookInputDesc" class="form-control" rows="6" placeholder="Enter detailed publication overview and summary..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger fw-bold" style="background: #721835; border-color: #721835;" onclick="saveBookCardDescription()">Save Description</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+                modal = document.getElementById('editorBookDescModal');
+            }
+
+            const titleEl = card.querySelector('.dbim-book-title, .wbg-details-book-title, h1, h2, h3, h4');
+            const title = card.getAttribute('data-book-title') || (titleEl ? titleEl.innerText.trim() : '');
+            const badge = card.getAttribute('data-book-badge') || 'Textiles Committee Publication';
+            const publisher = card.getAttribute('data-book-publisher') || 'Textiles Committee, Ministry of Textiles, Govt. of India';
+            
+            const descEl = card.querySelector('.dbim-book-description');
+            const desc = card.getAttribute('data-book-description') || (descEl ? descEl.innerHTML.trim() : '');
+
+            document.getElementById('editorBookInputTitle').value = title;
+            document.getElementById('editorBookInputBadge').value = badge;
+            document.getElementById('editorBookInputPublisher').value = publisher;
+            document.getElementById('editorBookInputDesc').value = desc;
+
+            const bsModal = bootstrap.Modal.getInstance(modal) || new bootstrap.Modal(modal);
+            bsModal.show();
+        }
+
+        function saveBookCardDescription() {
+            if (!activeBookCardForDesc) return;
+            const card = activeBookCardForDesc;
+
+            const title = document.getElementById('editorBookInputTitle').value.trim();
+            const badge = document.getElementById('editorBookInputBadge').value.trim();
+            const publisher = document.getElementById('editorBookInputPublisher').value.trim();
+            const desc = document.getElementById('editorBookInputDesc').value.trim();
+
+            card.setAttribute('data-book-title', title);
+            card.setAttribute('data-book-badge', badge);
+            card.setAttribute('data-book-publisher', publisher);
+            card.setAttribute('data-book-description', desc);
+
+            const titleEl = card.querySelector('.dbim-book-title, .wbg-details-book-title');
+            if (titleEl && title) {
+                titleEl.innerText = title;
+            }
+
+            let descEl = card.querySelector('.dbim-book-description');
+            if (!descEl) {
+                descEl = document.createElement('div');
+                descEl.className = 'dbim-book-description d-none';
+                card.appendChild(descEl);
+            }
+            descEl.innerHTML = desc;
+
+            const modal = document.getElementById('editorBookDescModal');
+            if (modal) {
+                const bsModal = bootstrap.Modal.getInstance(modal);
+                if (bsModal) bsModal.hide();
+            }
+            showToast('Publication description saved! Remember to click Save Page.');
+        }
+
         // ============================================================
         // PHOTO GALLERY HANDLERS
         // ============================================================
+        function updateAllAlbumPhotoCounts(section) {
+            section = section || document.querySelector('.dbim-photo-gallery-section');
+            if (!section) return;
+
+            const detailView = section.querySelector('.dbim-album-detail-view');
+            const cols = section.querySelectorAll('.dbim-photo-col');
+
+            cols.forEach(col => {
+                const slug = col.getAttribute('data-album-slug');
+                if (!slug || !detailView) return;
+                const subgrid = detailView.querySelector(`.dbim-album-subgrid[data-album-slug="${slug}"]`);
+                const count = subgrid ? (subgrid.querySelectorAll('.dbim-album-photo-col').length || subgrid.querySelectorAll('.dbim-album-photo-card').length) : 0;
+                const itemsSpan = col.querySelector('.dbim-photo-items');
+                if (itemsSpan) {
+                    itemsSpan.innerText = `${count} ${count === 1 ? 'PHOTO' : 'PHOTOS'}`;
+                }
+            });
+
+            // Also update active album header in detail view if open
+            if (detailView) {
+                const activeSubgrid = Array.from(detailView.querySelectorAll('.dbim-album-subgrid')).find(g => g.style.display !== 'none');
+                if (activeSubgrid) {
+                    const count = activeSubgrid.querySelectorAll('.dbim-album-photo-col').length || activeSubgrid.querySelectorAll('.dbim-album-photo-card').length;
+                    const badge = detailView.querySelector('.dbim-album-count-badge');
+                    if (badge) {
+                        badge.innerText = `${count} ${count === 1 ? 'Photo' : 'Photos'}`;
+                    }
+                }
+            }
+        }
+
         function addPhotoCard(btn) {
             const section = btn.closest('.dbim-photo-gallery-section') || document.querySelector('.dbim-photo-gallery-section');
             if (!section) return;
             const grid = section.querySelector('.dbim-photo-grid');
+            const detailView = section.querySelector('.dbim-album-detail-view');
             if (!grid) return;
 
             const currentCols = grid.getAttribute('data-cols') || '3';
@@ -9046,41 +9382,98 @@
             if (currentCols === '2') colClass = 'col-lg-6 col-md-6';
             else if (currentCols === '4') colClass = 'col-lg-3 col-md-6';
 
+            const newSlug = 'album-' + Date.now();
+            const newTitle = 'New Event Photo Gallery';
+            const newDate = new Date().toLocaleDateString('en-GB').replace(/\//g, '.');
+
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = renderPhotoCardItemHtml({
-                title: 'New Event Photo Gallery',
-                date: new Date().toLocaleDateString('en-GB'),
-                itemsCount: '10',
-                category: 'Convocations',
+                title: newTitle,
+                date: newDate,
+                itemsCount: '1',
+                category: 'Events',
+                slug: newSlug,
                 imgUrl: '/assets/images/gallery_nift_convocation.png'
             }).trim();
 
             const newCol = tempDiv.firstElementChild;
             newCol.className = colClass + ' dbim-photo-col';
             grid.appendChild(newCol);
-            showToast('New photo gallery item added!');
+
+            // Automatically create matching subgrid in detailView
+            if (detailView) {
+                const newSubgrid = document.createElement('div');
+                newSubgrid.className = 'row g-4 dbim-album-subgrid dbim-album-photos-grid';
+                newSubgrid.setAttribute('data-album-slug', newSlug);
+                newSubgrid.style.display = 'none';
+                newSubgrid.innerHTML = renderAlbumPhotoItemHtml({
+                    imgUrl: '/assets/images/gallery_nift_convocation.png',
+                    title: newTitle + ' - Photo 1'
+                });
+                detailView.appendChild(newSubgrid);
+            }
+
+            updateAllAlbumPhotoCounts(section);
+            showToast('New album created! Click on it to view or add photos.');
             newCol.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function duplicatePhotoCard(btn) {
             const col = btn.closest('.dbim-photo-col');
             if (!col) return;
+            const section = col.closest('.dbim-photo-gallery-section');
+            const detailView = section ? section.querySelector('.dbim-album-detail-view') : null;
+            const oldSlug = col.getAttribute('data-album-slug');
+            const newSlug = 'album-' + Date.now();
+
             const clone = col.cloneNode(true);
+            clone.setAttribute('data-album-slug', newSlug);
+            const titleEl = clone.querySelector('.dbim-photo-title');
+            if (titleEl) titleEl.innerText = titleEl.innerText.trim() + ' (Copy)';
+
+            const innerCard = clone.querySelector('.dbim-photo-card');
+            if (innerCard) {
+                innerCard.setAttribute('onclick', `openPhotoAlbum('${newSlug}', this)`);
+            }
+            clone.querySelectorAll('[onclick*="openPhotoAlbum"]').forEach(btnEl => {
+                btnEl.setAttribute('onclick', `event.stopPropagation(); openPhotoAlbum('${newSlug}', this)`);
+            });
+
             col.parentNode.insertBefore(clone, col.nextSibling);
-            showToast('Photo item duplicated!');
+
+            if (detailView && oldSlug) {
+                const oldSubgrid = detailView.querySelector(`.dbim-album-subgrid[data-album-slug="${oldSlug}"]`);
+                if (oldSubgrid) {
+                    const cloneSubgrid = oldSubgrid.cloneNode(true);
+                    cloneSubgrid.setAttribute('data-album-slug', newSlug);
+                    cloneSubgrid.style.display = 'none';
+                    oldSubgrid.parentNode.insertBefore(cloneSubgrid, oldSubgrid.nextSibling);
+                }
+            }
+
+            updateAllAlbumPhotoCounts(section);
+            showToast('Album and its photos duplicated!');
         }
 
         function deletePhotoCard(btn) {
             const col = btn.closest('.dbim-photo-col');
             if (!col) return;
+            const section = col.closest('.dbim-photo-gallery-section');
             const grid = col.closest('.dbim-photo-grid');
             if (grid && grid.querySelectorAll('.dbim-photo-col').length <= 1) {
-                alert('At least one photo item must remain in the gallery.');
+                alert('At least one photo album must remain in the gallery.');
                 return;
             }
-            if (confirm('Are you sure you want to delete this photo item?')) {
+            const title = col.querySelector('.dbim-photo-title')?.innerText || 'this album';
+            if (confirm(`Are you sure you want to delete "${title}" and all its photos?`)) {
+                const slug = col.getAttribute('data-album-slug');
+                if (slug && section) {
+                    const subgrid = section.querySelector(`.dbim-album-subgrid[data-album-slug="${slug}"]`);
+                    if (subgrid) subgrid.remove();
+                }
                 col.remove();
-                showToast('Photo item deleted.');
+                updateAllAlbumPhotoCounts(section);
+                showToast('Album deleted.');
             }
         }
 
@@ -9171,7 +9564,85 @@
         // ============================================================
         // VISUAL EDITOR ALBUM DETAIL & PHOTOS HANDLERS
         // ============================================================
+        function syncDetailViewToActiveCard(section) {
+            section = section || document.querySelector('.dbim-photo-gallery-section');
+            if (!section) return;
+            const detailView = section.querySelector('.dbim-album-detail-view');
+            if (!detailView) return;
+
+            const activeSubgrid = Array.from(detailView.querySelectorAll('.dbim-album-subgrid')).find(g => g.style.display !== 'none');
+            const slug = detailView.getAttribute('data-active-album-slug') || (activeSubgrid ? activeSubgrid.getAttribute('data-album-slug') : null);
+            if (!slug) return;
+
+            const card = section.querySelector(`.dbim-photo-col[data-album-slug="${slug}"]`);
+            if (!card) return;
+
+            const titleEl = detailView.querySelector('.dbim-album-title-text');
+            if (titleEl) {
+                const newTitle = titleEl.innerText.trim();
+                if (newTitle) {
+                    const cardTitleEl = card.querySelector('.dbim-photo-title');
+                    if (cardTitleEl && cardTitleEl.innerText.trim() !== newTitle) {
+                        cardTitleEl.innerText = newTitle;
+                    }
+                    card.setAttribute('data-title', newTitle.toLowerCase());
+                }
+            }
+
+            const dateEl = detailView.querySelector('.dbim-album-date-text');
+            if (dateEl) {
+                const newDate = dateEl.innerText.trim();
+                if (newDate) {
+                    const cardDateEl = card.querySelector('.dbim-photo-date');
+                    if (cardDateEl) {
+                        cardDateEl.innerHTML = `<i class="fa-regular fa-calendar me-1" style="font-size: 1.15rem;"></i>${newDate}`;
+                    }
+                    card.setAttribute('data-date', newDate);
+                }
+            }
+        }
+
+        // Live bidirectional synchronization for editable album titles and dates
+        document.addEventListener('input', function(e) {
+            if (e.target.closest('.dbim-album-title-text') || e.target.closest('.dbim-album-date-text')) {
+                const section = e.target.closest('.dbim-photo-gallery-section');
+                if (section) syncDetailViewToActiveCard(section);
+            } else if (e.target.closest('.dbim-photo-title')) {
+                const col = e.target.closest('.dbim-photo-col');
+                if (col) {
+                    const newTitle = e.target.innerText.trim();
+                    col.setAttribute('data-title', newTitle.toLowerCase());
+                    const section = col.closest('.dbim-photo-gallery-section');
+                    const detailView = section ? section.querySelector('.dbim-album-detail-view') : null;
+                    if (detailView && detailView.getAttribute('data-active-album-slug') === col.getAttribute('data-album-slug')) {
+                        const detailTitle = detailView.querySelector('.dbim-album-title-text');
+                        if (detailTitle) detailTitle.innerText = newTitle;
+                    }
+                }
+            } else if (e.target.closest('.dbim-photo-date')) {
+                const col = e.target.closest('.dbim-photo-col');
+                if (col) {
+                    const newDate = e.target.innerText.trim();
+                    col.setAttribute('data-date', newDate);
+                    const section = col.closest('.dbim-photo-gallery-section');
+                    const detailView = section ? section.querySelector('.dbim-album-detail-view') : null;
+                    if (detailView && detailView.getAttribute('data-active-album-slug') === col.getAttribute('data-album-slug')) {
+                        const detailDate = detailView.querySelector('.dbim-album-date-text');
+                        if (detailDate) detailDate.innerText = newDate;
+                    }
+                }
+            }
+        });
+
         function openPhotoAlbum(albumSlug, el) {
+            // Only ignore click if specifically editing title or date text
+            if (window.event && window.event.target && window.event.target.closest) {
+                const isEditingText = window.event.target.closest('.dbim-photo-title, .dbim-photo-date');
+                if (isEditingText) {
+                    return;
+                }
+            }
+
             const section = el ? el.closest('.dbim-photo-gallery-section') : document.querySelector('.dbim-photo-gallery-section');
             if (!section) return;
 
@@ -9183,6 +9654,8 @@
             const title = card ? (card.querySelector('.dbim-photo-title')?.innerText || card.getAttribute('data-title') || '').trim() : '';
             const date = card ? (card.querySelector('.dbim-photo-date')?.innerText || card.getAttribute('data-date') || '').trim() : '';
 
+            detailView.setAttribute('data-active-album-slug', albumSlug);
+
             const titleEl = detailView.querySelector('.dbim-album-title-text');
             const dateEl = detailView.querySelector('.dbim-album-date-text');
             if (titleEl && title) titleEl.innerText = title;
@@ -9190,16 +9663,25 @@
 
             // Show selected album subgrid
             detailView.querySelectorAll('.dbim-album-subgrid').forEach(sg => sg.style.display = 'none');
-            const targetSubgrid = detailView.querySelector(`.dbim-album-subgrid[data-album-slug="${albumSlug}"]`);
-            if (targetSubgrid) {
-                targetSubgrid.style.display = '';
-            } else {
-                let firstGrid = detailView.querySelector('.dbim-album-subgrid');
-                if (firstGrid) firstGrid.style.display = '';
+            let targetSubgrid = detailView.querySelector(`.dbim-album-subgrid[data-album-slug="${albumSlug}"]`);
+            if (!targetSubgrid) {
+                targetSubgrid = document.createElement('div');
+                targetSubgrid.className = 'row g-4 dbim-album-subgrid dbim-album-photos-grid';
+                targetSubgrid.setAttribute('data-album-slug', albumSlug);
+                targetSubgrid.innerHTML = renderAlbumPhotoItemHtml({
+                    imgUrl: card ? (card.querySelector('img')?.src || '/assets/images/gallery_nift_convocation.png') : '/assets/images/gallery_nift_convocation.png',
+                    title: (title || 'Photo 1')
+                });
+                detailView.appendChild(targetSubgrid);
             }
+            targetSubgrid.style.display = '';
 
             albumsView.style.display = 'none';
             detailView.style.display = 'block';
+            updateAllAlbumPhotoCounts(section);
+            if (typeof enhanceAlbumControlBars === 'function') {
+                enhanceAlbumControlBars();
+            }
             showToast(`Opened album: ${title || albumSlug}`);
         }
 
@@ -9211,8 +9693,10 @@
             const detailView = section.querySelector('.dbim-album-detail-view');
             if (!albumsView || !detailView) return;
 
+            syncDetailViewToActiveCard(section);
             detailView.style.display = 'none';
             albumsView.style.display = 'block';
+            updateAllAlbumPhotoCounts(section);
             showToast('Returned to Photo Albums overview');
         }
 
@@ -9226,26 +9710,187 @@
             if (albumsView.style.display === 'none') {
                 closePhotoAlbum(btn);
             } else {
-                openPhotoAlbum('nift-convocation-2026', btn);
+                const firstCard = section.querySelector('.dbim-photo-col');
+                const firstSlug = firstCard ? firstCard.getAttribute('data-album-slug') : 'nift-convocation-2026';
+                openPhotoAlbum(firstSlug, firstCard);
             }
         }
 
+        let activeAlbumSubgridForUpload = null;
+        let targetAlbumSubgrid = null;
+
+        function getActiveAlbumSubgrid(btn) {
+            const detailView = btn ? (btn.closest('.dbim-album-detail-view') || document.querySelector('.dbim-album-detail-view')) : document.querySelector('.dbim-album-detail-view');
+            if (!detailView) return null;
+            return Array.from(detailView.querySelectorAll('.dbim-album-subgrid')).find(g => g.style.display !== 'none') || detailView.querySelector('.dbim-album-subgrid');
+        }
+
+        function triggerAlbumUpload(btn) {
+            const activeSubgrid = getActiveAlbumSubgrid(btn);
+            if (!activeSubgrid) {
+                alert('Please open an album first to upload photos.');
+                return;
+            }
+            activeAlbumSubgridForUpload = activeSubgrid;
+
+            let fileInput = document.getElementById('dbimAlbumMultiFileInput');
+            if (!fileInput) {
+                fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.id = 'dbimAlbumMultiFileInput';
+                fileInput.accept = 'image/*';
+                fileInput.multiple = true;
+                fileInput.style.display = 'none';
+                fileInput.addEventListener('change', handleAlbumMultiFileUpload);
+                document.body.appendChild(fileInput);
+            }
+            fileInput.value = '';
+            fileInput.click();
+        }
+
+        async function handleAlbumMultiFileUpload(event) {
+            const files = Array.from(event.target.files || []);
+            if (!files.length) return;
+
+            const targetSubgrid = activeAlbumSubgridForUpload || getActiveAlbumSubgrid();
+            if (!targetSubgrid) {
+                alert('Active album not found. Please re-open the album.');
+                return;
+            }
+
+            const detailView = targetSubgrid.closest('.dbim-album-detail-view');
+            const section = targetSubgrid.closest('.dbim-photo-gallery-section');
+            const albumTitle = (detailView?.querySelector('.dbim-album-title-text')?.innerText || 'Photo').trim();
+            const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}';
+
+            showToast(`Uploading ${files.length} photo(s)... Please wait.`);
+
+            let uploadedCount = 0;
+            let lastNewCol = null;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const formData = new FormData();
+                formData.append('image', file);
+
+                try {
+                    const res = await fetch("{{ route('admin.pages.upload-image') }}", {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': csrf,
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        const imgUrl = data.url || data.relative_url;
+                        const currentCount = (targetSubgrid.querySelectorAll('.dbim-album-photo-col').length || targetSubgrid.querySelectorAll('.dbim-album-photo-card').length) + 1;
+                        
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = renderAlbumPhotoItemHtml({
+                            imgUrl: imgUrl,
+                            title: `${albumTitle} - Photo ${currentCount}`
+                        }).trim();
+
+                        const newCol = tempDiv.firstElementChild;
+                        targetSubgrid.appendChild(newCol);
+                        lastNewCol = newCol;
+                        uploadedCount++;
+                    } else {
+                        console.error('Photo upload failed for file:', file.name, data.message);
+                    }
+                } catch (err) {
+                    console.error('Photo upload error for file:', file.name, err);
+                }
+            }
+
+            if (section && typeof updateAllAlbumPhotoCounts === 'function') {
+                updateAllAlbumPhotoCounts(section);
+            }
+
+            if (uploadedCount > 0) {
+                showToast(`Successfully added ${uploadedCount} photo(s) to album!`);
+                if (lastNewCol) {
+                    lastNewCol.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            } else {
+                alert('Failed to upload selected photo(s). Please check image format and file size.');
+            }
+        }
+
+        function addPhotoFromMediaLibrary(btn) {
+            const activeSubgrid = getActiveAlbumSubgrid(btn);
+            if (!activeSubgrid) {
+                alert('Please open an album first.');
+                return;
+            }
+            targetAlbumSubgrid = activeSubgrid;
+            openImagePicker('add_to_album', null);
+        }
+
         function addPhotoToAlbum(btn) {
+            triggerAlbumUpload(btn);
+        }
+
+        function addBlankPhotoToAlbum(btn) {
             const detailView = btn.closest('.dbim-album-detail-view');
             if (!detailView) return;
             const activeSubgrid = Array.from(detailView.querySelectorAll('.dbim-album-subgrid')).find(g => g.style.display !== 'none') || detailView.querySelector('.dbim-album-subgrid');
             if (!activeSubgrid) return;
 
+            const albumTitle = detailView.querySelector('.dbim-album-title-text')?.innerText || 'Photo';
+            const count = (activeSubgrid.querySelectorAll('.dbim-album-photo-col').length || activeSubgrid.querySelectorAll('.dbim-album-photo-card').length) + 1;
+
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = renderAlbumPhotoItemHtml({
-                imgUrl: '/assets/images/nift_img_1.jpg',
-                title: 'New Album Photo'
+                imgUrl: '/assets/images/gallery_nift_convocation.png',
+                title: `${albumTitle} - Photo ${count}`
             }).trim();
 
             const newCol = tempDiv.firstElementChild;
             activeSubgrid.appendChild(newCol);
-            showToast('New photo added to album!');
+            
+            const section = btn.closest('.dbim-photo-gallery-section');
+            updateAllAlbumPhotoCounts(section);
+
+            showToast('Blank photo card added! Click "Change" on photo to upload image.');
             newCol.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function changePhotoItemImage(btn) {
+            const card = btn.closest('.dbim-album-photo-card, .dbim-photo-card, .position-relative') || btn.parentElement;
+            const img = card ? card.querySelector('img') : null;
+            if (img) {
+                openImagePicker('replace', img);
+            } else {
+                openAvatarModal(btn);
+            }
+        }
+
+        function enhanceAlbumControlBars() {
+            document.querySelectorAll('.editor-album-ctrl').forEach(ctrl => {
+                if (!ctrl.querySelector('.dbim-album-upload-btn-group')) {
+                    ctrl.classList.add('flex-wrap', 'gap-2');
+                    ctrl.innerHTML = `
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge" style="background: #721835; font-size: 1rem; padding: 6px 12px;"><i class="fa-solid fa-images me-1"></i> Album Photos</span>
+                            <span class="text-muted small fw-semibold">Upload photos, choose from media gallery, or manage photos</span>
+                        </div>
+                        <div class="d-flex flex-wrap align-items-center gap-2 dbim-album-upload-btn-group">
+                            <button type="button" class="btn btn-sm btn-success fw-bold editor-album-photo-btn" onclick="triggerAlbumUpload(this)" title="Upload photos directly from your computer">
+                                <i class="fa-solid fa-cloud-arrow-up me-1"></i> Upload Photos
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary fw-bold editor-album-photo-btn" onclick="addPhotoFromMediaLibrary(this)" title="Pick photo from Media Library">
+                                <i class="fa-solid fa-photo-film me-1"></i> Media Library
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light border fw-bold editor-album-photo-btn" onclick="addBlankPhotoToAlbum(this)" title="Add an empty photo card">
+                                <i class="fa-solid fa-plus me-1"></i> Add Blank Card
+                            </button>
+                        </div>
+                    `;
+                }
+            });
         }
 
         function duplicateAlbumPhoto(btn) {
@@ -9253,6 +9898,8 @@
             if (!col) return;
             const clone = col.cloneNode(true);
             col.parentNode.insertBefore(clone, col.nextSibling);
+            const section = btn.closest('.dbim-photo-gallery-section');
+            updateAllAlbumPhotoCounts(section);
             showToast('Album photo duplicated!');
         }
 
@@ -9265,7 +9912,9 @@
                 return;
             }
             if (confirm('Are you sure you want to delete this photo from the album?')) {
+                const section = btn.closest('.dbim-photo-gallery-section');
                 col.remove();
+                updateAllAlbumPhotoCounts(section);
                 showToast('Photo deleted from album.');
             }
         }
@@ -9286,6 +9935,98 @@
                     showToast('Moved photo right');
                 }
             }
+        }
+
+        let activeAlbumCardForEdit = null;
+        function editAlbumInfoModal(btn) {
+            const card = btn.closest('.dbim-photo-col');
+            if (!card) return;
+            activeAlbumCardForEdit = card;
+
+            let modal = document.getElementById('editorAlbumEditModal');
+            if (!modal) {
+                const modalHtml = `
+                <div class="modal fade" id="editorAlbumEditModal" tabindex="-1" aria-hidden="true" style="z-index: 2600;">
+                    <div class="modal-dialog modal-md modal-dialog-centered">
+                        <div class="modal-content border-0 shadow-lg">
+                            <div class="modal-header text-white" style="background: linear-gradient(135deg, #500a2f 0%, #721835 100%);">
+                                <h5 class="modal-title fs-5 fw-bold"><i class="fa-solid fa-pen-to-square me-2 text-warning"></i> Edit Album Information</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Album Title</label>
+                                    <input type="text" id="editorAlbumInputTitle" class="form-control" placeholder="e.g. NIFT Convocation 2026">
+                                </div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Event Date</label>
+                                        <input type="text" id="editorAlbumInputDate" class="form-control" placeholder="e.g. 31.08.2026">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Category</label>
+                                        <input type="text" id="editorAlbumInputCategory" class="form-control" placeholder="e.g. Convocations, Conferences">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger fw-bold" style="background: #721835; border-color: #721835;" onclick="saveAlbumInfo()">Save Album Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+                modal = document.getElementById('editorAlbumEditModal');
+            }
+
+            const title = (card.querySelector('.dbim-photo-title')?.innerText || card.getAttribute('data-title') || '').trim();
+            const date = (card.querySelector('.dbim-photo-date')?.innerText || card.getAttribute('data-date') || '').trim();
+            const category = card.getAttribute('data-category') || 'Events';
+
+            document.getElementById('editorAlbumInputTitle').value = title;
+            document.getElementById('editorAlbumInputDate').value = date;
+            document.getElementById('editorAlbumInputCategory').value = category;
+
+            const bsModal = bootstrap.Modal.getInstance(modal) || new bootstrap.Modal(modal);
+            bsModal.show();
+        }
+
+        function saveAlbumInfo() {
+            if (!activeAlbumCardForEdit) return;
+            const card = activeAlbumCardForEdit;
+
+            const title = document.getElementById('editorAlbumInputTitle').value.trim();
+            const date = document.getElementById('editorAlbumInputDate').value.trim();
+            const category = document.getElementById('editorAlbumInputCategory').value.trim();
+
+            card.setAttribute('data-title', title.toLowerCase());
+            card.setAttribute('data-date', date);
+            card.setAttribute('data-category', category);
+
+            const titleEl = card.querySelector('.dbim-photo-title');
+            if (titleEl) titleEl.innerText = title;
+
+            const dateEl = card.querySelector('.dbim-photo-date');
+            if (dateEl) {
+                dateEl.innerHTML = `<i class="fa-regular fa-calendar me-1" style="font-size: 1.15rem;"></i>${date}`;
+            }
+
+            const section = card.closest('.dbim-photo-gallery-section');
+            const detailView = section ? section.querySelector('.dbim-album-detail-view') : null;
+            if (detailView && detailView.getAttribute('data-active-album-slug') === card.getAttribute('data-album-slug')) {
+                const dtTitle = detailView.querySelector('.dbim-album-title-text');
+                if (dtTitle) dtTitle.innerText = title;
+                const dtDate = detailView.querySelector('.dbim-album-date-text');
+                if (dtDate) dtDate.innerText = date;
+            }
+
+            const modal = document.getElementById('editorAlbumEditModal');
+            if (modal) {
+                const bsModal = bootstrap.Modal.getInstance(modal);
+                if (bsModal) bsModal.hide();
+            }
+            showToast('Album information updated!');
         }
 
         // ============================================================
@@ -10315,9 +11056,9 @@
                                  style="border: 2px dashed #500a2f !important; cursor: pointer;" 
                                  onclick="document.getElementById('docModalFileInput').click()">
                                 <i class="fa-solid fa-file-arrow-up text-danger mb-2" style="font-size: 46px;"></i>
-                                <h6 class="fw-bold mb-1" style="color: #500a2f;">Click to select PDF or Document from your computer</h6>
-                                <p class="text-muted small mb-0">PDF, DOC, DOCX, XLS, XLSX up to 20MB are supported</p>
-                                <input type="file" id="docModalFileInput" class="d-none" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt" onchange="uploadDocModalFile(this.files[0])">
+                                <h6 class="fw-bold mb-1" style="color: #500a2f;">Click to select Document from your computer</h6>
+                                <p class="text-muted small mb-0">PDF, Word (DOC/DOCX), Excel (XLS/XLSX), PPT, CSV, ZIP up to 200MB are supported</p>
+                                <input type="file" id="docModalFileInput" class="d-none" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.rar,.csv" onchange="uploadDocModalFile(this.files[0])">
                             </div>
                             <div id="docModalUploadStatus" class="alert alert-info d-none text-center py-2 mt-3 mb-0"></div>
                             <small class="text-muted d-block mt-2 text-center">

@@ -177,7 +177,7 @@ class ContactUsAdminController extends Controller
             <p style="font-size: 1.45rem; line-height: 1.6; color: #555; margin-bottom: 14px;">
                 Facing technical, dyeing, or fabric production issues? Submit your issue or view verified solutions.
             </p>
-            <a href="/tcwebsite/public/industry-tech-issues" class="btn text-white fw-bold py-2 px-4 d-inline-flex align-items-center justify-content-center gap-2 w-100" style="background: #6c1340; border-radius: 8px; font-size: 1.5rem;">
+            <a href="/industry-tech-issues" class="btn tc-contact-btn-primary fw-bold py-2 px-4 d-inline-flex align-items-center justify-content-center gap-2 w-100 shadow-sm" style="background: #721835; border-color: #721835; color: #ffffff !important; border-radius: 6px; font-size: 15px; text-decoration: none;">
                 <i class="fa fa-wrench"></i>
                 <span>Industry Tech Issues Portal</span>
             </a>
@@ -228,7 +228,7 @@ class ContactUsAdminController extends Controller
                             </div>
 
                             <div class="mt-4">
-                                <button type="submit" class="btn text-white fw-bold py-3 px-5 shadow-sm" style="background: #6c1340; border-radius: 8px; font-size: 1.6rem; border: none;">
+                                <button type="submit" class="btn tc-contact-btn-primary fw-bold py-2 px-4 shadow-sm" style="background: #721835; border-color: #721835; color: #ffffff !important; border-radius: 6px; font-size: 15px;">
                                     <i class="fa fa-paper-plane me-2"></i> Submit Inquiry
                                 </button>
                             </div>
@@ -265,10 +265,10 @@ class ContactUsAdminController extends Controller
                 The Textiles Committee operates 28 Regional Offices and 19 state-of-the-art testing laboratories located across all major textile producing and exporting hubs in India, including Ahmedabad, Bengaluru, Chennai, Coimbatore, Hyderabad, Indore, Jaipur, Kanpur, Kolkata, Ludhiana, New Delhi, Surat, and Tirupur.
             </p>
             <div class="d-flex flex-wrap gap-3 mt-3">
-                <a href="/tcwebsite/public/page/office-network" class="btn text-white fw-bold py-2 px-4" style="background: #500a2f; border-radius: 8px; font-size: 1.55rem;">
+                <a href="/page/office-network" class="btn tc-contact-btn-primary fw-bold py-2 px-4 shadow-sm" style="background: #721835; border-color: #721835; color: #ffffff !important; border-radius: 6px; font-size: 15px; text-decoration: none;">
                     <i class="fa fa-building me-2"></i> View Regional Offices Directory
                 </a>
-                <a href="/tcwebsite/public/page/testing-laboratories" class="btn btn-outline-dark fw-bold py-2 px-4" style="border-radius: 8px; font-size: 1.55rem; border-color: #500a2f; color: #500a2f;">
+                <a href="/page/testing-laboratories" class="btn tc-contact-btn-outline fw-bold py-2 px-4 shadow-sm" style="background: #ffffff; border-color: #721835; color: #721835 !important; border-radius: 6px; font-size: 15px; text-decoration: none;">
                     <i class="fa fa-flask me-2"></i> Laboratory Testing Services
                 </a>
             </div>
