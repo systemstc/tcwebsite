@@ -107,8 +107,14 @@
                 ? ($page->content_hi ?: $page->content_en) 
                 : ($page->content_en ?: $page->content_hi);
 
-            // Auto-resolve relative asset and upload URLs for subfolder installations (e.g. /tcwebsite/public)
+            // Auto-resolve relative asset and upload URLs for subfolder installations (e.g. /tcwebsite/public) or server domains
             if (!empty($contentHtml)) {
+                // Ensure any hardcoded localhost URLs are stripped and dynamically point to the current server
+                $contentHtml = preg_replace('#(?:https?:)?//localhost(?::\d+)?(?:/tcwebsite/public)?/assets/#i', asset('assets') . '/', $contentHtml);
+                $contentHtml = preg_replace('#(?:https?:)?//localhost(?::\d+)?(?:/tcwebsite/public)?/uploads/#i', asset('uploads') . '/', $contentHtml);
+                $contentHtml = preg_replace('#(?:https?:)?//localhost(?::\d+)?(?:/tcwebsite/public)?/page/#i', url('/page') . '/', $contentHtml);
+                $contentHtml = preg_replace('#(?:https?:)?//localhost(?::\d+)?(?:/tcwebsite/public)?/industry-tech-issues#i', url('/industry-tech-issues'), $contentHtml);
+
                 $contentHtml = preg_replace('/src="\/assets\//i', 'src="' . asset('assets') . '/', $contentHtml);
                 $contentHtml = preg_replace('/src="\/uploads\//i', 'src="' . asset('uploads') . '/', $contentHtml);
                 $contentHtml = preg_replace('/href="\/uploads\//i', 'href="' . asset('uploads') . '/', $contentHtml);

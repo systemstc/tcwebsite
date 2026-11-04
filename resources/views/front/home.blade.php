@@ -180,7 +180,7 @@
                     <!-- Offerings List Box -->
                     <div class="offerings-list-box" id="tabContentSchemes">
                         @forelse($schemes as $scheme)
-                            <a href="{{ $scheme->link_url ?: ($scheme->guidelines_doc ? asset($scheme->guidelines_doc) : '#') }}" class="offerings-item">
+                            <a href="{{ $scheme->link_url ? url($scheme->link_url) : ($scheme->guidelines_doc ? asset($scheme->guidelines_doc) : '#') }}" class="offerings-item">
                                 <span>{{ $scheme->title_en }}</span>
                                 <i class="fa fa-chevron-right"></i>
                             </a>

@@ -29,6 +29,19 @@ class Media extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getUrlAttribute($value): string
+    {
+        if (empty($value)) return '';
+        // If stored with localhost, strip and resolve dynamically via asset()
+        if (preg_match('#^https?://localhost(?::\d+)?(?:/tcwebsite/public)?/(.*)$#i', $value, $m)) {
+            return asset($m[1]);
+        }
+        if (!str_starts_with($value, 'http://') && !str_starts_with($value, 'https://')) {
+            return asset(ltrim($value, '/'));
+        }
+        return $value;
+    }
+
     public function isImage(): bool
     {
         return $this->file_type === 'image' || in_array(strtolower($this->extension), ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp']);

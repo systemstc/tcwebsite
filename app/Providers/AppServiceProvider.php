@@ -22,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        // Force HTTPS URL generation on production or when APP_URL is configured with https://
+        if (config('app.env') === 'production' || str_starts_with((string) config('app.url'), 'https://')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         \Illuminate\Support\Facades\View::composer(['partials.header', 'layouts.front', 'front.*'], function ($view) {
             try {
                 if (Schema::hasTable('menu_items')) {
