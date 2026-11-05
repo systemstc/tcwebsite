@@ -11,9 +11,17 @@
             </h5>
             <small class="text-muted">Manage the posts, video links, tweets, and reels displayed in the 4 scrollable social cards on the homepage.</small>
         </div>
-        <a href="{{ route('admin.social-posts.create') }}" class="btn btn-cms-primary btn-sm d-flex align-items-center gap-1">
-            <span class="material-symbols-outlined" style="font-size: 18px;">add</span> Add New Social Post Link
-        </a>
+        <div class="d-flex align-items-center gap-2">
+            <form action="{{ route('admin.social-posts.sync') }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1" title="Automatically pull the latest 5 live posts from YouTube, X, Facebook, and Instagram">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">sync</span> Sync Live Feeds Now
+                </button>
+            </form>
+            <a href="{{ route('admin.social-posts.create') }}" class="btn btn-cms-primary btn-sm d-flex align-items-center gap-1">
+                <span class="material-symbols-outlined" style="font-size: 18px;">add</span> Add New Social Post Link
+            </a>
+        </div>
     </div>
 
     <!-- Quick Add Box: Paste Link Only -->

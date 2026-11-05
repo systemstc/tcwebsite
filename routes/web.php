@@ -114,6 +114,7 @@ Route::middleware(['admin.auth'])->prefix('admin')->as('admin.')->group(function
     Route::resource('personas', PersonaController::class);
     Route::resource('important-links', ImportantLinkController::class);
     Route::resource('campaigns', CampaignController::class);
+    Route::post('social-posts/sync', [SocialPostController::class, 'syncFeeds'])->name('social-posts.sync');
     Route::post('social-posts/quick-store', [SocialPostController::class, 'quickStore'])->name('social-posts.quick-store');
     Route::get('social-posts/fetch-metadata', [SocialPostController::class, 'fetchMetadata'])->name('social-posts.fetch-metadata');
     Route::resource('social-posts', SocialPostController::class);

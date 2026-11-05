@@ -46,7 +46,12 @@ class HomeController extends Controller
         // Dynamic Campaign Banners integrating CCPS and DBIM APIs with robust fallback
         $campaigns = $this->getCampaignBanners();
 
-        $socialPosts = SocialPost::where('is_active', true)->orderBy('sort_order')->get()->groupBy('platform');
+        $socialPosts = [
+            'twitter' => SocialPost::where('platform', 'twitter')->where('is_active', true)->orderBy('sort_order')->orderBy('id', 'desc')->take(5)->get(),
+            'youtube' => SocialPost::where('platform', 'youtube')->where('is_active', true)->orderBy('sort_order')->orderBy('id', 'desc')->take(5)->get(),
+            'facebook' => SocialPost::where('platform', 'facebook')->where('is_active', true)->orderBy('sort_order')->orderBy('id', 'desc')->take(5)->get(),
+            'instagram' => SocialPost::where('platform', 'instagram')->where('is_active', true)->orderBy('sort_order')->orderBy('id', 'desc')->take(5)->get(),
+        ];
         
         $aboutPage = Page::where('slug', 'history')->first() ?? Page::where('slug', 'about-us')->first();
         

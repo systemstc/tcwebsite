@@ -31,6 +31,20 @@ class SocialPostController extends Controller
     }
 
     /**
+     * Sync feeds automatically from live social media accounts (YouTube, X, Facebook, Instagram)
+     */
+    public function syncFeeds()
+    {
+        $results = \App\Services\SocialFeedSyncService::syncAll();
+        $total = array_sum($results);
+
+        ActivityLog::record('sync', 'social_posts', 0, "Synced {$total} social media posts from live accounts.");
+
+        return redirect()->route('admin.social-posts.index')
+            ->with('success', "Social feeds synced successfully! Synced {$results['youtube']} YouTube videos, {$results['twitter']} X posts, {$results['facebook']} Facebook posts, and {$results['instagram']} Instagram posts.");
+    }
+
+    /**
      * One-Click Quick Store: Paste link only, system auto-detects and auto-fetches everything!
      */
     public function quickStore(Request $request)
