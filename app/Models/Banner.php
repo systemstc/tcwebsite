@@ -12,6 +12,7 @@ class Banner extends Model
         'subtitle_hi',
         'subtitle_en',
         'image_url',
+        'display_mode',
         'link_url',
         'link_text_hi',
         'link_text_en',

@@ -1631,18 +1631,60 @@
         .hero-banner-slide {
             min-width: 100%;
             position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #150810;
+        }
+        .hero-banner-backdrop {
+            position: absolute;
+            inset: -20px;
+            background-size: cover;
+            background-position: center;
+            filter: blur(25px) brightness(0.45);
+            transform: scale(1.15);
+            z-index: 1;
+            pointer-events: none;
         }
         .hero-banner-slide a {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             height: 100%;
+            position: relative;
+            z-index: 2;
         }
-        .hero-banner-slide img {
-            width: 100%;
-            height: auto;
-            max-height: 635px;
-            object-fit: cover;
+        .hero-banner-slide img.hero-banner-img {
             display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Mode 1: Cover (Crop to fill widescreen edge-to-edge) */
+        .hero-banner-slide img.banner-fit-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Mode 2: Contain (Fit full image - complete flyer visible with ambient backdrop) */
+        .hero-banner-slide img.banner-fit-contain {
+            width: auto !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain !important;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        /* Mode 3: Fill (Stretch to fill full width & height) */
+        .hero-banner-slide img.banner-fit-fill {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: fill !important;
         }
 
         /* Hero Section Strictly Max-Height 635px in PC */
@@ -1662,35 +1704,61 @@
                 height: 635px;
                 max-height: 635px !important;
             }
-            .hero-banner-slide img {
+            .hero-banner-slide img.banner-fit-cover {
                 height: 635px !important;
                 max-height: 635px !important;
-                object-fit: cover;
+                object-fit: cover !important;
+            }
+            .hero-banner-slide img.banner-fit-contain {
+                height: 635px !important;
+                max-height: 635px !important;
+                object-fit: contain !important;
+            }
+            .hero-banner-slide img.banner-fit-fill {
+                height: 635px !important;
+                max-height: 635px !important;
+                object-fit: fill !important;
             }
         }
         @media (max-width: 991px) {
             .hero-banner-wrap {
                 max-height: 480px;
             }
-            .hero-banner-slide img {
+            .hero-banner-slide {
                 max-height: 480px;
-                object-fit: cover;
+            }
+            .hero-banner-slide img.banner-fit-cover {
+                max-height: 480px;
+                object-fit: cover !important;
+            }
+            .hero-banner-slide img.banner-fit-contain {
+                max-height: 480px;
+                object-fit: contain !important;
+            }
+            .hero-banner-slide img.banner-fit-fill {
+                max-height: 480px;
+                object-fit: fill !important;
             }
         }
         @media (max-width: 575px) {
             .hero-banner-wrap {
                 max-height: 280px;
             }
-            .hero-banner-slide img {
+            .hero-banner-slide {
                 max-height: 280px;
             }
-        }
-        .hero-banner-slide img {
-            width: 100%;
-            height: auto;
-            max-height: 635px;
-            object-fit: cover;
-            display: block;
+            .hero-banner-slide img.banner-fit-cover {
+                max-height: 280px;
+                object-fit: cover !important;
+            }
+            .hero-banner-slide img.banner-fit-contain {
+                max-height: 280px;
+                object-fit: contain !important;
+            }
+            .hero-banner-slide img.banner-fit-fill {
+                max-height: 280px;
+                object-fit: fill !important;
+            }
         }
         .hero-arrow-btn {
             position: absolute;

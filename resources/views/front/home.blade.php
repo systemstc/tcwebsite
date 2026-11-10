@@ -6,13 +6,27 @@
     <section class="hero-banner-wrap">
         <div class="hero-banner-track" id="heroTrack">
             @forelse($banners as $index => $banner)
-                <div class="hero-banner-slide">
+                @php
+                    $mode = $banner->display_mode ?? 'cover';
+                @endphp
+                <div class="hero-banner-slide banner-mode-{{ $mode }}">
+                    @if($mode === 'contain')
+                        <!-- Ambient blurred backdrop to frame non-widescreen flyers -->
+                        <div class="hero-banner-backdrop" style="background-image: url('{{ asset($banner->image_url) }}');"></div>
+                    @endif
+
                     @if(!empty($banner->link_url) && $banner->link_url !== '#')
                         <a href="{{ $banner->link_url }}" target="_blank">
-                            <img src="{{ asset($banner->image_url) }}" alt="{{ $banner->title_en ?: 'Ministry of Textiles Banner' }}" onerror="this.src='{{ asset('assets/images/hero_auditorium.png') }}'">
+                            <img src="{{ asset($banner->image_url) }}" 
+                                 alt="{{ $banner->title_en ?: 'Ministry of Textiles Banner' }}" 
+                                 class="hero-banner-img banner-fit-{{ $mode }}"
+                                 onerror="this.src='{{ asset('assets/images/hero_auditorium.png') }}'">
                         </a>
                     @else
-                        <img src="{{ asset($banner->image_url) }}" alt="{{ $banner->title_en ?: 'Ministry of Textiles Banner' }}" onerror="this.src='{{ asset('assets/images/hero_auditorium.png') }}'">
+                        <img src="{{ asset($banner->image_url) }}" 
+                             alt="{{ $banner->title_en ?: 'Ministry of Textiles Banner' }}" 
+                             class="hero-banner-img banner-fit-{{ $mode }}"
+                             onerror="this.src='{{ asset('assets/images/hero_auditorium.png') }}'">
                     @endif
                 </div>
             @empty

@@ -19,6 +19,7 @@
                     <tr>
                         <th style="width: 100px;">Preview</th>
                         <th>Title (Hindi / English)</th>
+                        <th>Fitting</th>
                         <th>Subtitle</th>
                         <th>Order</th>
                         <th>Status</th>
@@ -34,6 +35,15 @@
                             <td>
                                 <div class="fw-bold">{{ $b->title_hi }}</div>
                                 <div class="small text-muted">{{ $b->title_en }}</div>
+                            </td>
+                            <td>
+                                @if(($b->display_mode ?? 'cover') === 'contain')
+                                    <span class="badge bg-primary">Fit Full</span>
+                                @elseif(($b->display_mode ?? 'cover') === 'fill')
+                                    <span class="badge bg-warning text-dark">Stretch</span>
+                                @else
+                                    <span class="badge bg-light text-dark border">Crop (Cover)</span>
+                                @endif
                             </td>
                             <td><small class="text-muted">{{ Str::limit($b->subtitle_hi ?? $b->subtitle_en, 50) }}</small></td>
                             <td><span class="badge bg-light text-dark border">{{ $b->sort_order }}</span></td>
@@ -59,7 +69,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center py-4 text-muted">No banners found.</td>
+                            <td colspan="7" class="text-center py-4 text-muted">No banners found.</td>
                         </tr>
                     @endforelse
                 </tbody>

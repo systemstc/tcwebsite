@@ -23,12 +23,12 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title_hi' => 'required|string|max:200',
+            // 'title_hi' => 'required|string|max:200',
             'title_en' => 'nullable|string|max:200',
             'image_url' => 'nullable|string',
             'image_file' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'link_url' => 'nullable|string',
-            'type' => 'required|string',
+            // 'type' => 'required|string',
             'sort_order' => 'integer',
         ]);
 
@@ -39,11 +39,11 @@ class CampaignController extends Controller
         }
 
         $campaign = Campaign::create([
-            'title_hi' => $validated['title_hi'],
+            'title_hi' => $validated['title_hi'] ?? null,
             'title_en' => $validated['title_en'] ?? null,
             'image_url' => $imageUrl,
             'link_url' => $validated['link_url'] ?? '#',
-            'type' => $validated['type'],
+            'type' => $validated['type'] ?? 'banner',
             'sort_order' => $validated['sort_order'] ?? 0,
             'is_active' => $request->has('is_active'),
         ]);
@@ -61,12 +61,12 @@ class CampaignController extends Controller
     public function update(Request $request, Campaign $campaign)
     {
         $validated = $request->validate([
-            'title_hi' => 'required|string|max:200',
+            // 'title_hi' => 'required|string|max:200',
             'title_en' => 'nullable|string|max:200',
             'image_url' => 'nullable|string',
             'image_file' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'link_url' => 'nullable|string',
-            'type' => 'required|string',
+            // 'type' => 'required|string',
             'sort_order' => 'integer',
         ]);
 
@@ -77,11 +77,11 @@ class CampaignController extends Controller
         }
 
         $campaign->update([
-            'title_hi' => $validated['title_hi'],
+            'title_hi' => $validated['title_hi'] ?? null,
             'title_en' => $validated['title_en'] ?? null,
             'image_url' => $imageUrl,
             'link_url' => $validated['link_url'] ?? '#',
-            'type' => $validated['type'],
+            'type' => $validated['type'] ?? 'banner',
             'sort_order' => $validated['sort_order'] ?? 0,
             'is_active' => $request->has('is_active'),
         ]);

@@ -35,11 +35,60 @@
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Upload Image File</label>
                     <input type="file" name="image_file" class="form-control" accept="image/*">
-                    <small class="text-muted">Recommended size: 1500x550 pixels (JPG, PNG, WebP)</small>
+                    <small class="text-muted">Standard size: 1920x600 or 1500x550 pixels (JPG, PNG, WebP)</small>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Or Image Asset Path</label>
                     <input type="text" name="image_url" class="form-control" value="assets/images/BANNER-1-1.png" placeholder="assets/images/BANNER-1-1.png">
+                </div>
+
+                <!-- Banner Image Fitting / Display Mode -->
+                <div class="col-md-12">
+                    <label class="form-label fw-semibold d-flex align-items-center gap-1">
+                        <span class="material-symbols-outlined text-primary" style="font-size: 20px;">aspect_ratio</span> 
+                        Banner Image Fitting Option
+                    </label>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 bg-light h-100">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="display_mode" id="modeContain" value="contain" {{ old('display_mode') === 'contain' ? 'checked' : '' }}>
+                                    <label class="form-check-label fw-bold text-dark" for="modeContain">
+                                        Fit Full Image (Contain)
+                                    </label>
+                                </div>
+                                <small class="text-muted d-block mt-1">
+                                    <strong>Best for Flyers & Posters!</strong> Displays 100% of the image without any cropping. Fills sides with a smooth ambient backdrop.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 bg-light h-100">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="display_mode" id="modeCover" value="cover" {{ old('display_mode', 'cover') === 'cover' ? 'checked' : '' }}>
+                                    <label class="form-check-label fw-bold text-dark" for="modeCover">
+                                        Crop to Fill (Cover)
+                                    </label>
+                                </div>
+                                <small class="text-muted d-block mt-1">
+                                    <strong>Default for Wide Banners.</strong> Fills the entire slider edge-to-edge. Ideal for landscape panoramas (~1920x600).
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 bg-light h-100">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="display_mode" id="modeFill" value="fill" {{ old('display_mode') === 'fill' ? 'checked' : '' }}>
+                                    <label class="form-check-label fw-bold text-dark" for="modeFill">
+                                        Stretch to Fill (Stretch)
+                                    </label>
+                                </div>
+                                <small class="text-muted d-block mt-1">
+                                    Forces the graphic to stretch across 100% width and 100% height of the slider.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
