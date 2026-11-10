@@ -92,7 +92,7 @@
                         <span class="input-group-text bg-light text-muted">
                             <span class="material-symbols-outlined" style="font-size: 18px;">mail</span>
                         </span>
-                        <input type="email" name="email" class="form-control" value="{{ old('email', 'admin@tcwebsite.gov.in') }}" required autofocus placeholder="admin@tcwebsite.gov.in">
+                        <input type="email" name="email" class="form-control" value="{{ old('email', 'admin@tcwebsite.gov.in') }}" required autofocus placeholder="Email">
                     </div>
                 </div>
 
@@ -119,8 +119,8 @@
             </form>
 
             <div class="mt-4 pt-3 border-top text-center text-muted small">
-                Default Credentials:<br>
-                <strong>admin@tcwebsite.gov.in</strong> / <strong>admin123</strong>
+                <!-- Default Credentials:<br> -->
+                <!-- <strong>admin@tcwebsite.gov.in</strong> / <strong>admin123</strong> -->
                 <div class="mt-2">
                     <a href="{{ route('home') }}" class="text-decoration-none" style="color: #721835;">
                         &larr; Return to Main Website
