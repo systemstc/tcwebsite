@@ -539,6 +539,63 @@ class HomeController extends Controller
     }
 
     /**
+     * Securely stream or download a tender/vacancy PDF document directly
+     */
+    public function downloadTenderDocument(Request $request, $id)
+    {
+        $tender = Tender::where('id', $id)->where('is_active', true)->firstOrFail();
+
+        $docPath = $tender->document_url;
+        if (empty($docPath)) {
+            abort(404, 'No document attached.');
+        }
+
+        // Full external URL (e.g. GeM portal, PIB)
+        if (str_starts_with($docPath, 'http://') || str_starts_with($docPath, 'https://')) {
+            return redirect()->away($docPath);
+        }
+
+        $cleanPath = ltrim($docPath, '/');
+        $fileOnDisk = null;
+
+        if (str_starts_with($cleanPath, 'storage/')) {
+            $storageSub = substr($cleanPath, 8);
+            $candidate = storage_path('app/public/' . $storageSub);
+            if (file_exists($candidate)) {
+                $fileOnDisk = $candidate;
+            }
+        }
+
+        if (!$fileOnDisk && file_exists(public_path($cleanPath))) {
+            $fileOnDisk = public_path($cleanPath);
+        }
+
+        if (!$fileOnDisk && file_exists(storage_path('app/public/' . $cleanPath))) {
+            $fileOnDisk = storage_path('app/public/' . $cleanPath);
+        }
+
+        // Safe fallback to sample document if physical file is missing
+        if (!$fileOnDisk || !file_exists($fileOnDisk)) {
+            $fallback = public_path('assets/images/sample_doc.pdf');
+            if (file_exists($fallback)) {
+                $fileOnDisk = $fallback;
+            } else {
+                abort(404, 'Physical document file not found.');
+            }
+        }
+
+        $fileName = basename($fileOnDisk);
+        $disposition = $request->query('download') ? 'attachment' : 'inline';
+
+        return response()->file($fileOnDisk, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => "{$disposition}; filename=\"{$fileName}\"",
+            'X-Frame-Options' => 'SAMEORIGIN',
+            'Access-Control-Allow-Origin' => '*',
+        ]);
+    }
+
+    /**
      * Aggregates active announcements, circulars, tenders, and vacancies
      * sorted by published date descending into a unified What's New collection.
      */

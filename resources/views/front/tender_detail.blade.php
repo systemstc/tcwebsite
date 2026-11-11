@@ -15,7 +15,9 @@
     $dueDateFormatted = $tender->closing_date ? \Carbon\Carbon::parse($tender->closing_date)->format('d F Y') : ($isHindi ? 'खुली / जब तक भरी न जाए' : 'Open until filled');
     
     $isClosed = $tender->closing_date && \Carbon\Carbon::parse($tender->closing_date)->isPast();
-    $docUrl = $tender->document_url ? asset($tender->document_url) : null;
+    $hasDoc = !empty($tender->document_url);
+    $docUrl = $hasDoc ? route($isVacancy ? 'vacancies.document' : 'tenders.document', $tender->id) : null;
+    $downloadUrl = $hasDoc ? ($docUrl . '?download=1') : null;
 @endphp
 
 @section('title', $title . ' | ' . ($isHindi ? 'वस्त्र समिति' : 'Textiles Committee'))
@@ -137,7 +139,7 @@
                     </div>
 
                     <!-- Document Download / Viewer Box -->
-                    @if($docUrl)
+                    @if($hasDoc)
                         <div class="tender-doc-box mt-4">
                             <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
                                 <div class="d-flex align-items-center gap-3">
@@ -153,39 +155,19 @@
                                 </div>
                                 <div class="d-flex gap-2">
                                     <a href="{{ $docUrl }}" target="_blank" class="btn btn-outline-custom-maroon btn-sm">
-                                        <span class="material-symbols-outlined fs-6 align-middle">open_in_new</span>
+                                        <span class="material-symbols-outlined fs-6 align-middle me-1">open_in_new</span>
                                         {{ $isHindi ? 'नया टैब में खोलें' : 'Open in New Tab' }}
                                     </a>
-                                    <a href="{{ $docUrl }}" download class="btn btn-custom-maroon btn-sm">
-                                        <span class="material-symbols-outlined fs-6 align-middle">download</span>
+                                    <a href="{{ $downloadUrl }}" class="btn btn-custom-maroon btn-sm">
+                                        <span class="material-symbols-outlined fs-6 align-middle me-1">download</span>
                                         {{ $isHindi ? 'डाउनलोड करें' : 'Download Document' }}
                                     </a>
                                 </div>
                             </div>
 
-                            <!-- Embedded Document Viewer with Smart Fallback -->
+                            <!-- Embedded Document Viewer with direct server streaming -->
                             <div class="pdf-viewer-frame-wrap">
-                                <object data="{{ $docUrl }}" type="application/pdf" class="pdf-iframe">
-                                    <div class="pdf-fallback-card text-center py-5 px-3">
-                                        <span class="material-symbols-outlined text-danger mb-2" style="font-size: 54px;">picture_as_pdf</span>
-                                        <h4 class="h5 fw-bold text-dark mb-1">
-                                            {{ $isHindi ? 'आधिकारिक निविदा दस्तावेज' : 'Official Tender Notification Document' }}
-                                        </h4>
-                                        <p class="text-muted small mb-4">
-                                            {{ $isHindi ? 'ब्राउज़र में सीधे पीडीएफ देखने के लिए नीचे दिए गए बटन पर क्लिक करें।' : 'Click the button below to view or download the full document directly in your browser.' }}
-                                        </p>
-                                        <div class="d-flex justify-content-center gap-2 flex-wrap">
-                                            <a href="{{ $docUrl }}" target="_blank" class="btn btn-custom-maroon">
-                                                <span class="material-symbols-outlined fs-6 align-middle me-1">open_in_new</span>
-                                                {{ $isHindi ? 'नया टैब में खोलें' : 'Open PDF in New Tab' }}
-                                            </a>
-                                            <a href="{{ $docUrl }}" download class="btn btn-outline-custom-maroon">
-                                                <span class="material-symbols-outlined fs-6 align-middle me-1">download</span>
-                                                {{ $isHindi ? 'डाउनलोड करें' : 'Download PDF' }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                </object>
+                                <iframe src="{{ $docUrl }}#toolbar=1" class="pdf-iframe" title="{{ $title }}"></iframe>
                             </div>
                         </div>
                     @endif
