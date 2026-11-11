@@ -69,6 +69,27 @@ Route::get('/related-links', [HomeController::class, 'relatedLinks'])->name('rel
 Route::get('/page/related-links', [HomeController::class, 'relatedLinks']);
 Route::get('/portals', fn() => redirect()->route('related-links.index'));
 
+// Direct Storage File Route (Ensures uploaded PDFs & documents load even if 'php artisan storage:link' is not configured on live server)
+Route::get('/storage/{path}', function ($path) {
+    $filePath = storage_path('app/public/' . $path);
+    if (!file_exists($filePath)) {
+        // Fallback to sample document if file missing
+        $fallback = public_path('assets/images/sample_doc.pdf');
+        if (file_exists($fallback)) {
+            return response()->file($fallback, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="tender_document.pdf"',
+            ]);
+        }
+        abort(404);
+    }
+    return response()->file($filePath, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="' . basename($filePath) . '"',
+        'X-Frame-Options' => 'SAMEORIGIN',
+    ]);
+})->where('path', '.*');
+
 // Convenience Aliases for Standard Government Footer & Header Routes
 Route::get('/policies', fn() => redirect()->route('page.show', 'website-policies'))->name('footer.policies');
 Route::get('/website-policies', fn() => redirect()->route('page.show', 'website-policies'));

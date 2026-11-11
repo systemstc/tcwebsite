@@ -68,22 +68,49 @@
                 </div>
 
                 <div class="col-12">
-                    <label class="form-label fw-semibold d-flex justify-content-between align-items-center">
-                        <span>Details / Scope (English)</span>
-                        <span class="text-muted small"><i class="fa fa-info-circle me-1"></i> Highlight text to make <strong>Bold</strong> or add a <i class="fa fa-link"></i> <strong>Link</strong></span>
-                    </label>
-                    <div id="quill-editor-en" class="bg-white" style="min-height: 180px; border: 1px solid #ced4da; border-radius: 6px; padding: 12px;">{!! old('description_en', $tender->description_en) !!}</div>
-                    <input type="hidden" name="description_en" id="hidden_description_en">
-                    <div class="form-text small text-muted mt-1">
-                        Select any text and click the link icon (<i class="fa fa-link"></i>) in the toolbar to add redirect URLs to portals, application forms, or external websites.
+                    <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+                        <label class="form-label fw-semibold mb-0">
+                            Details / Scope of Tender <span class="text-muted fw-normal small">(Optional)</span>
+                        </label>
+                        <ul class="nav nav-pills custom-editor-tabs" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active" id="tab-en-btn" data-bs-toggle="pill" data-bs-target="#tab-desc-en" type="button">
+                                    <i class="fa fa-language me-1"></i> English
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="tab-hi-btn" data-bs-toggle="pill" data-bs-target="#tab-desc-hi" type="button">
+                                    हिंदी (Hindi)
+                                </button>
+                            </li>
+                        </ul>
                     </div>
-                </div>
 
-                <div class="col-12 mt-3">
-                    <label class="form-label fw-semibold d-flex justify-content-between align-items-center">
-                        <span>Details / Scope (Hindi - वैकल्पिक)</span>
-                    </label>
-                    <div id="quill-editor-hi" class="bg-white" style="min-height: 140px; border: 1px solid #ced4da; border-radius: 6px; padding: 12px;">{!! old('description_hi', $tender->description_hi) !!}</div>
+                    <div class="tab-content">
+                        <!-- English Tab -->
+                        <div class="tab-pane fade show active" id="tab-desc-en" role="tabpanel">
+                            <div class="cms-editor-wrapper">
+                                <div id="quill-editor-en">{!! old('description_en', $tender->description_en) !!}</div>
+                            </div>
+                            <div class="form-text small text-muted mt-1 d-flex justify-content-between flex-wrap">
+                                <span><i class="fa fa-info-circle text-primary me-1"></i> Highlight any text to make <strong>Bold</strong> or click <i class="fa fa-link"></i> to insert a redirect link.</span>
+                                <span class="text-secondary fw-semibold">English Description</span>
+                            </div>
+                        </div>
+
+                        <!-- Hindi Tab -->
+                        <div class="tab-pane fade" id="tab-desc-hi" role="tabpanel">
+                            <div class="cms-editor-wrapper">
+                                <div id="quill-editor-hi">{!! old('description_hi', $tender->description_hi) !!}</div>
+                            </div>
+                            <div class="form-text small text-muted mt-1 d-flex justify-content-between flex-wrap">
+                                <span>हिंदी में विवरण एवं कार्य क्षेत्र (वैकल्पिक)</span>
+                                <span class="text-secondary fw-semibold">Hindi Description</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="description_en" id="hidden_description_en">
                     <input type="hidden" name="description_hi" id="hidden_description_hi">
                 </div>
             </div>
@@ -101,23 +128,66 @@
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
 <style>
-    .ql-toolbar.ql-snow {
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-        border-color: #cbd5e1 !important;
+    /* Clean Tab Design */
+    .custom-editor-tabs {
+        background: #f1f5f9;
+        padding: 3px;
+        border-radius: 6px;
+        gap: 4px;
+        border: 1px solid #e2e8f0;
+    }
+    .custom-editor-tabs .nav-link {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #475569;
+        padding: 4px 14px;
+        border-radius: 4px;
+        transition: all 0.15s ease;
+    }
+    .custom-editor-tabs .nav-link:hover {
+        color: #1e293b;
+    }
+    .custom-editor-tabs .nav-link.active {
+        background: #721835;
+        color: #ffffff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Single Seamless Editor Card */
+    .cms-editor-wrapper {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cms-editor-wrapper:focus-within {
+        border-color: #721835;
+        box-shadow: 0 0 0 3px rgba(114, 24, 53, 0.12);
+    }
+    .cms-editor-wrapper .ql-toolbar.ql-snow {
+        border: none !important;
+        border-bottom: 1px solid #e2e8f0 !important;
         background: #f8fafc;
+        padding: 6px 10px;
     }
-    .ql-container.ql-snow {
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
-        border-color: #cbd5e1 !important;
+    .cms-editor-wrapper .ql-container.ql-snow {
+        border: none !important;
         font-family: inherit;
-        border-top: none !important;
     }
-    .ql-editor {
-        min-height: 180px;
-        font-size: 14.5px;
+    .cms-editor-wrapper .ql-editor {
+        min-height: 140px;
+        max-height: 280px;
+        overflow-y: auto;
+        padding: 12px 14px;
+        font-size: 14px;
         line-height: 1.6;
+        color: #1e293b;
+    }
+    .cms-editor-wrapper .ql-editor.ql-blank::before {
+        color: #94a3b8;
+        font-style: normal;
+        left: 14px;
     }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
@@ -126,11 +196,12 @@
     (function() {
         function initQuill() {
             var toolbarOptions = [
-                [{ 'header': [1, 2, 3, 4, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ 'color': [] }, { 'background': [] }],
+                [{ 'header': [2, 3, false] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'color': [] }],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                ['link', 'clean']
+                ['link'],
+                ['clean']
             ];
 
             if (typeof Quill !== 'undefined') {
@@ -144,6 +215,14 @@
                     theme: 'snow',
                     placeholder: 'हिंदी में विवरण (यदि लागू हो)...',
                     modules: { toolbar: toolbarOptions }
+                });
+
+                // Tab switch refresh
+                document.getElementById('tab-hi-btn')?.addEventListener('shown.bs.tab', function () {
+                    if (quillHi) quillHi.update();
+                });
+                document.getElementById('tab-en-btn')?.addEventListener('shown.bs.tab', function () {
+                    if (quillEn) quillEn.update();
                 });
 
                 var form = document.getElementById('tenderForm');
@@ -163,17 +242,16 @@
                     });
                 }
             } else {
-                // Fail-safe textarea fallback if script blocked or unreachable
                 console.warn('Quill not available; activating native textarea fallback.');
                 var elEn = document.getElementById('quill-editor-en');
                 var elHi = document.getElementById('quill-editor-hi');
                 if (elEn) {
                     var valEn = elEn.innerHTML.trim();
-                    elEn.outerHTML = '<textarea name="description_en" id="hidden_description_en" class="form-control" rows="6" style="font-size: 14.5px;" placeholder="Write description (HTML/Links supported)...">' + valEn + '</textarea>';
+                    elEn.outerHTML = '<textarea name="description_en" id="hidden_description_en" class="form-control" rows="5" style="font-size: 14px;" placeholder="Write description (HTML/Links supported)...">' + valEn + '</textarea>';
                 }
                 if (elHi) {
                     var valHi = elHi.innerHTML.trim();
-                    elHi.outerHTML = '<textarea name="description_hi" id="hidden_description_hi" class="form-control" rows="4" style="font-size: 14.5px;" placeholder="हिंदी में विवरण...">' + valHi + '</textarea>';
+                    elHi.outerHTML = '<textarea name="description_hi" id="hidden_description_hi" class="form-control" rows="4" style="font-size: 14px;" placeholder="हिंदी में विवरण...">' + valHi + '</textarea>';
                 }
             }
         }

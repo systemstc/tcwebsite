@@ -163,9 +163,29 @@
                                 </div>
                             </div>
 
-                            <!-- Embedded Document Viewer -->
+                            <!-- Embedded Document Viewer with Smart Fallback -->
                             <div class="pdf-viewer-frame-wrap">
-                                <iframe src="{{ $docUrl }}#toolbar=1" class="pdf-iframe" title="{{ $title }}"></iframe>
+                                <object data="{{ $docUrl }}" type="application/pdf" class="pdf-iframe">
+                                    <div class="pdf-fallback-card text-center py-5 px-3">
+                                        <span class="material-symbols-outlined text-danger mb-2" style="font-size: 54px;">picture_as_pdf</span>
+                                        <h4 class="h5 fw-bold text-dark mb-1">
+                                            {{ $isHindi ? 'आधिकारिक निविदा दस्तावेज' : 'Official Tender Notification Document' }}
+                                        </h4>
+                                        <p class="text-muted small mb-4">
+                                            {{ $isHindi ? 'ब्राउज़र में सीधे पीडीएफ देखने के लिए नीचे दिए गए बटन पर क्लिक करें।' : 'Click the button below to view or download the full document directly in your browser.' }}
+                                        </p>
+                                        <div class="d-flex justify-content-center gap-2 flex-wrap">
+                                            <a href="{{ $docUrl }}" target="_blank" class="btn btn-custom-maroon">
+                                                <span class="material-symbols-outlined fs-6 align-middle me-1">open_in_new</span>
+                                                {{ $isHindi ? 'नया टैब में खोलें' : 'Open PDF in New Tab' }}
+                                            </a>
+                                            <a href="{{ $docUrl }}" download class="btn btn-outline-custom-maroon">
+                                                <span class="material-symbols-outlined fs-6 align-middle me-1">download</span>
+                                                {{ $isHindi ? 'डाउनलोड करें' : 'Download PDF' }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </object>
                             </div>
                         </div>
                     @endif
