@@ -66,18 +66,18 @@
                         <span>Details / Scope (English)</span>
                         <span class="text-muted small"><i class="fa fa-info-circle me-1"></i> Highlight text to make <strong>Bold</strong> or add a <i class="fa fa-link"></i> <strong>Link</strong></span>
                     </label>
-                    <div id="quill-editor-en" class="bg-white">{!! old('description_en') !!}</div>
+                    <div id="quill-editor-en" class="bg-white" style="min-height: 180px; border: 1px solid #ced4da; border-radius: 6px; padding: 12px;">{!! old('description_en') !!}</div>
                     <input type="hidden" name="description_en" id="hidden_description_en">
                     <div class="form-text small text-muted mt-1">
                         Select any text and click the link icon (<i class="fa fa-link"></i>) in the toolbar to add redirect URLs to portals, application forms, or external websites.
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 mt-3">
                     <label class="form-label fw-semibold d-flex justify-content-between align-items-center">
                         <span>Details / Scope (Hindi - वैकल्पिक)</span>
                     </label>
-                    <div id="quill-editor-hi" class="bg-white">{!! old('description_hi') !!}</div>
+                    <div id="quill-editor-hi" class="bg-white" style="min-height: 140px; border: 1px solid #ced4da; border-radius: 6px; padding: 12px;">{!! old('description_hi') !!}</div>
                     <input type="hidden" name="description_hi" id="hidden_description_hi">
                 </div>
             </div>
@@ -91,19 +91,22 @@
 </div>
 
 @push('scripts')
+<!-- Quill Rich Text Editor (CDN with local fallback) -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
 <style>
     .ql-toolbar.ql-snow {
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
-        border-color: #cbd5e1;
+        border-color: #cbd5e1 !important;
         background: #f8fafc;
     }
     .ql-container.ql-snow {
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
-        border-color: #cbd5e1;
+        border-color: #cbd5e1 !important;
         font-family: inherit;
+        border-top: none !important;
     }
     .ql-editor {
         min-height: 180px;
@@ -111,46 +114,70 @@
         line-height: 1.6;
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 <script src="{{ asset('assets/vendor/quill/quill.js') }}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var toolbarOptions = [
-            [{ 'header': [1, 2, 3, 4, false] }],
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ 'color': [] }, { 'background': [] }],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-            ['link', 'clean']
-        ];
+    (function() {
+        function initQuill() {
+            var toolbarOptions = [
+                [{ 'header': [1, 2, 3, 4, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['link', 'clean']
+            ];
 
-        var quillEn = new Quill('#quill-editor-en', {
-            theme: 'snow',
-            placeholder: 'Write or paste description, highlight text to bold, italic, or add links to redirect...',
-            modules: { toolbar: toolbarOptions }
-        });
+            if (typeof Quill !== 'undefined') {
+                var quillEn = new Quill('#quill-editor-en', {
+                    theme: 'snow',
+                    placeholder: 'Write or paste description, highlight text to bold, italic, or add links to redirect...',
+                    modules: { toolbar: toolbarOptions }
+                });
 
-        var quillHi = new Quill('#quill-editor-hi', {
-            theme: 'snow',
-            placeholder: 'हिंदी में विवरण (यदि लागू हो)...',
-            modules: { toolbar: toolbarOptions }
-        });
+                var quillHi = new Quill('#quill-editor-hi', {
+                    theme: 'snow',
+                    placeholder: 'हिंदी में विवरण (यदि लागू हो)...',
+                    modules: { toolbar: toolbarOptions }
+                });
 
-        var form = document.getElementById('tenderForm');
-        if (form) {
-            form.addEventListener('submit', function() {
-                var htmlEn = quillEn.root.innerHTML;
-                if (quillEn.getText().trim().length === 0 && !htmlEn.includes('<img')) {
-                    htmlEn = '';
+                var form = document.getElementById('tenderForm');
+                if (form) {
+                    form.addEventListener('submit', function() {
+                        var htmlEn = quillEn.root.innerHTML;
+                        if (quillEn.getText().trim().length === 0 && !htmlEn.includes('<img')) {
+                            htmlEn = '';
+                        }
+                        document.getElementById('hidden_description_en').value = htmlEn;
+
+                        var htmlHi = quillHi.root.innerHTML;
+                        if (quillHi.getText().trim().length === 0 && !htmlHi.includes('<img')) {
+                            htmlHi = '';
+                        }
+                        document.getElementById('hidden_description_hi').value = htmlHi;
+                    });
                 }
-                document.getElementById('hidden_description_en').value = htmlEn;
-
-                var htmlHi = quillHi.root.innerHTML;
-                if (quillHi.getText().trim().length === 0 && !htmlHi.includes('<img')) {
-                    htmlHi = '';
+            } else {
+                // Fail-safe textarea fallback if script blocked or unreachable
+                console.warn('Quill not available; activating native textarea fallback.');
+                var elEn = document.getElementById('quill-editor-en');
+                var elHi = document.getElementById('quill-editor-hi');
+                if (elEn) {
+                    var valEn = elEn.innerHTML.trim();
+                    elEn.outerHTML = '<textarea name="description_en" id="hidden_description_en" class="form-control" rows="6" style="font-size: 14.5px;" placeholder="Write description (HTML/Links supported)...">' + valEn + '</textarea>';
                 }
-                document.getElementById('hidden_description_hi').value = htmlHi;
-            });
+                if (elHi) {
+                    var valHi = elHi.innerHTML.trim();
+                    elHi.outerHTML = '<textarea name="description_hi" id="hidden_description_hi" class="form-control" rows="4" style="font-size: 14.5px;" placeholder="हिंदी में विवरण...">' + valHi + '</textarea>';
+                }
+            }
         }
-    });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initQuill);
+        } else {
+            initQuill();
+        }
+    })();
 </script>
 @endpush
 @endsection
