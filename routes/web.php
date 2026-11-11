@@ -59,9 +59,11 @@ Route::get('/page/schemes', fn() => redirect()->route('schemes.index'));
 
 Route::get('/vacancies', [HomeController::class, 'vacancies'])->name('vacancies.index');
 Route::get('/page/vacancies', [HomeController::class, 'vacancies']);
+Route::get('/vacancies/{id}', [HomeController::class, 'showTender'])->name('vacancies.show');
 
 Route::get('/tenders', [HomeController::class, 'tenders'])->name('tenders.index');
 Route::get('/page/tenders', [HomeController::class, 'tenders']);
+Route::get('/tenders/{id}', [HomeController::class, 'showTender'])->name('tenders.show');
 
 Route::get('/related-links', [HomeController::class, 'relatedLinks'])->name('related-links.index');
 Route::get('/page/related-links', [HomeController::class, 'relatedLinks']);

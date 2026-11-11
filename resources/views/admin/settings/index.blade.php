@@ -189,8 +189,67 @@
                 </div>
             </div>
 
+            <!-- 5. GOOGLE ANALYTICS & RECAPTCHA SECURITY -->
             <h5 class="fw-bold mb-3 mt-4" style="color: var(--cms-primary); border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
-                5. Government Sponsored Schemes & SAMARTH Statistics (Home Page)
+                5. Google Analytics & Security (reCAPTCHA)
+            </h5>
+            <div class="row g-4 mb-4">
+                <!-- Google Analytics (GA4) Card -->
+                <div class="col-md-6">
+                    <div class="p-3 border rounded-3 bg-light h-100" style="border-color: #ebd0de !important;">
+                        <label class="form-label fw-bold d-flex align-items-center justify-content-between mb-2">
+                            <span><i class="fa-brands fa-google text-primary me-2"></i> Google Analytics (GA4)</span>
+                            @if(\App\Models\Setting::get('google_analytics_id'))
+                                <span class="badge bg-success">Active & Tracking</span>
+                            @else
+                                <span class="badge bg-secondary">Disabled</span>
+                            @endif
+                        </label>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small text-dark mb-1">Measurement ID (e.g., G-XXXXXXXXXX)</label>
+                            <input type="text" name="google_analytics_id" class="form-control font-monospace" value="{{ \App\Models\Setting::get('google_analytics_id', 'G-E3VVCP84DF') }}" placeholder="e.g. G-E3VVCP84DF">
+                            <small class="text-muted d-block mt-1">
+                                Automatically embeds the official Google <code>gtag.js</code> tracking snippet across every public page of the portal.
+                            </small>
+                        </div>
+
+                        <div class="p-2 bg-white rounded border small text-muted">
+                            <i class="fa-solid fa-circle-check text-success me-1"></i> Current Tracking ID: <strong class="text-dark">{{ \App\Models\Setting::get('google_analytics_id', 'G-E3VVCP84DF') }}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google reCAPTCHA Card -->
+                <div class="col-md-6">
+                    <div class="p-3 border rounded-3 bg-light h-100" style="border-color: #ebd0de !important;">
+                        <label class="form-label fw-bold d-flex align-items-center justify-content-between mb-2">
+                            <span><i class="fa-solid fa-shield-halved text-danger me-2"></i> Google reCAPTCHA</span>
+                            <div class="form-check form-switch m-0">
+                                <input class="form-check-input" type="checkbox" name="recaptcha_enabled" id="recaptchaEnabled" value="1" {{ \App\Models\Setting::get('recaptcha_enabled', '1') == '1' ? 'checked' : '' }}>
+                                <label class="form-check-label small fw-semibold" for="recaptchaEnabled">Enabled</label>
+                            </div>
+                        </label>
+
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold small text-dark mb-1">Site Key</label>
+                            <input type="text" name="recaptcha_site_key" class="form-control font-monospace" value="{{ \App\Models\Setting::get('recaptcha_site_key', '6LcGoBIsAAAAALZ2jeq6GOKz9RDkKhLJk38uEVP3') }}" placeholder="Site Key">
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold small text-dark mb-1">Secret Key</label>
+                            <input type="text" name="recaptcha_secret_key" class="form-control font-monospace" value="{{ \App\Models\Setting::get('recaptcha_secret_key', '6LcGoBIsAAAAABK9tlAIBJN_UptPe_s7RlzRySwa') }}" placeholder="Secret Key">
+                        </div>
+
+                        <small class="text-muted d-block">
+                            Used to safeguard portal inquiry forms, citizen grievance submissions, and interactive technical issue portals from automated spam.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="fw-bold mb-3 mt-4" style="color: var(--cms-primary); border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
+                6. Government Sponsored Schemes & SAMARTH Statistics (Home Page)
             </h5>
             <div class="row g-3 mb-4">
                 <div class="col-md-12">

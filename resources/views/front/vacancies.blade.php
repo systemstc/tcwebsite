@@ -119,13 +119,13 @@
                             </div>
                         </div>
 
-                        <a href="{{ $docUrl }}" target="_blank" class="vacancy-doc-link" title="{{ $title }}">
+                        <a href="{{ route('vacancies.show', $vac->id) }}" class="vacancy-doc-link" title="{{ $title }}">
                             {{ $title }}
                         </a>
 
                         <div class="vacancy-card-action">
-                            <a href="{{ $docUrl }}" target="_blank" class="btn-view-documents">
-                                VIEW ALL DOCUMENTS
+                            <a href="{{ route('vacancies.show', $vac->id) }}" class="btn-view-documents">
+                                VIEW DETAILS & DOCUMENTS
                             </a>
                         </div>
                     </div>

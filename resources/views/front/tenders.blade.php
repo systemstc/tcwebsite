@@ -117,7 +117,9 @@
                         {{ $ref }}
                     </div>
                     <div class="td-col col-title">
-                        {{ $title }}
+                        <a href="{{ route('tenders.show', $ten->id) }}" class="tender-title-link" title="Click to view details and description">
+                            {{ $title }}
+                        </a>
                     </div>
                     <div class="td-col col-pub-date">
                         {{ $pubDateFormatted }}
@@ -136,7 +138,7 @@
                         <span class="file-size-txt">PDF</span>
                     </div>
                     <div class="td-col col-action text-end">
-                        <a href="{{ $docUrl }}" target="_blank" class="btn-tender-view">
+                        <a href="{{ route('tenders.show', $ten->id) }}" class="btn-tender-view">
                             <span class="material-symbols-outlined btn-view-icon">visibility</span>
                             VIEW
                         </a>

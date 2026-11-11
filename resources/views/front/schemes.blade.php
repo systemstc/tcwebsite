@@ -113,10 +113,14 @@
                 @endphp
                 <div class="scheme-card" data-category="{{ $categorySlug }}" data-keywords="{{ strtolower($scheme->title_en . ' ' . $scheme->title_hi . ' ' . $scheme->category) }}">
                     <div class="scheme-banner-wrap">
-                        <img src="{{ $bannerUrl }}" alt="{{ $title }}" class="scheme-banner-img" onerror="this.src='{{ asset('assets/images/govt_schemes_bg.jpg') }}'">
+                        <a href="{{ $linkUrl }}" title="{{ $title }}" class="d-block w-100 h-100">
+                            <img src="{{ $bannerUrl }}" alt="{{ $title }}" class="scheme-banner-img" onerror="this.src='{{ asset('assets/images/govt_schemes_bg.jpg') }}'">
+                        </a>
                     </div>
                     <div class="scheme-card-body">
-                        <h2 class="scheme-card-title">{{ $title }}</h2>
+                        <h2 class="scheme-card-title">
+                            <a href="{{ $linkUrl }}" class="text-decoration-none text-dark hover-maroon">{{ $title }}</a>
+                        </h2>
                         <p class="scheme-card-desc">
                             {{ $desc }}
                         </p>
@@ -262,6 +266,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
     transition: transform 0.3s ease;
 }

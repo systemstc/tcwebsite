@@ -11,6 +11,8 @@ class Tender extends Model
         'title_hi',
         'title_en',
         'type',
+        'description_en',
+        'description_hi',
         'published_date',
         'closing_date',
         'document_url',

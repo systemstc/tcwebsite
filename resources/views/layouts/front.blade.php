@@ -4,6 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @php
+        $gaId = \App\Models\Setting::get('google_analytics_id', config('services.google.analytics_id', 'G-E3VVCP84DF'));
+        $recaptchaSiteKey = \App\Models\Setting::get('recaptcha_site_key', config('services.recaptcha.site_key', '6LcGoBIsAAAAALZ2jeq6GOKz9RDkKhLJk38uEVP3'));
+        $recaptchaEnabled = \App\Models\Setting::get('recaptcha_enabled', '1');
+    @endphp
+
+    @if(!empty($gaId))
+    <!-- Google tag (gtag.js) - Added to Every Public Page -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gaId }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{ $gaId }}');
+    </script>
+    @endif
+
+    @if(!empty($recaptchaSiteKey) && $recaptchaEnabled)
+    <!-- Google reCAPTCHA Integration -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endif
     
     @php
         $pageTitle = trim($__env->yieldContent('title'));

@@ -150,6 +150,40 @@ class PortalDocumentService
                 ];
             }
 
+            // 4. Scan Tenders & Vacancies with uploaded documents
+            $tenderDocs = \App\Models\Tender::where('is_active', true)
+                ->whereNotNull('document_url')
+                ->where('document_url', '!=', '')
+                ->orderBy('published_date', 'desc')
+                ->orderBy('updated_at', 'desc')
+                ->take(15)
+                ->get();
+
+            foreach ($tenderDocs as $t) {
+                $rawTitle = $t->title_en ?: $t->title_hi ?: 'Tender Notice';
+                $title = trim(html_entity_decode(strip_tags($rawTitle), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                $sub = $t->type === 'vacancy' ? 'Vacancies & Careers' : 'Tenders & Proposals';
+                $category = $t->type === 'vacancy' ? 'Vacancy' : 'Tender';
+
+                $dateStr = $t->published_date ? date('d.m.Y', strtotime($t->published_date)) : ($t->created_at ? $t->created_at->format('d.m.Y') : date('d.m.Y'));
+                $timestamp = $t->published_date ? strtotime($t->published_date) : ($t->created_at ? $t->created_at->timestamp : time());
+
+                $fileUrl = $t->document_url;
+                if (!str_starts_with($fileUrl, 'http://') && !str_starts_with($fileUrl, 'https://')) {
+                    $fileUrl = asset(ltrim($fileUrl, '/'));
+                }
+
+                $allDocs[] = [
+                    'title' => $title,
+                    'sub' => $sub,
+                    'category' => $category,
+                    'url' => $fileUrl,
+                    'size' => 'PDF',
+                    'date' => $dateStr,
+                    'timestamp' => $timestamp,
+                ];
+            }
+
             // Deduplicate by normalized title
             $uniqueDocs = [];
             foreach ($allDocs as $doc) {

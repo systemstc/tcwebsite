@@ -31,4 +31,13 @@ return [
         ],
     ],
 
+    'google' => [
+        'analytics_id' => env('GOOGLE_ANALYTICS_ID', 'G-E3VVCP84DF'),
+    ],
+
+    'recaptcha' => [
+        'site_key' => env('RECAPTCHA_SITE_KEY', '6LcGoBIsAAAAALZ2jeq6GOKz9RDkKhLJk38uEVP3'),
+        'secret_key' => env('RECAPTCHA_SECRET_KEY', '6LcGoBIsAAAAABK9tlAIBJN_UptPe_s7RlzRySwa'),
+    ],
+
 ];

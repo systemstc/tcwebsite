@@ -205,7 +205,7 @@
 
                     <div class="offerings-list-box d-none" id="tabContentVacancies">
                         @forelse($vacancies as $vac)
-                            <a href="{{ asset($vac->document_url ?? 'assets/images/sample_doc.pdf') }}" target="_blank" class="offerings-item">
+                            <a href="{{ route('vacancies.show', $vac->id) }}" class="offerings-item">
                                 <span>{{ $vac->title_en }}</span>
                                 <i class="fa fa-chevron-right"></i>
                             </a>
@@ -216,7 +216,7 @@
 
                     <div class="offerings-list-box d-none" id="tabContentTenders">
                         @forelse($tenders as $ten)
-                            <a href="{{ asset($ten->document_url ?? 'assets/images/sample_doc.pdf') }}" target="_blank" class="offerings-item">
+                            <a href="{{ route('tenders.show', $ten->id) }}" class="offerings-item">
                                 <span>{{ $ten->title_en }}</span>
                                 <i class="fa fa-chevron-right"></i>
                             </a>
@@ -225,7 +225,7 @@
                         @endforelse
                     </div>
 
-                    <!-- <a href="{{ route('schemes.index') }}" class="btn-view-more-outline" id="offeringsViewMoreBtn">VIEW MORE &gt;</a> -->
+                    <a href="{{ route('schemes.index') }}" class="btn-view-more-outline" id="offeringsViewMoreBtn">VIEW MORE &gt;</a>
                     <div style="clear: both;"></div>
                 </div>
 
@@ -240,8 +240,8 @@
 
                     <div class="whatsnew-card-solid">
                         @forelse($whatsNews as $item)
-                            <a href="{{ $item->link_url ?: ($item->document_url ? asset($item->document_url) : route('whats-new.index')) }}" target="{{ $item->link_url || $item->document_url ? '_blank' : '_self' }}" class="whatsnew-item">
-                                <span>{{ $item->title_en }}</span>
+                            <a href="{{ $item->link_url ?: ($item->document_url ? asset($item->document_url) : route('whats-new.index')) }}" target="{{ !empty($item->is_external) ? '_blank' : '_self' }}" class="whatsnew-item">
+                                <span>{{ session('locale') == 'hi' ? ($item->title_hi ?: $item->title_en) : $item->title_en }}</span>
                                 <i class="fa fa-chevron-right"></i>
                             </a>
                         @empty

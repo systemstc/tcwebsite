@@ -42,6 +42,9 @@ class SettingController extends Controller
         // 3. Process remaining non-file text settings
         $data = $request->except(['_token', 'site_emblem_file', 'site_logo_file', 'remove_site_emblem', 'remove_site_logo']);
 
+        // Explicitly handle toggle checkboxes
+        Setting::set('recaptcha_enabled', $request->has('recaptcha_enabled') ? '1' : '0');
+
         foreach ($data as $key => $value) {
             Setting::set($key, $value);
         }

@@ -37,8 +37,8 @@ class HomeController extends Controller
         $tenders = Tender::where('is_active', true)->where('type', 'tender')->orderBy('sort_order')->take(6)->get();
         $vacancies = Tender::where('is_active', true)->where('type', 'vacancy')->orderBy('sort_order')->take(6)->get();
         
-        $whatsNews = WhatsNew::where('is_active', true)->orderBy('sort_order')->take(5)->get();
-        // Aggregates most recently uploaded/published documents from across all portal sections (Pages, Documents CMS, Media uploads)
+        $whatsNews = $this->getCombinedWhatsNew(5);
+        // Aggregates most recently uploaded/published documents from across all portal sections (Pages, Documents CMS, Media uploads, Tenders & Vacancies)
         $documents = \App\Services\PortalDocumentService::getRecentDocuments(4);
         $personas = Persona::where('is_active', true)->orderBy('sort_order')->get();
         $importantLinks = ImportantLink::where('is_active', true)->orderBy('sort_order')->take(8)->get();
@@ -439,7 +439,7 @@ class HomeController extends Controller
 
     public function whatsNew(Request $request)
     {
-        $whatsNews = WhatsNew::where('is_active', true)->orderBy('date', 'desc')->orderBy('id', 'desc')->get();
+        $whatsNews = $this->getCombinedWhatsNew(50);
         $schemes = Scheme::where('is_active', true)->orderBy('sort_order')->get();
         $documents = Document::where('is_active', true)->orderBy('published_date', 'desc')->get();
 
@@ -525,5 +525,78 @@ class HomeController extends Controller
         $settings = Setting::all()->pluck('value', 'key')->toArray();
 
         return view('front.related-links', compact('page', 'links', 'settings'));
+    }
+
+    /**
+     * Dedicated detail page for Tenders and Vacancies
+     */
+    public function showTender($id)
+    {
+        $tender = Tender::where('id', $id)->where('is_active', true)->firstOrFail();
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+
+        return view('front.tender_detail', compact('tender', 'settings'));
+    }
+
+    /**
+     * Aggregates active announcements, circulars, tenders, and vacancies
+     * sorted by published date descending into a unified What's New collection.
+     */
+    protected function getCombinedWhatsNew($limit = 10)
+    {
+        $items = collect();
+
+        // 1. Dedicated WhatsNew CMS records
+        $whatsNews = WhatsNew::where('is_active', true)
+            ->orderBy('date', 'desc')
+            ->orderBy('id', 'desc')
+            ->take($limit)
+            ->get();
+
+        foreach ($whatsNews as $w) {
+            $items->push((object)[
+                'id' => $w->id,
+                'source_type' => 'whats_new',
+                'title_en' => $w->title_en,
+                'title_hi' => $w->title_hi ?: $w->title_en,
+                'category' => $w->category ?: 'Announcement',
+                'published_date' => $w->date ?: ($w->published_date ?? null),
+                'date' => $w->date ? date('d.m.Y', strtotime($w->date)) : ($w->created_at ? $w->created_at->format('d.m.Y') : date('d.m.Y')),
+                'timestamp' => $w->date ? strtotime($w->date) : ($w->created_at ? $w->created_at->timestamp : time()),
+                'link_url' => $w->link_url ?: ($w->document_url ? asset($w->document_url) : null),
+                'document_url' => $w->document_url,
+                'file_size' => $w->file_size ?: ($w->document_url ? 'PDF' : ''),
+                'is_new' => $w->is_new ?? true,
+                'is_external' => !empty($w->link_url) && $w->link_url !== '#',
+            ]);
+        }
+
+        // 2. Active Tenders & Vacancies
+        $tenders = Tender::where('is_active', true)
+            ->orderBy('published_date', 'desc')
+            ->orderBy('id', 'desc')
+            ->take($limit)
+            ->get();
+
+        foreach ($tenders as $t) {
+            $route = $t->type === 'vacancy' ? route('vacancies.show', $t->id) : route('tenders.show', $t->id);
+            $items->push((object)[
+                'id' => $t->id,
+                'source_type' => $t->type,
+                'title_en' => $t->title_en,
+                'title_hi' => $t->title_hi ?: $t->title_en,
+                'category' => $t->type === 'vacancy' ? 'Vacancy' : 'Tender',
+                'published_date' => $t->published_date,
+                'date' => $t->published_date ? date('d.m.Y', strtotime($t->published_date)) : ($t->created_at ? $t->created_at->format('d.m.Y') : date('d.m.Y')),
+                'timestamp' => $t->published_date ? strtotime($t->published_date) : ($t->created_at ? $t->created_at->timestamp : time()),
+                'link_url' => $route,
+                'document_url' => $t->document_url,
+                'file_size' => 'PDF',
+                'is_new' => true,
+                'is_external' => false,
+            ]);
+        }
+
+        return $items->sortByDesc('timestamp')->take($limit)->values();
     }
 }

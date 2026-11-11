@@ -67,8 +67,8 @@
                         @php
                             $title = session('locale') == 'hi' ? ($item->title_hi ?: $item->title_en) : ($item->title_en ?: $item->title_hi);
                             $date = $item->date ?: $item->published_date;
-                            $fileUrl = $item->document_url ? asset($item->document_url) : ($item->link_url !== '#' ? $item->link_url : '#');
-                            $hasFile = !empty($item->document_url) || ($item->link_url && $item->link_url !== '#');
+                            $targetUrl = $item->link_url ?: ($item->document_url ? asset($item->document_url) : '#');
+                            $hasFile = !empty($targetUrl) && $targetUrl !== '#';
                             $sizeText = $item->file_size ?: ($item->document_url ? 'PDF' : '');
                         @endphp
                         <div class="list-group-item p-3 p-md-4 whats-new-row border-bottom" data-search-text="{{ strtolower($item->title_en . ' ' . $item->title_hi . ' ' . $item->category) }}">
@@ -76,7 +76,7 @@
                                 <!-- Left: Title & Meta -->
                                 <div class="flex-grow-1" style="max-width: 820px;">
                                     <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
-                                        @if($item->is_new)
+                                        @if(!empty($item->is_new))
                                             <span class="badge bg-danger text-white px-2 py-1" style="font-size: 11px; animation: pulse 2s infinite;">NEW</span>
                                         @endif
                                         <span class="badge bg-light text-dark border px-2 py-1" style="font-size: 11px;">
@@ -90,14 +90,14 @@
                                     </div>
                                     <h4 class="h6 fw-bold mb-1" style="color: #1f1b2d; font-size: 1.55rem; line-height: 1.45;">
                                         @if($hasFile)
-                                            <a href="{{ $fileUrl }}" target="_blank" class="text-decoration-none text-dark hover-maroon">
+                                            <a href="{{ $targetUrl }}" class="text-decoration-none text-dark hover-maroon">
                                                 {{ $title }}
                                             </a>
                                         @else
                                             {{ $title }}
                                         @endif
                                     </h4>
-                                    @if($item->content_en)
+                                    @if(!empty($item->content_en))
                                         <p class="text-muted mb-0 small text-truncate" style="max-width: 750px;">{{ $item->content_en }}</p>
                                     @endif
                                 </div>
@@ -111,7 +111,7 @@
                                     @endif
 
                                     @if($hasFile)
-                                        <a href="{{ $fileUrl }}" target="_blank" class="btn btn-sm px-3 py-2 fw-semibold d-inline-flex align-items-center gap-1 shadow-xs" style="color: #6c1340; border: 1.5px solid #d4aabf; background: #ffffff; border-radius: 6px; font-size: 1.3rem;">
+                                        <a href="{{ $targetUrl }}" class="btn btn-sm px-3 py-2 fw-semibold d-inline-flex align-items-center gap-1 shadow-xs" style="color: #6c1340; border: 1.5px solid #d4aabf; background: #ffffff; border-radius: 6px; font-size: 1.3rem;">
                                             <i class="fa fa-eye"></i>
                                             <span>VIEW</span>
                                         </a>

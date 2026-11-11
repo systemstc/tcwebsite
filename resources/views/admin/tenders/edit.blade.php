@@ -11,7 +11,7 @@
         <a href="{{ route('admin.tenders.index') }}" class="btn btn-outline-secondary btn-sm">&larr; Back to List</a>
     </div>
     <div class="cms-card-body">
-        <form action="{{ route('admin.tenders.update', $tender->id) }}" method="POST" enctype="multipart/form-data">
+        <form id="tenderForm" action="{{ route('admin.tenders.update', $tender->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row g-3">
@@ -56,20 +56,35 @@
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Upload New PDF File (Optional)</label>
                     <input type="file" name="file" class="form-control" accept=".pdf">
-                    @if($tender->file_url)
+                    @if($tender->document_url)
                         <div class="mt-2">
-                            <a href="{{ asset($tender->file_url) }}" target="_blank" class="small text-primary"><i class="fa fa-file-pdf-o"></i> View Current PDF</a>
+                            <a href="{{ asset($tender->document_url) }}" target="_blank" class="small text-primary"><i class="fa fa-file-pdf"></i> View Current PDF</a>
                         </div>
                     @endif
                 </div>
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Or External Document URL</label>
-                    <input type="text" name="file_url" class="form-control" value="{{ old('file_url', $tender->file_url) }}">
+                    <input type="text" name="file_url" class="form-control" value="{{ old('file_url', $tender->document_url) }}">
                 </div>
 
                 <div class="col-12">
-                    <label class="form-label fw-semibold">Details / Scope (Optional)</label>
-                    <textarea name="description_en" class="form-control" rows="3">{{ old('description_en', $tender->description_en) }}</textarea>
+                    <label class="form-label fw-semibold d-flex justify-content-between align-items-center">
+                        <span>Details / Scope (English)</span>
+                        <span class="text-muted small"><i class="fa fa-info-circle me-1"></i> Highlight text to make <strong>Bold</strong> or add a <i class="fa fa-link"></i> <strong>Link</strong></span>
+                    </label>
+                    <div id="quill-editor-en" class="bg-white">{!! old('description_en', $tender->description_en) !!}</div>
+                    <input type="hidden" name="description_en" id="hidden_description_en">
+                    <div class="form-text small text-muted mt-1">
+                        Select any text and click the link icon (<i class="fa fa-link"></i>) in the toolbar to add redirect URLs to portals, application forms, or external websites.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold d-flex justify-content-between align-items-center">
+                        <span>Details / Scope (Hindi - वैकल्पिक)</span>
+                    </label>
+                    <div id="quill-editor-hi" class="bg-white">{!! old('description_hi', $tender->description_hi) !!}</div>
+                    <input type="hidden" name="description_hi" id="hidden_description_hi">
                 </div>
             </div>
 
@@ -80,4 +95,68 @@
         </form>
     </div>
 </div>
+
+@push('scripts')
+<link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+<style>
+    .ql-toolbar.ql-snow {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-color: #cbd5e1;
+        background: #f8fafc;
+    }
+    .ql-container.ql-snow {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border-color: #cbd5e1;
+        font-family: inherit;
+    }
+    .ql-editor {
+        min-height: 180px;
+        font-size: 14.5px;
+        line-height: 1.6;
+    }
+</style>
+<script src="{{ asset('assets/vendor/quill/quill.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var toolbarOptions = [
+            [{ 'header': [1, 2, 3, 4, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link', 'clean']
+        ];
+
+        var quillEn = new Quill('#quill-editor-en', {
+            theme: 'snow',
+            placeholder: 'Write or paste description, highlight text to bold, italic, or add links to redirect...',
+            modules: { toolbar: toolbarOptions }
+        });
+
+        var quillHi = new Quill('#quill-editor-hi', {
+            theme: 'snow',
+            placeholder: 'हिंदी में विवरण (यदि लागू हो)...',
+            modules: { toolbar: toolbarOptions }
+        });
+
+        var form = document.getElementById('tenderForm');
+        if (form) {
+            form.addEventListener('submit', function() {
+                var htmlEn = quillEn.root.innerHTML;
+                if (quillEn.getText().trim().length === 0 && !htmlEn.includes('<img')) {
+                    htmlEn = '';
+                }
+                document.getElementById('hidden_description_en').value = htmlEn;
+
+                var htmlHi = quillHi.root.innerHTML;
+                if (quillHi.getText().trim().length === 0 && !htmlHi.includes('<img')) {
+                    htmlHi = '';
+                }
+                document.getElementById('hidden_description_hi').value = htmlHi;
+            });
+        }
+    });
+</script>
+@endpush
 @endsection
