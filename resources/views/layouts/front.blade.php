@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ session('locale', 'en') }}" class="default-theme group1" id="htmlRoot">
+<html lang="{{ session('locale', 'en') == 'hi' ? 'hi' : 'en' }}" class="default-theme group1" id="htmlRoot">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,6 +42,14 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/images/Textiles_Committee_Logo.png') }}">
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/Textiles_Committee_Logo.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('assets/images/Textiles_Committee_Logo.png') }}">
+
+    @php
+        $heroPreloadBanner = \App\Models\Banner::where('is_active', 1)->orderBy('sort_order')->orderBy('id')->first();
+    @endphp
+    @if($heroPreloadBanner && !empty($heroPreloadBanner->image_url))
+    <!-- Preload LCP Hero Banner for Core Web Vitals (UX4G Audit Compliance) -->
+    <link rel="preload" as="image" href="{{ asset($heroPreloadBanner->image_url) }}" fetchpriority="high">
+    @endif
 
     <!-- Search Engine Optimization (SEO) & Discoverability for Textiles Committee -->
     <meta name="description" content="{{ $settings['about_us_text_en'] ?? 'Official Portal of Textiles Committee, Ministry of Textiles, Government of India. Statutory body established under the Textiles Committee Act, 1963 for textile testing, quality assurance, SAMARTH, export certification, and handloom mark.' }}">
@@ -1937,12 +1945,13 @@
             min-width: 0;
         }
         .pm-quote-mark {
-            font-size: 4.2rem !important;
-            font-family: 'Material Symbols Outlined', sans-serif;
+            font-size: 3.6rem !important;
+            font-family: Georgia, 'Times New Roman', serif;
             color: #6c1340;
             line-height: 1;
             display: inline;
             vertical-align: middle;
+            font-weight: 700;
         }
         .pm-quote-text {
             font-size: 2.1rem !important;
@@ -2039,6 +2048,7 @@
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
+            min-height: 44px !important; /* UX4G Touch Target Compliance */
             gap: 6px !important;
             border: 1.5px solid #6c1340 !important;
             background: #ffffff !important;
@@ -3475,6 +3485,8 @@
             display: inline-flex !important;
             align-items: center !important;
             gap: 8px !important;
+            min-height: 44px !important; /* UX4G / GIGW 3.0 Touch Target Compliance (min 44px) */
+            padding: 4px 6px !important;
             transition: opacity 0.15s ease, transform 0.15s ease !important;
         }
         .footer-link .chevron {
@@ -3516,7 +3528,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 18px;
+            gap: 12px;
             margin-bottom: 12px;
             width: 100%;
         }
@@ -3532,6 +3544,11 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            min-width: 44px; /* UX4G Touch Target Compliance (min 44x44px) */
+            min-height: 44px;
+            width: 44px;
+            height: 44px;
+            border-radius: 4px;
             transition: opacity 0.2s, transform 0.2s;
             line-height: 1;
         }
@@ -3551,9 +3568,13 @@
             }
         }
         .footer-badge-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 4px;
             background: #ffffff;
-            border-radius: 3px;
+            border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             transition: transform 0.15s ease;
@@ -3569,8 +3590,10 @@
         
         /* Floating / in-footer Back to Top */
         .footer-scroll-top-btn {
-            width: 30px;
-            height: 30px;
+            width: 44px; /* UX4G Touch Target Compliance (min 44x44px) */
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.35);
             border: 1px solid rgba(255, 255, 255, 0.25);
@@ -3578,7 +3601,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.6rem;
             cursor: pointer;
             transition: all 0.2s ease;
             padding: 0;
@@ -3587,6 +3610,27 @@
         .footer-scroll-top-btn:hover {
             background: rgba(0, 0, 0, 0.65);
             transform: scale(1.08);
+        }
+
+        /* Direct Contact Block in Footer (UX4G Compliance) */
+        .footer-contact-link {
+            color: #ffffff !important;
+            text-decoration: none !important;
+            font-size: 1.4rem !important;
+            font-weight: 500 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            min-height: 44px !important;
+            padding: 4px 10px !important;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+        .footer-contact-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff !important;
+            text-decoration: none !important;
+            transform: translateY(-1px);
         }
 
         .footer-bottom-bar {
@@ -3897,8 +3941,8 @@
     @php
         $footerLinks = \App\Http\Controllers\Admin\FooterController::getLinks();
         $footerCopyright = session('locale') == 'hi' 
-            ? \App\Models\Setting::get('footer_copyright_hi', 'यह वेबसाइट वस्त्र मंत्रालय, भारत सरकार की है')
-            : \App\Models\Setting::get('footer_copyright_en', 'This Website belong to Ministry of Textiles, Government of India');
+            ? \App\Models\Setting::get('footer_copyright_hi', 'यह वेबसाइट वस्त्र मंत्रालय, भारत सरकार की है।')
+            : \App\Models\Setting::get('footer_copyright_en', 'This website belongs to the Ministry of Textiles, Government of India.');
         
         $footerDateMode = \App\Models\Setting::get('footer_updated_mode', 'auto');
         $footerDate = $footerDateMode === 'custom' 
@@ -3957,6 +4001,24 @@
                                 @endforeach
                             </div>
                         @endfor
+                    </div>
+
+                    <!-- Direct Official Support Information (UX4G Audit Compliance) -->
+                    <div class="footer-direct-contact mt-3 pt-2" style="border-top: 1px solid rgba(255,255,255,0.18);">
+                        <div class="d-flex flex-wrap align-items-center gap-2">
+                            <span class="text-white fw-bold me-1" style="font-size: 1.35rem;">
+                                <i class="fa-solid fa-headset me-1 text-warning"></i> {{ session('locale') == 'hi' ? 'सीधा संपर्क / सहायता:' : 'Direct Support:' }}
+                            </span>
+                            <a href="mailto:secy.tc@nic.in" class="footer-contact-link" title="Email Secretary, Textiles Committee" aria-label="Email Secretary, Textiles Committee: secy.tc@nic.in">
+                                <i class="fa-solid fa-envelope me-1 text-warning"></i> secy.tc@nic.in
+                            </a>
+                            <a href="tel:+912266527500" class="footer-contact-link" title="Telephone Textiles Committee" aria-label="Telephone Textiles Committee: +91-22-66527500">
+                                <i class="fa-solid fa-phone me-1 text-warning"></i> +91-22-66527500
+                            </a>
+                            <span class="text-white-50 d-inline-flex align-items-center ms-lg-2" style="min-height: 44px; font-size: 1.25rem;">
+                                <i class="fa-regular fa-clock me-1 text-warning"></i> {{ session('locale') == 'hi' ? 'कार्य समय: सोम - शुक्र: 9:30 AM - 6:00 PM IST' : 'Mon - Fri: 9:30 AM - 6:00 PM IST' }}
+                            </span>
+                        </div>
                     </div>
                 </div>
 

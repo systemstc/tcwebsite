@@ -1,6 +1,6 @@
-<!-- GIGW / WCAG 2.1 Accessible Skip Links -->
-<a href="#mainContent" class="skip-to-main-link" tabindex="1">Skip to main content</a>
-<a href="#govNavUl" class="skip-to-main-link skip-to-nav-link" tabindex="2">Skip to navigation</a>
+<!-- GIGW / WCAG 2.1 Accessible Skip Links (Natural focus order, no positive tabindex) -->
+<a href="#mainContent" class="skip-to-main-link">{{ session('locale') == 'hi' ? 'मुख्य सामग्री पर जाएं' : 'Skip to main content' }}</a>
+<a href="#govNavUl" class="skip-to-main-link skip-to-nav-link">{{ session('locale') == 'hi' ? 'नेविगेशन पर जाएं' : 'Skip to navigation' }}</a>
 
 <!-- EXACT SAME HEADER WITH FULL RESPONSIVENESS & ACCESSIBILITY -->
 <header class="exact-header-wrap" role="banner">
@@ -32,19 +32,30 @@
         <!-- Center: Search Box with Maroon Bottom Accent & Mobile Hamburger -->
         <div class="exact-search-menu-bar">
             <div class="exact-search-wrap">
-                <form action="{{ route('site.search') }}" method="GET" class="exact-search-box" role="search" aria-label="Site Search">
-                    <input type="search" name="q" placeholder="Search..." value="{{ request('q') }}" aria-label="Search keywords">
+                <form action="{{ route('site.search') }}" method="GET" class="exact-search-box" role="search" aria-label="{{ session('locale') == 'hi' ? 'वस्त्र समिति वेबसाइट खोज' : 'Search Textiles Committee Website' }}">
+                    <input type="search" name="q" 
+                           placeholder="{{ session('locale') == 'hi' ? 'सेवाएं, योजनाएं, परिपत्र एवं दस्तावेज खोजें...' : 'Search services, schemes, circulars and documents...' }}" 
+                           value="{{ request('q') }}" 
+                           aria-label="{{ session('locale') == 'hi' ? 'वेबसाइट खोज इनपुट' : 'Search services, schemes, circulars and documents' }}"
+                           title="{{ session('locale') == 'hi' ? 'वेबसाइट पर खोजें' : 'Search this website' }}">
                     <div class="exact-search-divider"></div>
-                    <button type="submit" class="exact-search-btn" title="Submit Search" aria-label="Submit Search">
-                        <span class="material-symbols-outlined" style="font-size: 24px; color: #6c1340; font-weight: 600;">search</span>
+                    <button type="submit" class="exact-search-btn" title="{{ session('locale') == 'hi' ? 'खोजें' : 'Search' }}" aria-label="{{ session('locale') == 'hi' ? 'खोजें' : 'Search' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6c1340" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
                     </button>
                 </form>
             </div>
 
             <!-- Hamburger Button (Visible only on Responsive, on the right side of Search) -->
-            <button class="exact-hamburger-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavDrawer" aria-controls="mobileNavDrawer" aria-label="Open Navigation Menu">
-                <span class="material-symbols-outlined hamburger-icon">menu</span>
-                <span class="hamburger-label">Menu</span>
+            <button class="exact-hamburger-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavDrawer" aria-controls="mobileNavDrawer" aria-label="{{ session('locale') == 'hi' ? 'नेविगेशन मेनू खोलें' : 'Open Navigation Menu' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="margin-right: 4px;">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <span class="hamburger-label">{{ session('locale') == 'hi' ? 'मेनू' : 'Menu' }}</span>
             </button>
         </div>
 
@@ -80,8 +91,8 @@
     <nav class="gov-nav-bar-exact" role="navigation" aria-label="Main Navigation">
         <div class="gov-nav-container-exact">
             <button class="gov-mobile-toggle" onclick="document.getElementById('govNavUl').classList.toggle('show')" aria-label="Toggle Navigation Menu" aria-controls="govNavUl" aria-expanded="false">
-                <span><i class="fa fa-bars me-2"></i> Menu</span>
-                <span class="material-symbols-outlined" style="font-size: 20px;">expand_more</span>
+                <span><i class="fa fa-bars me-2"></i> {{ session('locale') == 'hi' ? 'मेनू' : 'Menu' }}</span>
+                <i class="fa-solid fa-chevron-down ms-1" style="font-size: 14px;" aria-hidden="true"></i>
             </button>
 
             <ul class="gov-nav-ul" id="govNavUl">

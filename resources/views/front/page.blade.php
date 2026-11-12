@@ -88,7 +88,14 @@
                     @endphp
                     <a href="{{ $sibUrl }}" class="inner-pill-link {{ $isActive ? 'active' : '' }}" {!! $isActive ? 'aria-current="page"' : '' !!}>
                         @if($isActive)
-                            <span class="material-symbols-outlined inner-pill-icon" aria-hidden="true">drag_indicator</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="me-1">
+                                <circle cx="9" cy="6" r="2"></circle>
+                                <circle cx="15" cy="6" r="2"></circle>
+                                <circle cx="9" cy="12" r="2"></circle>
+                                <circle cx="15" cy="12" r="2"></circle>
+                                <circle cx="9" cy="18" r="2"></circle>
+                                <circle cx="15" cy="18" r="2"></circle>
+                            </svg>
                         @endif
                         <span>{{ $sibTitle }}</span>
                     </a>
@@ -100,7 +107,7 @@
 </section>
 
 <!-- 3. MAIN PAGE CONTENT CONTAINER -->
-<main class="maincontent inner-page-main">
+<div class="maincontent inner-page-main">
     <div class="container mt-4">
         @php
             $contentHtml = session('locale') == 'hi' 
@@ -147,7 +154,7 @@
             </div>
         @endif
     </div>
-</main>
+</div>
 
 <style>
     /* Strictly Read-Only Frontend Protection */
@@ -740,6 +747,7 @@
         transition: all 0.15s;
         display: inline-flex !important;
         align-items: center !important;
+        min-height: 44px !important; /* UX4G / GIGW 3.0 Touch Target Compliance */
         gap: 6px !important;
     }
     .inner-hero-banner .inner-pill-link:hover,

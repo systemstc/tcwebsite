@@ -16,6 +16,22 @@ class FooterController extends Controller
     {
         return [
             [
+                'id' => 101,
+                'title' => 'Home',
+                'url' => '/',
+                'col' => 1,
+                'target' => '_self',
+                'is_active' => true,
+            ],
+            [
+                'id' => 102,
+                'title' => 'About Us',
+                'url' => '/page/history',
+                'col' => 1,
+                'target' => '_self',
+                'is_active' => true,
+            ],
+            [
                 'id' => 1,
                 'title' => 'Archives',
                 'url' => '/archives',
@@ -27,7 +43,7 @@ class FooterController extends Controller
                 'id' => 2,
                 'title' => 'Help',
                 'url' => '/help',
-                'col' => 1,
+                'col' => 2,
                 'target' => '_self',
                 'is_active' => true,
             ],
@@ -69,6 +85,14 @@ class FooterController extends Controller
                 'url' => '/page/sitemap',
                 'col' => 4,
                 'target' => '_self',
+                'is_active' => true,
+            ],
+            [
+                'id' => 8,
+                'title' => 'Grievance',
+                'url' => 'https://pgportal.gov.in/',
+                'col' => 4,
+                'target' => '_blank',
                 'is_active' => true,
             ],
         ];

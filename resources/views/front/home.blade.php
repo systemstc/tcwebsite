@@ -2,6 +2,9 @@
 
 @section('content')
 
+    <!-- Primary Top-Level Page Heading (WCAG 2.1 AA & UX4G Audit Compliance) -->
+    <h1 class="visually-hidden">{{ session('locale') == 'hi' ? 'वस्त्र समिति - वस्त्र मंत्रालय, भारत सरकार' : 'Textiles Committee - Ministry of Textiles, Government of India' }}</h1>
+
     <!-- 1. HERO BANNER SLIDER -->
     <section class="hero-banner-wrap">
         <div class="hero-banner-track" id="heroTrack">
@@ -82,23 +85,30 @@
                     <img src="{{ asset($pm->photo_url ?? 'assets/images/pm_quote_avatar.png') }}" alt="{{ $pm->name_en ?? 'Shri Narendra Modi' }}" onerror="this.onerror=null;this.src='{{ asset('assets/images/pm_quote_avatar.png') }}'">
                 </div>
 
-                <!-- Quote Text & Attribution -->
+                <!-- Quote Text & Attribution (Semantic Blockquote & Inline SVG) -->
                 <div class="pm-quote-content">
                     <div>
-                        <span class="pm-quote-mark">“</span>
-                        <h3 class="pm-quote-text">
-                            {{ $pm->quote_en ?? "India's technical textiles sector is witnessing rapid growth, driven by key initiatives like the National Technical Textiles Mission and the PLI scheme. These efforts are boosting manufacturing, innovation and exports, positioning India as a global leader." }}
-                        </h3>
-                        <span class="pm-quote-mark">”</span>
+                        <span class="pm-quote-mark" aria-hidden="true">“</span>
+                        <blockquote class="pm-quote-text mb-0" style="display: inline;">
+                            <p class="mb-0" style="display: inline; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit; letter-spacing: inherit; color: inherit;">
+                                {{ $pm->quote_en ?? "India's technical textiles sector is witnessing rapid growth, driven by key initiatives like the National Technical Textiles Mission and the PLI scheme. These efforts are boosting manufacturing, innovation and exports, positioning India as a global leader." }}
+                            </p>
+                        </blockquote>
+                        <span class="pm-quote-mark" aria-hidden="true">”</span>
                     </div>
 
                     <div class="pm-quote-footer">
                         <div>
-                            <div class="pm-quote-meta">{{ $pm->designation_en ?? 'PRESS INFORMATION BUREAU' }}</div>
+                            <cite class="pm-quote-meta" style="font-style: normal;">{{ $pm->designation_en ?? 'PRESS INFORMATION BUREAU' }}</cite>
                             <div class="pm-quote-date">{{ $pm->quote_date ?? '10.08.2025' }}</div>
                         </div>
-                        <a href="{{ $pm->profile_link ?? 'https://pmindia.gov.in' }}" target="_blank" class="btn-read-more">
-                            <span class="material-symbols-outlined" style="font-size: 14px;">open_in_new</span> READ MORE
+                        <a href="{{ $pm->profile_link ?? 'https://pmindia.gov.in' }}" target="_blank" rel="noopener noreferrer" class="btn-read-more" title="Read more at PM India (Opens in a new tab)" aria-label="Read full statement of the Hon'ble Prime Minister on PM India Portal (opens in a new tab)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="me-1">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                            <span>{{ session('locale') == 'hi' ? 'अधिक पढ़ें' : 'READ MORE' }}</span>
                         </a>
                     </div>
                 </div>
@@ -118,25 +128,41 @@
                         <h2 class="section-heading">About Us</h2>
                     </div>
 
-                    <p class="about-text">
+                    <p class="about-text mb-3">
                         {{ $aboutExcerpt }}
-                        <a href="{{ route('page.show', 'history') }}" class="about-readmore-btn">Read More <i class="fa fa-arrow-right ms-1"></i></a>
                     </p>
 
-               <!--      <div class="about-action-btns-group">
-                        <a href="{{ route('page.show', 'team') }}" class="about-pill-btn">
-                            <img src="{{ asset('assets/images/Group.svg') }}" alt="our team" width="45" height="45">
-                            <span class="about-pill-title">Our Team</span>
+                    <!-- Strategic Pillars: Mission & Vision (UX4G & GIGW 3.0 Compliance) -->
+                    <div class="about-pillars-grid mb-3">
+                        <div class="about-pillar-card p-3 rounded" style="background: #fbf5f8; border-left: 4px solid #6c1340; margin-bottom: 8px;">
+                            <h3 class="pillar-title fw-bold text-dark d-flex align-items-center gap-2 mb-1" style="font-size: 1.5rem;">
+                                <i class="fa-solid fa-eye" style="color: #6c1340;" aria-hidden="true"></i>
+                                <span>{{ session('locale') == 'hi' ? 'हमारा विज़न (Vision)' : 'Our Vision' }}</span>
+                            </h3>
+                            <p class="pillar-desc mb-0" style="font-size: 1.35rem; color: #444; line-height: 1.5;">
+                                {{ session('locale') == 'hi' ? 'भारतीय वस्त्र उद्योग हेतु गुणवत्ता आश्वासन, परीक्षण एवं निर्यात प्रतिस्पर्धा में विश्व स्तरीय उत्कृष्टता केंद्र बनना।' : 'To be a world-class centre of excellence in textile quality assurance, testing laboratories, and export competitiveness.' }}
+                            </p>
+                        </div>
+                        <div class="about-pillar-card p-3 rounded" style="background: #fbf5f8; border-left: 4px solid #6c1340;">
+                            <h3 class="pillar-title fw-bold text-dark d-flex align-items-center gap-2 mb-1" style="font-size: 1.5rem;">
+                                <i class="fa-solid fa-bullseye" style="color: #6c1340;" aria-hidden="true"></i>
+                                <span>{{ session('locale') == 'hi' ? 'हमारा मिशन (Mission)' : 'Our Mission' }}</span>
+                            </h3>
+                            <p class="pillar-desc mb-0" style="font-size: 1.35rem; color: #444; line-height: 1.5;">
+                                {{ session('locale') == 'hi' ? 'वैश्विक मानकों के अनुरूप आधुनिक प्रयोगशालाओं, क्षमता निर्माण (समर्थ), एवं हैंडलूम मार्क के माध्यम से गुणवत्ता संवर्धन।' : 'Facilitate global compliance, state-of-the-art testing, Handloom Mark protection, and workforce skilling (SAMARTH).' }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="about-action-links d-flex flex-wrap gap-2">
+                        <a href="{{ route('page.show', 'history') }}" class="btn-read-more" title="{{ session('locale') == 'hi' ? 'वस्त्र समिति के इतिहास और जनादेश के बारे में और जानें' : 'Learn about Textiles Committee history and statutory mandate' }}">
+                            <span>{{ session('locale') == 'hi' ? 'विस्तृत इतिहास एवं अधिदेश' : 'Detailed History & Mandate' }}</span>
+                            <i class="fa fa-arrow-right ms-1" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ route('page.show', 'organization-setup') }}" class="about-pill-btn">
-                            <img src="{{ asset('assets/images/Organisation.svg') }}" alt="Organisation" width="45" height="45">
-                            <span class="about-pill-title">Our Organisation</span>
+                        <a href="{{ route('page.show', 'organization-setup') }}" class="btn-view-more-outline" title="{{ session('locale') == 'hi' ? 'संगठनात्मक संरचना देखें' : 'View organizational structure' }}">
+                            <span>{{ session('locale') == 'hi' ? 'संगठनात्मक संरचना' : 'Organisational Structure' }}</span>
                         </a>
-                        <a href="{{ route('page.show', 'dashboard') }}" class="about-pill-btn">
-                            <img src="{{ asset('assets/images/Bar_Chart.svg') }}" alt="dashboard" width="45" height="45">
-                            <span class="about-pill-title">Our Dashboard</span>
-                        </a>
-                    </div> -->
+                    </div>
                 </div>
 
                 <!-- Right: Dignitaries Row (Fully Connected to CMS) -->
@@ -330,19 +356,19 @@
 
                         <!-- Card 5 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">HLM: Total Weavers</div>
+                            <div class="govt-stat-theme-label">{{ session('locale') == 'hi' ? 'हैंडलूम मार्क: कुल बुनकर' : 'Handloom Mark: Total Weavers' }}</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_total_weavers'] ?? '21245') }}">{{ $settings['stat_total_weavers'] ?? '21,245' }}</div>
                         </div>
 
                         <!-- Card 6 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">HLM: Societies</div>
+                            <div class="govt-stat-theme-label">{{ session('locale') == 'hi' ? 'हैंडलूम मार्क: समितियां' : 'Handloom Mark: Societies' }}</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_societies'] ?? '5867') }}">{{ $settings['stat_societies'] ?? '5,867' }}</div>
                         </div>
 
                         <!-- Card 7 -->
                         <div class="govt-stat-theme-card">
-                            <div class="govt-stat-theme-label">Origin Cert. Issued</div>
+                            <div class="govt-stat-theme-label">{{ session('locale') == 'hi' ? 'मूल प्रमाण पत्र जारी' : 'Certificates of Origin Issued' }}</div>
                             <div class="govt-stat-theme-value stat-ticker" data-target="{{ preg_replace('/[^0-9]/', '', $settings['stat_origin_certificates'] ?? '67381') }}">{{ $settings['stat_origin_certificates'] ?? '67,381' }}</div>
                         </div>
 
