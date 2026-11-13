@@ -3940,9 +3940,15 @@
     <!-- 12. FOOTER (Deep Maroon #6c1340 - Dynamic Backend Controlled) -->
     @php
         $footerLinks = \App\Http\Controllers\Admin\FooterController::getLinks();
-        $footerCopyright = session('locale') == 'hi' 
+        $rawCopyright = session('locale') == 'hi' 
             ? \App\Models\Setting::get('footer_copyright_hi', 'यह वेबसाइट वस्त्र मंत्रालय, भारत सरकार की है।')
             : \App\Models\Setting::get('footer_copyright_en', 'This website belongs to the Ministry of Textiles, Government of India.');
+        
+        $footerCopyright = str_replace(
+            ['This Website belong to Ministry of Textiles, Government of India.', 'This Website belong to Ministry of Textiles, Government of India', 'This website belongs to the Ministry of Textiles, Government of India'],
+            'This website belongs to the Ministry of Textiles, Government of India.',
+            $rawCopyright
+        );
         
         $footerDateMode = \App\Models\Setting::get('footer_updated_mode', 'auto');
         $footerDate = $footerDateMode === 'custom' 

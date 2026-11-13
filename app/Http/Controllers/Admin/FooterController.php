@@ -100,14 +100,54 @@ class FooterController extends Controller
 
     public static function getLinks()
     {
+        $links = [];
         $stored = Setting::get('footer_useful_links');
         if (!empty($stored)) {
             $decoded = json_decode($stored, true);
             if (is_array($decoded) && count($decoded) > 0) {
-                return $decoded;
+                $links = $decoded;
             }
         }
-        return self::defaultLinks();
+        if (empty($links)) {
+            $links = self::defaultLinks();
+        }
+
+        // UX4G & GIGW 3.0 Compliance: Ensure Home & About Us are present even if server DB has legacy links
+        $hasHome = false;
+        $hasAbout = false;
+        foreach ($links as $l) {
+            $u = strtolower($l['url'] ?? '');
+            $t = strtolower($l['title'] ?? '');
+            if ($u === '/' || $t === 'home' || $t === 'मुख्य पृष्ठ') $hasHome = true;
+            if (str_contains($u, 'history') || str_contains($t, 'about') || str_contains($t, 'परिचय')) $hasAbout = true;
+        }
+
+        if (!$hasHome || !$hasAbout) {
+            $mandatory = [];
+            if (!$hasHome) {
+                $mandatory[] = [
+                    'id' => 101,
+                    'title' => 'Home',
+                    'url' => '/',
+                    'col' => 1,
+                    'target' => '_self',
+                    'is_active' => true,
+                ];
+            }
+            if (!$hasAbout) {
+                $mandatory[] = [
+                    'id' => 102,
+                    'title' => 'About Us',
+                    'url' => '/page/history',
+                    'col' => 1,
+                    'target' => '_self',
+                    'is_active' => true,
+                ];
+            }
+            $links = array_merge($mandatory, $links);
+        }
+
+        return $links;
     }
 
     public function index()

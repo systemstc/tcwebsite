@@ -368,6 +368,16 @@ class HomeController extends Controller
             // Strip editor-only image upload tooltips
             $html = preg_replace('/\s*title=["\'](?:Click to upload\/change|Change Photo|Change Thumbnail|Change Slide)[^"\']*["\']/i', '', $html);
 
+            // UX4G / Accessibility proofreading & semantic cleanup (functions even if server DB holds legacy content):
+            // 1. Strip empty heading tags like <h2 ...><br></h2> or <h2>&nbsp;</h2>
+            $html = preg_replace('#<h[1-6][^>]*>\s*(?:<br\s*/?>|&nbsp;|\s*)*</h[1-6]>#si', '', $html);
+
+            // 2. Proofread possessive grammar on Secretaries list
+            $html = str_ireplace("List of Secretary's", "List of Secretaries", $html);
+
+            // 3. Normalize inquiry form action URLs to dynamic route
+            $html = preg_replace('#action=["\'][^"\']*/inquiry["\']#i', 'action="' . route('inquiry.submit') . '"', $html);
+
             // Dynamically resolve actual file sizes and types for document links
             $html = \App\Services\PortalDocumentService::normalizeDocumentRowsHtml($html);
 
