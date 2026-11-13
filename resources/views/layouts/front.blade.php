@@ -4013,9 +4013,9 @@
                                 <i class="fa-solid fa-envelope me-1 text-warning"></i> secy.tc@nic.in
                             </a>
                             <a href="tel:+912266527500" class="footer-contact-link" title="Telephone Textiles Committee" aria-label="Telephone Textiles Committee: +91-22-66527500">
-                                <i class="fa-solid fa-phone me-1 text-warning"></i> +91-22-66527500
+                                <i class="fa-solid fa-phone me-1 text-warning"></i> +91-22-66527507
                             </a>
-                            <span class="text-white-50 d-inline-flex align-items-center ms-lg-2" style="min-height: 44px; font-size: 1.25rem;">
+                            <span class="text-white-100 d-inline-flex align-items-center ms-lg-2" style="min-height: 44px; font-size: 1.25rem;">
                                 <i class="fa-regular fa-clock me-1 text-warning"></i> {{ session('locale') == 'hi' ? 'कार्य समय: सोम - शुक्र: 9:30 AM - 6:00 PM IST' : 'Mon - Fri: 9:30 AM - 6:00 PM IST' }}
                             </span>
                         </div>

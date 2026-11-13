@@ -132,7 +132,29 @@
                         {{ $aboutExcerpt }}
                     </p>
 
-                    <!-- Strategic Pillars: Mission & Vision (UX4G & GIGW 3.0 Compliance) -->
+                    @php
+                        $visionText = session('locale') == 'hi'
+                            ? (\App\Models\Setting::get('about_vision_hi', 'भारतीय वस्त्र उद्योग हेतु गुणवत्ता आश्वासन, परीक्षण एवं निर्यात प्रतिस्पर्धा में विश्व स्तरीय उत्कृष्टता केंद्र बनना।'))
+                            : (\App\Models\Setting::get('about_vision_en', 'To be a world-class centre of excellence in textile quality assurance, testing laboratories, and export competitiveness.'));
+
+                        $missionText = session('locale') == 'hi'
+                            ? (\App\Models\Setting::get('about_mission_hi', 'वैश्विक मानकों के अनुरूप आधुनिक प्रयोगशालाओं, क्षमता निर्माण (समर्थ), एवं हैंडलूम मार्क के माध्यम से गुणवत्ता संवर्धन।'))
+                            : (\App\Models\Setting::get('about_mission_en', 'Facilitate global compliance, state-of-the-art testing, Handloom Mark protection, and workforce skilling (SAMARTH).'));
+
+                        $btn1Text = session('locale') == 'hi'
+                            ? (\App\Models\Setting::get('about_btn1_text_hi', 'विस्तृत इतिहास एवं अधिदेश'))
+                            : (\App\Models\Setting::get('about_btn1_text_en', 'Detailed History & Mandate'));
+                        $btn1RawUrl = \App\Models\Setting::get('about_btn1_url', '/page/history');
+                        $btn1Url = str_starts_with($btn1RawUrl, 'http') ? $btn1RawUrl : url(ltrim($btn1RawUrl, '/'));
+
+                        $btn2Text = session('locale') == 'hi'
+                            ? (\App\Models\Setting::get('about_btn2_text_hi', 'संगठनात्मक संरचना'))
+                            : (\App\Models\Setting::get('about_btn2_text_en', 'Organisational Structure'));
+                        $btn2RawUrl = \App\Models\Setting::get('about_btn2_url', '/page/organization-setup');
+                        $btn2Url = str_starts_with($btn2RawUrl, 'http') ? $btn2RawUrl : url(ltrim($btn2RawUrl, '/'));
+                    @endphp
+
+                    <!-- Strategic Pillars: Mission & Vision (UX4G & GIGW 3.0 Compliance - Admin Editable) -->
                     <div class="about-pillars-grid mb-3">
                         <div class="about-pillar-card p-3 rounded" style="background: #fbf5f8; border-left: 4px solid #6c1340; margin-bottom: 8px;">
                             <h3 class="pillar-title fw-bold text-dark d-flex align-items-center gap-2 mb-1" style="font-size: 1.5rem;">
@@ -140,7 +162,7 @@
                                 <span>{{ session('locale') == 'hi' ? 'हमारा विज़न (Vision)' : 'Our Vision' }}</span>
                             </h3>
                             <p class="pillar-desc mb-0" style="font-size: 1.35rem; color: #444; line-height: 1.5;">
-                                {{ session('locale') == 'hi' ? 'भारतीय वस्त्र उद्योग हेतु गुणवत्ता आश्वासन, परीक्षण एवं निर्यात प्रतिस्पर्धा में विश्व स्तरीय उत्कृष्टता केंद्र बनना।' : 'To be a world-class centre of excellence in textile quality assurance, testing laboratories, and export competitiveness.' }}
+                                {{ $visionText }}
                             </p>
                         </div>
                         <div class="about-pillar-card p-3 rounded" style="background: #fbf5f8; border-left: 4px solid #6c1340;">
@@ -149,18 +171,18 @@
                                 <span>{{ session('locale') == 'hi' ? 'हमारा मिशन (Mission)' : 'Our Mission' }}</span>
                             </h3>
                             <p class="pillar-desc mb-0" style="font-size: 1.35rem; color: #444; line-height: 1.5;">
-                                {{ session('locale') == 'hi' ? 'वैश्विक मानकों के अनुरूप आधुनिक प्रयोगशालाओं, क्षमता निर्माण (समर्थ), एवं हैंडलूम मार्क के माध्यम से गुणवत्ता संवर्धन।' : 'Facilitate global compliance, state-of-the-art testing, Handloom Mark protection, and workforce skilling (SAMARTH).' }}
+                                {{ $missionText }}
                             </p>
                         </div>
                     </div>
 
                     <div class="about-action-links d-flex flex-wrap gap-2">
-                        <a href="{{ route('page.show', 'history') }}" class="btn-read-more" title="{{ session('locale') == 'hi' ? 'वस्त्र समिति के इतिहास और जनादेश के बारे में और जानें' : 'Learn about Textiles Committee history and statutory mandate' }}">
-                            <span>{{ session('locale') == 'hi' ? 'विस्तृत इतिहास एवं अधिदेश' : 'Detailed History & Mandate' }}</span>
+                        <a href="{{ $btn1Url }}" class="btn-read-more" title="{{ $btn1Text }}">
+                            <span>{{ $btn1Text }}</span>
                             <i class="fa fa-arrow-right ms-1" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ route('page.show', 'organization-setup') }}" class="btn-view-more-outline" title="{{ session('locale') == 'hi' ? 'संगठनात्मक संरचना देखें' : 'View organizational structure' }}">
-                            <span>{{ session('locale') == 'hi' ? 'संगठनात्मक संरचना' : 'Organisational Structure' }}</span>
+                        <a href="{{ $btn2Url }}" class="btn-view-more-outline" title="{{ $btn2Text }}">
+                            <span>{{ $btn2Text }}</span>
                         </a>
                     </div>
                 </div>

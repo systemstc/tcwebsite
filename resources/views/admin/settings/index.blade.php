@@ -137,14 +137,67 @@
                 </div>
 
                 <div class="col-12">
-                    <label class="form-label fw-semibold">About Us Home Page Summary (First 300 characters shown with Read More)</label>
+                    <label class="form-label fw-semibold">About Us Home Page Summary (First 300 characters shown on Home Page)</label>
                     <textarea name="about_us_text_en" class="form-control" rows="3" placeholder="Enter concise overview narrative...">{{ \App\Models\Setting::get('about_us_text_en') }}</textarea>
-                    <div class="form-text">This text will be gracefully truncated to 300 characters on the home page followed by a Read More button linking to History.</div>
+                    <div class="form-text">This text will be gracefully displayed on the home page under the About Us section.</div>
+                </div>
+            </div>
+
+            <h5 class="fw-bold mb-3 mt-4" style="color: var(--cms-primary); border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
+                <i class="fa-solid fa-bullseye me-2"></i> 3. Strategic Vision & Mission (Home Page & UX4G Compliance)
+            </h5>
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold"><i class="fa-solid fa-eye me-1 text-primary"></i> Our Vision (English)</label>
+                    <textarea name="about_vision_en" class="form-control" rows="2" placeholder="Enter vision in English...">{{ \App\Models\Setting::get('about_vision_en', 'To be a world-class centre of excellence in textile quality assurance, testing laboratories, and export competitiveness.') }}</textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold"><i class="fa-solid fa-eye me-1 text-primary"></i> Our Vision (Hindi)</label>
+                    <textarea name="about_vision_hi" class="form-control" rows="2" placeholder="हमारा विज़न हिंदी में दर्ज करें...">{{ \App\Models\Setting::get('about_vision_hi', 'भारतीय वस्त्र उद्योग हेतु गुणवत्ता आश्वासन, परीक्षण एवं निर्यात प्रतिस्पर्धा में विश्व स्तरीय उत्कृष्टता केंद्र बनना।') }}</textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold"><i class="fa-solid fa-bullseye me-1 text-danger"></i> Our Mission (English)</label>
+                    <textarea name="about_mission_en" class="form-control" rows="2" placeholder="Enter mission in English...">{{ \App\Models\Setting::get('about_mission_en', 'Facilitate global compliance, state-of-the-art testing, Handloom Mark protection, and workforce skilling (SAMARTH).') }}</textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold"><i class="fa-solid fa-bullseye me-1 text-danger"></i> Our Mission (Hindi)</label>
+                    <textarea name="about_mission_hi" class="form-control" rows="2" placeholder="हमारा मिशन हिंदी में दर्ज करें...">{{ \App\Models\Setting::get('about_mission_hi', 'वैश्विक मानकों के अनुरूप आधुनिक प्रयोगशालाओं, क्षमता निर्माण (समर्थ), एवं हैंडलूम मार्क के माध्यम से गुणवत्ता संवर्धन।') }}</textarea>
+                </div>
+
+                <!-- Action Button 1 -->
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Primary Button Text (English)</label>
+                    <input type="text" name="about_btn1_text_en" class="form-control" value="{{ \App\Models\Setting::get('about_btn1_text_en', 'Detailed History & Mandate') }}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Primary Button Text (Hindi)</label>
+                    <input type="text" name="about_btn1_text_hi" class="form-control" value="{{ \App\Models\Setting::get('about_btn1_text_hi', 'विस्तृत इतिहास एवं अधिदेश') }}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Primary Button Link / URL</label>
+                    <input type="text" name="about_btn1_url" class="form-control" value="{{ \App\Models\Setting::get('about_btn1_url', '/page/history') }}">
+                </div>
+
+                <!-- Action Button 2 -->
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Secondary Button Text (English)</label>
+                    <input type="text" name="about_btn2_text_en" class="form-control" value="{{ \App\Models\Setting::get('about_btn2_text_en', 'Organisational Structure') }}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Secondary Button Text (Hindi)</label>
+                    <input type="text" name="about_btn2_text_hi" class="form-control" value="{{ \App\Models\Setting::get('about_btn2_text_hi', 'संगठनात्मक संरचना') }}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Secondary Button Link / URL</label>
+                    <input type="text" name="about_btn2_url" class="form-control" value="{{ \App\Models\Setting::get('about_btn2_url', '/page/organization-setup') }}">
                 </div>
             </div>
 
             <h5 class="fw-bold mb-3" style="color: var(--cms-primary); border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
-                3. Contact Directory
+                4. Contact Directory
             </h5>
             <div class="row g-3 mb-4">
                 <div class="col-md-6">
