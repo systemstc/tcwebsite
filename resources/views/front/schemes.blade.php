@@ -46,7 +46,14 @@
                 @foreach($navPills as $sib)
                     <a href="{{ $sib->url }}" class="inner-pill-link {{ !empty($sib->is_active) ? 'active' : '' }}">
                         @if(!empty($sib->is_active))
-                            <span class="material-symbols-outlined inner-pill-icon" aria-hidden="true">drag_indicator</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="me-1">
+                                <circle cx="9" cy="6" r="2"></circle>
+                                <circle cx="15" cy="6" r="2"></circle>
+                                <circle cx="9" cy="12" r="2"></circle>
+                                <circle cx="15" cy="12" r="2"></circle>
+                                <circle cx="9" cy="18" r="2"></circle>
+                                <circle cx="15" cy="18" r="2"></circle>
+                            </svg>
                         @endif
                         <span>{{ session('locale') == 'hi' ? ($sib->title_hi ?? $sib->title_en) : $sib->title_en }}</span>
                     </a>
@@ -58,20 +65,20 @@
 </section>
 
 <!-- Main Schemes Content Section -->
-<main class="maincontent inner-page-main py-4 py-md-5">
+<div class="maincontent inner-page-main py-4 py-md-5">
     <div class="page-container">
 
         <!-- Top Controls / Filter Bar matching Image 1 -->
         <div class="schemes-filter-bar mb-4">
             <div class="schemes-search-wrap">
-                <span class="material-symbols-outlined search-icon">search</span>
-                <input type="text" id="schemeSearchInput" class="schemes-search-input" placeholder="Search..." onkeyup="filterSchemes()">
+                <i class="fa-solid fa-magnifying-glass search-icon" style="color: #ba4073;" aria-hidden="true"></i>
+                <input type="text" id="schemeSearchInput" class="schemes-search-input" placeholder="Search schemes, initiatives..." aria-label="Search schemes" onkeyup="filterSchemes()">
             </div>
 
             <div class="schemes-controls-right">
                 <div class="schemes-dropdown-wrap">
-                    <span class="material-symbols-outlined dropdown-icon">filter_list</span>
-                    <select id="schemeCategoryFilter" class="schemes-select" onchange="filterSchemes()">
+                    <i class="fa-solid fa-filter dropdown-icon" style="color: #ba4073;" aria-hidden="true"></i>
+                    <select id="schemeCategoryFilter" class="schemes-select" onchange="filterSchemes()" aria-label="Filter schemes by category">
                         <option value="all">Category</option>
                         <option value="all">All Categories</option>
                         @php
@@ -84,8 +91,8 @@
                 </div>
 
                 <div class="schemes-dropdown-wrap">
-                    <span class="material-symbols-outlined dropdown-icon">view_list</span>
-                    <select id="schemePageSize" class="schemes-select">
+                    <i class="fa-solid fa-table-cells-large dropdown-icon" style="color: #ba4073;" aria-hidden="true"></i>
+                    <select id="schemePageSize" class="schemes-select" aria-label="Schemes per page">
                         <option value="10">10 per page</option>
                         <option value="20">20 per page</option>
                         <option value="all">All</option>
@@ -133,7 +140,7 @@
                 </div>
             @empty
                 <div class="col-12 text-center py-5">
-                    <span class="material-symbols-outlined" style="font-size: 54px; color: #ba4073;">info</span>
+                    <i class="fa-solid fa-circle-info" style="font-size: 54px; color: #ba4073;" aria-hidden="true"></i>
                     <h3 class="h4 mt-3 text-dark fw-bold">No active schemes currently available.</h3>
                     <p class="text-muted" style="font-size: 1.5rem;">New schemes will appear here once added in the administrative portal.</p>
                 </div>
@@ -142,13 +149,13 @@
 
         <!-- No Results Fallback -->
         <div id="noSchemesFound" class="text-center py-5 d-none">
-            <span class="material-symbols-outlined" style="font-size: 48px; color: #ba4073;">search_off</span>
+            <i class="fa-solid fa-magnifying-glass-minus" style="font-size: 48px; color: #ba4073;" aria-hidden="true"></i>
             <h3 class="h4 mt-3 text-dark fw-bold">No schemes found matching your search.</h3>
             <p class="text-muted" style="font-size: 1.5rem;">Try adjusting your keywords or category filter.</p>
         </div>
 
     </div>
-</main>
+</div>
 
 <style>
 /* Filter Bar Styles (Matching Image 1) */
