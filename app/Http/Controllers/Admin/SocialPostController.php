@@ -40,8 +40,14 @@ class SocialPostController extends Controller
 
         ActivityLog::record('sync', 'social_posts', 0, "Synced {$total} social media posts from live accounts.");
 
+        $hasIgToken = !empty(env('INSTAGRAM_ACCESS_TOKEN'));
+        $msg = "Social feeds synced successfully! Synced {$results['youtube']} YouTube videos, {$results['twitter']} X posts, {$results['facebook']} Facebook updates, and updated {$results['instagram']} Instagram posts.";
+        if (!$hasIgToken) {
+            $msg .= " (Note: Instagram feeds updated with latest official Textiles Committee campaign updates. To connect direct Meta API sync, set INSTAGRAM_ACCESS_TOKEN in .env or paste any post/reel link in the Quick Add box).";
+        }
+
         return redirect()->route('admin.social-posts.index')
-            ->with('success', "Social feeds synced successfully! Synced {$results['youtube']} YouTube videos, {$results['twitter']} X posts, {$results['facebook']} Facebook posts, and {$results['instagram']} Instagram posts.");
+            ->with('success', $msg);
     }
 
     /**

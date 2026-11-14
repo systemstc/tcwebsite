@@ -70,6 +70,13 @@
         </a>
     </div>
 
+    @if(request('platform') === 'instagram')
+        <div class="px-3 py-2 bg-light border-bottom text-muted small d-flex align-items-center gap-2" style="background-color: #fffbfd !important; border-left: 4px solid #e4405f !important;">
+            <i class="fa-brands fa-instagram text-danger" style="font-size: 18px;"></i>
+            <span><strong>Instagram Sync Note:</strong> Unlike YouTube and X (which allow public feed syndication without login), Meta requires an official API Access Token for account scraping. You can easily add any Instagram post or reel directly by pasting its link in the <strong>Quick Add Box</strong> above, or add <code>INSTAGRAM_ACCESS_TOKEN</code> in <code>.env</code> for live API syncing.</span>
+        </div>
+    @endif
+
     <div class="cms-card-body p-0">
         <div class="table-responsive">
             <table class="table table-hover align-middle m-0">
