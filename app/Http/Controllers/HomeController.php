@@ -369,8 +369,8 @@ class HomeController extends Controller
             $html = preg_replace('/\s*title=["\'](?:Click to upload\/change|Change Photo|Change Thumbnail|Change Slide)[^"\']*["\']/i', '', $html);
 
             // UX4G / Accessibility proofreading & semantic cleanup (functions even if server DB holds legacy content):
-            // 1. Strip empty heading tags like <h2 ...><br></h2> or <h2>&nbsp;</h2>
-            $html = preg_replace('#<h[1-6][^>]*>\s*(?:<br\s*/?>|&nbsp;|\s*)*</h[1-6]>#si', '', $html);
+            // 1. Strip empty heading tags like <h2 ...><br></h2> or <h2>&nbsp;</h2> (safe non-backtracking pattern)
+            $html = preg_replace('#<h[1-6][^>]*>(?:\s|<br\s*/?>|&nbsp;)*</h[1-6]>#i', '', $html);
 
             // 2. Proofread possessive grammar on Secretaries list
             $html = str_ireplace("List of Secretary's", "List of Secretaries", $html);
